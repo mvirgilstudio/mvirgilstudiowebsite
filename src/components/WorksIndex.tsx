@@ -186,7 +186,7 @@ const WorksIndex: React.FC<WorksIndexProps> = ({ isVisible, activeSectionId, lan
           </motion.div>
         )}
       </AnimatePresence>
-      <WorkModal work={selectedWork} onClose={() => setSelectedWork(null)} lang={lang} />
+      <WorkModal work={selectedWork} onClose={() => setSelectedWork(null)} lang={lang} activeSectionId={activeSectionId} />
     </>
   );
 };

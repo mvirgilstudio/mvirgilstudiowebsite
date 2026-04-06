@@ -1,5 +1,27 @@
 import { SectionData, WorkItem } from '../types';
 
+export const SECTION_ACCENTS: Record<string, { rgb: string; hex: string; hoverHex: string }> = {
+  'section_01': { rgb: '180,140,80', hex: '#b48c50', hoverHex: '#d4a860' },  // warm amber
+  'section_02': { rgb: '80,130,190', hex: '#5282be', hoverHex: '#6a9ad6' },  // cool steel blue
+  'section_03': { rgb: '70,170,140', hex: '#46aa8c', hoverHex: '#5cc4a4' },  // teal green
+  'section_04': { rgb: '130,90,180', hex: '#825ab4', hoverHex: '#9a72cc' },  // deep violet
+  'section_05': { rgb: '60,160,110', hex: '#3ca06e', hoverHex: '#50b880' },  // emerald
+  'section_06': { rgb: '180,100,100', hex: '#b46464', hoverHex: '#cc7c7c' },  // warm rose
+};
+
+export const WORK_COLORS = [
+    { rgb: '0,242,255', hex: '#00f2ff', hoverHex: '#33f5ff' },   // electric cyan
+    { rgb: '188,255,0', hex: '#bcff00', hoverHex: '#caff33' },   // acid green
+    { rgb: '255,0,122', hex: '#ff007a', hoverHex: '#ff3395' },   // hot pink
+    { rgb: '255,107,0', hex: '#ff6b00', hoverHex: '#ff8933' },   // safety orange
+    { rgb: '188,0,255', hex: '#bc00ff', hoverHex: '#c933ff' },   // royal purple
+    { rgb: '255,234,0', hex: '#ffea00', hoverHex: '#ffee33' },   // cyber yellow
+    { rgb: '255,0,0', hex: '#ff0000', hoverHex: '#ff3333' },     // deep crimson
+    { rgb: '0,210,255', hex: '#00d2ff', hoverHex: '#33dbff' },   // ice blue
+    { rgb: '255,110,200', hex: '#ff6ec8', hoverHex: '#ff8bd3' }, // soft pink
+    { rgb: '100,255,180', hex: '#64ffb4', hoverHex: '#83ffc3' }, // mint
+];
+
 export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w1',

@@ -1,7 +1,7 @@
 import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, Variants, useMotionValue, useMotionTemplate, AnimatePresence, useInView, useSpring, useMotionValueEvent } from 'framer-motion';
 import { SectionData } from '../types';
-import { INTEL_DATA } from '../data/constants';
+import { INTEL_DATA, SECTION_ACCENTS } from '../data/constants';
 import { TRANSLATIONS } from '../data/translations';
 import VideoContainer from './VideoContainer';
 import Section01Experience from './Section01Experience';
@@ -15,16 +15,6 @@ import { Accordion05 } from './ui/accordion-05';
 import WorksIndex from './WorksIndex';
 
 const PALETTE = ["#141211", "#080a0f", "#130f0c", "#0a0d14", "#0e0a12", "#12110c"];
-
-// Subtle per-section accent colors — warm/cool alternation for visual rhythm
-const SECTION_ACCENTS: Record<string, { rgb: string; hex: string; hoverHex: string }> = {
-  'section_01': { rgb: '180,140,80', hex: '#b48c50', hoverHex: '#d4a860' },  // warm amber
-  'section_02': { rgb: '80,130,190', hex: '#5282be', hoverHex: '#6a9ad6' },  // cool steel blue
-  'section_03': { rgb: '70,170,140', hex: '#46aa8c', hoverHex: '#5cc4a4' },  // teal green
-  'section_04': { rgb: '130,90,180', hex: '#825ab4', hoverHex: '#9a72cc' },  // deep violet
-  'section_05': { rgb: '60,160,110', hex: '#3ca06e', hoverHex: '#50b880' },  // emerald
-  'section_06': { rgb: '180,100,100', hex: '#b46464', hoverHex: '#cc7c7c' },  // warm rose
-};
 
 const SECTION_02_VARIANTS = {
   bedroom: [
