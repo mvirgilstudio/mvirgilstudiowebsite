@@ -62,7 +62,7 @@ const App: React.FC = () => {
 
       {/* Header / Logo Fixed */}
       <motion.header
-        className="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-4 md:py-6 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
+        className="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
@@ -72,20 +72,20 @@ const App: React.FC = () => {
             <div className="flex items-center gap-2 sm:gap-3">
               <motion.svg
                 viewBox="0 0 1920 1080"
-                className="h-10 md:h-12 w-auto"
+                className="h-8 md:h-[38.4px] w-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <g fill="#808080" className="transition-opacity group-hover:opacity-80">
+                <g fill="#b0b0b0" className="transition-opacity group-hover:opacity-80">
                   <path d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
                   <path d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
                   <path d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
                   <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                 </g>
               </motion.svg>
-              <span className="text-[10px] sm:text-sm md:text-lg font-black font-sans tracking-[0.1em] md:tracking-[0.3em] text-[#808080] group-hover:opacity-80 transition-opacity hidden min-[400px]:block">MIGUEL VIRGÍLIO</span>
+              <span className="text-[10px] sm:text-sm md:text-lg font-black font-sans tracking-[0.1em] md:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block">MIGUEL VIRGÍLIO</span>
             </div>
           </div>
 

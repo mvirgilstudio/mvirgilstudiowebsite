@@ -1031,7 +1031,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                 filter: isBtnHovered ? 'blur(4px)' : 'blur(0px)'
               }}
               transition={{ duration: 0.4 }}
-              className="flex flex-col mt-8 md:mt-12 w-full"
+              className="flex flex-col mt-16 md:mt-24 w-full"
             >
               <Accordion05
                 items={data.description.map((item, i) => ({
@@ -1044,73 +1044,6 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               />
             </motion.div>
 
-            {/* Interaction Toggle Button */}
-            {!isExpanded && (
-              <motion.div
-                layoutId={`interaction-button-${data.id}`}
-                style={{ 
-                  opacity: btnOpacity,
-                  y: btnY,
-                }}
-                onClick={() => setIsExpanded(true)}
-                onHoverStart={() => setIsBtnHovered(true)}
-                onHoverEnd={() => setIsBtnHovered(false)}
-                className={`mt-6 md:mt-[6vh] mb-8 md:mb-[10vh] pointer-events-auto flex items-center gap-6 md:gap-8 group cursor-pointer w-fit relative ${isAlternate ? 'self-end flex-row-reverse' : ''}`}
-              >
-                {/* Icon Wrapper with enhanced Glow */}
-                <motion.div
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 flex items-center justify-center opacity-100 backdrop-blur-md transition-all duration-300 relative z-10"
-                  style={{
-                    borderColor: `rgba(${accent.rgb}, 0.55)`,
-                    backgroundColor: `rgba(${accent.rgb}, 0.1)`,
-                    boxShadow: `0 0 35px rgba(${accent.rgb}, 0.2)`
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 90,
-                    borderColor: accent.hoverHex,
-                    boxShadow: `0 0 60px rgba(${accent.rgb}, 0.4)`
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <motion.div
-                    className={`rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-2.5 h-2.5'} relative z-20`}
-                    style={{ backgroundColor: accent.hoverHex }}
-                    animate={theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  {/* Additional Scan Ring on Hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-full border opacity-0"
-                    style={{ borderColor: accent.hoverHex }}
-                    whileHover={{ scale: 1.4, opacity: [0, 0.5, 0], transition: { duration: 1, repeat: Infinity } }}
-                  />
-                </motion.div>
-
-                {/* Connecting Laser Line on Hover */}
-                <motion.div
-                  className="absolute left-10 md:left-12 h-[1px] bg-gradient-to-r from-white to-transparent opacity-0 z-0 origin-left"
-                  variants={{
-                    hover: { width: isMobile ? '80px' : '150px', opacity: 0.8, x: 20 },
-                    initial: { width: 0, opacity: 0, x: 0 }
-                  }}
-                  initial="initial"
-                  animate="initial"
-                  whileHover="hover"
-                />
-
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                  whileHover={!isMobile ? { x: 15, letterSpacing: '0.7em' } : {}}
-                  transition={{ duration: 0.8 }}
-                  className="text-[12px] md:text-base font-mono tracking-[0.5em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 whitespace-nowrap"
-                  style={{ color: accent.hoverHex }}
-                >
-                  {t.ui?.enterExperience || "ENTER EXPERIENCE"}
-                </motion.span>
-              </motion.div>
-            )}
           </motion.div>
 
           {/* Grid Overlay */}
@@ -1119,13 +1052,62 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
           )}
         </div>
 
-        {/* Section-Specific Works Sidebar */}
         {!isExpanded && (
           <WorksIndex 
             isVisible={isInView && !isExpanded} 
             activeSectionId={data.id} 
             lang={lang} 
           />
+        )}
+
+        {/* Centered Interaction Toggle Button */}
+        {!isExpanded && (
+          <motion.div
+            layoutId={`interaction-button-${data.id}`}
+            style={{ 
+              opacity: btnOpacity,
+              y: btnY,
+            }}
+            onClick={() => setIsExpanded(true)}
+            onHoverStart={() => setIsBtnHovered(true)}
+            onHoverEnd={() => setIsBtnHovered(false)}
+            className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[40] pointer-events-auto flex flex-col items-center gap-4 group cursor-pointer w-fit"
+          >
+            {/* Icon Wrapper with enhanced Glow */}
+            <motion.div
+              className="w-16 h-16 md:w-18 md:h-18 rounded-full border-2 flex items-center justify-center opacity-100 backdrop-blur-md transition-all duration-300 relative z-10"
+              style={{
+                borderColor: `rgba(${accent.rgb}, 0.55)`,
+                backgroundColor: `rgba(${accent.rgb}, 0.1)`,
+                boxShadow: `0 0 35px rgba(${accent.rgb}, 0.2)`
+              }}
+              whileHover={{
+                scale: 1.1,
+                rotate: 90,
+                borderColor: accent.hoverHex,
+                boxShadow: `0 0 60px rgba(${accent.rgb}, 0.4)`
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <motion.div
+                className={`rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-2 h-2'} relative z-20`}
+                style={{ backgroundColor: accent.hoverHex }}
+                animate={theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              whileHover={!isMobile ? { scale: 1.05, letterSpacing: '0.6em' } : {}}
+              transition={{ duration: 0.8 }}
+              className="text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 whitespace-nowrap text-center"
+              style={{ color: accent.hoverHex }}
+            >
+              {t.ui?.enterExperience || "ENTER EXPERIENCE"}
+            </motion.span>
+          </motion.div>
         )}
 
         {/* Corner Overlay - Outside of transforms for Title and Button */}
