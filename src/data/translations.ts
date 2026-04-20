@@ -40,6 +40,16 @@ export const TRANSLATIONS = {
                 title: 'HYBRID PHYSICAL DIGITAL SYSTEMS',
                 titleLines: ['HYBRID PHYSICAL', 'DIGITAL SYSTEMS'],
                 backgroundText: ['BRIDGING', 'MATTER', 'AND PIXELS'],
+                game: {
+                    objective: 'Objective',
+                    description: 'Guide the Green Sphere through the maze to the exit point by tilting the platform.',
+                    controls: 'Interface Controls',
+                    tilt: 'Tilt & Rotate',
+                    pan: 'Pan Camera',
+                    win: 'Mission Complete',
+                    youWon: 'You Won',
+                    switching: 'Path cleared — switching track',
+                }
             },
             section_04: {
                 title: 'AI & GENERATIVE INTERACTION',
@@ -252,6 +262,16 @@ export const TRANSLATIONS = {
                 title: 'SISTEMAS HÍBRIDOS FÍSICO-DIGITAIS',
                 titleLines: ['SISTEMAS HÍBRIDOS', 'FÍSICO-DIGITAIS'],
                 backgroundText: ['LIGAÇÃO', 'MATÉRIA', 'E PIXÉIS'],
+                game: {
+                    objective: 'Objetivo',
+                    description: 'Guia a Esfera Verde pelo labirinto até ao ponto de saída inclinando a plataforma.',
+                    controls: 'Controlos de Interface',
+                    tilt: 'Inclinar e Rodar',
+                    pan: 'Mover Câmara',
+                    win: 'Missão Completa',
+                    youWon: 'Ganhaste',
+                    switching: 'Caminho livre — a mudar de pista',
+                }
             },
             section_04: {
                 title: 'IA E INTERAÇÃO GENERATIVA',

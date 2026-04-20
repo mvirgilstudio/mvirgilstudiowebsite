@@ -69,7 +69,7 @@ const WorksIndex: React.FC<WorksIndexProps> = ({ isVisible, activeSectionId, lan
   const renderWorkItems = (mobile = false) => {
     return WORKS_INDEX.map((work) => {
       let isLinkable = true;
-      if (activeSectionId && linkableItems[activeSectionId]) {
+      if (!mobile && activeSectionId && linkableItems[activeSectionId]) {
         isLinkable = linkableItems[activeSectionId].includes(work.title);
       }
 

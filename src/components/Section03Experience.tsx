@@ -64,9 +64,9 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
     // Sync physics rotation with the controlled rotation using smoothing
     useFrame(() => {
         // Smoothly interpolate towards target rotation to prevent "kicking" the ball
-        currentRotation.current.x = THREE.MathUtils.lerp(currentRotation.current.x, rotation.x, 0.1);
-        currentRotation.current.y = THREE.MathUtils.lerp(currentRotation.current.y, rotation.y, 0.1);
-        currentRotation.current.z = THREE.MathUtils.lerp(currentRotation.current.z, rotation.z, 0.1);
+        currentRotation.current.x = THREE.MathUtils.lerp(currentRotation.current.x, rotation.x, 0.2);
+        currentRotation.current.y = THREE.MathUtils.lerp(currentRotation.current.y, rotation.y, 0.2);
+        currentRotation.current.z = THREE.MathUtils.lerp(currentRotation.current.z, rotation.z, 0.2);
 
         const targetQuat = new THREE.Quaternion().setFromEuler(currentRotation.current);
 
@@ -101,11 +101,31 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
             >
                 <primitive object={triggerScene} visible={false} />
                 {sensorInfo && (
-                    <CuboidCollider
-                        args={sensorInfo.args}
-                        position={sensorInfo.position}
-                        sensor
-                    />
+                    <>
+                        <CuboidCollider
+                            args={sensorInfo.args}
+                            position={sensorInfo.position}
+                            sensor
+                        />
+                        {/* Animated Indicator Arrow */}
+                        <Float speed={10} rotationIntensity={0.1} floatIntensity={4}>
+                            <mesh position={[sensorInfo.position[0], sensorInfo.position[1] + 1.2, sensorInfo.position[2]]} rotation={[Math.PI, 0, 0]}>
+                                <coneGeometry args={[0.3, 0.6, 4]} />
+                                <meshStandardMaterial 
+                                    color="#4ade80" 
+                                    emissive="#4ade80" 
+                                    emissiveIntensity={4} 
+                                    transparent 
+                                    opacity={0.9}
+                                />
+                            </mesh>
+                            {/* Glow ring at base of arrow */}
+                            <mesh position={[sensorInfo.position[0], sensorInfo.position[1] + 0.4, sensorInfo.position[2]]} rotation={[-Math.PI / 2, 0, 0]}>
+                                <torusGeometry args={[0.4, 0.015, 16, 32]} />
+                                <meshStandardMaterial color="#4ade80" emissive="#4ade80" emissiveIntensity={2} transparent opacity={0.5} />
+                            </mesh>
+                        </Float>
+                    </>
                 )}
             </RigidBody>
         </group>
@@ -141,7 +161,7 @@ const FallingBall = ({ onRemove, position, color }: { onRemove: () => void; posi
             <BallCollider args={[0.3]} restitution={0} friction={1} />
             <mesh castShadow>
                 <sphereGeometry args={[0.3, 32, 32]} />
-                <meshStandardMaterial color={color} roughness={0.1} metalness={0.8} />
+                <meshStandardMaterial color={color} roughness={0.1} metalness={0.8} emissive={color} emissiveIntensity={0.2} />
             </mesh>
         </RigidBody>
     );
@@ -370,13 +390,16 @@ const MouseTrail = ({ color }: { color: THREE.Color }) => {
 };
 
 
-const Section03Experience: React.FC = () => {
+import { TRANSLATIONS } from '../data/translations';
+
+const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) => {
+    const t = TRANSLATIONS[lang].sections.section_03;
     const [modelRotation, setModelRotation] = useState(new THREE.Euler(0, 0, 0));
     const [ballKey, setBallKey] = useState(0);
     const [useCylinder, setUseCylinder] = useState(true);
 
     const ballColor = useMemo(() => {
-        return new THREE.Color(0.15, 0.15, 0.15);
+        return new THREE.Color("#4ade80"); // Tech green
     }, []);
 
 
@@ -418,32 +441,23 @@ const Section03Experience: React.FC = () => {
     const handleBallRemove = () => {
         if (hasWon) return; // Don't respawn if we already won
 
-        // Start reset sequence
-        setIsRespawning(true);
+        // Instantly increment key for immediate respawn
+        setBallKey(prev => prev + 1);
         setModelRotation(new THREE.Euler(0, 0, 0));
-
-        // Delay the sphere generation to give the table time to reset
-        setTimeout(() => {
-            setBallKey(prev => prev + 1);
-            setIsRespawning(false);
-        }, 1500); // 1.5s delay for rotation reset
+        setIsRespawning(false);
     };
 
     const handleWin = () => {
         setHasWon(true);
         setUseCylinder(prev => !prev);
 
-
-        // Reset after a few seconds of glory
+        // Reset after a shorter period of glory
         setTimeout(() => {
-            setIsRespawning(true);
             setHasWon(false);
             setModelRotation(new THREE.Euler(0, 0, 0));
-            setTimeout(() => {
-                setBallKey(prev => prev + 1);
-                setIsRespawning(false);
-            }, 1000);
-        }, 4000);
+            setBallKey(prev => prev + 1);
+            setIsRespawning(false);
+        }, 1800); // Fast transition back to gameplay
     };
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -460,10 +474,10 @@ const Section03Experience: React.FC = () => {
                 <Suspense fallback={null}>
                     <color attach="background" args={['#040404']} />
                     <fog attach="fog" args={['#040404', 10, 50]} />
-                    <PerspectiveCamera makeDefault position={[0, 5, 15]} fov={35} />
+                    <PerspectiveCamera makeDefault position={[0, 15, 22]} fov={35} />
 
                     <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} intensity={2} castShadow />
+                    <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} intensity={2} castshadow />
                     <pointLight position={[-10, -10, -10]} intensity={1} color="#4488ff" />
                     <pointLight position={[10, 5, -5]} intensity={0.5} color="#ff8844" />
 
@@ -496,7 +510,7 @@ const Section03Experience: React.FC = () => {
 
                     <OrbitControls
                         enableRotate={false} // Disable camera rotation to allow model rotation
-                        enableZoom={true}
+                        enableZoom={false}
                         enablePan={true}
                         makeDefault
                     />
@@ -507,38 +521,37 @@ const Section03Experience: React.FC = () => {
             {/* Gameplay Instructions */}
             {!hasWon && (
                 <div className="absolute top-24 right-6 md:top-28 md:right-10 z-[3000] pointer-events-none max-w-[340px]">
-                    <div className="bg-black/50 backdrop-blur-xl border border-white/10 rounded-lg px-6 py-5 flex flex-col gap-5">
+                    <div className="bg-black/60 backdrop-blur-2xl border border-white/10 rounded-xl px-6 py-6 flex flex-col gap-5 relative overflow-hidden group shadow-2xl">
+                        {/* Dynamic Accent Border */}
+                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#4ade80] via-[#4488ff] to-[#ff8844]" />
+                        
                         {/* Title */}
                         <div className="flex items-center gap-3">
-                            <div className="w-2.5 h-2.5 rounded-full bg-white/80 animate-pulse" />
-                            <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-white/80 uppercase font-bold">
-                                Objective
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#4ade80] animate-pulse shadow-[0_0_10px_#4ade80]" />
+                            <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-white uppercase font-bold">
+                                {t.game.objective}
                             </span>
                         </div>
-                        <p className="text-sm md:text-base font-sans text-white/50 leading-relaxed">
-                            Guide the ball through the maze to the exit point by tilting the platform.
+                        <p className="text-sm md:text-base font-sans text-white/60 leading-relaxed">
+                            {t.game.description}
                         </p>
 
                         {/* Divider */}
-                        <div className="w-full h-[1px] bg-white/10" />
+                        <div className="w-full h-[1px] bg-gradient-to-r from-white/20 via-transparent to-transparent" />
 
                         {/* Controls */}
                         <div className="flex flex-col gap-4">
-                            <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-white/60 uppercase">
-                                Controls
+                            <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-white/40 uppercase">
+                                {t.game.controls}
                             </span>
                             <div className="flex flex-col gap-3">
                                 <div className="flex items-center gap-4">
-                                    <kbd className="text-xs font-mono bg-white/10 border border-white/15 rounded px-3 py-1 text-white/70 min-w-[75px] text-center">L-Click</kbd>
-                                    <span className="text-sm text-white/40">Tilt & Rotate</span>
+                                    <kbd className="text-[10px] font-mono bg-[#4ade80]/10 border border-[#4ade80]/30 rounded px-2.5 py-1 text-[#4ade80] min-w-[75px] text-center uppercase font-bold">L-Click</kbd>
+                                    <span className="text-xs text-white/50 tracking-wider">{t.game.tilt}</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <kbd className="text-xs font-mono bg-white/10 border border-white/15 rounded px-3 py-1 text-white/70 min-w-[75px] text-center">R-Click</kbd>
-                                    <span className="text-sm text-white/40">Pan Camera</span>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <kbd className="text-xs font-mono bg-white/10 border border-white/15 rounded px-3 py-1 text-white/70 min-w-[75px] text-center">Scroll</kbd>
-                                    <span className="text-sm text-white/40">Zoom In / Out</span>
+                                    <kbd className="text-[10px] font-mono bg-[#4488ff]/10 border border-[#4488ff]/30 rounded px-2.5 py-1 text-[#4488ff] min-w-[75px] text-center uppercase font-bold">R-Click</kbd>
+                                    <span className="text-xs text-white/50 tracking-wider">{t.game.pan}</span>
                                 </div>
                             </div>
                         </div>
@@ -563,10 +576,10 @@ const Section03Experience: React.FC = () => {
                         {/* Main text */}
                         <div className="flex flex-col items-center gap-2">
                             <span className="text-[10px] md:text-xs font-mono tracking-[0.6em] text-white/40 uppercase pl-[0.6em]">
-                                Mission Complete
+                                {t.game.win}
                             </span>
                             <h2 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight uppercase drop-shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-                                You Won
+                                {t.game.youWon}
                             </h2>
                         </div>
                         
@@ -575,7 +588,7 @@ const Section03Experience: React.FC = () => {
                         
                         {/* Subtitle */}
                         <span className="text-[9px] font-mono tracking-[0.4em] text-white/30 uppercase pl-[0.4em]">
-                            Path cleared — switching track
+                            {t.game.switching}
                         </span>
                     </div>
                 </div>

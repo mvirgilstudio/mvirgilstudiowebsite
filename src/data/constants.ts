@@ -43,9 +43,9 @@ export const WORKS_INDEX: WorkItem[] = [
     id: 'w3',
     title: 'TOUCHSTONE CATALOG',
     description: 'A hands-on catalog where touching a stone activates its digital counterpart. The system instantly changes the projected 3D scene to match the selected material. Printed buttons allow smooth transitions between curated environments. Users experience materials not just by seeing, but by interacting. A hybrid interface combining samples, sensors, and immersive visualization.',
-    mediaUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
-    mediaType: 'image',
-    externalLink: 'https://example.com/touchstone-catalog'
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/d7781688-242b-40ba-9d7a-ef77c558a697?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
+    externalLink: '/projects/touchstone/index.html'
   },
   {
     id: 'w4',
@@ -59,15 +59,15 @@ export const WORKS_INDEX: WorkItem[] = [
     id: 'w5',
     title: 'LIVESPACE',
     description: 'An immersive 3D visualization of a house where users can freely walk through every space. Interactively change furniture, colors, interior styles, and lighting in real time. Open and close doors or adjust lights to experiment with different atmospheres. Daylight and environmental settings respond dynamically to user actions. A fully interactive platform that brings architectural design to life.',
-    mediaUrl: '/assets/videos/casa_pr_movie.mp4',
-    mediaType: 'video',
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/7ce0e237-7f69-403e-990d-8e5ed7005a45?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
     externalLink: '/projects/livespace/code.html'
   },
   {
     id: 'w6',
     title: 'GREENHAVEN INTERACTIVE',
     description: 'Explore a forest house in an interactive, photorealistic 3D environment. Modify interior styles, furniture layouts, colors, and lighting on the fly. Walk through the space, open doors, and adjust lights with intuitive controls. Dynamic daylight and natural forest surroundings enhance realism. A digital experience connecting architectural exploration with immersive nature.',
-    mediaUrl: 'https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/4f613faf-a1f8-4505-892e-2a92a6288309?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/greenhaven/code.html'
   },
@@ -75,17 +75,17 @@ export const WORKS_INDEX: WorkItem[] = [
     id: 'w7',
     title: 'ORBITARIUM INTERACTIVE',
     description: 'Explore the solar system in an interactive, hand-controlled 3D environment. Navigate between planets and examine them up close with intuitive gestures. Each planet features immersive videos detailing its characteristics and features. Experience the movement, scale, and orbiting dynamics of our cosmic neighborhood. A unique fusion of interactivity, education, and astronomical visualization.',
-    mediaUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
-    mediaType: 'image',
-    externalLink: 'https://example.com/orbitarium'
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/67ba8e61-32a5-44bf-a110-a635ec840c06?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
+    externalLink: '/projects/solarsystem/index.html'
   },
   {
     id: 'w8',
     title: 'SKETCHMAGIC',
     description: 'An immersive AI-powered drawing experience designed for children. Users create sketches with hand motions, which are instantly transformed into playful AI-generated images. Choose from cute cartoon monsters, rainbow stars, or abstract landscapes. Sensors capture gestures while projections or screens display the results in real time. A fun and interactive platform combining creativity, technology, and imagination.',
-    mediaUrl: 'https://videos.pexels.com/video-files/5527739/5527739-uhd_2560_1440_25fps.mp4',
-    mediaType: 'video',
-    externalLink: 'https://example.com/sketchmagic'
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/6c067489-8672-4e37-a042-6c1a52474c78?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
+    externalLink: '/projects/sketchmagic/index.html'
   },
   {
     id: 'w9',
@@ -115,9 +115,9 @@ export const WORKS_INDEX: WorkItem[] = [
     id: 'w12',
     title: 'VASEMOTION',
     description: 'A unique 3D-printed vase with its own dedicated animated presentation. Motion graphics reveal every angle, curve, and detail of the object. The project blends tactile design with dynamic visual storytelling. Physical and digital representations create a cohesive showcase experience. A creative exploration of 3D printing, form, and animation.',
-    mediaUrl: 'https://videos.pexels.com/video-files/3845070/3845070-uhd_2560_1440_30fps.mp4',
-    mediaType: 'video',
-    externalLink: 'https://example.com/vasemotion'
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
+    externalLink: '/projects/vasemotion/index.html'
   },
 ];
 

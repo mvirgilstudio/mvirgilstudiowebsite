@@ -165,18 +165,18 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                                 </svg>
                                 <div className="absolute flex flex-col items-center">
                                     <span className="text-4xl font-mono text-white font-light">{mediapipeProgress}%</span>
-                                    <span className="text-[9px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
+                                    <span className="text-[11px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
                                 </div>
                             </div>
 
                             <div className="space-y-6">
                                 <div className="space-y-2">
-                                    <h3 className="text-[11px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
+                                    <h3 className="text-[13px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
                                         {lang === 'EN' ? 'Initializing AI Engine' : 'A Iniciar Motor IA'}
                                     </h3>
                                     <div className="w-8 h-[1px] bg-[#68F2EB] mx-auto" />
                                 </div>
-                                <p className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
+                                <p className="text-[12px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
                                     {lang === 'EN' 
                                         ? 'Configuring palm detection and camera streams for 360 viewer' 
                                         : 'A configurar deteção de palma e fluxos de câmara para visualizador 360'}
@@ -193,7 +193,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         </motion.div>
 
                         <div className="absolute bottom-16 flex flex-col items-center gap-3">
-                            <span className="text-[9px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
+                            <span className="text-[11px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
                         </div>
                     </motion.div>
                 )}
@@ -212,9 +212,9 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         }}
                         className="flex justify-center w-full"
                     >
-                        <div className="bg-black/60 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full flex items-center gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                            <div className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
-                            <span className="text-[11px] md:text-sm font-mono tracking-[0.3em] uppercase underline-offset-8 text-white/80">
+                        <div className="bg-black/60 backdrop-blur-2xl border border-white/10 px-12 py-6 rounded-full flex items-center gap-8 shadow-[0_0_60px_rgba(0,0,0,0.6)]">
+                            <div className="w-3 h-3 rounded-full bg-white/40 animate-pulse" />
+                            <span className="text-[15px] md:text-lg font-mono tracking-[0.3em] uppercase underline-offset-8 text-white/80">
                                 {sectionT.instructions.mouse}
                             </span>
                         </div>
@@ -227,13 +227,13 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 5 }}
-                            className="flex flex-col items-center gap-2 mb-2"
+                            className="flex flex-col items-center gap-4 mb-4"
                         >
-                            <div className="flex items-center gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-5 h-5 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}>
+                            <div className="flex items-center gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 px-12 py-6 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.6)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-8 h-8 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}>
                                     <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                                 </svg>
-                                <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-white font-bold whitespace-nowrap">
+                                <span className="text-[15px] font-mono tracking-[0.3em] uppercase text-white font-bold whitespace-nowrap">
                                     {handDetected ? (lang === 'EN' ? 'Pinch to Rotate • Open hand to click' : 'Aperte para Rodar • Mão aberta para clicar') : (lang === 'EN' ? 'Setup Complete • Show hand to track' : 'Configuração Concluída • Mostre a mão')}
                                 </span>
                             </div>
@@ -245,14 +245,14 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     onClick={toggleHandTracking}
                     onMouseEnter={() => setIsButtonHovered(true)}
                     onMouseLeave={() => setIsButtonHovered(false)}
-                    className={`group relative flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-500 cursor-pointer
+                    className={`group relative flex items-center gap-6 px-12 py-6 rounded-full border transition-all duration-500 cursor-pointer
                         ${handTrackingActive ? 'bg-[#68F2EB]/15 border-[#68F2EB]/60 shadow-[0_0_30px_rgba(104,242,235,0.3)]' : 'bg-black/80 border-white/20 hover:border-[#68F2EB]/40 hover:bg-[#68F2EB]/10'}
                         backdrop-blur-md`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-5 h-5 transition-all duration-300 ${handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-8 h-8 transition-all duration-300 ${handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'}`}>
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                     </svg>
-                    <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'}`}>
+                    <span className={`text-base uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'}`}>
                         {handTrackingActive ? (lang === 'PT' ? 'Sair da Experiência' : 'Exit Experience') : (lang === 'PT' ? 'Entrar na Experiência' : 'Enter Experience')}
                     </span>
                     {handTrackingActive && <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />}
@@ -299,19 +299,19 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     x: 0,
                     filter: isButtonHovered ? 'blur(10px)' : 'blur(0px)'
                 }}
-                className="fixed left-[60px] md:left-[400px] top-[400px] md:top-[320px] z-[3001] flex flex-col gap-6 pointer-events-auto"
+                className="fixed left-[40px] md:left-[380px] top-[400px] md:top-[280px] z-[3001] flex flex-col gap-14 pointer-events-auto"
             >
-                <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3 mb-1">
-                        <div className="w-8 h-[1px] bg-white/30" />
-                        <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase font-bold">Category</span>
+                <div className="flex flex-col gap-5">
+                    <div className="flex items-center gap-5 mb-1">
+                        <div className="w-12 h-[1px] bg-white/30" />
+                        <span className="text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Category</span>
                     </div>
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-4">
                         {(Object.keys(SECTION_02_VARIANTS) as Array<keyof typeof SECTION_02_VARIANTS>).map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => { setCategory(cat); setActiveTexture(SECTION_02_VARIANTS[cat][0].sphere); }}
-                                className={`px-3 py-1.5 text-[9px] font-mono tracking-widest border transition-all duration-300 ${category === cat ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'bg-white/10 text-white/70 border-white/20 hover:border-white/50 hover:text-white backdrop-blur-sm'}`}
+                                className={`px-8 py-4 text-[14px] font-mono tracking-widest border transition-all duration-300 ${category === cat ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/10 text-white/70 border-white/20 hover:border-white/50 hover:text-white backdrop-blur-sm'}`}
                             >
                                 {cat.toUpperCase()}
                             </button>
@@ -319,22 +319,22 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3 mb-1">
-                        <div className="w-8 h-[1px] bg-white/30" />
-                        <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase font-bold">Environment</span>
+                <div className="flex flex-col gap-5">
+                    <div className="flex items-center gap-5 mb-1">
+                        <div className="w-12 h-[1px] bg-white/30" />
+                        <span className="text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Environment</span>
                     </div>
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-6">
                         {SECTION_02_VARIANTS[category].map((item) => (
                             <div
                                 key={item.id}
                                 onClick={() => setActiveTexture(item.sphere)}
                                 className="group relative cursor-pointer"
                             >
-                                <div className={`w-14 h-14 md:w-16 md:h-16 p-0.5 rounded-lg border transition-all duration-500 overflow-hidden ${activeTexture === item.sphere ? 'border-[#68F2EB] shadow-[0_0_20px_rgba(104,242,235,0.2)]' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
-                                    <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-md" />
+                                <div className={`w-28 h-28 md:w-32 md:h-32 p-1.5 rounded-2xl border transition-all duration-500 overflow-hidden ${activeTexture === item.sphere ? 'border-[#68F2EB] shadow-[0_0_25px_rgba(104,242,235,0.3)]' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
+                                    <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-xl" />
                                 </div>
-                                <div className="mt-2 text-[8px] font-mono text-center tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity text-white">
+                                <div className="mt-4 text-[12px] font-mono text-center tracking-widest opacity-40 group-hover:opacity-100 transition-opacity text-white font-bold">
                                     {item.label}
                                 </div>
                             </div>

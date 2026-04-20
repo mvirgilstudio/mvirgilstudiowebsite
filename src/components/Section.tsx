@@ -421,7 +421,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   }
 
   const maskImage = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, black, transparent)`;
-                    
+
   const meshSpotlight = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, rgba(0,0,0,0.12) 0%, transparent 100%)`;
 
   // Variants for content containers
@@ -488,7 +488,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
     <section
       id={data.id}
       ref={containerRef}
-      className={`relative w-full ${(data.id === 'section_06' && isExpanded) ? 'md:min-h-[400vh] min-h-screen' : 'min-h-screen md:h-screen'} border-t border-white/5`}
+      className={`relative w-full ${(data.id === 'section_06' && isExpanded) ? 'md:min-h-[400vh] min-h-screen' : 'min-h-screen md:h-screen'} border-t border-white/5 flex flex-col md:flex-row items-center justify-center overflow-hidden`}
       style={{ backgroundColor: bgColor }}
       onMouseMove={handleMouseMove}
     >
@@ -637,224 +637,277 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
           )}
         </AnimatePresence>
 
-          {/* BACKGROUND TEXT CONTAINER (Relocated for true centering) */}
+        {/* BACKGROUND TEXT CONTAINER (Relocated for true centering) */}
+        <motion.div
+          style={{ y: yBg }}
+          className="absolute inset-0 pointer-events-none select-none z-[2]"
+        >
+          {/* Base Layer */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center opacity-[0.04]">
+            {sectionT.backgroundText.map((text, i) => (
+              <motion.h2
+                key={`base-${i}`}
+                style={{ skewX: animConfig.bgTextSkew }}
+                initial={
+                  data.id === 'section_02' ? { opacity: 0, x: -100 } :
+                    data.id === 'section_03' ? { opacity: 0, x: 100 } :
+                      data.id === 'section_04' ? { opacity: 0, y: 50, filter: 'blur(10px)' } :
+                        data.id === 'section_05' ? { opacity: 0, scale: 2, z: -500, rotateX: 45, rotateY: -30, filter: 'blur(20px)' } :
+                          data.id === 'section_06' ? { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)', y: 50 } : {}
+                }
+                animate={
+                  isInView ? (
+                    data.id === 'section_02' ? { opacity: 1, x: 0 } :
+                      data.id === 'section_03' ? { opacity: 1, x: 0 } :
+                        data.id === 'section_04' ? { opacity: 1, y: 0, filter: 'blur(0px)' } :
+                          data.id === 'section_05' ? { opacity: 1, scale: 1, z: 0, rotateX: 0, rotateY: 0, filter: 'blur(0px)' } :
+                            data.id === 'section_06' ? { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', y: 0 } : { opacity: 1 }
+                  ) : { opacity: 0 }
+                }
+                transition={
+                  (data.id === 'section_02' || data.id === 'section_03' || data.id === 'section_04' || data.id === 'section_05' || data.id === 'section_06')
+                    ? { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' } : {}
+                }
+                viewport={{ once: false }}
+                className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-white/25 whitespace-nowrap`}
+              >
+                {text}
+              </motion.h2>
+            ))}
+          </div>
+
+          {/* Glow Layer (Masked) */}
           <motion.div
-            style={{ y: yBg }}
-            className="absolute inset-0 pointer-events-none select-none z-[2]"
+            className={`absolute inset-0 hidden md:flex flex-col justify-center items-center opacity-12`}
+            style={{
+              WebkitMaskImage: maskImage,
+              maskImage: maskImage
+            }}
           >
-            {/* Base Layer */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center opacity-[0.04]">
+            {sectionT.backgroundText.map((text, i) => (
+              <motion.h2
+                key={`glow-${i}`}
+                style={{ skewX: animConfig.bgTextSkew }}
+                initial={
+                  data.id === 'section_02' ? { opacity: 0, x: -100 } :
+                    data.id === 'section_03' ? { opacity: 0, x: 100 } :
+                      data.id === 'section_04' ? { opacity: 0, y: 50, filter: 'blur(10px)' } :
+                        data.id === 'section_05' ? { opacity: 0, scale: 2, z: -500, rotateX: 45, rotateY: -30, filter: 'blur(20px)' } :
+                          data.id === 'section_06' ? { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)', y: 50 } : {}
+                }
+                animate={
+                  isInView ? (
+                    data.id === 'section_02' ? { opacity: 1, x: 0 } :
+                      data.id === 'section_03' ? { opacity: 1, x: 0 } :
+                        data.id === 'section_04' ? { opacity: 1, y: 0, filter: 'blur(0px)' } :
+                          data.id === 'section_05' ? { opacity: 1, scale: 1, z: 0, rotateX: 0, rotateY: 0, filter: 'blur(0px)' } :
+                            data.id === 'section_06' ? { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', y: 0 } : { opacity: 1 }
+                  ) : { opacity: 0 }
+                }
+                transition={
+                  (data.id === 'section_02' || data.id === 'section_03' || data.id === 'section_04' || data.id === 'section_05' || data.id === 'section_06')
+                    ? { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' } : {}
+                }
+                viewport={{ once: false }}
+                className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-white whitespace-nowrap ${theme === 'glitch' ? 'drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]' : 'drop-shadow-[0_0_25px_rgba(255,255,255,0.1)]'}`}
+              >
+                {text}
+              </motion.h2>
+            ))}
+          </motion.div>
+
+          {/* Lighting Layer (Section 02 exclusive sweep) */}
+          {data.id === 'section_02' && (
+            <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-20">
               {sectionT.backgroundText.map((text, i) => (
-                <motion.h2
-                  key={`base-${i}`}
-                  style={{ skewX: animConfig.bgTextSkew }}
-                  initial={
-                    data.id === 'section_02' ? { opacity: 0, x: -100 } :
-                      data.id === 'section_03' ? { opacity: 0, x: 100 } :
-                        data.id === 'section_04' ? { opacity: 0, y: 50, filter: 'blur(10px)' } :
-                          data.id === 'section_05' ? { opacity: 0, scale: 2, z: -500, rotateX: 45, rotateY: -30, filter: 'blur(20px)' } :
-                            data.id === 'section_06' ? { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)', y: 50 } : {}
-                  }
-                  animate={
-                    isInView ? (
-                      data.id === 'section_02' ? { opacity: 1, x: 0 } :
-                        data.id === 'section_03' ? { opacity: 1, x: 0 } :
-                          data.id === 'section_04' ? { opacity: 1, y: 0, filter: 'blur(0px)' } :
-                            data.id === 'section_05' ? { opacity: 1, scale: 1, z: 0, rotateX: 0, rotateY: 0, filter: 'blur(0px)' } :
-                              data.id === 'section_06' ? { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', y: 0 } : { opacity: 1 }
-                    ) : { opacity: 0 }
-                  }
-                  transition={
-                    (data.id === 'section_02' || data.id === 'section_03' || data.id === 'section_04' || data.id === 'section_05' || data.id === 'section_06')
-                      ? { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' } : {}
-                  }
-                  viewport={{ once: false }}
-                  className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-white/25 whitespace-nowrap`}
-                >
-                  {text}
-                </motion.h2>
+                <div key={`light-wrap-${i}`} className="relative">
+                  {/* Base Text with Gradient Sweep */}
+                  <motion.h2
+                    className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/20 to-transparent bg-[length:300%_100%]`}
+                    animate={{
+                      backgroundPosition: ["150% 0", "-150% 0"]
+                    }}
+                    transition={{
+                      backgroundPosition: {
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 1 + i * 0.5
+                      }
+                    }}
+                  >
+                    {text}
+                  </motion.h2>
+                </div>
               ))}
             </div>
+          )}
 
-            {/* Glow Layer (Masked) */}
-            <motion.div
-              className={`absolute inset-0 hidden md:flex flex-col justify-center items-center opacity-12`}
-              style={{
-                WebkitMaskImage: maskImage,
-                maskImage: maskImage
-              }}
-            >
+          {/* Lighting Layer (Section 03 exclusive scanner) */}
+          {data.id === 'section_03' && (
+            <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
               {sectionT.backgroundText.map((text, i) => (
-                <motion.h2
-                  key={`glow-${i}`}
-                  style={{ skewX: animConfig.bgTextSkew }}
-                  initial={
-                    data.id === 'section_02' ? { opacity: 0, x: -100 } :
-                      data.id === 'section_03' ? { opacity: 0, x: 100 } :
-                        data.id === 'section_04' ? { opacity: 0, y: 50, filter: 'blur(10px)' } :
-                          data.id === 'section_05' ? { opacity: 0, scale: 2, z: -500, rotateX: 45, rotateY: -30, filter: 'blur(20px)' } :
-                            data.id === 'section_06' ? { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)', y: 50 } : {}
-                  }
-                  animate={
-                    isInView ? (
-                      data.id === 'section_02' ? { opacity: 1, x: 0 } :
-                        data.id === 'section_03' ? { opacity: 1, x: 0 } :
-                          data.id === 'section_04' ? { opacity: 1, y: 0, filter: 'blur(0px)' } :
-                            data.id === 'section_05' ? { opacity: 1, scale: 1, z: 0, rotateX: 0, rotateY: 0, filter: 'blur(0px)' } :
-                              data.id === 'section_06' ? { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', y: 0 } : { opacity: 1 }
-                    ) : { opacity: 0 }
-                  }
-                  transition={
-                    (data.id === 'section_02' || data.id === 'section_03' || data.id === 'section_04' || data.id === 'section_05' || data.id === 'section_06')
-                      ? { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' } : {}
-                  }
-                  viewport={{ once: false }}
-                  className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-white whitespace-nowrap ${theme === 'glitch' ? 'drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]' : 'drop-shadow-[0_0_25px_rgba(255,255,255,0.1)]'}`}
-                >
-                  {text}
-                </motion.h2>
-              ))}
-            </motion.div>
-
-            {/* Lighting Layer (Section 02 exclusive sweep) */}
-            {data.id === 'section_02' && (
-              <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-20">
-                {sectionT.backgroundText.map((text, i) => (
-                  <div key={`light-wrap-${i}`} className="relative">
-                    {/* Base Text with Gradient Sweep */}
-                      <motion.h2
-                        className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/20 to-transparent bg-[length:300%_100%]`}
-                      animate={{
-                        backgroundPosition: ["150% 0", "-150% 0"]
-                      }}
-                      transition={{
-                        backgroundPosition: {
-                          duration: 10,
-                          repeat: Infinity,
-                          ease: "linear",
-                          delay: 1 + i * 0.5
-                        }
-                      }}
-                    >
-                      {text}
-                    </motion.h2>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Lighting Layer (Section 03 exclusive scanner) */}
-            {data.id === 'section_03' && (
-              <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
-                {sectionT.backgroundText.map((text, i) => (
-                  <div key={`scanner-wrap-${i}`} className="relative group">
-                    {/* The Scanning Bar Text */}
-                    <motion.h2
-                      initial={{ opacity: 0, x: 100 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/40 to-transparent bg-[length:200%_100%]`}
-                      animate={{
-                        backgroundPosition: ["-100% 0", "100% 0"]
-                      }}
-                      transition={{
-                        x: { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' },
-                        opacity: { duration: 1, delay: 0.2 + i * 0.1 },
-                        backgroundPosition: {
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: [0.4, 0, 0.2, 1],
-                          delay: 1 + i * 0.8
-                        }
-                      }}
-                    >
-                      {text}
-                    </motion.h2>
-
-                    {/* High-frequency Data Flicker (Simplified) */}
-                    <motion.h2
-                      animate={{
-                        opacity: [0, 0.4, 0, 0.2, 0.5, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 5,
-                      }}
-                      className={`absolute inset-0 text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-gray-800/10 whitespace-nowrap pointer-events-none`}
-                    >
-                      {text}
-                    </motion.h2>
-
-                    {/* Vertical Scanner Accent */}
-                    <motion.div
-                      className="absolute inset-y-0 w-[2px] bg-black/20 shadow-[0_0_15px_rgba(0,0,0,0.1)] z-10 pointer-events-none"
-                      animate={{
-                        left: ["-10%", "110%"]
-                      }}
-                      transition={{
+                <div key={`scanner-wrap-${i}`} className="relative group">
+                  {/* The Scanning Bar Text */}
+                  <motion.h2
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/40 to-transparent bg-[length:200%_100%]`}
+                    animate={{
+                      backgroundPosition: ["-100% 0", "100% 0"]
+                    }}
+                    transition={{
+                      x: { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' },
+                      opacity: { duration: 1, delay: 0.2 + i * 0.1 },
+                      backgroundPosition: {
                         duration: 3,
                         repeat: Infinity,
                         ease: [0.4, 0, 0.2, 1],
                         delay: 1 + i * 0.8
-                      }}
+                      }
+                    }}
+                  >
+                    {text}
+                  </motion.h2>
+
+                  {/* High-frequency Data Flicker (Simplified) */}
+                  <motion.h2
+                    animate={{
+                      opacity: [0, 0.4, 0, 0.2, 0.5, 0]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 5,
+                    }}
+                    className={`absolute inset-0 text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-gray-800/10 whitespace-nowrap pointer-events-none`}
+                  >
+                    {text}
+                  </motion.h2>
+
+                  {/* Vertical Scanner Accent */}
+                  <motion.div
+                    className="absolute inset-y-0 w-[2px] bg-black/20 shadow-[0_0_15px_rgba(0,0,0,0.1)] z-10 pointer-events-none"
+                    animate={{
+                      left: ["-10%", "110%"]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: [0.4, 0, 0.2, 1],
+                      delay: 1 + i * 0.8
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Lighting Layer (Section 04 exclusive neural pulse) */}
+          {data.id === 'section_04' && (
+            <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
+              {sectionT.backgroundText.map((text, i) => (
+                <div key={`neural-wrap-${i}`} className="relative">
+                  <motion.h2
+                    initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/20 to-transparent bg-[length:200%_100%]`}
+                    animate={{
+                      backgroundPosition: ["0% 0", "200% 0"],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      x: { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' },
+                      backgroundPosition: {
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.5
+                      },
+                      opacity: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.3
+                      }
+                    }}
+                  >
+                    {text}
+                  </motion.h2>
+
+                  {/* Neural Spark Layer (Simplified to words instead of characters) */}
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={{ opacity: [0.1, 0.3, 0.1] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <h2 className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-gray-800/10 whitespace-nowrap pointer-events-none`}>
+                      {text}
+                    </h2>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          )}
+          {/* Lighting Layer (Section 05 exclusive prismatic grid) */}
+          {data.id === 'section_05' && (
+            <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
+              {sectionT.backgroundText.map((text, i) => (
+                <div key={`grid-wrap-${i}`} className="relative group">
+                  {/* Prismatic Mesh Shimmer */}
+                  <motion.h2
+                    initial={{ opacity: 0, scale: 1.2 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-[length:200%_200%]`}
+                    style={{ backgroundImage: meshSpotlight }}
+                    animate={{
+                      backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"]
+                    }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  >
+                    {text}
+                  </motion.h2>
+
+                  {/* Intersecting Pulse Beams */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <motion.div
+                      className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_rgba(34,211,238,0.5)] z-10"
+                      animate={{ top: ["0%", "100%"] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.8 }}
+                    />
+                    <motion.div
+                      className="absolute inset-y-0 w-[1px] bg-gradient-to-b from-transparent via-rose-400 to-transparent shadow-[0_0_15px_rgba(244,63,94,0.5)] z-10"
+                      animate={{ left: ["0%", "100%"] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: i * 1.2 }}
                     />
                   </div>
-                ))}
-              </div>
-            )}
 
-            {/* Lighting Layer (Section 04 exclusive neural pulse) */}
-            {data.id === 'section_04' && (
-              <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
-                {sectionT.backgroundText.map((text, i) => (
-                  <div key={`neural-wrap-${i}`} className="relative">
-                    <motion.h2
-                      initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-                      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                      className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-transparent via-black/20 to-transparent bg-[length:200%_100%]`}
-                      animate={{
-                        backgroundPosition: ["0% 0", "200% 0"],
-                        opacity: [0.3, 0.6, 0.3]
-                      }}
-                      transition={{
-                        x: { duration: 1, delay: 0.2 + i * 0.1, ease: 'easeOut' },
-                        backgroundPosition: {
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: i * 0.5
-                        },
-                        opacity: {
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: i * 0.3
-                        }
-                      }}
-                    >
-                      {text}
-                    </motion.h2>
-
-                    {/* Neural Spark Layer (Simplified to words instead of characters) */}
-                    <motion.div
-                      className="absolute inset-0"
-                      animate={{ opacity: [0.1, 0.3, 0.1] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <h2 className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-gray-800/10 whitespace-nowrap pointer-events-none`}>
-                        {text}
-                      </h2>
-                    </motion.div>
+                  {/* simplified mesh vertex points */}
+                  <div className="absolute inset-0 flex flex-wrap justify-between items-center opacity-10">
+                    {[...Array(6)].map((_, j) => (
+                      <motion.div
+                        key={j}
+                        className="w-1 h-1 bg-black/40 rounded-full"
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, delay: j * 0.5 }}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
-            {/* Lighting Layer (Section 05 exclusive prismatic grid) */}
-            {data.id === 'section_05' && (
+                </div>
+              ))}
+            </div>
+          )}
+          {/* Lighting Layer (Section 06 exclusive UV curing bed) */}
+          {data.id === 'section_06' && (
+            <>
               <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
                 {sectionT.backgroundText.map((text, i) => (
-                  <div key={`grid-wrap-${i}`} className="relative group">
-                    {/* Prismatic Mesh Shimmer */}
+                  <div key={`fabrication-wrap-${i}`} className="relative group">
+                    {/* UV Scanning Mesh */}
                     <motion.h2
                       initial={{ opacity: 0, scale: 1.2 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -872,109 +925,56 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                       {text}
                     </motion.h2>
 
-                    {/* Intersecting Pulse Beams */}
+                    {/* High-speed Laser Paths */}
                     <div className="absolute inset-0 pointer-events-none">
-                      <motion.div
-                        className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_rgba(34,211,238,0.5)] z-10"
-                        animate={{ top: ["0%", "100%"] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.8 }}
-                      />
-                      <motion.div
-                        className="absolute inset-y-0 w-[1px] bg-gradient-to-b from-transparent via-rose-400 to-transparent shadow-[0_0_15px_rgba(244,63,94,0.5)] z-10"
-                        animate={{ left: ["0%", "100%"] }}
-                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: i * 1.2 }}
-                      />
+                      {[...Array(8)].map((_, lIdx) => (
+                        <motion.div
+                          key={lIdx}
+                          className="absolute bg-black shadow-[0_0_10px_rgba(0,0,0,0.2)]"
+                          style={{
+                            width: Math.random() * 20 + 10,
+                            height: 1,
+                            top: `${Math.random() * 100}%`,
+                            left: `${Math.random() * 100}%`
+                          }}
+                          animate={{
+                            opacity: [0, 0.8, 0],
+                            scaleX: [0, 1.5, 0],
+                            x: [0, 100, 0]
+                          }}
+                          transition={{
+                            duration: 0.8 + Math.random(),
+                            repeat: Infinity,
+                            delay: Math.random() * 3
+                          }}
+                        />
+                      ))}
                     </div>
 
-                    {/* simplified mesh vertex points */}
-                    <div className="absolute inset-0 flex flex-wrap justify-between items-center opacity-10">
-                      {[...Array(6)].map((_, j) => (
+                    {/* Fabrication Hotspots (Simplified count) */}
+                    <div className="absolute inset-0 flex flex-wrap justify-around items-center opacity-20">
+                      {[...Array(4)].map((_, hIdx) => (
                         <motion.div
-                          key={j}
-                          className="w-1 h-1 bg-black/40 rounded-full"
-                          animate={{ opacity: [0, 1, 0] }}
-                          transition={{ duration: 3, repeat: Infinity, delay: j * 0.5 }}
+                          key={hIdx}
+                          className="w-2 h-2 bg-purple-400 rounded-full"
+                          animate={{
+                            scale: [1, 1.5, 1],
+                            opacity: [0, 0.4, 0]
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            delay: hIdx * 0.5
+                          }}
                         />
                       ))}
                     </div>
                   </div>
                 ))}
               </div>
-            )}
-            {/* Lighting Layer (Section 06 exclusive UV curing bed) */}
-            {data.id === 'section_06' && (
-              <>
-                <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden opacity-15">
-                  {sectionT.backgroundText.map((text, i) => (
-                    <div key={`fabrication-wrap-${i}`} className="relative group">
-                      {/* UV Scanning Mesh */}
-                      <motion.h2
-                        initial={{ opacity: 0, scale: 1.2 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        className={`text-[18vw] md:text-[13vw] lg:text-[15vw] font-tech font-bold leading-[1.2] tracking-tighter text-transparent whitespace-nowrap bg-clip-text bg-[length:200%_200%]`}
-                        style={{ backgroundImage: meshSpotlight }}
-                        animate={{
-                          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"]
-                        }}
-                        transition={{
-                          duration: 10,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      >
-                        {text}
-                      </motion.h2>
-
-                      {/* High-speed Laser Paths */}
-                      <div className="absolute inset-0 pointer-events-none">
-                        {[...Array(8)].map((_, lIdx) => (
-                          <motion.div
-                            key={lIdx}
-                            className="absolute bg-black shadow-[0_0_10px_rgba(0,0,0,0.2)]"
-                            style={{
-                              width: Math.random() * 20 + 10,
-                              height: 1,
-                              top: `${Math.random() * 100}%`,
-                              left: `${Math.random() * 100}%`
-                            }}
-                            animate={{
-                              opacity: [0, 0.8, 0],
-                              scaleX: [0, 1.5, 0],
-                              x: [0, 100, 0]
-                            }}
-                            transition={{
-                              duration: 0.8 + Math.random(),
-                              repeat: Infinity,
-                              delay: Math.random() * 3
-                            }}
-                          />
-                        ))}
-                      </div>
-
-                      {/* Fabrication Hotspots (Simplified count) */}
-                      <div className="absolute inset-0 flex flex-wrap justify-around items-center opacity-20">
-                        {[...Array(4)].map((_, hIdx) => (
-                          <motion.div
-                            key={hIdx}
-                            className="w-2 h-2 bg-purple-400 rounded-full"
-                            animate={{
-                              scale: [1, 1.5, 1],
-                              opacity: [0, 0.4, 0]
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              delay: hIdx * 0.5
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </motion.div>
+            </>
+          )}
+        </motion.div>
 
 
         <div
@@ -1003,7 +1003,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               >
                 {/* Section Index Indicator (Now inline like accordion ID) */}
                 <span className="text-sm md:text-base font-mono mt-2 shrink-0 font-bold" style={{ color: `rgba(${accent.rgb}, 0.75)` }}>0{index + 1}</span>
-                
+
                 <div className={`flex-1 ${isAlternate ? 'text-right' : 'text-left'}`}>
                   {renderTitle()}
                 </div>
@@ -1038,30 +1038,30 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
 
           {/* Grid Overlay */}
           {!isExpanded && data.id !== 'section_06' && (
-            <div className={`absolute inset-0 z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none ${theme === 'glitch' ? 'opacity-[0.25]' : 'opacity-[0.1]'}`}></div>
+            <div className={`absolute inset-0 z-10 bg-[url('/noise.svg')] mix-blend-overlay pointer-events-none ${theme === 'glitch' ? 'opacity-[0.25]' : 'opacity-[0.1]'}`}></div>
           )}
         </div>
 
         {!isExpanded && (
-          <WorksIndex 
-            isVisible={isInView && !isExpanded} 
-            activeSectionId={data.id} 
-            lang={lang} 
+          <WorksIndex
+            isVisible={isInView && !isExpanded}
+            activeSectionId={data.id}
+            lang={lang}
           />
         )}
 
-        {/* Centered Interaction Toggle Button */}
+        {/* Centered Interaction Toggle Button - Outside content for desktop centering, after content for mobile flow */}
         {!isExpanded && (
           <motion.div
             layoutId={`interaction-button-${data.id}`}
-            style={{ 
+            style={{
               opacity: btnOpacity,
-              y: btnY,
+              y: isMobile ? 0 : btnY,
             }}
             onClick={() => setIsExpanded(true)}
             onHoverStart={() => setIsBtnHovered(true)}
             onHoverEnd={() => setIsBtnHovered(false)}
-            className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[40] pointer-events-auto flex flex-col items-center gap-4 group cursor-pointer w-fit"
+            className={`${isMobile ? 'relative mt-12 mb-8 mx-auto' : 'absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2'} z-[40] pointer-events-auto flex flex-col items-center gap-4 group cursor-pointer w-fit`}
           >
             {/* Icon Wrapper with enhanced Glow */}
             <motion.div
@@ -1100,13 +1100,15 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
           </motion.div>
         )}
 
+
+
         {/* Corner Overlay - Outside of transforms for Title and Button */}
         <AnimatePresence mode="wait">
           {isExpanded && (
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-[55]">
               {data.id === 'section_01' && <Section01Experience lang={lang} />}
               {data.id === 'section_02' && <Section02Experience textureUrl={s02ActiveTexture} lang={lang} />}
-              {data.id === 'section_03' && <Section03Experience />}
+              {data.id === 'section_03' && <Section03Experience lang={lang} />}
               {data.id === 'section_04' && <Section04Experience lang={lang} />}
               {data.id === 'section_05' && <Section05Experience />}
               {data.id === 'section_06' && <Section06Experience scrollProgress={scrollProgress} modelId={activeModelId} />}
@@ -1211,6 +1213,20 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                       </motion.div>
                     ))}
                   </div>
+
+                  <motion.a
+                    href="/projects/vasemotion/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 group flex items-center gap-4 py-3 px-6 border border-white/5 bg-white/2 backdrop-blur-md hover:border-accent/40 transition-all duration-500 w-fit"
+                    whileHover={{ x: 10 }}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    <span className="text-[10px] font-mono tracking-[0.3em] text-concrete group-hover:text-white transition-colors uppercase">
+                      View Full Animated Presentation
+                    </span>
+                    <span className="text-concrete group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
+                  </motion.a>
                 </motion.div>
               )}
               {/* Section 02 UI is now handled internal to Section02Experience for MediaPipe compatibility */}

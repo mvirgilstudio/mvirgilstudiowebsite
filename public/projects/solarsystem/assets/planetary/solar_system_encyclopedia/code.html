@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cosmos Explorer | Solar System Encyclopedia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#cd7fec",
+                    "on-primary": "#002970",
+                    "inverse-primary": "#0055d6",
+                    "secondary": "#fa846c",
+                    "error-dim": "#d7383b",
+                    "surface-container-highest": "#22262b",
+                    "error": "#ff716c",
+                    "primary-fixed": "#789dff",
+                    "secondary-dim": "#f07d65",
+                    "primary-container": "#789dff",
+                    "surface-tint": "#8eabff",
+                    "on-secondary-container": "#ffc2b5",
+                    "on-surface": "#f8f9fe",
+                    "on-tertiary-fixed": "#2c003f",
+                    "on-primary-fixed": "#000000",
+                    "surface-container": "#171a1e",
+                    "primary-dim": "#2c6cf0",
+                    "inverse-surface": "#f8f9fe",
+                    "surface-dim": "#0c0e12",
+                    "surface-bright": "#282c32",
+                    "on-tertiary-container": "#41005a",
+                    "on-background": "#f8f9fe",
+                    "surface-container-high": "#1c2025",
+                    "primary-fixed-dim": "#628eff",
+                    "outline": "#73757a",
+                    "error-container": "#9f0519",
+                    "on-tertiary-fixed-variant": "#5d0d7d",
+                    "tertiary-fixed": "#e192ff",
+                    "background": "#0c0e12",
+                    "on-primary-fixed-variant": "#00276b",
+                    "tertiary-container": "#d384f2",
+                    "tertiary": "#e192ff",
+                    "on-tertiary": "#520071",
+                    "surface-variant": "#22262b",
+                    "outline-variant": "#46484c",
+                    "tertiary-fixed-dim": "#d384f2",
+                    "on-primary-container": "#001f58",
+                    "on-secondary-fixed": "#661607",
+                    "surface-container-low": "#111417",
+                    "on-secondary": "#540900",
+                    "primary": "#8eabff",
+                    "secondary-fixed-dim": "#ffb0a0",
+                    "on-surface-variant": "#a9abb0",
+                    "secondary-fixed": "#ffc4b8",
+                    "inverse-on-surface": "#535559",
+                    "secondary-container": "#802918",
+                    "surface": "#0c0e12",
+                    "on-error": "#490006",
+                    "on-error-container": "#ffa8a3",
+                    "on-secondary-fixed-variant": "#8d3321"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(28, 32, 37, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(115, 117, 122, 0.15);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(142, 171, 255, 0.15), transparent 60%);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0c0e12; }
+        ::-webkit-scrollbar-thumb { background: #1c2025; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8eabff; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<header class="bg-[#0c0e12]/80 dark:bg-[#0c0e12]/80 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-center items-center px-8 py-4">
+<nav class="flex items-center gap-8">
+<a class="text-blue-300 border-b-2 border-blue-400 pb-1 font-['Space_Grotesk'] tracking-tight transition-all" href="#Mercury">Mercury</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Venus">Venus</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Earth">Earth</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Mars">Mars</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Jupiter">Jupiter</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Saturn">Saturn</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Uranus">Uranus</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Neptune">Neptune</a>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden hero-gradient">
+<div class="absolute inset-0 pointer-events-none opacity-40" data-alt="deep space nebula background with shimmering stars and subtle cosmic dust in shades of blue and black"></div>
+<div class="container mx-auto px-6 text-center z-10">
+<div class="mb-6 inline-flex items-center gap-2 bg-surface-container-high px-4 py-1.5 rounded-full border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-bold tracking-[0.2em] uppercase text-on-surface-variant">Deep Space Observation Log</span>
+</div>
+<h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-gradient-to-b from-on-surface to-on-surface-variant bg-clip-text text-transparent">
+                Cosmos Explorer
+            </h1>
+<p class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 font-light">
+                An editorial odyssey through the celestial bodies of our local star system. Experience high-fidelity planetary data rendered through the lens of modern astrophysics.
+            </p>
+
+</div>
+<!-- Animated Floating Decorative Element -->
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[400px] bg-gradient-to-t from-background via-transparent to-transparent z-20"></div>
+</section>
+<!-- Planetary Sections Container -->
+<main class="container mx-auto px-6 pb-32 space-y-48">
+<!-- Mercury -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Mercury">
+<div class="relative group">
+<div class="absolute -inset-10 bg-primary/5 blur-[100px] rounded-full group-hover:bg-primary/10 transition-all duration-700"></div>
+<img alt="Planet Mercury" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="a detailed 3D render of mercury planet with its cratered grey surface against the deep black void of space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR_w_Ul7VMlmgyy5POGW2MvmztCGCpyjCIby3H1NW_1IbiOXRFXmsBnwWLimKhjplnm3Hwv1BFBwVy-bzEwxYw1Frh4JOs1TYomr4yFwwIAsloIIoL0qN5xO1ddJB0_L1H5F7XTjtqQAM-BC35sS5TPiIfqcxpzJM9IDUmtFlVC6GuH0jm9_On3IwZYsGSxCtkM9duQ6c_YpEdS74gX3pv0FoNmR1CPqaXyavwLcR--l-MpO9OKzj1NMRJK_qavN3eBhptuYM8BFJy"/>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 0.39 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Mercury</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        The smallest planet in our solar system and closest to the Sun—is only slightly larger than Earth's Moon. Mercury is the fastest planet, zipping around the Sun every 88 Earth days.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-primary">4,879 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary">59 Earth Days</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-primary">0</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Temp Range</span>
+<span class="text-xl font-headline font-bold text-primary">-173°C to 427°C</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Venus -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Venus">
+<div class="order-2 md:order-1 space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 0.72 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Venus</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Spinning slowly in the opposite direction from most planets, Venus is the hottest planet in our solar system. Its thick atmosphere traps heat in a runaway greenhouse effect, making it hot enough to melt lead.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-secondary">12,104 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary">243 Earth Days</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-secondary">0</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Atmosphere</span>
+<span class="text-xl font-headline font-bold text-secondary">96% CO2</span>
+</div>
+</div>
+</div>
+<div class="relative order-1 md:order-2 group">
+<div class="absolute -inset-10 bg-secondary/5 blur-[100px] rounded-full group-hover:bg-secondary/10 transition-all duration-700"></div>
+<img alt="Planet Venus" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="a majestic view of venus shrouded in its dense yellowish-white clouds highlighting the intense atmospheric pressure and heat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApwWjq0tdIs7nlJoSHQvi6Joc01kCtc0p-vFVD1AnDytkt-ZMb-quxEg63VhmF9_2xjU17jmLwwsR1okUeOzziCNIF8mk_jnqvEpcM6eMLjd8VXI3vt9y3L9Bqef64_qO4NiLw57hF7CqAgwHhz7wWCKzh8cHtrdA6m6WBMyFPqnfR5SJII-0I3iQZAykDHp30ILhI0zddZcAeL41ZFrHHCqNK4431HNm47tjA-d2lAW79ra0KAu_4Iz4VZX1j_hnliiSK_9TLjPrR"/>
+</div>
+</section>
+<!-- Earth -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Earth">
+<div class="relative group">
+<div class="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-all duration-700"></div>
+<img alt="Planet Earth" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="a stunning cinematic view of earth from space with glowing city lights at night and swirling white clouds over deep blue oceans" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvEA4T-cku6KNID96Mr75INxFqd9MrDhwdfrnZeBRc3I_cBFU91o6XaizoZo41heAriOAlJEpEoVjPkTnGbZW7TCO-RvKLbA39FNNIqDXJJLMVL-oHUjv1IMsnHYltn8LY8kasJmwJiz6Q5yRQjfBTtBb7ObWKA5Iep9jDCNyiy7YTeoy3Z4QD6Hhp5nY-mSulAKfr2iHPKpMLTLs3ePGmrrhJB87Cvu-iL54x1fYfxdW7ZBSpOok14GtUUNvcGknLUZONw3EoYEcw"/>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 1.00 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Earth</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Our home planet is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-primary">12,742 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary">24 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-primary">1</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Population</span>
+<span class="text-xl font-headline font-bold text-primary">8.1 Billion</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Mars -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Mars">
+<div class="order-2 md:order-1 space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 1.52 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Mars</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        A dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was—billions of years ago—much wetter and warmer, with a thicker atmosphere.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-secondary">6,779 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary">24.6 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-secondary">2</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Mission Count</span>
+<span class="text-xl font-headline font-bold text-secondary">50+</span>
+</div>
+</div>
+</div>
+<div class="relative order-1 md:order-2 group">
+<div class="absolute -inset-10 bg-secondary/5 blur-[100px] rounded-full group-hover:bg-secondary/10 transition-all duration-700"></div>
+<img alt="Planet Mars" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="the red planet mars showing its rocky rusty-red surface and olympus mons with a thin hazy atmosphere against black space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGAFlNgNQmrUgtMYCvlSPGlRkyuATiB9Jd-V7vBcyxq7xTdLfG3zpB-TPEoRZKxsTNUbsYeABQjif9kUr6_VkVefE2-fyaR7ePK6y8EZA9tyCVpXeGxloYngNlfMPWImu83FOH3vrtB4cvo6-SloKLim26wEAe1zznVBHJCEpvhStnzIMcXxtp3TiRnLEwxj1SHfqLYmGh5yYlfRGdM75AlfLndVZmV27LEBYOeQD6jsJAOfCzC17ooEpyLdRnuaBrOFf8J0IQOKX-"/>
+</div>
+</section>
+<!-- Jupiter -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Jupiter">
+<div class="relative group">
+<div class="absolute -inset-10 bg-primary/10 blur-[120px] rounded-full group-hover:bg-primary/20 transition-all duration-700"></div>
+<img alt="Planet Jupiter" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="magnificent close-up of jupiter showing its vibrant swirling cloud bands and the famous great red spot with high detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNGUQqAsA2p6cA7jHcQRMTeDm5hpJa2GxTYnnKZGfchCT5StjdAipp3x3uApqp9BiQa5T3y5-esLYIk92BYqG7QwOFX1o5rFB_T5ankG_yzxgzJWosPFKmH9q7UGxLQIQo3es1x6kC85TVXm6z2gIyn4Zn2rXPbytDGtYSYzDrXClh4DblFNAMDQGT2KIjVoAqp0WvmSIfpTeIp1WAQoiGHDJRy_QF1yIq0apeJy1aEAOWTgNsrIWhAoWU_TAmYhInG57N1GCn_EjD"/>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 5.20 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Jupiter</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Jupiter is more than twice as massive than the other planets of our solar system combined. The giant planet's Great Red spot is a centuries-old storm bigger than Earth.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-primary">139,820 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary">9.9 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-primary">95</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Mass</span>
+<span class="text-xl font-headline font-bold text-primary">318 x Earth</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Saturn -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Saturn">
+<div class="order-2 md:order-1 space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 9.58 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Saturn</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Adorned with a dazzling, complex system of icy rings, Saturn is unique in our solar system. The other giant planets have rings, but none are as spectacular as Saturn's.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-secondary">116,460 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary">10.7 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-secondary">146</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Rings</span>
+<span class="text-xl font-headline font-bold text-secondary">7 Main Sets</span>
+</div>
+</div>
+</div>
+<div class="relative order-1 md:order-2 group">
+<div class="absolute -inset-10 bg-secondary/5 blur-[120px] rounded-full group-hover:bg-secondary/10 transition-all duration-700"></div>
+<img alt="Planet Saturn" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="the gas giant saturn with its vast horizontal rings composed of ice and rock particles against the dark starry cosmic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJB30ieyBguJUPyG7Sy-8xjvOREGsVEqI8m5Vl8wwxwiaKrkoGKJYTpDqO1Mnzk0VBWHBbCgcYE7W8XUtrMnwBScQTZdNp0M8ULf_emB36pfUfJZxYt5IsdiUGYoNakDZGQ5UcQ5xIcHTxvujh6qlN7VNRJmiWEwQIpVXVGIaaWzN9AYWSszR2Sf9jVXsjfDmYKMxNva4aSf8dzlh380u4RQK_gf39vfjcwVCr1voKRkUHta8jF38jbq80O7o-U9ziNdN-Po8mcSnD"/>
+</div>
+</section>
+<!-- Uranus -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Uranus">
+<div class="relative group">
+<div class="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-all duration-700"></div>
+<img alt="Planet Uranus" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="uranus planet as a smooth pale blue sphere with subtle rings rotating on its side in the dark solar system" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCigfNx-zj77Q4Qu1hcs2vZvSOrOTz6urWTRweeldIBFhXSdQSNUIlHSzF32dG_cRPghRSTfpWZiKQ6q-ZFqVfIY9f8Q6k71WkcShKBeHcLMGiFYsyD7kJ1dWyG4AdlmjF_sYu9pJXlg650zTT5h4AqCVDEfgOQR_-q3GWj1QT7twa74ZSRhHorsu2ZY10EFEfIGJHxBax9e2FUD8iInO1LnDP9qPjI4DF7AVZwEK0dfIDFXucJPuWwI6iNQhTxT9FyPoG2Qezad-JN"/>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 19.20 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Uranus</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Uranus—seventh planet from the Sun—rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-primary">50,724 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary">17.2 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-primary">28</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Classification</span>
+<span class="text-xl font-headline font-bold text-primary">Ice Giant</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Neptune -->
+<section class="relative grid md:grid-cols-2 gap-12 items-center" id="Neptune">
+<div class="order-2 md:order-1 space-y-8">
+<div class="space-y-4">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 30.05 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Neptune</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Dark, cold, and whipped by supersonic winds, ice giant Neptune is the eighth and most distant major planet orbiting our Sun. It was the first planet located through mathematical calculations.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xl font-headline font-bold text-primary">49,244 KM</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary">16.1 Hours</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xl font-headline font-bold text-primary">16</span>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Wind Speed</span>
+<span class="text-xl font-headline font-bold text-primary">2,100 KM/H</span>
+</div>
+</div>
+</div>
+<div class="relative order-1 md:order-2 group">
+<div class="absolute -inset-10 bg-primary/20 blur-[100px] rounded-full group-hover:bg-primary/30 transition-all duration-700"></div>
+<img alt="Planet Neptune" class="relative w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-105" data-alt="deep blue globe of neptune with soft white clouds and dark spots visible on its surface in the outer reaches of the solar system" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlN9cVDLM1vHUmhXbbx3obOjpZM0M90K_ITmTISedqbCkAz-dKCqcWaZ9Ox2ls5Ns0PXMJVV5Brgw0Z9WVCdOnwXA0uvzGM2z7tVUBuzwxfSaEbXMbFXrB9rXq09Y9FCPJ1COewaoKq64mpjXHEv0ju3VynbMo0hOdnq-rL6C-jl2tSydnmNb0Rgoa7AN9g7oJ4iOIA_I-nrgKR_dZBQMbj0w_JxFL6jN8hc9QfOjvApUPPlXLox2j8eAjfLGKzTK_32iRLvENo14j"/>
+</div>
+</section>
+</main>
+
+
+</body></html>

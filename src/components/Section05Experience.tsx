@@ -81,7 +81,7 @@ const GlowingOrbs = ({ count = 12 }: { count?: number }) => {
         <group ref={groupRef}>
             {orbs.map((orb, i) => (
                 <mesh key={i} position={orb.pos}>
-                <sphereGeometry args={[1.5, 12, 12]} />
+                    <sphereGeometry args={[1.5, 12, 12]} />
                     <meshBasicMaterial color={orb.color} transparent opacity={0.4} />
                 </mesh>
             ))}

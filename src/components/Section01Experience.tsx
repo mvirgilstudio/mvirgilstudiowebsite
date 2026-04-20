@@ -115,12 +115,14 @@ const SimulationShaders = {
       vec4 xNoisePotentialDerivatives = vec4(0.0);
       vec4 yNoisePotentialDerivatives = vec4(0.0);
       vec4 zNoisePotentialDerivatives = vec4(0.0);
-      for (int i = 0; i < 3; ++i) {
+      
+      // Optimized: Reduced octaves from 3 to 2 for better performance
+      for (int i = 0; i < 2; ++i) {
         float twoPowI = pow(2.0, float(i));
-        float scale = 0.5 * twoPowI * pow(0.2, float(i)); // 0.2 is persistence
+        float scale = 0.5 * twoPowI * pow(0.2, float(i));
         xNoisePotentialDerivatives += simplexNoiseDerivatives(vec4(p * twoPowI, noiseTime)) * scale;
-        yNoisePotentialDerivatives += simplexNoiseDerivatives(vec4((p + vec3(123.4, 129845.6, -1239.1)) * twoPowI, noiseTime)) * scale;
-        zNoisePotentialDerivatives += simplexNoiseDerivatives(vec4((p + vec3(-9519.0, 9051.0, -123.0)) * twoPowI, noiseTime)) * scale;
+        yNoisePotentialDerivatives += simplexNoiseDerivatives(vec4((p + vec3(123.4, 129.6, -129.1)) * twoPowI, noiseTime)) * scale;
+        zNoisePotentialDerivatives += simplexNoiseDerivatives(vec4((p + vec3(-95.0, 95.0, -123.0)) * twoPowI, noiseTime)) * scale;
       }
       return vec3(
         zNoisePotentialDerivatives[1] - yNoisePotentialDerivatives[2],
@@ -145,27 +147,27 @@ const SimulationShaders = {
           position = mix(targetSource, targetDest, targetMorphProgress) * 0.15;
         } else {
           positionInfo = texture2D( textureDefaultPosition, uv );
-          position = positionInfo.xyz * (1.0 + sin(time * 15.0) * 0.2) * 0.4 * radius;
+          // Simplified sine calculation
+          position = positionInfo.xyz * (1.0 + sin(time * 10.0) * 0.15) * 0.4 * radius;
           position += followPosition;
           life = 0.5 + fract(positionInfo.w * 21.4131 + time);
         }
       } else {
         vec3 delta = followPosition - position;
-        position += delta * (0.005 + life * 0.01) * attraction * (1.0 - smoothstep(5.0, 35.0, length(delta))) * speed;
+        float dist = length(delta);
+        // Optimization: avoid extra smoothstep if possible
+        position += delta * (0.005 + life * 0.01) * attraction * (1.0 - smoothstep(5.0, 35.0, dist)) * speed;
         position += curl(position * curlSize, time) * speed;
       }
 
       // Manual rotation from user drag
-      mat3 rotX = mat3(
-        1.0, 0.0, 0.0,
-        0.0, cos(uUserRotation.x), -sin(uUserRotation.x),
-        0.0, sin(uUserRotation.x), cos(uUserRotation.x)
-      );
-      mat3 rotY = mat3(
-        cos(uUserRotation.y), 0.0, sin(uUserRotation.y),
-        0.0, 1.0, 0.0,
-        -sin(uUserRotation.y), 0.0, cos(uUserRotation.y)
-      );
+      float cx = cos(uUserRotation.x);
+      float sx = sin(uUserRotation.x);
+      float cy = cos(uUserRotation.y);
+      float sy = sin(uUserRotation.y);
+      
+      mat3 rotX = mat3(1.0, 0.0, 0.0, 0.0, cx, -sx, 0.0, sx, cx);
+      mat3 rotY = mat3(cy, 0.0, sy, 0.0, 1.0, 0.0, -sy, 0.0, cy);
       
       vec3 targetSource = texture2D(textureMorphTargetSource, uv).xyz;
       vec3 targetDest = texture2D(textureMorphTargetDest, uv).xyz;
@@ -173,10 +175,12 @@ const SimulationShaders = {
       
       // Localized wobble effect when mouse/hand is near
       float dToMouse = length(morphPos - mouse3d);
-      float wobble = smoothstep(45.0, 0.0, dToMouse) * morphProgress;
-      morphPos += curl(morphPos * 0.05, time * 1.5) * wobble * 4.5;
+      if (dToMouse < 45.0) {
+          float wobble = (1.0 - dToMouse / 45.0) * morphProgress;
+          morphPos += curl(morphPos * 0.05, time * 1.5) * wobble * 4.0;
+      }
 
-      morphPos = rotY * rotX * morphPos; // Apply user rotation to the morph target
+      morphPos = rotY * rotX * morphPos; 
       position = mix(position, morphPos, morphProgress);
 
       gl_FragColor = vec4(position, life);
@@ -186,11 +190,11 @@ const SimulationShaders = {
 
 const MouseAttractor = ({ mouseRef, pinching }: { mouseRef: React.RefObject<THREE.Vector3>, pinching: boolean }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  
+
   useFrame((state) => {
     if (!meshRef.current || !mouseRef.current) return;
     meshRef.current.position.copy(mouseRef.current);
-    
+
     // Subtle float and scale on pinch
     const t = state.clock.elapsedTime;
     const targetScale = pinching ? 1.5 + Math.sin(t * 15.0) * 0.2 : 0.8;
@@ -201,7 +205,7 @@ const MouseAttractor = ({ mouseRef, pinching }: { mouseRef: React.RefObject<THRE
     <mesh ref={meshRef}>
       <sphereGeometry args={[0.5, 16, 16]} />
       <meshBasicMaterial color={pinching ? "#68F2EB" : "#ffffff"} transparent opacity={0.6} blending={THREE.AdditiveBlending} />
-      
+
       {/* Outer glow ring */}
       <mesh scale={[2.5, 2.5, 2.5]}>
         <ringGeometry args={[0.8, 1.0, 32]} />
@@ -555,10 +559,10 @@ const Particles = () => {
   // AUTO-RETURN TO FLUID TIMER (2 seconds)
   useEffect(() => {
     if (!hoveredButton) return;
-    
+
     const timeout = setTimeout(() => {
-        setHoveredButton(null);
-    }, 2000); 
+      setHoveredButton(null);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [hoveredButton, setHoveredButton]);
@@ -573,7 +577,7 @@ const Particles = () => {
     // Use hand position if available, otherwise use raycaster mouse
     if (handPos) {
       // Direct hand-to-3D projection (scaled to match interaction box)
-      const targetX = handPos.x * 85; 
+      const targetX = handPos.x * 85;
       const targetY = handPos.y * 60;
       mouse.current.lerp(new THREE.Vector3(targetX, targetY, 0), 0.25);
     } else {
@@ -612,7 +616,7 @@ import { TRANSLATIONS } from '../data/translations';
 
 const ParticleLoaderUI = ({ lang, onActiveChange }: { lang: 'EN' | 'PT', onActiveChange?: (active: boolean) => void }) => {
   const { progress, active } = useProgress();
-  
+
   useEffect(() => {
     if (onActiveChange) {
       onActiveChange(active);
@@ -632,7 +636,7 @@ const ParticleLoaderUI = ({ lang, onActiveChange }: { lang: 'EN' | 'PT', onActiv
         <span className="text-[10px] font-mono text-[#68F2EB]">{Math.round(progress)}%</span>
       </div>
       <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">
-        <motion.div 
+        <motion.div
           className="h-full bg-[#68F2EB]"
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.3 }}
@@ -647,7 +651,7 @@ const ParticleLoaderUI = ({ lang, onActiveChange }: { lang: 'EN' | 'PT', onActiv
 const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) => {
   const t = TRANSLATIONS[lang];
   const sectionT = t.sections.section_01 as any;
-  
+
   const [hoveredButton, setHoveredButton] = useState<number | null>(null);
   const [handPos, setHandPos] = useState<{ x: number; y: number; isPinching?: boolean } | null>(null);
   const [mediapipeStatus, setMediapipeStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
@@ -683,7 +687,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
   // Map hand position to particle attraction
   const handleHandMove = useCallback((pos: { x: number; y: number; isPinching?: boolean }) => {
     setHandPos(pos);
-    
+
     // Trigger shape change only on the START of a pinch (debounce)
     if (pos.isPinching && !lastPinchRef.current) {
       setActiveButtonIdx(prev => {
@@ -727,181 +731,179 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
         </Canvas>
 
         {/* --- Button Row --- */}
-      <AnimatePresence>
-        {handTrackingActive && (mediapipeStatus === 'loading' || isAssetsLoading) && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[4000] bg-black/95 backdrop-blur-3xl flex flex-col items-center justify-center pointer-events-auto"
-          >
+        <AnimatePresence>
+          {handTrackingActive && (mediapipeStatus === 'loading' || isAssetsLoading) && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="flex flex-col items-center gap-10 max-w-sm w-full px-10 text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[4000] bg-black/95 backdrop-blur-3xl flex flex-col items-center justify-center pointer-events-auto"
             >
-              <div className="relative w-32 h-32 flex items-center justify-center">
-                <svg className="w-full h-full -rotate-90">
-                  <circle cx="64" cy="64" r="62" fill="none" stroke="white" strokeWidth="1" className="opacity-10" />
-                  <motion.circle 
-                    cx="64" cy="64" r="62" fill="none" stroke="#68F2EB" strokeWidth="2" 
-                    strokeDasharray="390"
-                    animate={{ strokeDashoffset: 390 * (1 - mediapipeProgress / 100) }}
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="flex flex-col items-center gap-10 max-w-sm w-full px-10 text-center"
+              >
+                <div className="relative w-32 h-32 flex items-center justify-center">
+                  <svg className="w-full h-full -rotate-90">
+                    <circle cx="64" cy="64" r="62" fill="none" stroke="white" strokeWidth="1" className="opacity-10" />
+                    <motion.circle
+                      cx="64" cy="64" r="62" fill="none" stroke="#68F2EB" strokeWidth="2"
+                      strokeDasharray="390"
+                      animate={{ strokeDashoffset: 390 * (1 - mediapipeProgress / 100) }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </svg>
+                  <div className="absolute flex flex-col items-center">
+                    <span className="text-4xl font-mono text-white font-light">{mediapipeProgress}%</span>
+                    <span className="text-[9px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="text-[11px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
+                      {lang === 'EN' ? 'Initializing AI Engine' : 'A Iniciar Motor IA'}
+                    </h3>
+                    <div className="w-8 h-[1px] bg-[#68F2EB] mx-auto" />
+                  </div>
+                  <p className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
+                    {lang === 'EN'
+                      ? 'Creating particle grid and vision tasks for finger interaction'
+                      : 'A criar grelha de partículas e tarefas de visão para interação digital'}
+                  </p>
+                  <ParticleLoaderUI lang={lang} onActiveChange={setIsAssetsLoading} />
+                </div>
+
+                <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-[#68F2EB]"
+                    animate={{ width: `${mediapipeProgress}%` }}
                     transition={{ duration: 0.3 }}
                   />
-                </svg>
-                <div className="absolute flex flex-col items-center">
-                  <span className="text-4xl font-mono text-white font-light">{mediapipeProgress}%</span>
-                  <span className="text-[9px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <h3 className="text-[11px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
-                    {lang === 'EN' ? 'Initializing AI Engine' : 'A Iniciar Motor IA'}
-                  </h3>
-                  <div className="w-8 h-[1px] bg-[#68F2EB] mx-auto" />
-                </div>
-                <p className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
-                  {lang === 'EN' 
-                    ? 'Creating particle grid and vision tasks for finger interaction' 
-                    : 'A criar grelha de partículas e tarefas de visão para interação digital'}
-                </p>
-                <ParticleLoaderUI lang={lang} onActiveChange={setIsAssetsLoading} />
-              </div>
-
-              <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">
-                <motion.div 
-                  className="h-full bg-[#68F2EB]"
-                  animate={{ width: `${mediapipeProgress}%` }}
-                  transition={{ duration: 0.3 }}
-                />
+              <div className="absolute bottom-16 flex flex-col items-center gap-3">
+                <span className="text-[9px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
               </div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            <div className="absolute bottom-16 flex flex-col items-center gap-3">
-              <span className="text-[9px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* --- Unified Interaction Layer (Mouse & Hand) --- */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3000] pointer-events-auto flex flex-col items-center gap-6 w-full max-w-2xl px-4">
-        <AnimatePresence mode="wait">
-          {!handTrackingActive ? (
-            /* Mouse Mode Instructions & Morph Button */
-            <motion.div
-              key="mouse-ui"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <div
-                className="group relative flex items-center justify-center cursor-pointer"
-                onMouseEnter={() => {
-                  const next = Math.floor(Math.random() * 6);
-                  setHoveredButton(next + 1);
-                }}
-                onMouseLeave={() => setHoveredButton(null)}
-              >
-                <div className="absolute inset-0 bg-[#68F2EB]/20 blur-xl rounded-full scale-50 group-hover:scale-150 transition-transform duration-500" />
-                <img
-                  src="/assets/images/s01_button_01.svg"
-                  alt="Morph Particles"
-                  className="w-14 h-14 md:w-20 md:h-20 object-contain relative z-10 animate-pulse group-hover:animate-none group-hover:scale-110 transition-all duration-300 filter drop-shadow-[0_0_15px_rgba(104,242,235,0.4)]"
-                />
-              </div>
-              <p className="text-sm md:text-base font-mono tracking-widest text-white/40 uppercase animate-pulse text-center max-w-md">
-                {sectionT.instructions?.mouse || "Move cursor to attract • Hover button to form shapes"}
-              </p>
-            </motion.div>
-          ) : (
-            /* Hand Tracking Mode Status & Instructions */
-            mediapipeStatus === 'ready' && !isAssetsLoading && (
+        {/* --- Unified Interaction Layer (Mouse & Hand) --- */}
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3000] pointer-events-auto flex flex-col items-center gap-6 w-full max-w-2xl px-4">
+          <AnimatePresence mode="wait">
+            {!handTrackingActive ? (
+              /* Mouse Mode Instructions & Morph Button */
               <motion.div
-                key="hand-ui"
+                key="mouse-ui"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 className="flex flex-col items-center gap-4"
               >
-                <div className="flex items-center gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={`w-6 h-6 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}
-                  >
-                    <path d="M18 11V6a2 2 0 0 0-4 0v5" />
-                    <path d="M14 10V4a2 2 0 0 0-4 0v6" />
-                    <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
-                    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-                  </svg>
-                  <span className="text-[11px] md:text-xs font-mono tracking-[0.4em] uppercase text-white font-bold whitespace-nowrap">
-                    {handDetected 
-                      ? (lang === 'EN' ? 'Sculpt with your palm • Pinch to morph' : 'Esculpir com a palma • Aperte para transformar')
-                      : (lang === 'EN' ? 'Setup Complete • Show hand to track' : 'Configuração Concluída • Mostre a mão')}
-                  </span>
+                <div
+                  className="group relative flex items-center justify-center cursor-pointer"
+                  onMouseEnter={() => {
+                    const next = Math.floor(Math.random() * 6);
+                    setHoveredButton(next + 1);
+                  }}
+                  onMouseLeave={() => setHoveredButton(null)}
+                >
+                  <div className="absolute inset-0 bg-[#68F2EB]/20 blur-xl rounded-full scale-50 group-hover:scale-150 transition-transform duration-500" />
+                  <img
+                    src="/assets/images/s01_button_01.svg"
+                    alt="Morph Particles"
+                    className="w-14 h-14 md:w-20 md:h-20 object-contain relative z-10 animate-pulse group-hover:animate-none group-hover:scale-110 transition-all duration-300 filter drop-shadow-[0_0_15px_rgba(104,242,235,0.4)]"
+                  />
                 </div>
+                <p className="text-sm md:text-base font-mono tracking-widest text-white/40 uppercase animate-pulse text-center max-w-md">
+                  {sectionT.instructions?.mouse || "Move cursor to attract • Hover button to form shapes"}
+                </p>
               </motion.div>
-            )
-          )}
-        </AnimatePresence>
+            ) : (
+              /* Hand Tracking Mode Status & Instructions */
+              mediapipeStatus === 'ready' && !isAssetsLoading && (
+                <motion.div
+                  key="hand-ui"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex flex-col items-center gap-4"
+                >
+                  <div className="flex items-center gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`w-6 h-6 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}
+                    >
+                      <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+                      <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+                      <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                      <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+                    </svg>
+                    <span className="text-[11px] md:text-xs font-mono tracking-[0.4em] uppercase text-white font-bold whitespace-nowrap">
+                      {handDetected
+                        ? (lang === 'EN' ? 'Sculpt with your palm • Pinch to morph' : 'Esculpir com a palma • Aperte para transformar')
+                        : (lang === 'EN' ? 'Setup Complete • Show hand to track' : 'Configuração Concluída • Mostre a mão')}
+                    </span>
+                  </div>
+                </motion.div>
+              )
+            )}
+          </AnimatePresence>
 
-        <button
-          onClick={toggleHandTracking}
-          className={`group relative flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-500 cursor-pointer
+          <button
+            onClick={toggleHandTracking}
+            className={`group relative flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-500 cursor-pointer
             ${handTrackingActive
-              ? 'bg-[#68F2EB]/15 border-[#68F2EB]/60 shadow-[0_0_30px_rgba(104,242,235,0.3)]'
-              : 'bg-black/80 border-white/20 hover:border-[#68F2EB]/40 hover:bg-[#68F2EB]/10' }
+                ? 'bg-[#68F2EB]/15 border-[#68F2EB]/60 shadow-[0_0_30px_rgba(104,242,235,0.3)]'
+                : 'bg-black/80 border-white/20 hover:border-[#68F2EB]/40 hover:bg-[#68F2EB]/10'}
             backdrop-blur-md`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`w-5 h-5 transition-all duration-300 ${
-              handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'
-            }`}
           >
-            <path d="M18 11V6a2 2 0 0 0-4 0v5" />
-            <path d="M14 10V4a2 2 0 0 0-4 0v6" />
-            <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
-            <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={`w-5 h-5 transition-all duration-300 ${handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'
+                }`}
+            >
+              <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+              <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+              <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+              <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+            </svg>
 
-          <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${
-            handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'
-          }`}>
-            {handTrackingActive ? t.ui.exitExperience : t.ui.enterExperience}
-          </span>
+            <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'
+              }`}>
+              {handTrackingActive ? t.ui.exitExperience : t.ui.enterExperience}
+            </span>
 
-          {handTrackingActive && (
-            <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />
+            {handTrackingActive && (
+              <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />
+            )}
+          </button>
+
+          {!handTrackingActive && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-[10px] font-mono tracking-[0.3em] text-white/40 uppercase"
+            >
+              {lang === 'EN' ? 'Uses MediaPipe AI Hand Tracking' : 'Usa Rastreamento de Mãos MediaPipe IA'}
+            </motion.p>
           )}
-        </button>
-        
-        {!handTrackingActive && (
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-[10px] font-mono tracking-[0.3em] text-white/40 uppercase"
-          >
-            {lang === 'EN' ? 'Uses MediaPipe AI Hand Tracking' : 'Usa Rastreamento de Mãos MediaPipe IA'}
-          </motion.p>
-        )}
-      </div>
+        </div>
 
         {/* MediaPipe Hand Tracker — webcam overlay bottom-right */}
         <HandTracker
