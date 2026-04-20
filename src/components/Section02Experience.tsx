@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useRef, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, useTexture, Html } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TRANSLATIONS } from '../data/translations';
@@ -11,8 +11,42 @@ interface PanoramaProps {
 }
 
 const Panorama: React.FC<PanoramaProps> = ({ textureUrl }) => {
-    const texture = useTexture(textureUrl);
-    texture.mapping = THREE.EquirectangularReflectionMapping;
+    const [texture, setTexture] = useState<THREE.Texture | null>(null);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        setError(false);
+        const loader = new THREE.TextureLoader();
+        loader.load(
+            textureUrl,
+            (tex) => {
+                tex.mapping = THREE.EquirectangularReflectionMapping;
+                tex.colorSpace = THREE.SRGBColorSpace;
+                setTexture(tex);
+            },
+            undefined,
+            (err) => {
+                console.error('[Panorama] Failed to load texture:', textureUrl, err);
+                setError(true);
+            }
+        );
+        return () => {
+            if (texture) texture.dispose();
+        };
+    }, [textureUrl]);
+
+    if (error) {
+        return (
+            <Html center>
+                <div style={{ color: '#f87171', fontFamily: 'monospace', fontSize: '12px', textAlign: 'center' }}>
+                    Failed to load panorama
+                </div>
+            </Html>
+        );
+    }
+
+    if (!texture) return null;
+
     return (
         <mesh>
             <sphereGeometry args={[500, 64, 64]} />
@@ -139,7 +173,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
     }, [handPos, handTrackingActive]);
 
     return (
-        <div className="absolute inset-0 z-[2500] pointer-events-none" style={{ background: '#040404' }}>
+        <div className="absolute inset-0 z-[2500] pointer-events-auto" style={{ background: '#040404' }}>
             <AnimatePresence>
                 {handTrackingActive && mediapipeStatus === 'loading' && (
                     <motion.div
@@ -253,7 +287,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                     </svg>
                     <span className={`text-base uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'}`}>
-                        {handTrackingActive ? (lang === 'PT' ? 'Sair da Experiência' : 'Exit Experience') : (lang === 'PT' ? 'Entrar na Experiência' : 'Enter Experience')}
+                        {handTrackingActive ? (lang === 'PT' ? 'Desativar IA' : 'Disable AI Tracking') : (lang === 'PT' ? 'Ativar IA Tracking' : 'Enable AI Tracking')}
                     </span>
                     {handTrackingActive && <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />}
                 </button>
@@ -344,7 +378,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
             </motion.div>
 
             <motion.div
-                className="absolute inset-0 z-[2499]"
+                className="absolute inset-0 z-[2501]"
                 animate={{
                     filter: isButtonHovered ? 'blur(15px)' : 'blur(0px)',
                     scale: isButtonHovered ? 1.05 : 1
@@ -357,7 +391,13 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     dpr={[1, 1.5]}
                     camera={{ position: [0, 0, 0.1], fov: 75 }}
                 >
-                    <Suspense fallback={null}>
+                    <Suspense fallback={
+                        <Html center>
+                            <div style={{ color: 'white', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', opacity: 0.6 }}>
+                                Loading Panorama...
+                            </div>
+                        </Html>
+                    }>
                         <color attach="background" args={['#040404']} />
                         <PerspectiveCamera makeDefault position={[0, 0, 0.1]} fov={75} />
                         {!handTrackingActive && (

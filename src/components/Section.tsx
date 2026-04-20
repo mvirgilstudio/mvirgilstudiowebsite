@@ -1105,7 +1105,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         {/* Corner Overlay - Outside of transforms for Title and Button */}
         <AnimatePresence mode="wait">
           {isExpanded && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-[55]">
+            <div className="absolute inset-0 pointer-events-auto overflow-hidden z-[4000]">
               {data.id === 'section_01' && <Section01Experience lang={lang} />}
               {data.id === 'section_02' && <Section02Experience textureUrl={s02ActiveTexture} lang={lang} />}
               {data.id === 'section_03' && <Section03Experience lang={lang} />}
