@@ -417,32 +417,33 @@ const Section05Experience: React.FC = () => {
 
     return (
         <div className="absolute inset-0 z-[50] pointer-events-none">
-            <Canvas
-                shadows={false}
-                gl={{ antialias: false, alpha: true, powerPreference: "high-performance", stencil: false, depth: true }}
-                dpr={isMobile ? [1, 1] : [1, 1.25]}
-                style={{ pointerEvents: 'auto' }}
-            >
-                <color attach="background" args={['#040404']} />
-                <fog attach="fog" args={['#040404', 18, 50]} />
-                <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={35} />
+            <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+                <Canvas
+                    shadows={false}
+                    gl={{ antialias: false, alpha: true, powerPreference: "high-performance", stencil: false, depth: true }}
+                    dpr={isMobile ? [1, 1] : [1, 1.25]}
+                >
+                    <color attach="background" args={['#040404']} />
+                    <fog attach="fog" args={['#040404', 18, 50]} />
+                    <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={35} />
 
-                <Suspense fallback={null}>
-                    <NebulaBackground count={15} />
-                    <GlowingOrbs count={10} />
-                    <AmbientDust count={50} />
+                    <Suspense fallback={null}>
+                        <NebulaBackground count={15} />
+                        <GlowingOrbs count={10} />
+                        <AmbientDust count={50} />
 
-                    <OrbitingParticles count={80} colliders={[sculptureColliders]} hoveredPlaneIdx={null} />
-                    <Sculpture collidersRef={sculptureColliders} occluderMeshes={sculptureOccluderMeshes} />
+                        <OrbitingParticles count={80} colliders={[sculptureColliders]} hoveredPlaneIdx={null} />
+                        <Sculpture collidersRef={sculptureColliders} occluderMeshes={sculptureOccluderMeshes} />
 
-                    <Environment files="/assets/3d/s05/moon_lab_1k.hdr" />
+                        <Environment files="/assets/3d/s05/moon_lab_1k.hdr" />
 
-                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={15} />
-                    <pointLight position={[0, -8, 0]} intensity={10} color="#ffffff" />
-                    <hemisphereLight intensity={0.25} color="#ffffff" groundColor="#444444" />
-                    <ambientLight intensity={0.1} />
-                </Suspense>
-            </Canvas>
+                        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={15} />
+                        <pointLight position={[0, -8, 0]} intensity={10} color="#ffffff" />
+                        <hemisphereLight intensity={0.25} color="#ffffff" groundColor="#444444" />
+                        <ambientLight intensity={0.1} />
+                    </Suspense>
+                </Canvas>
+            </div>
 
             {/* Popup Overlay removed as per user request to disable click actions */}
         </div>

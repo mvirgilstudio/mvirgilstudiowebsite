@@ -1,6 +1,6 @@
 import React, { Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float } from '@react-three/drei';
+import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress: number, mouseRotation: THREE.Euler }) => {
@@ -43,9 +43,10 @@ const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress
 interface Section06ExperienceProps {
     scrollProgress: number;
     modelId?: string;
+    onModelChange?: (id: string) => void;
 }
 
-const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01' }) => {
+const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange }) => {
     const [mouseRotation, setMouseRotation] = useState(new THREE.Euler(0, 0, 0));
     const isDragging = useRef(false);
     const lastMouse = useRef({ x: 0, y: 0 });
@@ -99,17 +100,25 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
     return (
-        <div className="absolute inset-0 z-[50] pointer-events-none flex items-center justify-center">
+        <div className="absolute inset-0 z-[10] pointer-events-none flex items-center justify-center">
             {/* 3D Scene Layer — transparent background so LottieBackground (z-[45]) in Section.tsx shows through */}
-            <div className="absolute inset-0 w-full h-full">
+            <div 
+                className="absolute inset-0 w-full h-full"
+                style={{ pointerEvents: 'auto', background: 'transparent' }}
+            >
                 <Canvas
                     shadows={!isMobile}
-                    style={{ pointerEvents: scrollProgress > 0.95 ? 'auto' : 'none', background: 'transparent' }}
                     gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
                     dpr={isMobile ? [1, 1] : [1, 1.5]}
                     camera={{ position: [0, 0, 25], fov: 30 }}
                 >
-                    <Suspense fallback={null}>
+                    <Suspense fallback={
+                        <Html center>
+                            <div className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap">
+                                Fabricating Model...
+                            </div>
+                        </Html>
+                    }>
                         {/* NO <color> background — canvas stays transparent */}
                         <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={30} />
 
@@ -128,6 +137,53 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                 </Canvas>
             </div>
             {/* Lottie animation is rendered by LottieBackground in Section.tsx at z-[45] behind this transparent canvas */}
+            {/* Model Select Buttons Layer */}
+            <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="absolute left-10 md:left-20 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-6 pointer-events-auto"
+            >
+                <div className="flex items-center gap-3 mb-1">
+                    <div className="w-8 h-[1px] bg-white/30" />
+                    <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase font-bold">Select Prototype</span>
+                </div>
+
+                <div className="flex flex-col gap-5">
+                    {[
+                        { id: 'print01', img: '/assets/images/print_01_bttn.png', label: 'PRT-ALPHA' },
+                        { id: 'print02', img: '/assets/images/print_02_bttn.png', label: 'PRT-BETA' },
+                        { id: 'print03', img: '/assets/images/print_03_bttn.png', label: 'PRT-GAMMA' }
+                    ].map((btn) => (
+                        <div
+                            key={btn.id}
+                            onClick={() => onModelChange?.(btn.id)}
+                            className="group relative cursor-pointer"
+                        >
+                            <div className={`w-14 h-14 md:w-20 md:h-20 p-0.5 rounded-lg border transition-all duration-500 overflow-hidden ${modelId === btn.id ? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-white/5' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
+                                <img src={btn.img} alt={btn.label} className="w-full h-full object-cover rounded-md" />
+                            </div>
+                            <div className={`absolute -right-4 top-1/2 -translate-y-1/2 translate-x-full px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`}>
+                                <span className="text-[8px] font-mono text-white tracking-widest uppercase">{btn.label}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <motion.a
+                    href="/projects/vasemotion/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 group flex items-center gap-3 py-3 px-5 border border-white/5 bg-white/2 backdrop-blur-md hover:border-white/40 transition-all duration-500 w-fit rounded-lg"
+                    whileHover={{ x: 10 }}
+                >
+                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    <span className="text-[9px] font-mono tracking-[0.2em] text-white/60 group-hover:text-white transition-colors uppercase">
+                        Lab Archives
+                    </span>
+                    <span className="text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all text-xs">→</span>
+                </motion.a>
+            </motion.div>
         </div>
     );
 };

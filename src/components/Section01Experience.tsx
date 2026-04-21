@@ -646,8 +646,6 @@ const ParticleLoaderUI = ({ lang, onActiveChange }: { lang: 'EN' | 'PT', onActiv
   );
 };
 
-// ... (previous imports and simulation logic) ...
-
 const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) => {
   const t = TRANSLATIONS[lang];
   const sectionT = t.sections.section_01 as any;
@@ -702,33 +700,34 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
   return (
     <div className="absolute inset-0 z-[2500] pointer-events-none">
       <MorphContext.Provider value={{ hoveredButton, setHoveredButton, handPos, setHandPos, handTrackingActive }}>
-        <Canvas
-          style={{ pointerEvents: 'auto' }}
-          camera={{ position: [0, 0, 100], fov: 50, far: 10000 }}
-          gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
-          dpr={[1, 1.5]}
-          shadows
-        >
-          <color attach="background" args={['#040404']} />
-          <fog attach="fog" args={['#040404', 50, 150]} />
-          {/* Scene Lighting */}
-          <ambientLight intensity={0.3} />
-          <directionalLight
-            position={[50, 80, 50]}
-            intensity={1.5}
-            castShadow
-            shadow-mapSize-width={isMobile ? 512 : 1024}
-            shadow-mapSize-height={isMobile ? 512 : 1024}
-            shadow-camera-far={500}
-            shadow-camera-left={-100}
-            shadow-camera-right={100}
-            shadow-camera-top={100}
-            shadow-camera-bottom={-100}
-          />
-          <pointLight position={[-50, 30, -50]} intensity={0.5} color="#4488ff" />
+        <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+          <Canvas
+            camera={{ position: [0, 0, 100], fov: 50, far: 10000 }}
+            gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
+            dpr={[1, 1.5]}
+            shadows
+          >
+            <color attach="background" args={['#040404']} />
+            <fog attach="fog" args={['#040404', 50, 150]} />
+            {/* Scene Lighting */}
+            <ambientLight intensity={0.3} />
+            <directionalLight
+              position={[50, 80, 50]}
+              intensity={1.5}
+              castShadow
+              shadow-mapSize-width={isMobile ? 512 : 1024}
+              shadow-mapSize-height={isMobile ? 512 : 1024}
+              shadow-camera-far={500}
+              shadow-camera-left={-100}
+              shadow-camera-right={100}
+              shadow-camera-top={100}
+              shadow-camera-bottom={-100}
+            />
+            <pointLight position={[-50, 30, -50]} intensity={0.5} color="#4488ff" />
 
-          <Particles />
-        </Canvas>
+            <Particles />
+          </Canvas>
+        </div>
 
         {/* --- Button Row --- */}
         <AnimatePresence>
@@ -772,7 +771,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                       ? 'Creating particle grid and vision tasks for finger interaction'
                       : 'A criar grelha de partículas e tarefas de visão para interação digital'}
                   </p>
-                  <ParticleLoaderUI lang={lang} onActiveChange={setIsAssetsLoading} />
+                  <ParticleLoaderUI lang={lang as 'EN' | 'PT'} onActiveChange={setIsAssetsLoading} />
                 </div>
 
                 <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">

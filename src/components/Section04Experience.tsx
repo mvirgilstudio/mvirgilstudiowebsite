@@ -83,7 +83,7 @@ const MouseAttractor = ({ worldPos, isPinching }: { worldPos: THREE.Vector3, isP
     );
 };
 
-const ColumnGrid = ({ handPos, handTrackingActive }: { handPos: any, handTrackingActive: boolean }) => {
+const ColumnGrid = ({ handPos, handTrackingActive }: { handPos: { x: number; y: number; isPinching?: boolean } | null, handTrackingActive: boolean }) => {
     const meshRef = useRef<THREE.InstancedMesh>(null);
     const { camera, gl } = useThree();
     const count = GRID_W * GRID_H;
@@ -258,7 +258,7 @@ const PhysicsColumns = () => {
     );
 };
 
-const FallingSphere = ({ id, color, position, onRemove }: { id: number; color: THREE.Color; position: [number, number, number]; onRemove: (id: number, reason: 'oob') => void }) => {
+const FallingSphere: React.FC<{ id: number; color: THREE.Color; position: [number, number, number]; onRemove: (id: number, reason: 'oob') => void }> = ({ id, color, position, onRemove }) => {
     const bodyRef = useRef<RapierRigidBody>(null);
 
     useFrame(() => {
@@ -544,26 +544,28 @@ const Section04Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                 )}
             </div>
 
-        <Canvas shadows gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }} dpr={[1, 1.5]} camera={{ position: [0, 22, 34], fov: 48, near: 0.1, far: 500 }} style={{ pointerEvents: 'auto' }}>
-            <fog attach="fog" args={['#040404', 80, 200]} />
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[10, 35, 10]} intensity={3.5} castShadow shadow-mapSize={[2048, 2048]} shadow-camera-left={-40} shadow-camera-right={40} shadow-camera-top={40} shadow-camera-bottom={-40} />
-            <pointLight position={[0, 25, 0]} intensity={8} color="#40e0d0" />
-            <pointLight position={[-22, 10, -22]} intensity={5} color="#4488ff" />
-            <pointLight position={[22, 10, -22]} intensity={5} color="#ffcc33" />
-            <Grid position={[0, 0, 0]} args={[200, 200]} cellSize={SPACING} cellThickness={0.5} cellColor="#2a3a5a" sectionSize={SPACING * 5} sectionThickness={1.0} sectionColor="#3a5080" fadeDistance={90} infiniteGrid />
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-                <planeGeometry args={[300, 300]} />
-                <meshPhysicalMaterial color="#000000" roughness={0.0} metalness={1.0} reflectivity={1.0} envMapIntensity={2.0} />
-            </mesh>
-            <Physics gravity={[0, -30, 0]}>
-                <SphereSpawner />
-                <PhysicsColumns />
-                <CuboidCollider args={[150, 0.5, 150]} position={[0, -0.5, 0]} restitution={1.5} />
-                <DynamicBounds />
-            </Physics>
-            <ColumnGrid handPos={handPos} handTrackingActive={handTrackingActive} />
-        </Canvas>
+            <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+                <Canvas shadows gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }} dpr={[1, 1.5]} camera={{ position: [0, 22, 34], fov: 48, near: 0.1, far: 500 }}>
+                    <fog attach="fog" args={['#040404', 80, 200]} />
+                    <ambientLight intensity={0.6} />
+                    <directionalLight position={[10, 35, 10]} intensity={3.5} castShadow shadow-mapSize={[2048, 2048]} shadow-camera-left={-40} shadow-camera-right={40} shadow-camera-top={40} shadow-camera-bottom={-40} />
+                    <pointLight position={[0, 25, 0]} intensity={8} color="#40e0d0" />
+                    <pointLight position={[-22, 10, -22]} intensity={5} color="#4488ff" />
+                    <pointLight position={[22, 10, -22]} intensity={5} color="#ffcc33" />
+                    <Grid position={[0, 0, 0]} args={[200, 200]} cellSize={SPACING} cellThickness={0.5} cellColor="#2a3a5a" sectionSize={SPACING * 5} sectionThickness={1.0} sectionColor="#3a5080" fadeDistance={90} infiniteGrid />
+                    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+                        <planeGeometry args={[300, 300]} />
+                        <meshPhysicalMaterial color="#000000" roughness={0.0} metalness={1.0} reflectivity={1.0} envMapIntensity={2.0} />
+                    </mesh>
+                    <Physics gravity={[0, -30, 0]}>
+                        <SphereSpawner />
+                        <PhysicsColumns />
+                        <CuboidCollider args={[150, 0.5, 150]} position={[0, -0.5, 0]} restitution={1.5} />
+                        <DynamicBounds />
+                    </Physics>
+                    <ColumnGrid handPos={handPos} handTrackingActive={handTrackingActive} />
+                </Canvas>
+            </div>
         <HandTracker onHandMove={setHandPos} active={handTrackingActive} onStatusChange={handleMediapipeStatus} />
     </div>
     );

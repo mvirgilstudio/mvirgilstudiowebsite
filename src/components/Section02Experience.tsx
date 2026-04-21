@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useRef, useEffect, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,41 +11,14 @@ interface PanoramaProps {
 }
 
 const Panorama: React.FC<PanoramaProps> = ({ textureUrl }) => {
-    const [texture, setTexture] = useState<THREE.Texture | null>(null);
-    const [error, setError] = useState(false);
+    const texture = useLoader(THREE.TextureLoader, textureUrl) as THREE.Texture;
 
     useEffect(() => {
-        setError(false);
-        const loader = new THREE.TextureLoader();
-        loader.load(
-            textureUrl,
-            (tex) => {
-                tex.mapping = THREE.EquirectangularReflectionMapping;
-                tex.colorSpace = THREE.SRGBColorSpace;
-                setTexture(tex);
-            },
-            undefined,
-            (err) => {
-                console.error('[Panorama] Failed to load texture:', textureUrl, err);
-                setError(true);
-            }
-        );
-        return () => {
-            if (texture) texture.dispose();
-        };
-    }, [textureUrl]);
-
-    if (error) {
-        return (
-            <Html center>
-                <div style={{ color: '#f87171', fontFamily: 'monospace', fontSize: '12px', textAlign: 'center' }}>
-                    Failed to load panorama
-                </div>
-            </Html>
-        );
-    }
-
-    if (!texture) return null;
+        if (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
+        }
+    }, [texture]);
 
     return (
         <mesh>
@@ -385,12 +358,12 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                 }}
                 transition={{ duration: 0.5 }}
             >
-                <Canvas
-                    style={{ pointerEvents: 'auto' }}
-                    gl={{ antialias: false, powerPreference: 'high-performance' }}
-                    dpr={[1, 1.5]}
-                    camera={{ position: [0, 0, 0.1], fov: 75 }}
-                >
+                <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+                    <Canvas
+                        gl={{ antialias: false, powerPreference: 'high-performance' }}
+                        dpr={[1, 1.5]}
+                        camera={{ position: [0, 0, 0.1], fov: 75 }}
+                    >
                     <Suspense fallback={
                         <Html center>
                             <div style={{ color: 'white', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', opacity: 0.6 }}>
@@ -412,7 +385,8 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         {handTrackingActive && <ControlsHandler handPos={handPos} handTrackingActive={handTrackingActive} />}
                         <Panorama textureUrl={activeTexture} />
                     </Suspense>
-                </Canvas>
+                    </Canvas>
+                </div>
             </motion.div>
 
             <HandTracker onHandMove={setHandPos} active={handTrackingActive} onStatusChange={handleMediapipeStatus} />

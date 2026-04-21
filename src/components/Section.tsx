@@ -384,9 +384,10 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (data.id === 'section_06' && !isExpanded) {
+    const val = latest as number;
+    if (data.id === 'section_06') {
       // Map full 0 to 1 range for better scroll filling when browsing normally
-      const mapped = Math.min(Math.max(latest, 0), 1);
+      const mapped = Math.min(Math.max(val, 0), 1);
       setScrollProgress(mapped);
     }
   });
@@ -1111,7 +1112,16 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               {data.id === 'section_03' && <Section03Experience lang={lang} />}
               {data.id === 'section_04' && <Section04Experience lang={lang} />}
               {data.id === 'section_05' && <Section05Experience />}
-              {data.id === 'section_06' && <Section06Experience scrollProgress={scrollProgress} modelId={activeModelId} />}
+              {data.id === 'section_06' && (
+                <Section06Experience 
+                  scrollProgress={scrollProgress} 
+                  modelId={activeModelId} 
+                  onModelChange={(id) => {
+                    setActiveModelId(id);
+                    setScrollProgress(0); // Reset animation when switching
+                  }}
+                />
+              )}
               {/* Expanded Title & Index */}
 
               <motion.div
@@ -1178,56 +1188,6 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                 </motion.span>
               </motion.div>
 
-              {/* Model Select Buttons for Section 06 */}
-              {data.id === 'section_06' && (
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  className="fixed left-[400px] top-[320px] z-[3001] flex flex-col gap-3 pointer-events-auto"
-                >
-                  <div className="flex items-center gap-3 mb-1">
-                    <div className="w-8 h-[1px] bg-accent/30" />
-                    <span className="text-[9px] font-mono tracking-widest text-concrete uppercase opacity-60 font-bold">Select Prototype</span>
-                  </div>
-
-                  <div className="flex flex-row gap-4">
-                    {[
-                      { id: 'print01', img: '/assets/images/print_01_bttn.png', label: 'PRT-ALPHA' },
-                      { id: 'print02', img: '/assets/images/print_02_bttn.png', label: 'PRT-BETA' },
-                      { id: 'print03', img: '/assets/images/print_03_bttn.png', label: 'PRT-GAMMA' }
-                    ].map((btn) => (
-                      <motion.div
-                        key={btn.id}
-                        onClick={() => {
-                          setActiveModelId(btn.id);
-                          setScrollProgress(0); // Reset animation when switching
-                        }}
-                        className="group relative cursor-pointer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <div className={`w-14 h-14 md:w-16 md:h-16 p-0.5 rounded-lg border transition-all duration-500 overflow-hidden ${activeModelId === btn.id ? 'border-accent shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-accent/5' : 'border-black/10 grayscale hover:grayscale-0 bg-black/5'}`}>
-                          <img src={btn.img} alt={btn.label} className="w-full h-full object-cover rounded-md" />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <motion.a
-                    href="/projects/vasemotion/index.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 group flex items-center gap-4 py-3 px-6 border border-white/5 bg-white/2 backdrop-blur-md hover:border-accent/40 transition-all duration-500 w-fit"
-                    whileHover={{ x: 10 }}
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                    <span className="text-[10px] font-mono tracking-[0.3em] text-concrete group-hover:text-white transition-colors uppercase">
-                      View Full Animated Presentation
-                    </span>
-                    <span className="text-concrete group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
-                  </motion.a>
-                </motion.div>
               )}
               {/* Section 02 UI is now handled internal to Section02Experience for MediaPipe compatibility */}
 

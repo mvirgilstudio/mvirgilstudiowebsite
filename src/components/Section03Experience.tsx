@@ -464,10 +464,10 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
 
     return (
         <div className="absolute inset-0 z-[2500] pointer-events-none">
+        <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
             <Canvas
                 shadows
                 camera={{ position: [0, 2, 5], fov: 45 }}
-                style={{ pointerEvents: 'auto' }}
                 gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
                 dpr={[1, 1.5]}
             >
@@ -485,14 +485,14 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                         debug={false}
                         gravity={[0, -9.81, 0]}
                     >
-                        <Model key={`${ballKey}-${useCylinder}`} rotation={modelRotation} onWinTrigger={handleWin} useCylinder={useCylinder} />
+                        <Model rotation={modelRotation} onWinTrigger={handleWin} useCylinder={useCylinder} />
                         {!isRespawning && (
-                            <FallingBall key={ballKey} onRemove={handleBallRemove} position={currentSpawnPoint} color={ballColor} />
+                            <FallingBall onRemove={handleBallRemove} position={currentSpawnPoint} color={ballColor} />
                         )}
 
                     </Physics>
 
-                    <ControlOverlay key={ballKey} onRotationChange={setModelRotation} />
+                    <ControlOverlay onRotationChange={setModelRotation} />
 
                     {!isMobile && (
                         <ContactShadows
@@ -516,6 +516,7 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                     />
                 </Suspense>
             </Canvas>
+        </div>
 
 
             {/* Gameplay Instructions */}

@@ -394,7 +394,8 @@ const HeroCanvas: React.FC<{ scrollY?: MotionValue<number> }> = ({ scrollY }) =>
     const [isActive, setIsActive] = React.useState(true);
 
     useMotionValueEvent(s, "change", (latest) => {
-        if (latest > 1500) {
+        const val = latest as number;
+        if (val > 1500) {
             if (isActive) setIsActive(false);
         } else {
             if (!isActive) setIsActive(true);
