@@ -2,6 +2,7 @@ import React, { Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { motion } from 'framer-motion';
 
 const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress: number, mouseRotation: THREE.Euler }) => {
     const { scene } = useGLTF(`/assets/3d/s06/${modelId}.gltf`);
@@ -132,7 +133,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                             </Center>
                         </Float>
 
-                        <Environment preset="warehouse" />
+                        <Environment files="/assets/images/monochrome_studio_04_1k.hdr" />
                     </Suspense>
                 </Canvas>
             </div>
