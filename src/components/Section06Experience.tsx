@@ -1,45 +1,8 @@
-import React, { Suspense, useMemo, useState, useRef, useEffect } from 'react';
+import React, { Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html } from '@react-three/drei';
-import * as THREE from 'three';
-import { motion } from 'framer-motion';
-
-const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress: number, mouseRotation: THREE.Euler }) => {
-    const { scene } = useGLTF(`/assets/3d/s06/${modelId}.gltf`);
-
-    // Ensure shadows and materials
-    useMemo(() => {
-        scene.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                if (child.material) {
-                    child.material.roughness = 0.5;
-                    child.material.metalness = 0.4;
-                }
-            }
-        });
-    }, [scene]);
-
-    // Scale: show minimal geometry at start, full size at end
-    // Start appearing at 5% scroll, full size at 100%
-    const easedProgress = Math.max(0, (progress - 0.05) / 0.95);
-    const scale = easedProgress * 0.034;
-
-    const isComplete = progress > 0.98;
-
-    return (
-        <primitive
-            object={scene}
-            scale={scale}
-            rotation={[
-                isComplete ? mouseRotation.x : 0,
-                isComplete ? mouseRotation.y : Math.PI * progress * 0.5,
-                isComplete ? mouseRotation.z : 0
-            ]}
-        />
-    );
-};
+import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
+import LottieBackground from './LottieBackground';
 
 interface Section06ExperienceProps {
     scrollProgress: number;
@@ -47,150 +10,125 @@ interface Section06ExperienceProps {
     onModelChange?: (id: string) => void;
 }
 
+const Model = ({ url }: { url: string }) => {
+    const { scene } = useGLTF(url);
+    // Adjusted scale to 0.04 to reduce size by half
+    return <primitive object={scene} scale={0.04} position={[0, -0.8, 0]} />;
+};
+
 const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange }) => {
-    const [mouseRotation, setMouseRotation] = useState(new THREE.Euler(0, 0, 0));
-    const isDragging = useRef(false);
-    const lastMouse = useRef({ x: 0, y: 0 });
-
-    // Reset rotation when scrolling back
-    useEffect(() => {
-        if (scrollProgress < 0.95) {
-            setMouseRotation(new THREE.Euler(0, 0, 0));
-        }
-    }, [scrollProgress]);
-
-    // Handle mouse rotation when progress is 100%
-    useEffect(() => {
-        if (scrollProgress < 0.95) return;
-
-        const handleMouseDown = (e: MouseEvent) => {
-            if (e.button === 0) {
-                isDragging.current = true;
-                lastMouse.current = { x: e.clientX, y: e.clientY };
-            }
-        };
-
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!isDragging.current) return;
-            const deltaX = e.clientX - lastMouse.current.x;
-            const deltaY = e.clientY - lastMouse.current.y;
-
-            setMouseRotation(prev => new THREE.Euler(
-                prev.x + deltaY * 0.01,
-                prev.y + deltaX * 0.01,
-                0
-            ));
-            lastMouse.current = { x: e.clientX, y: e.clientY };
-        };
-
-        const handleMouseUp = () => {
-            isDragging.current = false;
-        };
-
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
-
-        return () => {
-            window.removeEventListener('mousedown', handleMouseDown);
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, [scrollProgress]);
-
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
     return (
-        <div className="absolute inset-0 z-[10] pointer-events-none flex items-center justify-center">
-            {/* 3D Scene Layer — transparent background so LottieBackground (z-[45]) in Section.tsx shows through */}
-            <div 
-                className="absolute inset-0 w-full h-full"
-                style={{ pointerEvents: 'auto', background: 'transparent' }}
-            >
-                <Canvas
-                    shadows={!isMobile}
-                    gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
-                    dpr={isMobile ? [1, 1] : [1, 1.5]}
-                    camera={{ position: [0, 0, 25], fov: 30 }}
-                >
-                    <Suspense fallback={
-                        <Html center>
-                            <div className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap">
-                                Fabricating Model...
-                            </div>
-                        </Html>
-                    }>
-                        {/* NO <color> background — canvas stays transparent */}
-                        <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={30} />
-
-                        <ambientLight intensity={0.6} />
-                        <spotLight position={[15, 20, 15]} angle={0.3} penumbra={1} intensity={2.5} castShadow />
-                        <pointLight position={[-10, 10, -10]} intensity={1.5} color="#A855F7" />
-
-                        <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
-                            <Center position={[-4, -1.5, 8]}>
-                                <Model modelId={modelId} progress={scrollProgress} mouseRotation={mouseRotation} />
-                            </Center>
-                        </Float>
-
-                        <Environment files="/assets/images/monochrome_studio_04_1k.hdr" />
-                    </Suspense>
-                </Canvas>
+        <div
+            className="absolute inset-0 flex items-center justify-center w-full h-full overflow-hidden"
+            style={{ zIndex: 10, background: 'linear-gradient(135deg, #050505 0%, #151515 50%, #000000 100%)' }}
+        >
+            {/* 1. Lottie Background Animation */}
+            <div className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${scrollProgress > 0.95 ? 'opacity-30' : 'opacity-100'}`}>
+                <LottieBackground
+                    url={`/assets/3d/s06/${modelId}.json`}
+                    progress={scrollProgress}
+                />
             </div>
-            {/* Lottie animation is rendered by LottieBackground in Section.tsx at z-[45] behind this transparent canvas */}
-            {/* Model Select Buttons Layer */}
+
+            {/* 1b. Interactive GLTF Model */}
+            <AnimatePresence>
+                {scrollProgress > 0.95 && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="absolute inset-0 z-40 pointer-events-auto"
+                    >
+                        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+                            <ambientLight intensity={0.5} />
+                            <directionalLight position={[10, 10, 10]} intensity={1} />
+                            <directionalLight position={[-10, -10, -10]} intensity={0.5} />
+                            <Environment preset="city" />
+                            <Suspense fallback={null}>
+                                <Model url={`/assets/3d/s06/${modelId}.gltf`} />
+                            </Suspense>
+                            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
+                        </Canvas>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* 2. Scroll Interaction Captions */}
             <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="absolute left-10 md:left-20 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-6 pointer-events-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-3 z-[100] pointer-events-none w-[90%] md:w-auto"
             >
-                <div className="flex items-center gap-3 mb-1">
-                    <div className="w-8 h-[1px] bg-white/30" />
-                    <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase font-bold">Select Prototype</span>
+                <AnimatePresence mode="wait">
+                    {scrollProgress > 0.95 ? (
+                        <motion.div
+                            key="inspect"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1.1 }}
+                            className="flex flex-col items-center gap-2"
+                        >
+                            <div className="w-2 h-2 rounded-full bg-purple-500 animate-ping" />
+                            <span className="text-xs font-mono tracking-widest text-white uppercase font-bold bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
+                                Click & Drag to Inspect
+                            </span>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="fabricate"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="flex flex-col items-center gap-2"
+                        >
+                            <div className="w-[2px] h-10 bg-white/50 animate-bounce" />
+                            <span className="text-xs font-mono tracking-widest text-white font-bold uppercase bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
+                                Scroll to Fabricate
+                            </span>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+                <div className="text-xs font-tech text-white tracking-widest font-bold">
+                    {Math.round(scrollProgress * 100)}% Complete
+                </div>
+            </motion.div>
+
+
+
+            {/* 4. Sidebar Buttons */}
+            <div className="absolute right-4 md:left-20 md:right-auto top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 md:gap-6 pointer-events-auto items-end md:items-start">
+                <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-mono tracking-widest text-white/80 uppercase font-bold hidden md:inline-block">Prototypes</span>
+                    <div className="w-8 h-[1px] bg-white/30 hidden md:block" />
                 </div>
 
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3 md:gap-5">
                     {[
-                        { id: 'print01', img: '/assets/images/print_01_bttn.png', label: 'PRT-ALPHA' },
-                        { id: 'print02', img: '/assets/images/print_02_bttn.png', label: 'PRT-BETA' },
-                        { id: 'print03', img: '/assets/images/print_03_bttn.png', label: 'PRT-GAMMA' }
+                        { id: 'print01', img: '/assets/images/vfx/vfx_07.png', label: 'OBJ-ALPHA' },
+                        { id: 'print02', img: '/assets/images/vfx/vfx_08.png', label: 'OBJ-BETA' },
+                        { id: 'print03', img: '/assets/images/vfx/vfx_09.png', label: 'OBJ-GAMMA' }
                     ].map((btn) => (
                         <div
                             key={btn.id}
                             onClick={() => onModelChange?.(btn.id)}
                             className="group relative cursor-pointer"
                         >
-                            <div className={`w-14 h-14 md:w-20 md:h-20 p-0.5 rounded-lg border transition-all duration-500 overflow-hidden ${modelId === btn.id ? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-white/5' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
-                                <img src={btn.img} alt={btn.label} className="w-full h-full object-cover rounded-md" />
+                            <div className={`w-12 h-12 md:w-20 md:h-20 p-[2px] rounded-xl transition-all duration-300 overflow-hidden ${modelId === btn.id ? 'border-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] scale-110' : 'border border-white/20 grayscale hover:grayscale-0 hover:border-white/50'}`}>
+                                <img src={btn.img} alt={btn.label} className="w-full h-full object-cover rounded-lg bg-black/40" />
                             </div>
-                            <div className={`absolute -right-4 top-1/2 -translate-y-1/2 translate-x-full px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`}>
-                                <span className="text-[8px] font-mono text-white tracking-widest uppercase">{btn.label}</span>
+                            <div className="absolute md:-right-4 right-full md:left-auto mr-4 md:mr-0 top-1/2 -translate-y-1/2 md:translate-x-full px-3 py-1 bg-black/80 backdrop-blur border border-white/20 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                <span className="text-[10px] font-mono text-white tracking-widest uppercase">{btn.label}</span>
                             </div>
                         </div>
                     ))}
                 </div>
-
-                <motion.a
-                    href="/projects/vasemotion/index.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 group flex items-center gap-3 py-3 px-5 border border-white/5 bg-white/2 backdrop-blur-md hover:border-white/40 transition-all duration-500 w-fit rounded-lg"
-                    whileHover={{ x: 10 }}
-                >
-                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    <span className="text-[9px] font-mono tracking-[0.2em] text-white/60 group-hover:text-white transition-colors uppercase">
-                        Lab Archives
-                    </span>
-                    <span className="text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all text-xs">→</span>
-                </motion.a>
-            </motion.div>
+            </div>
         </div>
     );
 };
 
-useGLTF.preload('/assets/3d/s06/print01.gltf');
-useGLTF.preload('/assets/3d/s06/print02.gltf');
-useGLTF.preload('/assets/3d/s06/print03.gltf');
+
 
 export default Section06Experience;

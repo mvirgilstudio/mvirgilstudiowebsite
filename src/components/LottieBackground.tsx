@@ -11,9 +11,10 @@ interface LottieBackgroundProps {
 const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opacity = 0.5, progress }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const animRef = useRef<AnimationItem | null>(null);
-    const lastFrameRef = useRef<number>(-1);
+    const lastFrameRef = useRef<number>(-Infinity);
     const rafIdRef = useRef<number | null>(null);
     const pendingProgressRef = useRef<number | undefined>(undefined);
+    const isReadyRef = useRef<boolean>(false);
 
     // Initialize lottie-web with canvas renderer
     useEffect(() => {
@@ -24,16 +25,17 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
             animRef.current.destroy();
             animRef.current = null;
         }
-        lastFrameRef.current = -1;
+        lastFrameRef.current = -Infinity;
+        isReadyRef.current = false;
 
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 if (!containerRef.current) return;
 
-                animRef.current = lottie.loadAnimation({
+                const anim = lottie.loadAnimation({
                     container: containerRef.current,
-                    renderer: 'canvas',
+                    renderer: 'svg',
                     loop: progress === undefined,
                     autoplay: progress === undefined,
                     animationData: data,
@@ -44,10 +46,17 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
                     },
                 });
 
-                // If we already have a progress value queued, apply it
-                if (pendingProgressRef.current !== undefined) {
-                    requestAnimationFrame(() => updateFrame());
-                }
+                animRef.current = anim;
+
+                // Wait for lottie to be fully ready before applying progress
+                anim.addEventListener('DOMLoaded', () => {
+                    isReadyRef.current = true;
+                    // Apply the current progress value now that the animation is ready
+                    if (pendingProgressRef.current !== undefined) {
+                        lastFrameRef.current = -Infinity; // Force update
+                        requestAnimationFrame(() => updateFrame());
+                    }
+                });
             })
             .catch((error) => console.error('Error loading lottie animation:', error));
 
@@ -56,6 +65,7 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
                 animRef.current.destroy();
                 animRef.current = null;
             }
+            isReadyRef.current = false;
             if (rafIdRef.current !== null) {
                 cancelAnimationFrame(rafIdRef.current);
                 rafIdRef.current = null;

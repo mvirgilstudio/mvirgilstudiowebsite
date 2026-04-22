@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, Variants, useMotionValue, useMotionTemplate, AnimatePresence, useInView, useSpring, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants, useMotionValue, useMotionTemplate, AnimatePresence, useInView, useSpring, useMotionValueEvent, animate } from 'framer-motion';
 import { SectionData } from '../types';
 import { INTEL_DATA, SECTION_ACCENTS } from '../data/constants';
 import { TRANSLATIONS } from '../data/translations';
@@ -267,9 +267,15 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
 
   useEffect(() => {
     onExpandChange?.(isExpanded);
-    // Reset animation to frame 1 when entering section 06 experience
     if (isExpanded && data.id === 'section_06') {
       setScrollProgress(0);
+      // Auto-animate the Lottie scroll from 0 to 0.95 over 3 seconds
+      const controls = animate(0, 0.95, {
+        duration: 3,
+        ease: 'easeInOut',
+        onUpdate: (value) => setScrollProgress(value),
+      });
+      return () => controls.stop();
     }
   }, [isExpanded, onExpandChange, data.id]);
 
@@ -385,7 +391,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const val = latest as number;
-    if (data.id === 'section_06') {
+    if (data.id === 'section_06' && !isExpanded) {
       // Map full 0 to 1 range for better scroll filling when browsing normally
       const mapped = Math.min(Math.max(val, 0), 1);
       setScrollProgress(mapped);
@@ -489,7 +495,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
     <section
       id={data.id}
       ref={containerRef}
-      className={`relative w-full ${(data.id === 'section_06' && isExpanded) ? 'md:min-h-[400vh] min-h-screen' : 'min-h-screen md:h-screen'} border-t border-white/5 flex flex-col md:flex-row items-center justify-center overflow-hidden`}
+      className={`relative w-full min-h-screen md:h-screen border-t border-white/5 flex flex-col md:flex-row items-center justify-center overflow-hidden`}
       style={{ backgroundColor: bgColor }}
       onMouseMove={handleMouseMove}
     >
@@ -576,67 +582,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
       />
 
       <div className={`w-full ${(data.id === 'section_06' && isExpanded) ? 'md:sticky md:top-0 md:h-screen relative min-h-screen' : 'relative h-full'} flex flex-col overflow-hidden ${isAlternate ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-        {/* Lottie Background - Section 06 specific (Global Background) */}
-        <AnimatePresence>
-          {data.id === 'section_06' && isExpanded && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              className="absolute inset-0 z-[45] bg-black pointer-events-none"
-            >
-              <LottieBackground
-                url={`/assets/3d/s06/${activeModelId}.json`}
-                opacity={0.8}
-                progress={scrollProgress}
-                className="absolute inset-0 brightness-110 contrast-125"
-              />
-              {/* Scroll/Interaction Caption */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-50 pointer-events-none"
-              >
-                <AnimatePresence mode="wait">
-                  {scrollProgress > 0.95 ? (
-                    <motion.div
-                      key="inspect"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.1 }}
-                      className="flex flex-col items-center gap-2"
-                    >
-                      <div className="flex gap-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
-                      </div>
-                      <span className="text-[11px] md:text-xs font-mono tracking-[0.3em] text-white uppercase font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
-                        Click & Drag to Inspect
-                      </span>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="fabricate"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="flex flex-col items-center gap-1"
-                    >
-                      <div className="w-[2px] h-14 bg-gradient-to-b from-transparent via-white/80 to-transparent animate-bounce drop-shadow-[0_0_4px_rgba(255,255,255,0.4)]" />
-                      <span className="text-[11px] md:text-xs font-mono tracking-[0.3em] text-white font-bold uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
-                        Scroll to Fabricate
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <div className="text-[10px] md:text-[11px] font-tech text-white tracking-widest uppercase font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-2">
-                  {Math.round(scrollProgress * 100)}% Complete
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Section 06 Experience and background is now fully encapsulated in Section06Experience */}
 
         {/* BACKGROUND TEXT CONTAINER (Relocated for true centering) */}
         <motion.div
@@ -1101,100 +1047,97 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
           </motion.div>
         )}
 
+      </div>
 
-
-        {/* Corner Overlay - Outside of transforms for Title and Button */}
-        <AnimatePresence mode="wait">
-          {isExpanded && (
-            <div className="absolute inset-0 pointer-events-auto overflow-hidden z-[4000]">
-              {data.id === 'section_01' && <Section01Experience lang={lang} />}
-              {data.id === 'section_02' && <Section02Experience textureUrl={s02ActiveTexture} lang={lang} />}
-              {data.id === 'section_03' && <Section03Experience lang={lang} />}
-              {data.id === 'section_04' && <Section04Experience lang={lang} />}
-              {data.id === 'section_05' && <Section05Experience />}
-              {data.id === 'section_06' && (
-                <Section06Experience 
-                  scrollProgress={scrollProgress} 
-                  modelId={activeModelId} 
-                  onModelChange={(id) => {
-                    setActiveModelId(id);
-                    setScrollProgress(0); // Reset animation when switching
-                  }}
-                />
-              )}
-              {/* Expanded Title & Index */}
-
-              <motion.div
-                layoutId={`section-title-${data.id}`}
-                style={{
-                  position: 'absolute',
-                  top: isMobile ? '60px' : '100px',
-                  left: isMobile ? '44px' : '60px',
-                  right: 'auto',
-                  width: isMobile ? '80%' : '45%',
-                  zIndex: 3001,
-                  opacity: 0.8,
-                  transformOrigin: 'left top'
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-                exit={{ opacity: 0 }}
-                className="pointer-events-none flex flex-col gap-4"
-              >
-                {/* Section Index Indicator (Expanded Mode) */}
-                <div className="flex items-center gap-4 opacity-60 scale-75 origin-left">
-                  <div
-                    className="h-[1px] bg-white/40"
-                    style={{ width: isMobile ? '30px' : '50px' }}
+      {/* Expanded Experience Overlay Wrapper */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-[4000]">
+        <div className="sticky top-0 w-full h-screen pointer-events-none flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            {isExpanded && (
+              <div className="absolute inset-0 pointer-events-auto overflow-hidden">
+                {data.id === 'section_01' && <Section01Experience lang={lang} />}
+                {data.id === 'section_02' && <Section02Experience textureUrl={s02ActiveTexture} lang={lang} />}
+                {data.id === 'section_03' && <Section03Experience lang={lang} />}
+                {data.id === 'section_04' && <Section04Experience lang={lang} />}
+                {data.id === 'section_05' && <Section05Experience />}
+                {data.id === 'section_06' && (
+                  <Section06Experience
+                    scrollProgress={scrollProgress}
+                    modelId={activeModelId}
+                    onModelChange={(id) => {
+                      setActiveModelId(id);
+                      setScrollProgress(0);
+                    }}
                   />
-                  <span className="text-xs font-mono text-gray-200/60">0{index + 1}</span>
-                </div>
-                <div>
-                  {renderTitle(true)}
-                </div>
-              </motion.div>
+                )}
 
-              {/* Expanded Toggle Button */}
-              <motion.div
-                layoutId={`interaction-button-${data.id}`}
-                style={{
-                  position: 'absolute',
-                  top: isMobile ? '220px' : '320px',
-                  left: isMobile ? '44px' : '60px',
-                  right: 'auto',
-                  zIndex: 3000
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="pointer-events-auto flex items-center gap-6 group cursor-pointer"
-              >
+                {/* Expanded Title & Index */}
                 <motion.div
-                  onClick={() => setIsExpanded(false)}
-                  className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center cursor-pointer bg-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(255,255,255,0.05)] rotate-45 transition-colors duration-300"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  layoutId={`section-title-${data.id}`}
+                  style={{
+                    position: 'absolute',
+                    top: isMobile ? '60px' : '100px',
+                    left: isMobile ? '44px' : '60px',
+                    right: 'auto',
+                    width: isMobile ? '80%' : '45%',
+                    zIndex: 3001,
+                    opacity: 0.8,
+                    transformOrigin: 'left top'
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.8 }}
+                  exit={{ opacity: 0 }}
+                  className="pointer-events-none flex flex-col gap-4"
                 >
-                  <div className={`bg-white rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-1.5 h-1.5'} scale-[1.5]`} />
+                  <div className="flex items-center gap-4 opacity-60 scale-75 origin-left">
+                    <div
+                      className="h-[1px] bg-white/40"
+                      style={{ width: isMobile ? '30px' : '50px' }}
+                    />
+                    <span className="text-xs font-mono text-gray-200/60">0{index + 1}</span>
+                  </div>
+                  <div>
+                    {renderTitle(true)}
+                  </div>
                 </motion.div>
 
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-[10px] md:text-xs font-mono tracking-[0.3em] text-gray-300 uppercase pointer-events-none"
+                {/* Expanded Toggle Button */}
+                <motion.div
+                  layoutId={`interaction-button-${data.id}`}
+                  style={{
+                    position: 'absolute',
+                    top: isMobile ? '160px' : '220px',
+                    left: isMobile ? '44px' : '60px',
+                    right: 'auto',
+                    zIndex: 3000
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="pointer-events-auto flex items-center gap-6 group cursor-pointer"
                 >
-                  {t.ui?.exitExperience || "EXIT EXPERIENCE"}
-                </motion.span>
-              </motion.div>
+                  <motion.div
+                    onClick={() => setIsExpanded(false)}
+                    className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center cursor-pointer bg-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(255,255,255,0.05)] rotate-45 transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <div className={`bg-white rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-1.5 h-1.5'} scale-[1.5]`} />
+                  </motion.div>
 
-              )}
-              {/* Section 02 UI is now handled internal to Section02Experience for MediaPipe compatibility */}
-
-
-            </div>
-          )}
-        </AnimatePresence>
+                  <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-[10px] md:text-xs font-mono tracking-[0.3em] text-gray-300 uppercase pointer-events-none"
+                  >
+                    {t.ui?.exitExperience || "EXIT EXPERIENCE"}
+                  </motion.span>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

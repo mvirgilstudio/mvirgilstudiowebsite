@@ -409,21 +409,22 @@ const HeroCanvas: React.FC<{ scrollY?: MotionValue<number> }> = ({ scrollY }) =>
         <motion.div
             style={{
                 opacity,
-                display: isActive ? 'block' : 'none'
             }}
-            className="fixed inset-0 z-0 pointer-events-none overflow-hidden h-screen w-full"
+            className={`fixed inset-0 z-0 pointer-events-none overflow-hidden h-screen w-full ${isActive ? 'block' : 'hidden'}`}
         >
-            <Canvas
-                shadows
-                dpr={[1, 1.5]}
-                gl={{
-                    antialias: false,
-                    toneMapping: THREE.ACESFilmicToneMapping,
-                    powerPreference: "high-performance"
-                }}
-            >
-                <Scene scrollY={s} isActive={isActive} />
-            </Canvas>
+            {isActive && (
+                <Canvas
+                    shadows
+                    dpr={[1, 1.5]}
+                    gl={{
+                        antialias: false,
+                        toneMapping: THREE.ACESFilmicToneMapping,
+                        powerPreference: "high-performance"
+                    }}
+                >
+                    <Scene scrollY={s} isActive={isActive} />
+                </Canvas>
+            )}
         </motion.div>
     );
 };
