@@ -25,7 +25,8 @@ export const TRANSLATIONS = {
                 instructions: {
                     mouse: "Move cursor to attract • Hover button to form shapes • Click to rotate",
                     hand: "Sculpt with your palm • Pinch to morph"
-                }
+                },
+                enterExperience: 'USE YOUR WEBCAM AND PLAY WITH YOUR HANDS'
             },
             section_02: {
                 title: 'REAL-TIME 3D VISUALIZATION',
@@ -248,6 +249,7 @@ export const TRANSLATIONS = {
                 title: 'INTERAÇÃO HUMANO–OBJETO',
                 titleLines: ['INTERAÇÃO', 'HUMANO–OBJETO'],
                 backgroundText: ['TOQUE', 'MOVIMENTO', 'CONTROLO'],
+                enterExperience: 'USE A SUA WEBCAM E JOGUE COM AS MÃOS'
             },
             section_02: {
                 title: 'VISUALIZAÇÃO 3D EM TEMPO REAL',

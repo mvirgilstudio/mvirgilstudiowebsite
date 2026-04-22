@@ -885,7 +885,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
 
             <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'
               }`}>
-              {handTrackingActive ? t.ui.exitExperience : t.ui.enterExperience}
+              {handTrackingActive ? t.ui.exitExperience : (sectionT.enterExperience || t.ui.enterExperience)}
             </span>
 
             {handTrackingActive && (

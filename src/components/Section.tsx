@@ -1042,7 +1042,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               className="text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 whitespace-nowrap text-center"
               style={{ color: accent.hoverHex }}
             >
-              {t.ui?.enterExperience || "ENTER EXPERIENCE"}
+              {(sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE"}
             </motion.span>
           </motion.div>
         )}
