@@ -747,7 +747,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                   <svg className="w-full h-full -rotate-90">
                     <circle cx="64" cy="64" r="62" fill="none" stroke="white" strokeWidth="1" className="opacity-10" />
                     <motion.circle
-                      cx="64" cy="64" r="62" fill="none" stroke="#68F2EB" strokeWidth="2"
+                      cx="64" cy="64" r="62" fill="none" stroke="#b48c50" strokeWidth="2"
                       strokeDasharray="390"
                       animate={{ strokeDashoffset: 390 * (1 - mediapipeProgress / 100) }}
                       transition={{ duration: 0.3 }}
@@ -755,7 +755,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                   </svg>
                   <div className="absolute flex flex-col items-center">
                     <span className="text-4xl font-mono text-white font-light">{mediapipeProgress}%</span>
-                    <span className="text-[9px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
+                    <span className="text-[9px] font-mono text-[#b48c50] tracking-[0.3em] uppercase mt-1">Ready</span>
                   </div>
                 </div>
 
@@ -764,7 +764,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                     <h3 className="text-[11px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
                       {lang === 'EN' ? 'Initializing AI Engine' : 'A Iniciar Motor IA'}
                     </h3>
-                    <div className="w-8 h-[1px] bg-[#68F2EB] mx-auto" />
+                    <div className="w-8 h-[1px] bg-[#b48c50] mx-auto" />
                   </div>
                   <p className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
                     {lang === 'EN'
@@ -776,16 +776,14 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
 
                 <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-[#68F2EB]"
+                    className="h-full bg-[#b48c50]"
                     animate={{ width: `${mediapipeProgress}%` }}
                     transition={{ duration: 0.3 }}
                   />
                 </div>
               </motion.div>
 
-              <div className="absolute bottom-16 flex flex-col items-center gap-3">
-                <span className="text-[9px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
-              </div>
+
             </motion.div>
           )}
         </AnimatePresence>
@@ -817,7 +815,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                     className="w-14 h-14 md:w-20 md:h-20 object-contain relative z-10 animate-pulse group-hover:animate-none group-hover:scale-110 transition-all duration-300 filter drop-shadow-[0_0_15px_rgba(104,242,235,0.4)]"
                   />
                 </div>
-                <p className="text-sm md:text-base font-mono tracking-widest text-white/40 uppercase animate-pulse text-center max-w-md">
+                <p className="text-sm md:text-base font-mono tracking-widest text-white/40 uppercase animate-pulse text-center max-w-md whitespace-nowrap">
                   {sectionT.instructions?.mouse || "Move cursor to attract • Hover button to form shapes"}
                 </p>
               </motion.div>
@@ -862,8 +860,8 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
             onClick={toggleHandTracking}
             className={`group relative flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-500 cursor-pointer
             ${handTrackingActive
-                ? 'bg-[#68F2EB]/15 border-[#68F2EB]/60 shadow-[0_0_30px_rgba(104,242,235,0.3)]'
-                : 'bg-black/80 border-white/20 hover:border-[#68F2EB]/40 hover:bg-[#68F2EB]/10'}
+                ? 'bg-[#b48c50]/15 border-[#b48c50]/60 shadow-[0_0_30px_rgba(180,140,80,0.3)]'
+                : 'bg-black/80 border-[#b48c50]/40 hover:border-white/30 hover:bg-white/5'}
             backdrop-blur-md`}
           >
             <svg
@@ -874,7 +872,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className={`w-5 h-5 transition-all duration-300 ${handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'
+              className={`w-5 h-5 transition-all duration-300 ${handTrackingActive ? 'text-[#b48c50] animate-pulse' : 'text-[#b48c50] group-hover:text-white'
                 }`}
             >
               <path d="M18 11V6a2 2 0 0 0-4 0v5" />
@@ -883,25 +881,17 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
               <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
             </svg>
 
-            <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'
+            <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 whitespace-nowrap ${handTrackingActive ? 'text-[#b48c50]' : 'text-[#b48c50] group-hover:text-white'
               }`}>
-              {handTrackingActive ? t.ui.exitExperience : (sectionT.enterExperience || t.ui.enterExperience)}
+              {handTrackingActive ? t.ui.exitExperience : (lang === 'EN' ? 'use your webcam and play with hands' : 'use a sua webcam e jogue com as mãos')}
             </span>
 
             {handTrackingActive && (
-              <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />
+              <span className="absolute inset-0 rounded-full border border-[#b48c50]/40 animate-ping" />
             )}
           </button>
 
-          {!handTrackingActive && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-[10px] font-mono tracking-[0.3em] text-white/40 uppercase"
-            >
-              {lang === 'EN' ? 'Uses MediaPipe AI Hand Tracking' : 'Usa Rastreamento de Mãos MediaPipe IA'}
-            </motion.p>
-          )}
+
         </div>
 
         {/* MediaPipe Hand Tracker — webcam overlay bottom-right */}
@@ -909,6 +899,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
           active={handTrackingActive}
           onHandMove={handleHandMove}
           onStatusChange={handleMediapipeStatus}
+          color="#b48c50"
         />
       </MorphContext.Provider>
     </div>

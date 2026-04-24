@@ -7,9 +7,10 @@ interface HandTrackerProps {
     onHandMove: (pos: { x: number; y: number; isPinching?: boolean }) => void;
     active: boolean;
     onStatusChange?: (status: 'idle' | 'loading' | 'ready' | 'error', handDetected: boolean, progress: number) => void;
+    color?: string;
 }
 
-const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusChange }) => {
+const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusChange, color = '#68F2EB' }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const landmarkerRef = useRef<HandLandmarker | null>(null);
     const rafRef = useRef<number>(0);
@@ -159,11 +160,11 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
         };
     }, [active, predict]);
 
-    const statusColor = status === 'ready' ? (handDetected ? '#68F2EB' : '#ffffff40') : status === 'loading' ? '#facc15' : status === 'error' ? '#f87171' : '#ffffff20';
+    const statusColor = status === 'ready' ? (handDetected ? color : '#ffffff40') : status === 'loading' ? '#facc15' : status === 'error' ? '#f87171' : '#ffffff20';
     const statusLabel = status === 'ready' ? (handDetected ? 'Hand Detected' : 'Tracking...') : status === 'loading' ? 'Loading AI...' : status === 'error' ? 'Error' : '';
 
     const overlay = (
-        <div className={`fixed bottom-8 right-8 w-64 h-48 overflow-hidden rounded-2xl border transition-all duration-500 shadow-2xl ${active ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'} ${status === 'ready' ? 'border-[#68F2EB]/30' : 'border-white/10'} bg-black/80`} style={{ backdropFilter: 'blur(12px)', zIndex: 99999 }}>
+        <div className={`fixed bottom-4 md:bottom-8 right-4 md:right-8 w-40 md:w-64 h-32 md:h-48 overflow-hidden rounded-2xl border transition-all duration-500 shadow-2xl ${active ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'} ${status === 'ready' ? 'border-white/20' : 'border-white/10'} bg-black/80`} style={{ backdropFilter: 'blur(12px)', zIndex: 99999 }}>
             <video ref={videoRef} className="w-full h-full object-cover scale-x-[-1] opacity-80" playsInline muted />
             <div className="absolute top-0 left-0 right-0 flex items-center gap-2 px-3 py-2 bg-black/50 backdrop-blur-sm">
                 <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${status === 'ready' && handDetected ? 'animate-pulse' : ''}`} style={{ backgroundColor: statusColor }} />
@@ -175,13 +176,13 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
                         <svg className="w-full h-full -rotate-90">
                             <circle cx="32" cy="32" r="28" fill="none" stroke="white" strokeWidth="2" className="opacity-10" />
                             <motion.circle 
-                                cx="32" cy="32" r="28" fill="none" stroke="#68F2EB" strokeWidth="2" 
+                                cx="32" cy="32" r="28" fill="none" stroke={color} strokeWidth="2" 
                                 strokeDasharray="175.9"
                                 animate={{ strokeDashoffset: 175.9 * (1 - loadProgress / 100) }}
                                 transition={{ duration: 0.3 }}
                             />
                         </svg>
-                        <span className="absolute text-[10px] font-mono text-[#68F2EB] font-bold">{loadProgress}%</span>
+                        <span className="absolute text-[10px] font-mono font-bold" style={{ color: color }}>{loadProgress}%</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                         <span className="text-[10px] font-mono text-white/60 uppercase tracking-widest animate-pulse">
@@ -189,7 +190,8 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
                         </span>
                         <div className="w-32 h-[1px] bg-white/10 overflow-hidden rounded-full">
                             <motion.div 
-                                className="h-full bg-[#68F2EB]"
+                                className="h-full"
+                                style={{ backgroundColor: color }}
                                 animate={{ width: `${loadProgress}%` }}
                                 transition={{ duration: 0.3 }}
                             />
@@ -202,14 +204,14 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
                     <span className="text-[11px] font-mono text-red-400 text-center leading-tight">Camera or model failed to load</span>
                 </div>
             )}
-            <div className="absolute inset-3 pointer-events-none">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#68F2EB]/40 rounded-tl-sm" />
-                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#68F2EB]/40 rounded-tr-sm" />
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#68F2EB]/40 rounded-bl-sm" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#68F2EB]/40 rounded-br-sm" />
+            <div className="absolute inset-3 pointer-events-none opacity-40">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 rounded-tl-sm" style={{ borderColor: color }} />
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 rounded-tr-sm" style={{ borderColor: color }} />
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 rounded-bl-sm" style={{ borderColor: color }} />
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 rounded-br-sm" style={{ borderColor: color }} />
             </div>
             <div className="absolute bottom-0 left-0 right-0 flex justify-between items-center px-3 py-1.5 bg-black/50 backdrop-blur-sm">
-                <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest">MediaPipe v0.10</span>
+                <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest">AI VISION ENGINE</span>
                 <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest">Palm Tracking</span>
             </div>
         </div>

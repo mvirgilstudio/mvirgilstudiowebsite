@@ -6,9 +6,10 @@ interface LottieBackgroundProps {
     className?: string;
     opacity?: number;
     progress?: number; // 0 to 1
+    onLoaded?: () => void;
 }
 
-const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opacity = 0.5, progress }) => {
+const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opacity = 0.5, progress, onLoaded }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const animRef = useRef<AnimationItem | null>(null);
     const lastFrameRef = useRef<number>(-Infinity);
@@ -51,6 +52,7 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
                 // Wait for lottie to be fully ready before applying progress
                 anim.addEventListener('DOMLoaded', () => {
                     isReadyRef.current = true;
+                    onLoaded?.();
                     // Apply the current progress value now that the animation is ready
                     if (pendingProgressRef.current !== undefined) {
                         lastFrameRef.current = -Infinity; // Force update

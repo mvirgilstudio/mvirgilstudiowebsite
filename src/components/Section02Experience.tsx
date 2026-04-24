@@ -163,8 +163,8 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                             <div className="relative w-32 h-32 flex items-center justify-center">
                                 <svg className="w-full h-full -rotate-90">
                                     <circle cx="64" cy="64" r="62" fill="none" stroke="white" strokeWidth="1" className="opacity-10" />
-                                    <motion.circle 
-                                        cx="64" cy="64" r="62" fill="none" stroke="#68F2EB" strokeWidth="2" 
+                                    <motion.circle
+                                        cx="64" cy="64" r="62" fill="none" stroke="#5282be" strokeWidth="2"
                                         strokeDasharray="390"
                                         animate={{ strokeDashoffset: 390 * (1 - mediapipeProgress / 100) }}
                                         transition={{ duration: 0.3 }}
@@ -172,7 +172,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                                 </svg>
                                 <div className="absolute flex flex-col items-center">
                                     <span className="text-4xl font-mono text-white font-light">{mediapipeProgress}%</span>
-                                    <span className="text-[11px] font-mono text-[#68F2EB] tracking-[0.3em] uppercase mt-1">Ready</span>
+                                    <span className="text-[11px] font-mono text-[#5282be] tracking-[0.3em] uppercase mt-1">Ready</span>
                                 </div>
                             </div>
 
@@ -181,47 +181,45 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                                     <h3 className="text-[13px] font-mono tracking-[0.5em] uppercase text-white font-bold animate-pulse">
                                         {lang === 'EN' ? 'Initializing AI Engine' : 'A Iniciar Motor IA'}
                                     </h3>
-                                    <div className="w-8 h-[1px] bg-[#68F2EB] mx-auto" />
+                                    <div className="w-8 h-[1px] bg-[#5282be] mx-auto" />
                                 </div>
                                 <p className="text-[12px] font-mono tracking-[0.2em] text-white/50 uppercase leading-relaxed">
-                                    {lang === 'EN' 
-                                        ? 'Configuring palm detection and camera streams for 360 viewer' 
+                                    {lang === 'EN'
+                                        ? 'Configuring palm detection and camera streams for 360 viewer'
                                         : 'A configurar deteção de palma e fluxos de câmara para visualizador 360'}
                                 </p>
                             </div>
 
                             <div className="w-full h-[1px] bg-white/10 rounded-full overflow-hidden">
-                                <motion.div 
-                                    className="h-full bg-[#68F2EB]"
+                                <motion.div
+                                    className="h-full bg-[#5282be]"
                                     animate={{ width: `${mediapipeProgress}%` }}
                                     transition={{ duration: 0.3 }}
                                 />
                             </div>
                         </motion.div>
 
-                        <div className="absolute bottom-16 flex flex-col items-center gap-3">
-                            <span className="text-[11px] font-mono tracking-[0.4em] text-white/20 uppercase">Powered by MediaPipe</span>
-                        </div>
+
                     </motion.div>
                 )}
             </AnimatePresence>
 
             {/* Hand-Tracking Toggle & Instructions */}
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3005] pointer-events-auto flex flex-col items-center gap-4 w-full px-4">
+            <div className="absolute bottom-3 md:bottom-20 right-2 md:right-12 z-[3005] pointer-events-auto flex flex-col items-end gap-2 md:gap-6 w-auto max-w-xl px-4">
                 {/* Mouse Instructions (Desktop only) */}
                 {!handTrackingActive && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, x: 10 }}
                         animate={{
                             opacity: 1,
-                            y: 0,
+                            x: 0,
                             filter: isButtonHovered ? 'blur(10px)' : 'blur(0px)'
                         }}
-                        className="flex justify-center w-full"
+                        className="flex justify-end w-full"
                     >
-                        <div className="bg-black/60 backdrop-blur-2xl border border-white/10 px-12 py-6 rounded-full flex items-center gap-8 shadow-[0_0_60px_rgba(0,0,0,0.6)]">
-                            <div className="w-3 h-3 rounded-full bg-white/40 animate-pulse" />
-                            <span className="text-[15px] md:text-lg font-mono tracking-[0.3em] uppercase underline-offset-8 text-white/80">
+                        <div className="bg-white/5 backdrop-blur-2xl border border-white/10 px-2 md:px-8 py-1 md:py-4 rounded-full flex items-center justify-center gap-1.5 md:gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                            <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white/40 animate-pulse flex-shrink-0" />
+                            <span className="text-[7px] md:text-xs font-mono tracking-[0.1em] md:tracking-[0.4em] uppercase text-white font-bold text-center">
                                 {sectionT.instructions.mouse}
                             </span>
                         </div>
@@ -231,16 +229,16 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                 <AnimatePresence>
                     {handTrackingActive && mediapipeStatus === 'ready' && (
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 5 }}
-                            className="flex flex-col items-center gap-4 mb-4"
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 10 }}
+                            className="flex flex-col items-end gap-3 md:gap-4 mb-2 md:mb-4 w-full"
                         >
-                            <div className="flex items-center gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 px-12 py-6 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.6)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-8 h-8 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}>
+                            <div className="flex items-center gap-1.5 md:gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-2 md:px-8 py-1 md:py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-3 h-3 md:w-6 md:h-6 flex-shrink-0 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}>
                                     <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                                 </svg>
-                                <span className="text-[15px] font-mono tracking-[0.3em] uppercase text-white font-bold whitespace-nowrap">
+                                <span className="text-[7px] md:text-xs font-mono tracking-[0.1em] md:tracking-[0.4em] uppercase text-white font-bold text-center">
                                     {handDetected ? (lang === 'EN' ? 'Pinch to Rotate • Open hand to click' : 'Aperte para Rodar • Mão aberta para clicar') : (lang === 'EN' ? 'Setup Complete • Show hand to track' : 'Configuração Concluída • Mostre a mão')}
                                 </span>
                             </div>
@@ -252,30 +250,19 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     onClick={toggleHandTracking}
                     onMouseEnter={() => setIsButtonHovered(true)}
                     onMouseLeave={() => setIsButtonHovered(false)}
-                    className={`group relative flex items-center gap-6 px-12 py-6 rounded-full border transition-all duration-500 cursor-pointer
-                        ${handTrackingActive ? 'bg-[#68F2EB]/15 border-[#68F2EB]/60 shadow-[0_0_30px_rgba(104,242,235,0.3)]' : 'bg-black/80 border-white/20 hover:border-[#68F2EB]/40 hover:bg-[#68F2EB]/10'}
+                    className={`group relative flex items-center gap-1.5 md:gap-3 px-2 md:px-6 py-1.5 md:py-3 rounded-full border transition-all duration-500 cursor-pointer
+                        ${handTrackingActive ? 'bg-[#5282be]/15 border-[#5282be]/60 shadow-[0_0_30px_rgba(82,130,190,0.3)]' : 'bg-black/80 border-[#5282be]/40 hover:border-white/30 hover:bg-white/5'}
                         backdrop-blur-md`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-8 h-8 transition-all duration-300 ${handTrackingActive ? 'text-[#68F2EB] animate-pulse' : 'text-white/60 group-hover:text-[#68F2EB]'}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-3 h-3 md:w-5 md:h-5 flex-shrink-0 transition-all duration-300 ${handTrackingActive ? 'text-[#5282be] animate-pulse' : 'text-[#5282be] group-hover:text-white'}`}>
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                     </svg>
-                    <span className={`text-base uppercase font-mono tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#68F2EB]' : 'text-white/70 group-hover:text-[#68F2EB]'}`}>
-                        {handTrackingActive ? (lang === 'PT' ? 'Desativar IA' : 'Disable AI Tracking') : (lang === 'PT' ? 'Ativar IA Tracking' : 'Enable AI Tracking')}
+                    <span className={`text-[8px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#5282be]' : 'text-[#5282be] group-hover:text-white'}`}>
+                        {handTrackingActive ? (lang === 'PT' ? 'Sair da Experiência' : 'Exit Experience') : (lang === 'PT' ? 'use a sua webcam e jogue com as mãos' : 'use your webcam and play with hands')}
                     </span>
-                    {handTrackingActive && <span className="absolute inset-0 rounded-full border border-[#68F2EB]/40 animate-ping" />}
+                    {handTrackingActive && <span className="absolute inset-0 rounded-full border border-[#5282be]/40 animate-ping" />}
                 </button>
-                
-                {!handTrackingActive && isButtonHovered && (
-                    <motion.p 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-[10px] font-mono tracking-[0.3em] text-white font-bold uppercase mt-2"
-                    >
-                        {lang === 'EN' ? 'Uses MediaPipe AI Hand Tracking' : 'Usa Rastreamento de Mãos MediaPipe IA'}
-                    </motion.p>
-                )}
             </div>
-
             {/* Virtual Cursor */}
             {handTrackingActive && handPos && (
                 <motion.div
@@ -287,10 +274,10 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     }}
                     transition={{ type: 'spring', damping: 25, stiffness: 250 }}
                 >
-                    <div className={`w-full h-full rounded-full border-2 transition-colors duration-300 ${handPos.isPinching ? 'border-[#68F2EB] bg-[#68F2EB]/20' : 'border-white/50'}`} />
+                    <div className={`w-full h-full rounded-full border-2 transition-colors duration-300 ${handPos.isPinching ? 'border-[#5282be] bg-[#5282be]/20' : 'border-white/50'}`} />
                     {hoverRef.current && !handPos.isPinching && (
                         <motion.div
-                            className="absolute inset-[-4px] rounded-full border-2 border-[#68F2EB] border-t-transparent animate-spin"
+                            className="absolute inset-[-4px] rounded-full border-2 border-[#5282be] border-t-transparent animate-spin"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                         />
@@ -300,25 +287,25 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
 
             {/* Environment Selection UI (replicated from Section.tsx for better MP integration) */}
             <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{
                     opacity: 1,
                     x: 0,
                     filter: isButtonHovered ? 'blur(10px)' : 'blur(0px)'
                 }}
-                className="fixed left-[40px] md:left-[380px] top-[400px] md:top-[280px] z-[3001] flex flex-col gap-14 pointer-events-auto"
+                className="fixed left-4 md:left-12 top-20 md:top-[380px] z-[3001] flex flex-col gap-4 md:gap-12 pointer-events-auto max-w-[calc(100vw-32px)] md:max-w-xl max-h-[calc(100vh-120px)] md:max-h-none overflow-y-auto md:overflow-visible no-scrollbar"
             >
-                <div className="flex flex-col gap-5">
-                    <div className="flex items-center gap-5 mb-1">
-                        <div className="w-12 h-[1px] bg-white/30" />
-                        <span className="text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Category</span>
+                <div className="flex flex-col gap-3 md:gap-5">
+                    <div className="flex items-center gap-3 md:gap-5 mb-1">
+                        <div className="w-8 md:w-12 h-[1px] bg-white/30" />
+                        <span className="text-[11px] md:text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Category</span>
                     </div>
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row flex-wrap gap-1.5 md:gap-4">
                         {(Object.keys(SECTION_02_VARIANTS) as Array<keyof typeof SECTION_02_VARIANTS>).map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => { setCategory(cat); setActiveTexture(SECTION_02_VARIANTS[cat][0].sphere); }}
-                                className={`px-8 py-4 text-[14px] font-mono tracking-widest border transition-all duration-300 ${category === cat ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/10 text-white/70 border-white/20 hover:border-white/50 hover:text-white backdrop-blur-sm'}`}
+                                className={`px-3 md:px-8 py-1.5 md:py-4 text-[10px] md:text-[14px] font-mono tracking-widest border transition-all duration-300 ${category === cat ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/10 text-white/70 border-white/20 hover:border-white/50 hover:text-white backdrop-blur-sm'}`}
                             >
                                 {cat.toUpperCase()}
                             </button>
@@ -326,22 +313,22 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-5">
-                    <div className="flex items-center gap-5 mb-1">
-                        <div className="w-12 h-[1px] bg-white/30" />
-                        <span className="text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Environment</span>
+                <div className="flex flex-col gap-3 md:gap-5">
+                    <div className="flex items-center gap-3 md:gap-5 mb-1">
+                        <div className="w-8 md:w-12 h-[1px] bg-white/30" />
+                        <span className="text-[11px] md:text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Environment</span>
                     </div>
-                    <div className="flex flex-row gap-6">
+                    <div className="flex flex-row gap-2 md:gap-6 overflow-x-auto md:overflow-visible pb-2 md:pb-0 no-scrollbar pr-6 md:pr-0">
                         {SECTION_02_VARIANTS[category].map((item) => (
                             <div
                                 key={item.id}
                                 onClick={() => setActiveTexture(item.sphere)}
-                                className="group relative cursor-pointer"
+                                className="group relative cursor-pointer flex-shrink-0"
                             >
-                                <div className={`w-28 h-28 md:w-32 md:h-32 p-1.5 rounded-2xl border transition-all duration-500 overflow-hidden ${activeTexture === item.sphere ? 'border-[#68F2EB] shadow-[0_0_25px_rgba(104,242,235,0.3)]' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
-                                    <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-xl" />
+                                <div className={`w-16 h-16 md:w-32 md:h-32 p-0.5 md:p-1 rounded-xl md:rounded-2xl border transition-all duration-500 overflow-hidden ${activeTexture === item.sphere ? 'border-[#5282be] shadow-[0_0_25px_rgba(82,130,190,0.3)]' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
+                                    <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-lg md:rounded-xl" />
                                 </div>
-                                <div className="mt-4 text-[12px] font-mono text-center tracking-widest opacity-40 group-hover:opacity-100 transition-opacity text-white font-bold">
+                                <div className="mt-1.5 md:mt-3 text-[8px] md:text-[12px] font-mono text-center tracking-widest opacity-40 group-hover:opacity-100 transition-opacity text-white font-bold">
                                     {item.label}
                                 </div>
                             </div>
@@ -364,32 +351,32 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         dpr={[1, 1.5]}
                         camera={{ position: [0, 0, 0.1], fov: 75 }}
                     >
-                    <Suspense fallback={
-                        <Html center>
-                            <div style={{ color: 'white', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', opacity: 0.6 }}>
-                                Loading Panorama...
-                            </div>
-                        </Html>
-                    }>
-                        <color attach="background" args={['#040404']} />
-                        <PerspectiveCamera makeDefault position={[0, 0, 0.1]} fov={75} />
-                        {!handTrackingActive && (
-                            <OrbitControls
-                                enableZoom={false}
-                                enablePan={false}
-                                rotateSpeed={-0.4}
-                                autoRotate={true}
-                                autoRotateSpeed={0.5}
-                            />
-                        )}
-                        {handTrackingActive && <ControlsHandler handPos={handPos} handTrackingActive={handTrackingActive} />}
-                        <Panorama textureUrl={activeTexture} />
-                    </Suspense>
+                        <Suspense fallback={
+                            <Html center>
+                                <div style={{ color: 'white', fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', opacity: 0.6 }}>
+                                    Loading Panorama...
+                                </div>
+                            </Html>
+                        }>
+                            <color attach="background" args={['#040404']} />
+                            <PerspectiveCamera makeDefault position={[0, 0, 0.1]} fov={75} />
+                            {!handTrackingActive && (
+                                <OrbitControls
+                                    enableZoom={false}
+                                    enablePan={false}
+                                    rotateSpeed={-0.4}
+                                    autoRotate={true}
+                                    autoRotateSpeed={0.5}
+                                />
+                            )}
+                            {handTrackingActive && <ControlsHandler handPos={handPos} handTrackingActive={handTrackingActive} />}
+                            <Panorama textureUrl={activeTexture} />
+                        </Suspense>
                     </Canvas>
                 </div>
             </motion.div>
 
-            <HandTracker onHandMove={setHandPos} active={handTrackingActive} onStatusChange={handleMediapipeStatus} />
+            <HandTracker onHandMove={setHandPos} active={handTrackingActive} onStatusChange={handleMediapipeStatus} color="#5282be" />
         </div>
     );
 };

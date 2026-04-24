@@ -269,13 +269,6 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
     onExpandChange?.(isExpanded);
     if (isExpanded && data.id === 'section_06') {
       setScrollProgress(0);
-      // Auto-animate the Lottie scroll from 0 to 0.95 over 3 seconds
-      const controls = animate(0, 0.95, {
-        duration: 3,
-        ease: 'easeInOut',
-        onUpdate: (value) => setScrollProgress(value),
-      });
-      return () => controls.stop();
     }
   }, [isExpanded, onExpandChange, data.id]);
 
@@ -303,8 +296,8 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
       if (e.cancelable) e.preventDefault();
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+    return () => window.removeEventListener('wheel', handleWheel, { capture: true });
   }, [isExpanded, data.id]);
 
   useEffect(() => {
@@ -1067,6 +1060,13 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                     onModelChange={(id) => {
                       setActiveModelId(id);
                       setScrollProgress(0);
+                    }}
+                    onLottieLoaded={() => {
+                      animate(0, 0.95, {
+                        duration: 1.5,
+                        ease: 'easeInOut',
+                        onUpdate: (value) => setScrollProgress(value),
+                      });
                     }}
                   />
                 )}

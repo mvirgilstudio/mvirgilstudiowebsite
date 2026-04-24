@@ -25,8 +25,7 @@ export const TRANSLATIONS = {
                 instructions: {
                     mouse: "Move cursor to attract • Hover button to form shapes • Click to rotate",
                     hand: "Sculpt with your palm • Pinch to morph"
-                },
-                enterExperience: 'USE YOUR WEBCAM AND PLAY WITH YOUR HANDS'
+                }
             },
             section_02: {
                 title: 'REAL-TIME 3D VISUALIZATION',
@@ -249,7 +248,10 @@ export const TRANSLATIONS = {
                 title: 'INTERAÇÃO HUMANO–OBJETO',
                 titleLines: ['INTERAÇÃO', 'HUMANO–OBJETO'],
                 backgroundText: ['TOQUE', 'MOVIMENTO', 'CONTROLO'],
-                enterExperience: 'USE A SUA WEBCAM E JOGUE COM AS MÃOS'
+                instructions: {
+                    mouse: "Mova o cursor para atrair • Passe sobre o botão para formar formas • Clique para rodar",
+                    hand: "Esculpa com a palma • Aperte para transformar"
+                }
             },
             section_02: {
                 title: 'VISUALIZAÇÃO 3D EM TEMPO REAL',
@@ -292,9 +294,9 @@ export const TRANSLATIONS = {
             },
         },
         ui: {
-            enterExperience: 'ENTRAR NA EXPERIÊNCIA',
-            exitExperience: 'SAIR DA EXPERIÊNCIA',
-            visitProject: 'VISITAR PROJETO',
+            enterExperience: 'ENTER EXPERIENCE',
+            exitExperience: 'EXIT EXPERIENCE',
+            visitProject: 'VISIT PROJECT',
         },
         intel: {
             'CAPACITIVE SENSORS': {
@@ -383,7 +385,7 @@ export const TRANSLATIONS = {
             },
             '3D PRINTING': {
                 title: 'IMPRESSÃO 3D',
-                description: 'A IMPRESSÃO 3D TRANSFORMA MODELOS DIGITAIS EM OBJETOS FÍSICOS COM ALTA PRECISÃO.\nPERMITE PROTOTIPAGEM RÁPIDA E A CRIAÇÃO DE FORMAS TANGÍVEIS E FUNCIONAIS.',
+                description: 'A IMPRESSÃO 3D TRANSFORMA MODELOS DIGITAIS EM OBJETOS FÍSICOS COM ALTA PRECISÃO.\nPERMITE PROTOTIPAGEM RÁPIDA E A CRIAÇÃO DE FORMAS TANGÍVEIS e FUNCIONAIS.',
             },
             'DIGITAL FABRICATION': {
                 title: 'FABRICO DIGITAL',

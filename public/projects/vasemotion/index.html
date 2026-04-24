@@ -693,15 +693,19 @@
                         ease: "none"
                     }); // Stay on Left for Command Succession (Final section)
 
-                // Frame Sequence Logic
-                ScrollTrigger.create({
-                    trigger: "body",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1.5,
-                    onUpdate: (self) => {
-                        const frame = self.progress * (lottieScroll.totalFrames - 1);
-                        lottieScroll.goToAndStop(frame, true);
+                // Frame Sequence Logic with Lag Effect
+                const playhead = { frame: 0 };
+                gsap.to(playhead, {
+                    frame: lottieScroll.totalFrames - 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "body",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.5
+                    },
+                    onUpdate: () => {
+                        lottieScroll.goToAndStop(playhead.frame, true);
                     }
                 });
             });

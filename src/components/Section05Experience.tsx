@@ -369,7 +369,21 @@ const Sculpture = ({ collidersRef, occluderMeshes }: {
 
     useEffect(() => {
         const meshes: THREE.Mesh[] = [];
+        const toRemove: THREE.Object3D[] = [];
+        
         scene.traverse((child) => {
+            const nameLower = child.name.toLowerCase();
+            if (nameLower.includes('cell')) {
+                const match = nameLower.match(/\d+/);
+                if (match) {
+                    const num = parseInt(match[0], 10);
+                    if (num % 2 !== 0) {
+                        toRemove.push(child);
+                        return; // Skip adding to meshes
+                    }
+                }
+            }
+
             if (child instanceof THREE.Mesh) {
                 meshes.push(child);
                 child.castShadow = true;
@@ -382,6 +396,10 @@ const Sculpture = ({ collidersRef, occluderMeshes }: {
                 });
             }
         });
+
+        // Remove the odd-numbered cells from the scene
+        toRemove.forEach(child => child.removeFromParent());
+
         collidersRef.current = meshes;
         occluderMeshes.current = meshes;
     }, [scene, collidersRef, occluderMeshes]);

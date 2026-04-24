@@ -8,15 +8,16 @@ interface Section06ExperienceProps {
     scrollProgress: number;
     modelId?: string;
     onModelChange?: (id: string) => void;
+    onLottieLoaded?: () => void;
 }
 
 const Model = ({ url }: { url: string }) => {
     const { scene } = useGLTF(url);
     // Adjusted scale to 0.04 to reduce size by half
-    return <primitive object={scene} scale={0.04} position={[0, -0.8, 0]} />;
+    return <primitive object={scene} scale={0.04} position={[0, -1.8, 0]} />;
 };
 
-const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange }) => {
+const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded }) => {
 
     return (
         <div
@@ -28,6 +29,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                 <LottieBackground
                     url={`/assets/3d/s06/${modelId}.json`}
                     progress={scrollProgress}
+                    onLoaded={onLottieLoaded}
                 />
             </div>
 
@@ -83,8 +85,8 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                             exit={{ opacity: 0 }}
                             className="flex flex-col items-center gap-2"
                         >
-                            <div className="w-[2px] h-10 bg-white/50 animate-bounce" />
-                            <span className="text-xs font-mono tracking-widest text-white font-bold uppercase bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
+                            <div className="w-[2px] h-10 bg-[#b46464]/50 animate-bounce" />
+                            <span className="text-xs font-mono tracking-widest text-[#b46464] font-bold uppercase bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-[#b46464]/20">
                                 Scroll to Fabricate
                             </span>
                         </motion.div>
@@ -97,11 +99,11 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
 
 
 
-            {/* 4. Sidebar Buttons */}
-            <div className="absolute right-4 md:left-20 md:right-auto top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 md:gap-6 pointer-events-auto items-end md:items-start">
+            {/* 4. Sidebar Buttons - Relocated to right to avoid collision with Exit button */}
+            <div className="absolute right-4 md:right-12 md:left-auto top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 md:gap-6 pointer-events-auto items-end">
                 <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-mono tracking-widest text-white/80 uppercase font-bold hidden md:inline-block">Prototypes</span>
                     <div className="w-8 h-[1px] bg-white/30 hidden md:block" />
+                    <span className="text-[10px] font-mono tracking-widest text-white/80 uppercase font-bold hidden md:inline-block">Prototypes</span>
                 </div>
 
                 <div className="flex flex-col gap-3 md:gap-5">
@@ -115,11 +117,12 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                             onClick={() => onModelChange?.(btn.id)}
                             className="group relative cursor-pointer"
                         >
-                            <div className={`w-12 h-12 md:w-20 md:h-20 p-[2px] rounded-xl transition-all duration-300 overflow-hidden ${modelId === btn.id ? 'border-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] scale-110' : 'border border-white/20 grayscale hover:grayscale-0 hover:border-white/50'}`}>
+                            <div className={`w-12 h-12 md:w-20 md:h-20 p-[2px] rounded-xl transition-all duration-500 overflow-hidden backdrop-blur-sm bg-white/5 ${modelId === btn.id ? 'border-2 border-white shadow-[0_0_30px_rgba(255,255,255,0.4)] scale-110' : 'border border-white/10 grayscale hover:grayscale-0 hover:border-white/40 hover:scale-105'}`}>
                                 <img src={btn.img} alt={btn.label} className="w-full h-full object-cover rounded-lg bg-black/40" />
                             </div>
-                            <div className="absolute md:-right-4 right-full md:left-auto mr-4 md:mr-0 top-1/2 -translate-y-1/2 md:translate-x-full px-3 py-1 bg-black/80 backdrop-blur border border-white/20 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                                <span className="text-[10px] font-mono text-white tracking-widest uppercase">{btn.label}</span>
+                            {/* Hover label - now appearing to the left of the button */}
+                            <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-1 bg-black/90 backdrop-blur-xl border border-white/20 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap translate-x-2 group-hover:translate-x-0">
+                                <span className="text-[10px] font-mono text-white tracking-widest uppercase font-bold">{btn.label}</span>
                             </div>
                         </div>
                     ))}
