@@ -376,6 +376,7 @@
         };
 
         let isAnimating = false;
+        let activeLoadingController = null;
 
         function updatePaths() {
             const isExt = viewMode === 'exterior';
@@ -410,43 +411,84 @@
             loadImages();
         }
 
-        function loadImages() {
-            loader.style.opacity = '1';
-            let loaded = 0;
-            const isExt = viewMode === 'exterior';
-            const totalToLoad = isExt ? frameCount * 3 : frameCount;
-            
-            Object.keys(sequences).forEach(key => {
-                sequences[key].images = [];
-            });
+        async function loadImages() {
+            // Cancel previous load attempt
+            if (activeLoadingController) activeLoadingController.abort = true;
+            const controller = { abort: false };
+            activeLoadingController = controller;
 
-            const loadSequence = (key, count, start) => {
-                for (let i = 0; i < count; i++) {
-                    const img = new Image();
-                    const num = (start + i).toString().padStart(4, '0');
-                    img.src = `${sequences[key].path}${num}.jpg`;
-                    img.onload = () => {
-                        loaded++;
-                        if (loaded >= totalToLoad) loader.style.opacity = '0';
-                        if (img === sequences[activeSeqKey].images[currentFrame - sequences[activeSeqKey].start]) draw();
-                    };
-                    img.onerror = () => {
-                        loaded++;
-                        if (loaded >= totalToLoad) loader.style.opacity = '0';
-                    };
-                    sequences[key].images.push(img);
-                }
+            loader.style.opacity = '1';
+            const isExt = viewMode === 'exterior';
+            
+            // Clear current images to force reload (or we could keep them until new ones are ready)
+            // For now, let's just keep the old ones so the screen doesn't go black
+            const oldImages = {
+                low: [...sequences.low.images],
+                mid: [...sequences.mid.images],
+                high: [...sequences.high.images]
             };
 
+            const loadSingleImage = (url) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error(`Failed to load ${url}`));
+                });
+            };
+
+            const loadBatch = async (key, count, start) => {
+                const newImages = [];
+                const batchSize = 6; // Limit concurrent requests to avoid browser limits
+                
+                for (let i = 0; i < count; i += batchSize) {
+                    if (controller.abort) return null;
+                    
+                    const chunk = [];
+                    for (let j = 0; j < batchSize && (i + j) < count; j++) {
+                        const frameIdx = i + j;
+                        const num = (start + frameIdx).toString().padStart(4, '0');
+                        chunk.push(loadSingleImage(`${sequences[key].path}${num}.jpg`));
+                    }
+
+                    try {
+                        const results = await Promise.all(chunk);
+                        newImages.push(...results);
+                        
+                        // If this is the active sequence, update the view as we load
+                        if (key === activeSeqKey) {
+                            sequences[key].images = newImages;
+                            draw();
+                        }
+                    } catch (e) {
+                        console.warn(e.message);
+                    }
+                }
+                return newImages;
+            };
+
+            // 1. Load LOW resolution first (Priority)
+            const lowRes = await loadBatch('low', frameCount, sequences.low.start);
+            if (controller.abort || !lowRes) return;
+            sequences.low.images = lowRes;
+            draw();
+
+            // 2. Load MID and HIGH in background if exterior
             if (isExt) {
-                loadSequence('low', 60, 1);
-                loadSequence('mid', 60, 1);
-                loadSequence('high', 60, 1);
+                loader.style.opacity = '0.5'; // Partial fade to show we are still caching HQ
+                const midRes = await loadBatch('mid', 60, 1);
+                if (controller.abort || !midRes) return;
+                sequences.mid.images = midRes;
+
+                const highRes = await loadBatch('high', 60, 1);
+                if (controller.abort || !highRes) return;
+                sequences.high.images = highRes;
             } else {
-                loadSequence('low', 30, 61);
-                sequences.mid.images = sequences.low.images;
-                sequences.high.images = sequences.low.images;
+                sequences.mid.images = lowRes;
+                sequences.high.images = lowRes;
             }
+
+            loader.style.opacity = '0';
         }
 
         function playToFrame(targetFrame, delay, callback) {
