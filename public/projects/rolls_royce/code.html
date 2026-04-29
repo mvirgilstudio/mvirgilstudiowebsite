@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Rolls-Royce Ghost | Interactive Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#131313",
+                        surface: "#0e0e0e",
+                        primary: "#ffffff",
+                    },
+                    fontFamily: {
+                        headline: ["Playfair Display", "serif"],
+                        body: ["Manrope", "sans-serif"],
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #131313;
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .bg-grain {
+            position: relative;
+        }
+        .bg-grain::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .text-shadow-lg {
+            text-shadow: 0 0 40px rgba(255,255,255,0.15);
+        }
+        canvas {
+            display: block;
+        }
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.4);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(71, 71, 71, 0.15);
+            border-radius: 8px;
+        }
+        .swatch-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .swatch-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swatch-btn:hover img {
+            transform: scale(1.1);
+        }
+        .swatch-btn.active {
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.2), 0 0 0 6px #131313;
+        }
+        .view-toggle-btn {
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+        }
+        .view-toggle-btn.active {
+            background: white;
+            color: black;
+        }
+        .view-toggle-btn:not(.active) {
+            color: rgba(255,255,255,0.4);
+        }
+        .view-toggle-btn:not(.active):hover {
+            color: white;
+        }
+        #loader {
+            transition: opacity 0.5s ease;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #131313;
+            aspect-ratio: 16/9;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.6);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+        .spec-card {
+            background: #131313;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            transition: background 0.3s ease;
+        }
+        .spec-card:hover {
+            background: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <!-- Top Navigation -->
+    <header class="fixed top-0 z-50 w-full bg-[#131313]/60 backdrop-blur-xl transition-all duration-300 border-b border-white/5">
+        <nav class="flex justify-between items-center w-full px-6 md:px-12 py-4 max-w-[1920px] mx-auto">
+            <div class="flex items-center gap-4">
+                <img src="vectors/rolls-royce.svg" alt="Rolls-Royce" class="h-10 w-auto invert opacity-90" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Rolls-Royce_Motor_Cars_logo.svg/1200px-Rolls-Royce_Motor_Cars_logo.svg.png'"/>
+            </div>
+            <div class="hidden md:flex gap-10 items-center">
+                <a class="text-white font-bold border-b border-white/20 pb-1 tracking-tight" href="#">Ghost</a>
+                <a class="text-white/40 hover:text-white transition-colors duration-300 tracking-tight" href="#specs">Specifications</a>
+                <a class="text-white/40 hover:text-white transition-colors duration-300 tracking-tight" href="#gallery">Gallery</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-[10px] uppercase tracking-[0.4em] text-white/40 font-['Manrope'] hidden md:block">Ghost View</span>
+                <button class="bg-white text-black px-6 py-2 rounded-sm font-semibold text-sm hover:bg-gray-200 transition-all active:scale-95">
+                    Configure Yours
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section & 3D Viewer -->
+        <section class="relative h-screen w-full overflow-hidden bg-black">
+            <canvas id="hero-sequence" class="w-full h-full object-cover"></canvas>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none"></div>
+
+            <div id="loader" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+                <div class="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+            </div>
+
+            <!-- Hero Branding -->
+            <div class="absolute inset-0 z-10 flex flex-col items-center justify-start pt-32 px-6 text-center pointer-events-none gsap-scrub-fade">
+                <img src="vectors/rolls-royce.svg" alt="Rolls-Royce" class="h-14 md:h-20 w-auto invert opacity-80 mb-4 gsap-reveal-up" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Rolls-Royce_Motor_Cars_logo.svg/1200px-Rolls-Royce_Motor_Cars_logo.svg.png'"/>
+                <span class="text-[13px] md:text-[15px] uppercase tracking-[0.5em] text-white/60 font-light mb-1 gsap-reveal-up">Rolls Royce</span>
+                <span class="text-[10px] uppercase tracking-[0.6em] text-white/30 font-bold mb-8 gsap-reveal-up">Interactive Presentation</span>
+                <h1 class="text-5xl md:text-7xl font-headline font-normal text-white tracking-tighter leading-none mb-6 max-w-4xl text-shadow-lg gsap-reveal-up">
+                    The Rolls-Royce <span class="text-white/70 font-style-italic">Ghost.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/70 font-light max-w-2xl mb-10 leading-relaxed gsap-reveal-up">
+                    Explore the pinnacle of automotive luxury in an immersive 3D environment. Every stitch, every surface, rendered with absolute fidelity.
+                </p>
+            </div>
+
+            <!-- Controls Panel -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6 z-20">
+                <!-- Hint -->
+                <div class="flex flex-col items-center mb-10 opacity-60">
+                    <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-white font-bold">
+                        <span class="material-symbols-outlined text-[16px]">swipe</span>
+                        <span>Click & Drag to Rotate</span>
+                    </div>
+                    <div class="w-px h-12 bg-gradient-to-b from-white/40 to-transparent mt-4"></div>
+                </div>
+
+                <div class="bg-[#131313]/40 backdrop-blur-[24px] border border-[#474747]/15 p-8 rounded-lg flex flex-col md:flex-row gap-16 items-center justify-center">
+                    <div class="space-y-6 md:space-y-0 md:flex md:gap-16">
+                        <!-- Paint -->
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-[#c6c6c6] mb-4 block font-bold text-center font-['Manrope']">Exterior Paint</span>
+                            <div class="flex gap-4 justify-center" id="paint-selectors">
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-all group ring-2 ring-white/20 ring-offset-4 ring-offset-[#131313] active" data-color="gray">
+                                    <img src="buttons/carpaint_gray.png" alt="Gray" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-all group" data-color="black">
+                                    <img src="buttons/carpaint_black.png" alt="Black" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-all group" data-color="white">
+                                    <img src="buttons/carpaint_white.png" alt="White" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Interior -->
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-[#c6c6c6] mb-4 block font-bold text-center font-['Manrope']">Interior Leather</span>
+                            <div class="flex gap-4 justify-center" id="interior-selectors">
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-transform group ring-2 ring-white/20 ring-offset-4 ring-offset-[#131313] active" data-color="beige">
+                                    <img src="buttons/int_beige.png" alt="Beige" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-transform group" data-color="black">
+                                    <img src="buttons/int_black.png" alt="Black" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                                <button class="w-12 h-12 p-0 rounded-full overflow-hidden transition-transform group" data-color="blue">
+                                    <img src="buttons/int_blue.png" alt="Blue" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Perspective -->
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] uppercase tracking-widest text-[#c6c6c6] mb-4 block font-bold text-center font-['Manrope'] drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">Perspective</span>
+                            <div class="flex bg-white/5 p-1 rounded-full border border-white/10" id="view-toggle">
+                                <button class="px-6 py-2 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] bg-white text-black active" data-view="exterior">EXTERIOR</button>
+                                <button class="px-6 py-2 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] text-white/40 hover:text-white" data-view="interior">INTERIOR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="relative w-full bg-[#131313] py-32 overflow-hidden flex flex-col items-center border-t border-white/5 bg-grain">
+            <div class="max-w-4xl mx-auto text-center px-6 mb-16 gsap-stagger">
+                <span class="text-[11px] uppercase tracking-[0.6em] text-white/30 mb-6 block font-bold">Why Ghost View</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-normal text-white mb-8 tracking-tight">Beyond The Showroom</h2>
+                <p class="text-white/60 font-light text-lg leading-relaxed">
+                    Ghost View bridges the physical and digital worlds of Rolls-Royce. This interactive presentation was conceived to translate the post-opulent presence of the Ghost into a digital medium — allowing prospective owners, enthusiasts, and designers to explore every bespoke configuration before a single hand touches leather.
+                </p>
+            </div>
+            <div class="w-full max-w-7xl px-6 gsap-scrub-scale">
+                <div class="rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] ring-1 ring-white/10 bg-black">
+                    <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/5e01c0f1-f170-4c44-85e8-a6dcabadf5de?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specifications Section -->
+        <section id="specs" class="bg-[#0e0e0e] py-32 px-6 md:px-12 border-t border-white/5">
+            <div class="max-w-[1920px] mx-auto">
+                <div class="text-center mb-20 gsap-stagger">
+                    <img src="vectors/rolls-royce.svg" alt="Rolls-Royce" class="h-16 w-auto invert opacity-20 mx-auto mb-8" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Rolls-Royce_Motor_Cars_logo.svg/1200px-Rolls-Royce_Motor_Cars_logo.svg.png'"/>
+                    <span class="text-[11px] uppercase tracking-[0.6em] text-white/30 mb-6 block font-bold">Technical Excellence</span>
+                    <h2 class="text-4xl md:text-5xl font-headline font-normal text-white mb-6 tracking-tight">Ghost Specifications</h2>
+                    <p class="text-white/50 font-light max-w-2xl mx-auto text-lg leading-relaxed">
+                        The new Rolls-Royce Ghost is the most technologically advanced Rolls-Royce yet. It distills the brand's pillars into a beautiful, minimalist, and yet highly complex product.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-5xl mx-auto gsap-stagger">
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Engine</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">6.75L V12</span>
+                        <span class="text-[11px] text-white/40 font-light">Twin-Turbocharged</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Power</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">563 HP</span>
+                        <span class="text-[11px] text-white/40 font-light">627 lb-ft Torque</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">0-60 mph</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">4.6s</span>
+                        <span class="text-[11px] text-white/40 font-light">All-Wheel Drive</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Top Speed</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">155 mph</span>
+                        <span class="text-[11px] text-white/40 font-light">Electronically Limited</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Suspension</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">Planar</span>
+                        <span class="text-[11px] text-white/40 font-light">World-First System</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Weight</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">2,490 kg</span>
+                        <span class="text-[11px] text-white/40 font-light">Post-Opulent Luxury</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Transmission</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">8-Speed</span>
+                        <span class="text-[11px] text-white/40 font-light">Satellite Aided</span>
+                    </div>
+                    <div class="spec-card">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-white/30 font-bold">Steering</span>
+                        <span class="text-2xl md:text-3xl font-bold text-white font-headline tracking-tight">All-Wheel</span>
+                        <span class="text-[11px] text-white/40 font-light">Effortless Agility</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section (Card Stack) -->
+        <section id="gallery" class="bg-[#131313] py-32 px-6 md:px-12 border-t border-white/5 overflow-hidden relative bg-grain">
+            <div class="max-w-4xl mx-auto text-center mb-10 gsap-stagger">
+                <span class="text-[11px] uppercase tracking-[0.6em] text-white/30 mb-6 block font-bold">The Perspective</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-normal text-white mb-6 tracking-tight">Gallery</h2>
+            </div>
+
+            <!-- Card Stack Container -->
+            <div class="relative w-full max-w-5xl mx-auto flex items-center justify-center min-h-[500px]">
+                <!-- Navigation Buttons -->
+                <button id="prev-card" class="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all z-50 hidden md:block">
+                    <span class="material-symbols-outlined text-white">chevron_left</span>
+                </button>
+                <button id="next-card" class="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all z-50 hidden md:block">
+                    <span class="material-symbols-outlined text-white">chevron_right</span>
+                </button>
+
+                <div id="card-stack" class="relative w-full max-w-3xl aspect-video mx-auto px-4 md:px-0 cursor-grab active:cursor-grabbing">
+                    <!-- Cards will be injected here by JS -->
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div id="progress-dots" class="flex justify-center gap-2 mt-8">
+                <!-- Dots will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Magnified Modal -->
+        <div id="magnified-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto">
+            <div id="magnified-image-container" class="relative max-w-6xl w-[90vw] aspect-video rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20 bg-black pointer-events-auto">
+                <img id="modal-img" src="" alt="Magnified View" class="w-full h-full object-cover pointer-events-none">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0e0e0e] w-full py-16 px-12 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-[1920px] mx-auto opacity-80 gap-12 md:gap-0">
+            <div class="flex items-center gap-4">
+                <img src="vectors/rolls-royce.svg" alt="Rolls-Royce" class="h-8 w-auto invert opacity-60" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Rolls-Royce_Motor_Cars_logo.svg/1200px-Rolls-Royce_Motor_Cars_logo.svg.png'"/>
+                <span class="text-white/30 text-[10px] uppercase tracking-[0.3em]">Ghost View</span>
+            </div>
+            <p class="text-white/30 uppercase tracking-widest text-[10px]">© 2024 GHOST VIEW. AN INTERACTIVE ROLLS-ROYCE EXPERIENCE.</p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('hero-sequence');
+        const ctx = canvas.getContext('2d');
+        const loader = document.getElementById('loader');
+        
+        let frameCount = 60;
+        let viewMode = 'exterior';
+        let currentExterior = 'gray';
+        let currentInterior = 'beige';
+        let currentFrame = 1;
+        let activeSeqKey = 'low';
+        let lastExteriorFrame = 1;
+        
+        const sequences = {
+            low: { path: '', start: 1, images: [] },
+            mid: { path: '', start: 1, images: [] },
+            high: { path: '', start: 1, images: [] }
+        };
+
+        let isAnimating = false;
+
+        function updatePaths() {
+            const isExt = viewMode === 'exterior';
+            const basePath = isExt ? `sequences/${currentExterior}_${currentInterior}/` : `sequences/${currentExterior}_${currentInterior}_trans/`;
+            const filePrefix = isExt ? `carpaint_${currentExterior}_ext_${currentInterior}_int.` : `carpaint_trans_${currentExterior}_ext_${currentInterior}_int.`;
+            
+            frameCount = isExt ? 60 : 30;
+            const startFrameNum = isExt ? 1 : 61;
+
+            sequences.low.path = basePath + filePrefix;
+            sequences.low.start = startFrameNum;
+            
+            if (isExt) {
+                let midPrefix = `carpaint_mid_${currentExterior}_ext_${currentInterior}_int.`;
+                let highPrefix = `carpaint_high_${currentExterior}_ext_${currentInterior}_int.`;
+                
+                if (currentExterior === 'white' && currentInterior === 'blue') {
+                    midPrefix = `carpaint_white_mid_ext_blue_int.`;
+                    highPrefix = `carpaint_white_high_ext_blue_int.`;
+                }
+                
+                sequences.mid.path = `sequences/${currentExterior}_${currentInterior}_mid/${midPrefix}`;
+                sequences.mid.start = 1;
+                sequences.high.path = `sequences/${currentExterior}_${currentInterior}_high/${highPrefix}`;
+                sequences.high.start = 1;
+            } else {
+                sequences.mid.path = sequences.low.path;
+                sequences.mid.start = startFrameNum;
+                sequences.high.path = sequences.low.path;
+                sequences.high.start = startFrameNum;
+            }
+            loadImages();
+        }
+
+        function loadImages() {
+            loader.style.opacity = '1';
+            let loaded = 0;
+            const isExt = viewMode === 'exterior';
+            const totalToLoad = isExt ? frameCount * 3 : frameCount;
+            
+            Object.keys(sequences).forEach(key => {
+                sequences[key].images = [];
+            });
+
+            const loadSequence = (key, count, start) => {
+                for (let i = 0; i < count; i++) {
+                    const img = new Image();
+                    const num = (start + i).toString().padStart(4, '0');
+                    img.src = `${sequences[key].path}${num}.jpg`;
+                    img.onload = () => {
+                        loaded++;
+                        if (loaded >= totalToLoad) loader.style.opacity = '0';
+                        if (img === sequences[activeSeqKey].images[currentFrame - sequences[activeSeqKey].start]) draw();
+                    };
+                    img.onerror = () => {
+                        loaded++;
+                        if (loaded >= totalToLoad) loader.style.opacity = '0';
+                    };
+                    sequences[key].images.push(img);
+                }
+            };
+
+            if (isExt) {
+                loadSequence('low', 60, 1);
+                loadSequence('mid', 60, 1);
+                loadSequence('high', 60, 1);
+            } else {
+                loadSequence('low', 30, 61);
+                sequences.mid.images = sequences.low.images;
+                sequences.high.images = sequences.low.images;
+            }
+        }
+
+        function playToFrame(targetFrame, delay, callback) {
+            isAnimating = true;
+            
+            const animate = () => {
+                if (currentFrame !== targetFrame) {
+                    const step = targetFrame > currentFrame ? 1 : -1;
+                    currentFrame += step;
+                    draw();
+                    setTimeout(animate, delay);
+                } else {
+                    isAnimating = false;
+                    if (callback) callback();
+                }
+            };
+            animate();
+        }
+
+        function draw() {
+            const seq = sequences[activeSeqKey] || sequences.low;
+            if (!seq.images || seq.images.length === 0) return;
+
+            let idx = currentFrame - seq.start;
+            if (idx < 0) idx = 0;
+            if (idx >= seq.images.length) idx = seq.images.length - 1;
+
+            const img = seq.images[idx];
+            if (!img || !img.complete || img.naturalWidth === 0) return;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+            const x = (canvas.width / 2) - (img.width / 2) * scale;
+            const y = (canvas.height / 2) - (img.height / 2) * scale;
+            
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+        }
+
+        window.addEventListener('resize', draw);
+
+        // Interaction
+        let isDragging = false;
+        let startX = 0, startY = 0, startFrame = 1;
+
+        canvas.addEventListener('mousedown', e => {
+            if (viewMode === 'interior' || isAnimating) return;
+            isDragging = true;
+            startX = e.pageX; startY = e.pageY;
+            startFrame = currentFrame;
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging || isAnimating) return;
+            const dx = e.pageX - startX;
+            const dy = e.pageY - startY;
+            
+            const frameDiff = Math.round(dx / (800 / 60));
+            currentFrame = ((startFrame + frameDiff - 1) % 60 + 60) % 60 + 1;
+            
+            if (dy > 200) activeSeqKey = 'high';
+            else if (dy > 100) activeSeqKey = 'mid';
+            else activeSeqKey = 'low';
+            
+            requestAnimationFrame(draw);
+        });
+
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        // UI Listeners
+        document.querySelectorAll('#paint-selectors button').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('#paint-selectors button').forEach(b => b.classList.remove('ring-2', 'ring-white/20', 'ring-offset-4', 'ring-offset-[#131313]', 'active'));
+                btn.classList.add('ring-2', 'ring-white/20', 'ring-offset-4', 'ring-offset-[#131313]', 'active');
+                currentExterior = btn.dataset.color;
+                updatePaths();
+            };
+        });
+
+        document.querySelectorAll('#interior-selectors button').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('#interior-selectors button').forEach(b => b.classList.remove('ring-2', 'ring-white/20', 'ring-offset-4', 'ring-offset-[#131313]', 'active'));
+                btn.classList.add('ring-2', 'ring-white/20', 'ring-offset-4', 'ring-offset-[#131313]', 'active');
+                currentInterior = btn.dataset.color;
+                updatePaths();
+            };
+        });
+
+        document.querySelectorAll('#view-toggle button').forEach(btn => {
+            btn.onclick = () => {
+                const next = btn.dataset.view;
+                if (next === viewMode || isAnimating) return;
+                
+                document.querySelectorAll('#view-toggle button').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'active');
+                    b.classList.add('text-white/40', 'hover:text-white');
+                });
+                btn.classList.add('bg-white', 'text-black', 'active');
+                btn.classList.remove('text-white/40', 'hover:text-white');
+                
+                if (next === 'interior') {
+                    lastExteriorFrame = currentFrame;
+                    playToFrame(60, 20, () => {
+                        viewMode = 'interior';
+                        currentFrame = 61;
+                        activeSeqKey = 'low';
+                        updatePaths();
+                        setTimeout(() => playToFrame(90, 30), 500);
+                    });
+                } else {
+                    playToFrame(61, 30, () => {
+                        viewMode = 'exterior';
+                        currentFrame = 60;
+                        updatePaths();
+                        setTimeout(() => playToFrame(lastExteriorFrame, 20), 500);
+                    });
+                }
+            };
+        });
+
+        // --- Card Stack Logic ---
+        const initialCards = [
+            { id: 1, src: "images/HighresScreenshot00002.jpg", title: "Sculpted Elegance", description: "The iconic profile in high resolution" },
+            { id: 2, src: "images/HighresScreenshot00006.jpg", title: "Impeccable Details", description: "Precision engineering on display" },
+            { id: 3, src: "images/HighresScreenshot00009.jpg", title: "Luxury Redefined", description: "Every surface meticulously crafted" },
+            { id: 4, src: "images/HighresScreenshot00010.jpg", title: "The Starlight Headliner", description: "A celestial experience inside" },
+            { id: 5, src: "images/HighresScreenshot00011.jpg", title: "Bespoke Interior", description: "Crafted for the senses" },
+            { id: 6, src: "images/HighresScreenshot00012.jpg", title: "Commanding Presence", description: "The unmistakable grille" },
+            { id: 7, src: "images/HighresScreenshot00013.jpg", title: "Artisan Woodwork", description: "Seamless grain matching" },
+            { id: 8, src: "images/HighresScreenshot00014.jpg", title: "Whisper Quiet", description: "Acoustic insulation technology" },
+            { id: 9, src: "images/HighresScreenshot00015.jpg", title: "Dynamic Drive", description: "Effortless power delivery" },
+            { id: 10, src: "images/HighresScreenshot00016.jpg", title: "Iconic Silhouette", description: "Timeless design proportions" },
+            { id: 11, src: "images/HighresScreenshot00017.jpg", title: "Signature Details", description: "The Spirit of Ecstasy" },
+            { id: 12, src: "images/HighresScreenshot00018.jpg", title: "Refined Leather", description: "Highest grade materials" },
+            { id: 13, src: "images/HighresScreenshot00019.jpg", title: "Atelier Customization", description: "Made uniquely yours" }
+        ];
+
+        let stackCards = [...initialCards];
+        let stackIndex = 0;
+        const stackContainer = document.getElementById('card-stack');
+        const dotsContainer = document.getElementById('progress-dots');
+        const prevBtn = document.getElementById('prev-card');
+        const nextBtn = document.getElementById('next-card');
+        const modal = document.getElementById('magnified-modal');
+        const modalImg = document.getElementById('modal-img');
+
+        function renderStack() {
+            stackContainer.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            stackCards.forEach((card, i) => {
+                if (i > 3) return;
+
+                const el = document.createElement('div');
+                el.className = 'absolute w-full h-full rounded-xl overflow-hidden border-2 border-white/10 transition-all duration-500 ease-out shadow-2xl';
+                
+                const zIndex = stackCards.length - i;
+                const scale = 1 - (i * 0.05);
+                const translateY = i * -15;
+                const brightness = 1 - (i * 0.15);
+
+                el.style.zIndex = zIndex;
+                el.style.transform = `translateY(${translateY}px) scale(${scale})`;
+                el.style.filter = `brightness(${brightness})`;
+                el.style.opacity = i > 3 ? 0 : 1;
+
+                el.innerHTML = `
+                    <img src="${card.src}" class="w-full h-full object-cover pointer-events-none select-none">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 ${i === 0 ? 'opacity-100' : 'opacity-0'}">
+                        <h3 class="text-white font-bold text-2xl mb-1">${card.title}</h3>
+                        <p class="text-white/60 text-sm font-light tracking-wide">${card.description}</p>
+                    </div>
+                `;
+
+                if (i === 0) {
+                    el.onmouseenter = () => {
+                        modalImg.src = card.src;
+                        modal.classList.remove('hidden');
+                        setTimeout(() => modal.classList.add('opacity-100', 'flex'), 10);
+                    };
+                }
+
+                stackContainer.appendChild(el);
+            });
+
+            initialCards.forEach((_, i) => {
+                const dot = document.createElement('div');
+                const isActive = i === stackIndex;
+                dot.className = `h-1.5 rounded-full transition-all duration-300 ${isActive ? 'bg-white w-8' : 'bg-white/20 w-1.5'}`;
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function moveToEnd() {
+            const topCard = stackCards.shift();
+            stackCards.push(topCard);
+            stackIndex = (stackIndex + 1) % initialCards.length;
+            renderStack();
+        }
+
+        function moveToStart() {
+            const lastCard = stackCards.pop();
+            stackCards.unshift(lastCard);
+            stackIndex = (stackIndex - 1 + initialCards.length) % initialCards.length;
+            renderStack();
+        }
+
+        nextBtn.onclick = moveToEnd;
+        prevBtn.onclick = moveToStart;
+
+        // Close modal when mouse leaves the magnified container or moves in the background
+        const modalContainer = document.getElementById('magnified-image-container');
+        modalContainer.onmouseleave = () => {
+            modal.classList.remove('opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        };
+        modal.onmousemove = (e) => {
+            if (e.target === modal) { // only close if hovering on backdrop
+                modal.classList.remove('opacity-100');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        };
+
+        let swipeStartY = 0;
+        stackContainer.onmousedown = (e) => { swipeStartY = e.pageY; };
+        stackContainer.onmouseup = (e) => {
+            const diffY = e.pageY - swipeStartY;
+            if (Math.abs(diffY) > 50) moveToEnd();
+        };
+
+        renderStack();
+
+        updatePaths();
+
+        // --- GSAP & Lenis Smooth Scroll ---
+        const lenis = new Lenis({
+            duration: 1.6,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            touchMultiplier: 1.5,
+        });
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.gsap-reveal-up').forEach((el) => {
+            gsap.fromTo(el, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', end: 'bottom 10%', toggleActions: 'play reverse play reverse' } });
+        });
+
+        gsap.utils.toArray('.gsap-stagger').forEach((parent) => {
+            gsap.fromTo(parent.children, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: parent, start: 'top 85%', end: 'bottom 10%', toggleActions: 'play reverse play reverse' } });
+        });
+
+        gsap.utils.toArray('.gsap-scrub-scale').forEach((el) => {
+            gsap.fromTo(el, { scale: 0.8, opacity: 0.3 }, { scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'center center', scrub: 1 } });
+        });
+
+        gsap.utils.toArray('.gsap-scrub-fade').forEach((el) => {
+            gsap.fromTo(el, { opacity: 1 }, { opacity: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true } });
+        });
+    </script>
+</body>
+</html>

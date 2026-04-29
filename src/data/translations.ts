@@ -212,13 +212,10 @@ export const TRANSLATIONS = {
                 description: 'A series of interactive, immersive installations where visuals respond to body movement and audio. Wall projections and screen displays react dynamically to user gestures and motion sensors. Particle systems, abstract visuals, and environmental backgrounds shift in real time. Each interaction transforms the space into a living, responsive digital canvas. A fusion of motion, sound, and immersive visual storytelling for engaging experiences.',
             },
             w10: {
-                title: 'PHANTOMVIEW',
-                description: 'Experience a Rolls-Royce in a fully interactive 3D environment. Customize car paint, interiors, and toggle doors and lighting with intuitive controls. Switch between studio, urban street, and snow-covered road scenes. Explore every angle and immerse yourself in luxury automotive design. An engaging tool that fuses visualization, interactivity, and high-end design.',
+                title: 'GHOSTVIEW',
+                description: 'Experience the Rolls-Royce Ghost in a fully interactive 3D environment. Customize car paint, interiors, and explore the pinnacle of automotive luxury with intuitive controls. Switch between studio, urban street, and scenic road scenes. Every surface is rendered with absolute fidelity for an immersive digital showroom experience.',
             },
-            w11: {
-                title: 'SUPRAVIEW',
-                description: 'An interactive 3D visualization of the Toyota Supra, designed for hands-on exploration. Users can switch exterior colors and materials in real time, seeing instant updates. View the car from multiple perspectives to examine every detail. Explore both a studio environment and a dynamic exterior scene. A sleek digital platform blending automotive design, interactivity, and visual realism.',
-            },
+
             w12: {
                 title: 'VASEMOTION',
                 description: 'A unique 3D-printed vase with its own dedicated animated presentation. Motion graphics reveal every angle, curve, and detail of the object. The project blends tactile design with dynamic visual storytelling. Physical and digital representations create a cohesive showcase experience. A creative exploration of 3D printing, form, and animation.',
@@ -438,13 +435,10 @@ export const TRANSLATIONS = {
                 description: 'A série de instalações interativas e imersivas onde os visuais respondem ao movimento do corpo e áudio. Projeções de parede e exibições de ecrã reagem dinamicamente a gestos de utilizadores e sensores de movimento. Sistemas de partículas, visuais abstratos e fundos ambientais mudam em tempo real. Cada interação transforma o espaço numa tela digital viva e responsiva. Uma fusão de movimento, som e narrativa visual imersiva para experiências envolventes.',
             },
             w10: {
-                title: 'PHANTOMVIEW',
-                description: 'Experiencie um Rolls-Royce num ambiente 3D totalmente interativo. Personalize a pintura do carro, interiores e alterne portas e iluminação com controlos intuitivos. Alterne entre estúdio, rua urbana e cenas de estrada coberta de neve. Explore cada ângulo e mergulhe no design automóvel de luxo. Uma ferramenta envolvente que funde visualização, interatividade e design de topo.',
+                title: 'GHOSTVIEW',
+                description: 'Experimente o Rolls-Royce Ghost num ambiente 3D totalmente interativo. Personalize a pintura, interiores e explore o auge do luxo automóvel com controlos intuitivos. Alterne entre cenários de estúdio, ruas urbanas e estradas panorâmicas. Cada superfície é renderizada com fidelidade absoluta para uma experiência de showroom digital imersiva.',
             },
-            w11: {
-                title: 'SUPRAVIEW',
-                description: 'Uma visualização 3D interativa do Toyota Supra, desenhada para exploração prática. Os utilizadores podem mudar cores exteriores e materiais em tempo real, vendo atualizações instantâneas. Visualize o carro de múltiplas perspetivas para examinar cada detalhe. Explore tanto um ambiente de estúdio como uma cena exterior dinâmica. Uma plataforma digital elegante que combina design automóvel, interatividade e realismo visual.',
-            },
+
             w12: {
                 title: 'VASEMOTION',
                 description: 'Uma jarra única impressa em 3D com a sua própria apresentação animada dedicada. Gráficos de movimento revelam cada ângulo, curva e detalhe do objeto. O projeto combina design tátil com narrativa visual dinâmica. As representações físicas e digitais criam uma experiência de exibição coesa. Uma exploração criativa da impressão 3D, forma e animação.',

@@ -38,8 +38,7 @@ const WorksIndex: React.FC<WorksIndexProps> = ({ isVisible, activeSectionId, lan
       'LIVESPACE',
       'GREENHAVEN INTERACTIVE',
       'ORBITARIUM INTERACTIVE',
-      'PHANTOMVIEW',
-      'SUPRAVIEW'
+      'GHOSTVIEW'
     ],
     'section_03': [
       'ARCHSYNC MODEL',
@@ -54,15 +53,13 @@ const WorksIndex: React.FC<WorksIndexProps> = ({ isVisible, activeSectionId, lan
       'MOTIONSCAPE',
       'VASEMOTION',
       'ORBITARIUM INTERACTIVE',
-      'PHANTOMVIEW',
-      'SUPRAVIEW'
+      'GHOSTVIEW'
     ],
     'section_06': [
       'MOTIONSCAPE',
       'VASEMOTION',
       'ORBITARIUM INTERACTIVE',
-      'PHANTOMVIEW',
-      'SUPRAVIEW'
+      'GHOSTVIEW'
     ]
   };
 

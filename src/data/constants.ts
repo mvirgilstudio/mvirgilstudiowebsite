@@ -10,16 +10,16 @@ export const SECTION_ACCENTS: Record<string, { rgb: string; hex: string; hoverHe
 };
 
 export const WORK_COLORS = [
-    { rgb: '0,242,255', hex: '#00f2ff', hoverHex: '#33f5ff' },   // electric cyan
-    { rgb: '188,255,0', hex: '#bcff00', hoverHex: '#caff33' },   // acid green
-    { rgb: '255,0,122', hex: '#ff007a', hoverHex: '#ff3395' },   // hot pink
-    { rgb: '255,107,0', hex: '#ff6b00', hoverHex: '#ff8933' },   // safety orange
-    { rgb: '188,0,255', hex: '#bc00ff', hoverHex: '#c933ff' },   // royal purple
-    { rgb: '255,234,0', hex: '#ffea00', hoverHex: '#ffee33' },   // cyber yellow
-    { rgb: '255,0,0', hex: '#ff0000', hoverHex: '#ff3333' },     // deep crimson
-    { rgb: '0,210,255', hex: '#00d2ff', hoverHex: '#33dbff' },   // ice blue
-    { rgb: '255,110,200', hex: '#ff6ec8', hoverHex: '#ff8bd3' }, // soft pink
-    { rgb: '100,255,180', hex: '#64ffb4', hoverHex: '#83ffc3' }, // mint
+  { rgb: '0,242,255', hex: '#00f2ff', hoverHex: '#33f5ff' },   // electric cyan
+  { rgb: '188,255,0', hex: '#bcff00', hoverHex: '#caff33' },   // acid green
+  { rgb: '255,0,122', hex: '#ff007a', hoverHex: '#ff3395' },   // hot pink
+  { rgb: '255,107,0', hex: '#ff6b00', hoverHex: '#ff8933' },   // safety orange
+  { rgb: '188,0,255', hex: '#bc00ff', hoverHex: '#c933ff' },   // royal purple
+  { rgb: '255,234,0', hex: '#ffea00', hoverHex: '#ffee33' },   // cyber yellow
+  { rgb: '255,0,0', hex: '#ff0000', hoverHex: '#ff3333' },     // deep crimson
+  { rgb: '0,210,255', hex: '#00d2ff', hoverHex: '#33dbff' },   // ice blue
+  { rgb: '255,110,200', hex: '#ff6ec8', hoverHex: '#ff8bd3' }, // soft pink
+  { rgb: '100,255,180', hex: '#64ffb4', hoverHex: '#83ffc3' }, // mint
 ];
 
 export const WORKS_INDEX: WorkItem[] = [
@@ -97,20 +97,13 @@ export const WORKS_INDEX: WorkItem[] = [
   },
   {
     id: 'w10',
-    title: 'PHANTOMVIEW',
-    description: 'Experience a Rolls-Royce in a fully interactive 3D environment. Customize car paint, interiors, and toggle doors and lighting with intuitive controls. Switch between studio, urban street, and snow-covered road scenes. Explore every angle and immerse yourself in luxury automotive design. An engaging tool that fuses visualization, interactivity, and high-end design.',
-    mediaUrl: '/projects/phantomview/assets/video/rr_interactive.mp4',
-    mediaType: 'video',
-    externalLink: '/projects/phantomview/index.html'
+    title: 'GHOSTVIEW',
+    description: 'Experience the Rolls-Royce Ghost in a fully interactive 3D environment. Customize car paint, interiors, and explore the pinnacle of automotive luxury with intuitive controls. Switch between studio, urban street, and scenic road scenes. Every surface is rendered with absolute fidelity for an immersive digital showroom experience.',
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/3fc8c5e8-84a2-466a-b9e6-0d022d51005e?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
+    externalLink: '/projects/rolls_royce/code.html'
   },
-  {
-    id: 'w11',
-    title: 'SUPRAVIEW',
-    description: 'An interactive 3D visualization of the Toyota Supra, designed for hands-on exploration. Users can switch exterior colors and materials in real time, seeing instant updates. View the car from multiple perspectives to examine every detail. Explore both a studio environment and a dynamic exterior scene. A sleek digital platform blending automotive design, interactivity, and visual realism.',
-    mediaUrl: 'https://images.unsplash.com/photo-1631557022789-9828d5d4d385?q=80&w=2070&auto=format&fit=crop',
-    mediaType: 'image',
-    externalLink: 'https://example.com/supraview'
-  },
+
   {
     id: 'w12',
     title: 'VASEMOTION',

@@ -335,6 +335,26 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                         ))}
                     </div>
                 </div>
+
+                {/* Direct Link to Rolls-Royce Experience */}
+                <div className="pt-4 border-t border-white/5">
+                    <motion.a
+                        href="/projects/rolls_royce/code.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-6 py-5 px-8 border border-[#68F2EB]/30 bg-[#68F2EB]/5 backdrop-blur-xl hover:border-[#68F2EB] hover:bg-[#68F2EB]/10 transition-all duration-500 rounded-2xl w-full md:w-fit"
+                        whileHover={{ scale: 1.02, x: 10 }}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        <div className="flex flex-col items-start gap-1">
+                            <span className="text-[10px] font-mono tracking-[0.4em] text-[#68F2EB] uppercase font-bold">Launch Full Project</span>
+                            <span className="text-xl md:text-2xl font-tech text-white uppercase tracking-wider">Ghost View</span>
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-[#68F2EB]/30 flex items-center justify-center group-hover:border-[#68F2EB] transition-colors">
+                            <span className="text-[#68F2EB] text-xl">→</span>
+                        </div>
+                    </motion.a>
+                </div>
             </motion.div>
 
             <motion.div
