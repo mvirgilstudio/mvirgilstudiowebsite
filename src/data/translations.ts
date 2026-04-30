@@ -14,7 +14,7 @@ export const TRANSLATIONS = {
             title: 'WORKS',
         },
         footer: {
-            copyright: 'MVFX Interactive Systems',
+            copyright: 'MV Interactive Systems',
             tagline: 'Designed for Performance & Precision',
         },
         sections: {
