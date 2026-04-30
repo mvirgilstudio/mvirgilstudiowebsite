@@ -752,31 +752,30 @@
 
             // Priority frame indices (distributed across the sequence)
             const getPriorityIndices = (count) => {
-                const indices = [0]; // First frame
-                if (count > 1) indices.push(count - 1); // Last frame
-                if (count > 2) indices.push(Math.floor(count / 2)); // Middle
+                const priority = [0]; // First frame
+                if (count > 1) priority.push(count - 1); // Last frame
+                if (count > 2) priority.push(Math.floor(count / 2)); // Middle
                 if (count > 4) {
-                    indices.push(Math.floor(count / 4));
-                    indices.push(Math.floor(3 * count / 4));
+                    priority.push(Math.floor(count / 4));
+                    priority.push(Math.floor(3 * count / 4));
                 }
                 // Add remaining frames in a distributed way
                 const remaining = [];
                 for (let i = 0; i < count; i++) {
-                    if (!indices.includes(i)) remaining.push(i);
+                    if (!priority.includes(i)) remaining.push(i);
                 }
-                return [...indices, ...remaining];
+                return { priority, remaining };
             };
 
             let essentialLoaded = false;
 
             const loadSequence = async (key, count, start, isPriority = false) => {
                 const path = sequences[key].path;
-                const indices = isPriority ? getPriorityIndices(count) : Array.from({length: count}, (_, i) => i);
+                const { priority, remaining } = getPriorityIndices(count);
                 const results = new Array(count).fill(null);
                 let loadedCount = 0;
 
-                // Fire all requests immediately; the browser's connection queue will optimize the fetching
-                const promises = indices.map(async (idx) => {
+                const fetchFrame = async (idx) => {
                     if (controller.aborted) return;
                     
                     const num = (start + idx).toString().padStart(4, '0');
@@ -791,12 +790,6 @@
                             const totalProgress = (loadedCount / count) * 100;
                             loaderBar.style.width = `${totalProgress}%`;
                             loaderText.innerText = `Loading ${Math.round(totalProgress)}%`;
-                            
-                            // Hide loader early once a few priority frames are loaded to allow instant interaction
-                            if (!essentialLoaded && loadedCount >= 4) {
-                                essentialLoaded = true;
-                                gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => { loader.style.display = 'none'; } });
-                            }
                         }
 
                         // Update view progressively
@@ -805,9 +798,26 @@
                             requestAnimationFrame(draw);
                         }
                     }
-                });
+                };
 
-                await Promise.all(promises);
+                if (isPriority) {
+                    // 1. Await essential priority frames FIRST so they monopolize bandwidth
+                    await Promise.all(priority.map(fetchFrame));
+                    
+                    if (controller.aborted) return;
+                    
+                    if (key === 'low' && !essentialLoaded) {
+                        essentialLoaded = true;
+                        gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => { loader.style.display = 'none'; } });
+                    }
+
+                    // 2. Fire the rest
+                    await Promise.all(remaining.map(fetchFrame));
+                } else {
+                    // Non-priority (mid/high res), just fire them all
+                    const allIndices = [...priority, ...remaining];
+                    await Promise.all(allIndices.map(fetchFrame));
+                }
                 
                 if (!controller.aborted) {
                     sequences[key].images = results;
