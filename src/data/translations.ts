@@ -237,7 +237,7 @@ export const TRANSLATIONS = {
             title: 'TRABALHOS',
         },
         footer: {
-            copyright: 'MVFX Sistemas Interativos',
+            copyright: 'MV Sistemas Interativos',
             tagline: 'Desenhado para Performance e Precisão',
         },
         sections: {
