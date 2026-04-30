@@ -751,7 +751,7 @@
             };
 
             // Priority frame indices (distributed across the sequence)
-            const getPriorityIndices = (count) => {
+            const getPriorityIndices = (count, key) => {
                 const priority = [0]; // First frame
                 if (count > 1) priority.push(count - 1); // Last frame
                 if (count > 2) priority.push(Math.floor(count / 2)); // Middle
@@ -761,7 +761,9 @@
                 }
                 // Add remaining frames in a distributed way
                 const remaining = [];
-                for (let i = 0; i < count; i++) {
+                // If it's the 'low' sequence, skip frames to massively reduce initial bandwidth
+                const step = key === 'low' ? 4 : 1;
+                for (let i = 0; i < count; i += step) {
                     if (!priority.includes(i)) remaining.push(i);
                 }
                 return { priority, remaining };
@@ -771,8 +773,9 @@
 
             const loadSequence = async (key, count, start, isPriority = false) => {
                 const path = sequences[key].path;
-                const { priority, remaining } = getPriorityIndices(count);
+                const { priority, remaining } = getPriorityIndices(count, key);
                 const results = new Array(count).fill(null);
+
                 let loadedCount = 0;
 
                 const fetchFrame = async (idx) => {
