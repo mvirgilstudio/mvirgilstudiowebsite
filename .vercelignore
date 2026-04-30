@@ -8,10 +8,7 @@ dist
 **/dist
 **/.cache
 *.log
-public/projects/**/*.mp4
-public/projects/**/*.mov
-public/projects/**/*.png
-public/projects/**/*.jpg
+
 
 
 
