@@ -125,7 +125,7 @@ const WorksIndex: React.FC<WorksIndexProps> = ({ isVisible, activeSectionId, lan
       <AnimatePresence>
         {isVisible && (
           <motion.button
-            className={`fixed bottom-8 right-8 z-[60] lg:hidden w-12 h-12 rounded-full flex items-center justify-center font-tech font-bold text-[10px] tracking-tighter shadow-lg ${isOpen ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}
+            className={`fixed bottom-12 right-8 z-[60] lg:hidden w-12 h-12 rounded-full flex items-center justify-center font-tech font-bold text-[10px] tracking-tighter shadow-lg ${isOpen ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
