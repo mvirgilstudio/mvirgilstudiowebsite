@@ -814,9 +814,16 @@
                     // 2. Fire the rest
                     await Promise.all(remaining.map(fetchFrame));
                 } else {
-                    // Non-priority (mid/high res), just fire them all
+                    // Non-priority (mid/high res), load slowly in small batches to prevent choking the network
                     const allIndices = [...priority, ...remaining];
-                    await Promise.all(allIndices.map(fetchFrame));
+                    const batchSize = 4;
+                    for (let i = 0; i < allIndices.length; i += batchSize) {
+                        if (controller.aborted) return;
+                        const chunk = allIndices.slice(i, i + batchSize);
+                        await Promise.all(chunk.map(fetchFrame));
+                        // Add a tiny delay to yield to the main thread and interaction
+                        await new Promise(r => setTimeout(r, 10));
+                    }
                 }
                 
                 if (!controller.aborted) {
@@ -826,11 +833,13 @@
             };
 
             // 1. Start loading LOW resolution progressively
-            loadSequence('low', frameCount, sequences.low.start, true).then(() => {
-                // 2. Load MID and HIGH in background if exterior, only after LOW finishes
+            loadSequence('low', frameCount, sequences.low.start, true).then(async () => {
+                // 2. Load MID and HIGH in background if exterior, sequentially to save bandwidth
                 if (isExt && !controller.aborted) {
-                    loadSequence('mid', 60, 1);
-                    loadSequence('high', 60, 1);
+                    await loadSequence('mid', 60, 1);
+                    if (!controller.aborted) {
+                        await loadSequence('high', 60, 1);
+                    }
                 } else if (!isExt && !controller.aborted) {
                     sequences.mid.images = [...sequences.low.images];
                     sequences.high.images = [...sequences.low.images];
