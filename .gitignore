@@ -25,3 +25,5 @@ dist-ssr
 
 # Large video files
 *interactive.mp4
+
+.vercel

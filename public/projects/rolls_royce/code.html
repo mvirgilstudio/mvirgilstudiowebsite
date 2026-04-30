@@ -229,7 +229,7 @@
             <!-- Controls Panel -->
             <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6 z-20">
                 <!-- Hint -->
-                <div class="flex flex-col items-center mb-10 opacity-60">
+                <div id="interaction-hint" class="flex flex-col items-center mb-10 opacity-60 transition-opacity duration-1000">
                     <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-white font-bold">
                         <span class="material-symbols-outlined text-[16px]">swipe</span>
                         <span id="hint-drag">Clique e Arraste para Rodar</span>
@@ -662,6 +662,9 @@
         let isAnimating = false;
         let activeLoadingController = null;
 
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderText = document.getElementById('loader-text');
+
         function updatePaths() {
             const isExt = viewMode === 'exterior';
             const basePath = isExt ? `sequences/${currentExterior}_${currentInterior}/` : `sequences/${currentExterior}_${currentInterior}_trans/`;
@@ -697,82 +700,129 @@
 
         async function loadImages() {
             // Cancel previous load attempt
-            if (activeLoadingController) activeLoadingController.abort = true;
-            const controller = { abort: false };
-            activeLoadingController = controller;
+            if (activeLoadingController) {
+                activeLoadingController.abort();
+            }
+            
+            activeLoadingController = {
+                aborted: false,
+                pendingImages: [],
+                abort() {
+                    this.aborted = true;
+                    // Reset src to cancel network request and free connections
+                    this.pendingImages.forEach(img => {
+                        if (!img.complete) img.src = '';
+                    });
+                    this.pendingImages = [];
+                }
+            };
+            const controller = activeLoadingController;
 
+            loader.style.display = 'flex';
             loader.style.opacity = '1';
             const isExt = viewMode === 'exterior';
             
-            // Clear current images to force reload (or we could keep them until new ones are ready)
-            // For now, let's just keep the old ones so the screen doesn't go black
-            const oldImages = {
-                low: [...sequences.low.images],
-                mid: [...sequences.mid.images],
-                high: [...sequences.high.images]
-            };
-
-            const loadSingleImage = (url) => {
-                return new Promise((resolve, reject) => {
+            // Function to load a single image via native Image object for maximum performance & caching
+            const fetchImage = (url) => {
+                return new Promise((resolve) => {
+                    if (controller.aborted) return resolve(null);
+                    
                     const img = new Image();
+                    img.decoding = "async"; // Offload decoding to background thread
+                    
+                    const cleanup = () => {
+                        const idx = controller.pendingImages.indexOf(img);
+                        if (idx > -1) controller.pendingImages.splice(idx, 1);
+                    };
+
+                    img.onload = () => {
+                        cleanup();
+                        resolve(img);
+                    };
+                    
+                    img.onerror = () => {
+                        cleanup();
+                        resolve(null);
+                    };
+                    
+                    controller.pendingImages.push(img);
                     img.src = url;
-                    img.onload = () => resolve(img);
-                    img.onerror = () => reject(new Error(`Failed to load ${url}`));
                 });
             };
 
-            const loadBatch = async (key, count, start) => {
-                const newImages = [];
-                const batchSize = 6; // Limit concurrent requests to avoid browser limits
-                
-                for (let i = 0; i < count; i += batchSize) {
-                    if (controller.abort) return null;
-                    
-                    const chunk = [];
-                    for (let j = 0; j < batchSize && (i + j) < count; j++) {
-                        const frameIdx = i + j;
-                        const num = (start + frameIdx).toString().padStart(4, '0');
-                        chunk.push(loadSingleImage(`${sequences[key].path}${num}.jpg`));
-                    }
-
-                    try {
-                        const results = await Promise.all(chunk);
-                        newImages.push(...results);
-                        
-                        // If this is the active sequence, update the view as we load
-                        if (key === activeSeqKey) {
-                            sequences[key].images = newImages;
-                            draw();
-                        }
-                    } catch (e) {
-                        console.warn(e.message);
-                    }
+            // Priority frame indices (distributed across the sequence)
+            const getPriorityIndices = (count) => {
+                const indices = [0]; // First frame
+                if (count > 1) indices.push(count - 1); // Last frame
+                if (count > 2) indices.push(Math.floor(count / 2)); // Middle
+                if (count > 4) {
+                    indices.push(Math.floor(count / 4));
+                    indices.push(Math.floor(3 * count / 4));
                 }
-                return newImages;
+                // Add remaining frames in a distributed way
+                const remaining = [];
+                for (let i = 0; i < count; i++) {
+                    if (!indices.includes(i)) remaining.push(i);
+                }
+                return [...indices, ...remaining];
             };
 
-            // 1. Load LOW resolution first (Priority)
-            const lowRes = await loadBatch('low', frameCount, sequences.low.start);
-            if (controller.abort || !lowRes) return;
-            sequences.low.images = lowRes;
-            draw();
+            const loadSequence = async (key, count, start, isPriority = false) => {
+                const path = sequences[key].path;
+                const indices = isPriority ? getPriorityIndices(count) : Array.from({length: count}, (_, i) => i);
+                const results = new Array(count).fill(null);
+                let loadedCount = 0;
+
+                const batchSize = 10; // Increased batch size for native loading
+                for (let i = 0; i < indices.length; i += batchSize) {
+                    if (controller.aborted) return;
+
+                    const chunk = indices.slice(i, i + batchSize);
+                    const promises = chunk.map(async (idx) => {
+                        const num = (start + idx).toString().padStart(4, '0');
+                        const img = await fetchImage(`${path}${num}.jpg`);
+                        if (img && !controller.aborted) {
+                            results[idx] = img;
+                            loadedCount++;
+                            
+                            // Update progress UI only for active sequence or low res
+                            const totalProgress = (loadedCount / count) * 100;
+                            if (key === 'low') {
+                                loaderBar.style.width = `${totalProgress}%`;
+                                loaderText.innerText = `Loading ${Math.round(totalProgress)}%`;
+                            }
+
+                            // If it's the active sequence, update the view as we load
+                            if (key === activeSeqKey) {
+                                sequences[key].images = [...results];
+                                requestAnimationFrame(draw);
+                            }
+                        }
+                    });
+
+                    await Promise.all(promises);
+                }
+                
+                if (!controller.aborted) {
+                    sequences[key].images = results;
+                    if (key === activeSeqKey) requestAnimationFrame(draw);
+                }
+            };
+
+            // 1. Load LOW resolution first with priority distribution
+            await loadSequence('low', frameCount, sequences.low.start, true);
+            if (controller.aborted) return;
+            
+            gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => { loader.style.display = 'none'; } });
 
             // 2. Load MID and HIGH in background if exterior
             if (isExt) {
-                loader.style.opacity = '0.5'; // Partial fade to show we are still caching HQ
-                const midRes = await loadBatch('mid', 60, 1);
-                if (controller.abort || !midRes) return;
-                sequences.mid.images = midRes;
-
-                const highRes = await loadBatch('high', 60, 1);
-                if (controller.abort || !highRes) return;
-                sequences.high.images = highRes;
+                loadSequence('mid', 60, 1);
+                loadSequence('high', 60, 1);
             } else {
-                sequences.mid.images = lowRes;
-                sequences.high.images = lowRes;
+                sequences.mid.images = [...sequences.low.images];
+                sequences.high.images = [...sequences.low.images];
             }
-
-            loader.style.opacity = '0';
         }
 
         function playToFrame(targetFrame, delay, callback) {
@@ -800,8 +850,49 @@
             if (idx < 0) idx = 0;
             if (idx >= seq.images.length) idx = seq.images.length - 1;
 
-            const img = seq.images[idx];
-            if (!img || !img.complete || img.naturalWidth === 0) return;
+            let img = seq.images[idx];
+            
+            // If the specific frame isn't loaded, find the nearest one in the same sequence
+            if (!img || !img.complete || img.naturalWidth === 0) {
+                let nearestIdx = -1;
+                let minDist = Infinity;
+                for (let i = 0; i < seq.images.length; i++) {
+                    if (seq.images[i] && seq.images[i].complete && seq.images[i].naturalWidth > 0) {
+                        const dist = Math.abs(i - idx);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            nearestIdx = i;
+                        }
+                    }
+                }
+                
+                if (nearestIdx !== -1) {
+                    img = seq.images[nearestIdx];
+                } else {
+                    // Fallback to low res if mid/high not available at all for this frame
+                    const lowSeq = sequences.low;
+                    if (activeSeqKey !== 'low' && lowSeq.images && lowSeq.images[idx]) {
+                        img = lowSeq.images[idx];
+                    } else if (activeSeqKey !== 'low' && lowSeq.images) {
+                        // Find nearest in low res as last resort
+                        let nearestLowIdx = -1;
+                        let minLowDist = Infinity;
+                        for (let i = 0; i < lowSeq.images.length; i++) {
+                            if (lowSeq.images[i] && lowSeq.images[i].complete) {
+                                const dist = Math.abs(i - idx);
+                                if (dist < minLowDist) {
+                                    minLowDist = dist;
+                                    nearestLowIdx = i;
+                                }
+                            }
+                        }
+                        if (nearestLowIdx !== -1) img = lowSeq.images[nearestLowIdx];
+                        else return;
+                    } else {
+                        return;
+                    }
+                }
+            }
 
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -829,6 +920,14 @@
 
         window.addEventListener('mousemove', e => {
             if (!isDragging || isAnimating) return;
+
+            // Fade out hint on first interaction
+            const hint = document.getElementById('interaction-hint');
+            if (hint && hint.style.opacity !== '0') {
+                hint.style.opacity = '0';
+                setTimeout(() => hint.style.display = 'none', 1000);
+            }
+
             const dx = e.pageX - startX;
             const dy = e.pageY - startY;
             
