@@ -767,41 +767,47 @@
                 return [...indices, ...remaining];
             };
 
+            let essentialLoaded = false;
+
             const loadSequence = async (key, count, start, isPriority = false) => {
                 const path = sequences[key].path;
                 const indices = isPriority ? getPriorityIndices(count) : Array.from({length: count}, (_, i) => i);
                 const results = new Array(count).fill(null);
                 let loadedCount = 0;
 
-                const batchSize = 10; // Increased batch size for native loading
-                for (let i = 0; i < indices.length; i += batchSize) {
+                // Fire all requests immediately; the browser's connection queue will optimize the fetching
+                const promises = indices.map(async (idx) => {
                     if (controller.aborted) return;
-
-                    const chunk = indices.slice(i, i + batchSize);
-                    const promises = chunk.map(async (idx) => {
-                        const num = (start + idx).toString().padStart(4, '0');
-                        const img = await fetchImage(`${path}${num}.jpg`);
-                        if (img && !controller.aborted) {
-                            results[idx] = img;
-                            loadedCount++;
-                            
-                            // Update progress UI only for active sequence or low res
+                    
+                    const num = (start + idx).toString().padStart(4, '0');
+                    const img = await fetchImage(`${path}${num}.jpg`);
+                    
+                    if (img && !controller.aborted) {
+                        results[idx] = img;
+                        loadedCount++;
+                        
+                        // Update progress UI
+                        if (key === 'low') {
                             const totalProgress = (loadedCount / count) * 100;
-                            if (key === 'low') {
-                                loaderBar.style.width = `${totalProgress}%`;
-                                loaderText.innerText = `Loading ${Math.round(totalProgress)}%`;
-                            }
-
-                            // If it's the active sequence, update the view as we load
-                            if (key === activeSeqKey) {
-                                sequences[key].images = [...results];
-                                requestAnimationFrame(draw);
+                            loaderBar.style.width = `${totalProgress}%`;
+                            loaderText.innerText = `Loading ${Math.round(totalProgress)}%`;
+                            
+                            // Hide loader early once a few priority frames are loaded to allow instant interaction
+                            if (!essentialLoaded && loadedCount >= 4) {
+                                essentialLoaded = true;
+                                gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => { loader.style.display = 'none'; } });
                             }
                         }
-                    });
 
-                    await Promise.all(promises);
-                }
+                        // Update view progressively
+                        if (key === activeSeqKey) {
+                            sequences[key].images = [...results];
+                            requestAnimationFrame(draw);
+                        }
+                    }
+                });
+
+                await Promise.all(promises);
                 
                 if (!controller.aborted) {
                     sequences[key].images = results;
@@ -809,20 +815,17 @@
                 }
             };
 
-            // 1. Load LOW resolution first with priority distribution
-            await loadSequence('low', frameCount, sequences.low.start, true);
-            if (controller.aborted) return;
-            
-            gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => { loader.style.display = 'none'; } });
-
-            // 2. Load MID and HIGH in background if exterior
-            if (isExt) {
-                loadSequence('mid', 60, 1);
-                loadSequence('high', 60, 1);
-            } else {
-                sequences.mid.images = [...sequences.low.images];
-                sequences.high.images = [...sequences.low.images];
-            }
+            // 1. Start loading LOW resolution progressively
+            loadSequence('low', frameCount, sequences.low.start, true).then(() => {
+                // 2. Load MID and HIGH in background if exterior, only after LOW finishes
+                if (isExt && !controller.aborted) {
+                    loadSequence('mid', 60, 1);
+                    loadSequence('high', 60, 1);
+                } else if (!isExt && !controller.aborted) {
+                    sequences.mid.images = [...sequences.low.images];
+                    sequences.high.images = [...sequences.low.images];
+                }
+            });
         }
 
         function playToFrame(targetFrame, delay, callback) {
