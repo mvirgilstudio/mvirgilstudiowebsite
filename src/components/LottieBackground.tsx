@@ -36,7 +36,7 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
 
                 const anim = lottie.loadAnimation({
                     container: containerRef.current,
-                    renderer: 'svg',
+                    renderer: 'canvas',
                     loop: progress === undefined,
                     autoplay: progress === undefined,
                     animationData: data,
@@ -88,7 +88,7 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
                 const targetFrame = Math.max(0, Math.min(prog * totalFrames, totalFrames - 0.01));
 
                 // Skip near-identical frames to avoid redundant repaints
-                if (Math.abs(targetFrame - lastFrameRef.current) < 0.5) {
+                if (Math.abs(targetFrame - lastFrameRef.current) < 0.1) {
                     return;
                 }
                 lastFrameRef.current = targetFrame;
