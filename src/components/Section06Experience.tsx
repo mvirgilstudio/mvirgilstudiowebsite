@@ -56,7 +56,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        
+
         const handleMouseMove = (e: MouseEvent) => {
             if (scrollProgress > 0.98) {
                 const x = (e.clientY / window.innerHeight - 0.5) * 0.5;
@@ -76,7 +76,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
         <div className="absolute inset-0 z-[10] flex items-center justify-center bg-black">
             {/* Lottie Fabrication Animation Layer */}
             <div className="absolute inset-0 z-[15] opacity-60">
-                <LottieBackground 
+                <LottieBackground
                     key={modelId}
                     url={`/assets/3d/s06/${modelId}.json`}
                     progress={scrollProgress}
@@ -86,7 +86,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
             </div>
 
             {/* 3D Scene Layer — transparent background */}
-            <div 
+            <div
                 className="absolute inset-0 w-full h-full z-[20]"
                 style={{ pointerEvents: 'auto', background: 'transparent' }}
             >

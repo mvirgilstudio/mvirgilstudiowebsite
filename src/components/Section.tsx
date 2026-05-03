@@ -263,15 +263,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   const [activeModelId, setActiveModelId] = useState('print01');
   const [s02Category, setS02Category] = useState<keyof typeof SECTION_02_VARIANTS>('bedroom');
   const [s02ActiveTexture, setS02ActiveTexture] = useState('/assets/images/bedroom_01.jpg');
-  const controlsRef = useRef<any>(null);
+  const [isBtnHovered, setIsBtnHovered] = useState(false);
 
   useEffect(() => {
     onExpandChange?.(isExpanded);
     if (isExpanded && data.id === 'section_06') {
       setScrollProgress(0);
-    } else {
-      // Stop animation if we exit
-      controlsRef.current?.stop();
     }
   }, [isExpanded, onExpandChange, data.id]);
 
@@ -281,7 +278,6 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   useEffect(() => {
     if (!isInView && isExpanded) {
       setIsExpanded(false);
-      controlsRef.current?.stop();
     }
   }, [isInView, isExpanded]);
 
@@ -290,15 +286,9 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
     if (!isExpanded || data.id !== 'section_06') return;
 
     const handleWheel = (e: WheelEvent) => {
-      // Stop any running auto-animation if user scrolls manually
-      if (controlsRef.current) {
-        controlsRef.current.stop();
-        controlsRef.current = null;
-      }
-
       // If we are in the experience, use wheel to scrub the lottie
       setScrollProgress(prev => {
-        const next = Math.min(Math.max(prev + (e.deltaY * 0.0012), 0), 1);
+        const next = Math.min(Math.max(prev + (e.deltaY * 0.0005), 0), 1);
         return next;
       });
 
@@ -1072,13 +1062,10 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                       setScrollProgress(0);
                     }}
                     onLottieLoaded={() => {
-                      controlsRef.current = animate(0, 0.95, {
+                      animate(0, 0.95, {
                         duration: 1.5,
                         ease: 'easeInOut',
                         onUpdate: (value) => setScrollProgress(value),
-                        onComplete: () => {
-                          controlsRef.current = null;
-                        }
                       });
                     }}
                   />
