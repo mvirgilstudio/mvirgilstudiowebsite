@@ -123,7 +123,7 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
                 setLoadProgress(85);
 
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { width: 640, height: 480, facingMode: 'user' },
+                    video: { width: 320, height: 240, facingMode: 'user' },
                     audio: false,
                 });
                 if (cancelled) { stream.getTracks().forEach(t => t.stop()); return; }

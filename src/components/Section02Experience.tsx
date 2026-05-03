@@ -47,17 +47,17 @@ const SECTION_02_VARIANTS = {
 };
 
 const ControlsHandler = ({ handPos, handTrackingActive }: { handPos: any; handTrackingActive: boolean }) => {
-    const { camera, gl } = useThree();
+    const { camera } = useThree();
     const lastPos = useRef<{ x: number; y: number } | null>(null);
-    const rotation = useRef({ x: camera.rotation.x, y: camera.rotation.y });
+    const targetRotation = useRef({ x: camera.rotation.x, y: camera.rotation.y });
 
     useEffect(() => {
         // Sync rotation on mount to avoid jumping
-        rotation.current.x = camera.rotation.x;
-        rotation.current.y = camera.rotation.y;
+        targetRotation.current.x = camera.rotation.x;
+        targetRotation.current.y = camera.rotation.y;
     }, [camera]);
 
-    useFrame(() => {
+    useFrame((state, delta) => {
         if (handTrackingActive && handPos && handPos.isPinching) {
             if (!lastPos.current) {
                 lastPos.current = { x: handPos.x, y: handPos.y };
@@ -65,9 +65,9 @@ const ControlsHandler = ({ handPos, handTrackingActive }: { handPos: any; handTr
                 const dx = handPos.x - lastPos.current.x;
                 const dy = handPos.y - lastPos.current.y;
 
-                // Optimized sensitivity for high-res panoramas
-                rotation.current.y -= dx * 3.5;
-                rotation.current.x = Math.max(-1.2, Math.min(1.2, rotation.current.x + dy * 2.8));
+                // Increased sensitivity, but smoothed out by lerp
+                targetRotation.current.y -= dx * 4.5;
+                targetRotation.current.x = Math.max(-1.2, Math.min(1.2, targetRotation.current.x + dy * 3.5));
 
                 lastPos.current = { x: handPos.x, y: handPos.y };
             }
@@ -76,8 +76,10 @@ const ControlsHandler = ({ handPos, handTrackingActive }: { handPos: any; handTr
         }
 
         camera.rotation.order = 'YXZ';
-        camera.rotation.y = rotation.current.y;
-        camera.rotation.x = rotation.current.x;
+        
+        // Smooth lerping to absorb low frame rates from mediapipe tracking
+        camera.rotation.y += (targetRotation.current.y - camera.rotation.y) * 12 * delta;
+        camera.rotation.x += (targetRotation.current.x - camera.rotation.x) * 12 * delta;
         camera.rotation.z = 0; // Prevent rolling
     });
 
@@ -205,21 +207,21 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
             </AnimatePresence>
 
             {/* Hand-Tracking Toggle & Instructions */}
-            <div className="absolute bottom-3 md:bottom-20 right-2 md:right-12 z-[3005] pointer-events-auto flex flex-col items-end gap-2 md:gap-6 w-auto max-w-xl px-4">
+            <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-[3005] pointer-events-auto flex flex-col items-center gap-3 md:gap-6 w-full max-w-2xl px-4">
                 {/* Mouse Instructions (Desktop only) */}
                 {!handTrackingActive && (
                     <motion.div
-                        initial={{ opacity: 0, x: 10 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{
                             opacity: 1,
-                            x: 0,
+                            y: 0,
                             filter: isButtonHovered ? 'blur(10px)' : 'blur(0px)'
                         }}
-                        className="flex justify-end w-full"
+                        className="flex justify-center w-full"
                     >
-                        <div className="bg-white/5 backdrop-blur-2xl border border-white/10 px-2 md:px-8 py-1 md:py-4 rounded-full flex items-center justify-center gap-1.5 md:gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                            <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white/40 animate-pulse flex-shrink-0" />
-                            <span className="text-[7px] md:text-xs font-mono tracking-[0.1em] md:tracking-[0.4em] uppercase text-white font-bold text-center">
+                        <div className="bg-white/5 backdrop-blur-2xl border border-white/10 px-4 md:px-8 py-2 md:py-4 rounded-full flex items-center justify-center gap-2 md:gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse flex-shrink-0" />
+                            <span className="text-[10px] md:text-xs font-mono tracking-[0.1em] md:tracking-[0.4em] uppercase text-white font-bold text-center">
                                 {sectionT.instructions.mouse}
                             </span>
                         </div>
@@ -229,10 +231,10 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                 <AnimatePresence>
                     {handTrackingActive && mediapipeStatus === 'ready' && (
                         <motion.div
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 10 }}
-                            className="flex flex-col items-end gap-3 md:gap-4 mb-2 md:mb-4 w-full"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="flex flex-col items-center gap-3 md:gap-4 mb-2 md:mb-4 w-full"
                         >
                             <div className="flex items-center gap-1.5 md:gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-2 md:px-8 py-1 md:py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-3 h-3 md:w-6 md:h-6 flex-shrink-0 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}>
@@ -250,14 +252,14 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     onClick={toggleHandTracking}
                     onMouseEnter={() => setIsButtonHovered(true)}
                     onMouseLeave={() => setIsButtonHovered(false)}
-                    className={`group relative flex items-center gap-1.5 md:gap-3 px-2 md:px-6 py-1.5 md:py-3 rounded-full border transition-all duration-500 cursor-pointer
+                    className={`group relative flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2.5 md:py-3 rounded-full border transition-all duration-500 cursor-pointer
                         ${handTrackingActive ? 'bg-[#5282be]/15 border-[#5282be]/60 shadow-[0_0_30px_rgba(82,130,190,0.3)]' : 'bg-black/80 border-[#5282be]/40 hover:border-white/30 hover:bg-white/5'}
                         backdrop-blur-md`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-3 h-3 md:w-5 md:h-5 flex-shrink-0 transition-all duration-300 ${handTrackingActive ? 'text-[#5282be] animate-pulse' : 'text-[#5282be] group-hover:text-white'}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-4 h-4 md:w-5 md:h-5 flex-shrink-0 transition-all duration-300 ${handTrackingActive ? 'text-[#5282be] animate-pulse' : 'text-[#5282be] group-hover:text-white'}`}>
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                     </svg>
-                    <span className={`text-[8px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#5282be]' : 'text-[#5282be] group-hover:text-white'}`}>
+                    <span className={`text-[9px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] transition-colors duration-300 ${handTrackingActive ? 'text-[#5282be]' : 'text-[#5282be] group-hover:text-white'}`}>
                         {handTrackingActive ? (lang === 'PT' ? 'Sair da Experiência' : 'Exit Experience') : (lang === 'PT' ? 'use a sua webcam e jogue com as mãos' : 'use your webcam and play with hands')}
                     </span>
                     {handTrackingActive && <span className="absolute inset-0 rounded-full border border-[#5282be]/40 animate-ping" />}
@@ -336,25 +338,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     </div>
                 </div>
 
-                {/* Direct Link to Rolls-Royce Experience */}
-                <div className="pt-4 border-t border-white/5">
-                    <motion.a
-                        href="/projects/rolls_royce/code.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-6 py-5 px-8 border border-[#68F2EB]/30 bg-[#68F2EB]/5 backdrop-blur-xl hover:border-[#68F2EB] hover:bg-[#68F2EB]/10 transition-all duration-500 rounded-2xl w-full md:w-fit"
-                        whileHover={{ scale: 1.02, x: 10 }}
-                        whileTap={{ scale: 0.98 }}
-                    >
-                        <div className="flex flex-col items-start gap-1">
-                            <span className="text-[10px] font-mono tracking-[0.4em] text-[#68F2EB] uppercase font-bold">Launch Full Project</span>
-                            <span className="text-xl md:text-2xl font-tech text-white uppercase tracking-wider">Ghost View</span>
-                        </div>
-                        <div className="w-10 h-10 rounded-full border border-[#68F2EB]/30 flex items-center justify-center group-hover:border-[#68F2EB] transition-colors">
-                            <span className="text-[#68F2EB] text-xl">→</span>
-                        </div>
-                    </motion.a>
-                </div>
+
             </motion.div>
 
             <motion.div
