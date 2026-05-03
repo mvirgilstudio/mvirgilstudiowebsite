@@ -20,8 +20,16 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
     // Ensure shadows are enabled on all models and set aluminum shader
     React.useMemo(() => {
         [pathNormal, triggerNormal, pathCyl, triggerCyl].forEach(s => {
+            const toRemove: THREE.Object3D[] = [];
             s.traverse((child) => {
                 if (child instanceof THREE.Mesh) {
+                    // Check if mesh should be removed (invisible bounds/colliders)
+                    const name = child.name.toLowerCase();
+                    if (name.includes('bound') || name.includes('collider') || name.includes('invisible') || !child.visible || (child.material && child.material.opacity === 0)) {
+                        toRemove.push(child);
+                        return;
+                    }
+
                     child.castShadow = true;
                     child.receiveShadow = true;
                     if (child.material instanceof THREE.Material) {
@@ -37,6 +45,7 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
                     }
                 }
             });
+            toRemove.forEach(obj => obj.removeFromParent());
         });
     }, [pathNormal, triggerNormal, pathCyl, triggerCyl]);
 
@@ -83,13 +92,21 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
 
     return (
         <group>
-            {/* The Solid Path - uses auto-trimesh for the pathScene */}
-            <RigidBody ref={rbRef} type="kinematicPosition" colliders="trimesh" restitution={0} friction={1}>
+            {/* The Solid Path - key forces trimesh rebuild on model swap */}
+            <RigidBody 
+                key={useCylinder ? 'path-cyl' : 'path-normal'}
+                ref={rbRef} 
+                type="kinematicPosition" 
+                colliders="trimesh" 
+                restitution={0} 
+                friction={1}
+            >
                 <primitive object={pathScene} />
             </RigidBody>
 
             {/* The Trigger Sensor - separate body rotated in sync */}
             <RigidBody
+                key={useCylinder ? 'sensor-cyl' : 'sensor-normal'}
                 ref={rbSensorRef}
                 type="kinematicPosition"
                 colliders={false}
@@ -99,7 +116,9 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
                     }
                 }}
             >
-                <primitive object={triggerScene} visible={false} />
+                <MeshCollider type="trimesh" sensor>
+                    <primitive object={triggerScene} visible={false} />
+                </MeshCollider>
                 {sensorInfo && (
                     <>
                         <CuboidCollider
@@ -111,11 +130,11 @@ const Model = ({ rotation, onWinTrigger, useCylinder = false }: { rotation: THRE
                         <Float speed={10} rotationIntensity={0.1} floatIntensity={4}>
                             <mesh position={[sensorInfo.position[0], sensorInfo.position[1] + 1.2, sensorInfo.position[2]]} rotation={[Math.PI, 0, 0]}>
                                 <coneGeometry args={[0.3, 0.6, 4]} />
-                                <meshStandardMaterial 
-                                    color="#4ade80" 
-                                    emissive="#4ade80" 
-                                    emissiveIntensity={4} 
-                                    transparent 
+                                <meshStandardMaterial
+                                    color="#4ade80"
+                                    emissive="#4ade80"
+                                    emissiveIntensity={4}
+                                    transparent
                                     opacity={0.9}
                                 />
                             </mesh>
@@ -139,6 +158,7 @@ const FallingBall = ({ onRemove, position, color }: { onRemove: () => void; posi
     // Trigger removal if ball falls too low
     useFrame(() => {
         if (rbRef.current) {
+            rbRef.current.wakeUp(); // Force wake up to prevent mid-air floating if kinematic platform moves
             const pos = rbRef.current.translation();
             if (pos.y < -6) {
                 onRemove();
@@ -154,13 +174,14 @@ const FallingBall = ({ onRemove, position, color }: { onRemove: () => void; posi
             position={position}
             friction={1}
             mass={10}
-            linearDamping={0.5}
-            angularDamping={0.5}
+            linearDamping={0.1}
+            angularDamping={0.1}
             ccd={true}
+            canSleep={false}
         >
-            <BallCollider args={[0.3]} restitution={0} friction={1} />
+            <BallCollider args={[0.28]} restitution={0} friction={1} />
             <mesh castShadow>
-                <sphereGeometry args={[0.3, 32, 32]} />
+                <sphereGeometry args={[0.28, 32, 32]} />
                 <meshStandardMaterial color={color} roughness={0.1} metalness={0.8} emissive={color} emissiveIntensity={0.2} />
             </mesh>
         </RigidBody>
@@ -418,12 +439,12 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
         if (p1) {
             box.setFromObject(p1);
             box.getCenter(center);
-            points.push([center.x, center.y, center.z]);
+            points.push([center.x, center.y + 8.0, center.z]);
         }
         if (p2) {
             box.setFromObject(p2);
             box.getCenter(center);
-            points.push([center.x, center.y, center.z]);
+            points.push([center.x, center.y + 8.0, center.z]);
         }
 
         // Fallback if objects not found
@@ -464,59 +485,59 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
 
     return (
         <div className="absolute inset-0 z-[2500] pointer-events-none">
-        <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
-            <Canvas
-                shadows
-                camera={{ position: [0, 2, 5], fov: 45 }}
-                gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
-                dpr={[1, 1.5]}
-            >
-                <Suspense fallback={null}>
-                    <color attach="background" args={['#040404']} />
-                    <fog attach="fog" args={['#040404', 10, 50]} />
-                    <PerspectiveCamera makeDefault position={[0, 15, 22]} fov={35} />
+            <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+                <Canvas
+                    shadows
+                    camera={{ position: [0, 2, 5], fov: 45 }}
+                    gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
+                    dpr={[1, 1.5]}
+                >
+                    <Suspense fallback={null}>
+                        <color attach="background" args={['#040404']} />
+                        <fog attach="fog" args={['#040404', 10, 50]} />
+                        <PerspectiveCamera makeDefault position={[0, 15, 22]} fov={35} />
 
-                    <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} intensity={2} castshadow />
-                    <pointLight position={[-10, -10, -10]} intensity={1} color="#4488ff" />
-                    <pointLight position={[10, 5, -5]} intensity={0.5} color="#ff8844" />
+                        <ambientLight intensity={0.5} />
+                        <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} intensity={2} castshadow />
+                        <pointLight position={[-10, -10, -10]} intensity={1} color="#4488ff" />
+                        <pointLight position={[10, 5, -5]} intensity={0.5} color="#ff8844" />
 
-                    <Physics
-                        debug={false}
-                        gravity={[0, -9.81, 0]}
-                    >
-                        <Model rotation={modelRotation} onWinTrigger={handleWin} useCylinder={useCylinder} />
-                        {!isRespawning && (
-                            <FallingBall onRemove={handleBallRemove} position={currentSpawnPoint} color={ballColor} />
+                        <Physics
+                            debug={false}
+                            gravity={[0, -9.81, 0]}
+                        >
+                            <Model rotation={modelRotation} onWinTrigger={handleWin} useCylinder={useCylinder} />
+                            {!isRespawning && (
+                                <FallingBall key={ballKey} onRemove={handleBallRemove} position={currentSpawnPoint} color={ballColor} />
+                            )}
+
+                        </Physics>
+
+                        <ControlOverlay onRotationChange={setModelRotation} />
+
+                        {!isMobile && (
+                            <ContactShadows
+                                position={[0, -4.9, 0]}
+                                opacity={0.4}
+                                scale={30}
+                                blur={2.5}
+                                far={10}
+                            />
                         )}
 
-                    </Physics>
+                        <Environment preset="city" />
 
-                    <ControlOverlay onRotationChange={setModelRotation} />
+                        <BackgroundPlanes />
 
-                    {!isMobile && (
-                        <ContactShadows
-                            position={[0, -4.9, 0]}
-                            opacity={0.4}
-                            scale={30}
-                            blur={2.5}
-                            far={10}
+                        <OrbitControls
+                            enableRotate={false} // Disable camera rotation to allow model rotation
+                            enableZoom={false}
+                            enablePan={true}
+                            makeDefault
                         />
-                    )}
-
-                    <Environment preset="city" />
-
-                    <BackgroundPlanes />
-
-                    <OrbitControls
-                        enableRotate={false} // Disable camera rotation to allow model rotation
-                        enableZoom={false}
-                        enablePan={true}
-                        makeDefault
-                    />
-                </Suspense>
-            </Canvas>
-        </div>
+                    </Suspense>
+                </Canvas>
+            </div>
 
 
             {/* Gameplay Instructions */}
@@ -525,7 +546,7 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                     <div className="bg-black/60 backdrop-blur-2xl border border-white/10 rounded-xl px-6 py-6 flex flex-col gap-5 relative overflow-hidden group shadow-2xl">
                         {/* Dynamic Accent Border */}
                         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#4ade80] via-[#4488ff] to-[#ff8844]" />
-                        
+
                         {/* Title */}
                         <div className="flex items-center gap-3">
                             <div className="w-2.5 h-2.5 rounded-full bg-[#4ade80] animate-pulse shadow-[0_0_10px_#4ade80]" />
@@ -565,15 +586,15 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-[9999]">
                     {/* Full-screen flash */}
                     <div className="absolute inset-0 bg-white/5 animate-pulse" />
-                    
+
                     {/* Radial glow behind text */}
                     <div className="absolute w-[600px] h-[600px] rounded-full bg-gradient-radial from-white/10 via-transparent to-transparent blur-3xl animate-ping opacity-30" />
-                    
+
                     {/* Main banner */}
                     <div className="relative flex flex-col items-center gap-6">
                         {/* Decorative line top */}
                         <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-                        
+
                         {/* Main text */}
                         <div className="flex flex-col items-center gap-2">
                             <span className="text-[10px] md:text-xs font-mono tracking-[0.6em] text-white/40 uppercase pl-[0.6em]">
@@ -583,10 +604,10 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                                 {t.game.youWon}
                             </h2>
                         </div>
-                        
+
                         {/* Decorative line bottom */}
                         <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-                        
+
                         {/* Subtitle */}
                         <span className="text-[9px] font-mono tracking-[0.4em] text-white/30 uppercase pl-[0.4em]">
                             {t.game.switching}
