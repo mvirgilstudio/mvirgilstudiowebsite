@@ -166,22 +166,22 @@
                             <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                         </g>
                     </svg>
-                    <span class="text-[10px] sm:text-sm md:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block">MIGUEL VIRGÍLIO</span>
+                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO</span>
                 </div>
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex gap-8 pointer-events-auto items-center">
+            <div class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
                 <a href="#instrumento" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    EXPERTISE
+                    <span data-t="nav.expertise">EXPERTISE</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#experiencia" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    ABOUT
+                    <span data-t="nav.about">ABOUT</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    CONTACT
+                    <span data-t="nav.contact">CONTACT</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
 
@@ -193,7 +193,7 @@
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <div class="md:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" onclick="toggleMenu()">
+            <div class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" onclick="toggleMenu()">
                 <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">
                     MENU
                 </div>
@@ -210,15 +210,15 @@
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                EXPERTISE
+                <span data-t="nav.expertise">EXPERTISE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
-                ABOUT
+                <span data-t="nav.about">ABOUT</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
-                CONTACT
+                <span data-t="nav.contact">CONTACT</span>
             </div>
 
             <div class="mt-12 pt-12 border-t border-white/10 flex justify-between items-center">
@@ -548,9 +548,9 @@
 
         const TRANSLATIONS = {
             PT: {
-                "nav.expertise": "EXPERTISE",
-                "nav.about": "ABOUT",
-                "nav.contact": "CONTACT",
+                "nav.expertise": "ESPECIALIDADE",
+                "nav.about": "SOBRE",
+                "nav.contact": "CONTACTO",
                 "hero.label": "The Electric Underground",
                 "hero.title": "O TEU PALCO <br /><span class=\"text-secondary hover:text-[#ff9473] transition-colors duration-500\">É UM CARTAZ.</span>",
                 "hero.desc": "Vê o design. Toca na arte. Ouve o Rock. <br class=\"hidden md:block\" /> O primeiro poster interativo que podes tocar como uma guitarra.",

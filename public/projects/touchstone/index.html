@@ -147,11 +147,11 @@
                     </g>
                 </svg>
                 <span
-                    class="text-[10px] sm:text-sm md:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase">MIGUEL
+                    class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase whitespace-nowrap flex-shrink-0">MIGUEL
                     VIRGÍLIO</span>
             </a>
 
-            <div class="hidden md:flex gap-8 items-center">
+            <div class="hidden lg:flex gap-6 xl:gap-8 items-center">
                 <a href="/#expertise"
                     class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
                     EXPERTISE
@@ -176,7 +176,7 @@
                 </span>
             </div>
 
-            <div class="md:hidden flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
+            <div class="lg:hidden flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
                 <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">MENU</div>
                 <div class="relative w-6 h-4 group">
                     <span id="line1" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
@@ -188,7 +188,7 @@
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 md:hidden pointer-events-none">
+    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
@@ -596,7 +596,7 @@
 
         function toggleLang() {
             currentLang = currentLang === 'EN' ? 'PT' : 'EN';
-            const langToggle = document.querySelector('.md\\:flex span.text-center');
+            const langToggle = document.querySelector('.lg\\:flex span.text-center');
             const langPt = document.getElementById('lang-pt');
             const langEn = document.getElementById('lang-en');
 

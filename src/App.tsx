@@ -85,12 +85,12 @@ const App: React.FC = () => {
                   <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                 </g>
               </motion.svg>
-              <span className="text-[10px] sm:text-sm md:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+              <span className="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8 pointer-events-auto items-center">
+          <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
             {[
               { label: t.nav.expertise, key: 'expertise' },
               { label: t.nav.about, key: 'about' },
@@ -123,7 +123,7 @@ const App: React.FC = () => {
 
           {/* Mobile Menu Toggle */}
           <div
-            className="md:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto"
+            className="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div className="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">
@@ -146,7 +146,7 @@ const App: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 md:hidden"
+            className="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden"
           >
             <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
               {[
