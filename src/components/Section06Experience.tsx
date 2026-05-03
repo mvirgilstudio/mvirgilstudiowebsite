@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
+import LottieBackground from './LottieBackground';
 
 const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress: number, mouseRotation: THREE.Euler }) => {
     const { scene } = useGLTF(`/assets/3d/s06/${modelId}.gltf`);
@@ -47,7 +48,7 @@ interface Section06ExperienceProps {
     onLottieLoaded?: () => void;
 }
 
-const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange }) => {
+const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded }) => {
     const [mouseRotation, setMouseRotation] = useState(new THREE.Euler(0, 0, 0));
     const [isMobile, setIsMobile] = useState(false);
 
@@ -72,7 +73,18 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
     }, [scrollProgress]);
 
     return (
-        <div className="absolute inset-0 z-[10] flex items-center justify-center">
+        <div className="absolute inset-0 z-[10] flex items-center justify-center bg-black">
+            {/* Lottie Fabrication Animation Layer */}
+            <div className="absolute inset-0 z-[15] opacity-60">
+                <LottieBackground 
+                    key={modelId}
+                    url={`/assets/3d/s06/${modelId}.json`}
+                    progress={scrollProgress}
+                    onLoaded={onLottieLoaded}
+                    opacity={0.8}
+                />
+            </div>
+
             {/* 3D Scene Layer — transparent background */}
             <div 
                 className="absolute inset-0 w-full h-full z-[20]"
@@ -84,13 +96,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                     dpr={isMobile ? [1, 1] : [1, 1.5]}
                     camera={{ position: [0, 0, 25], fov: 30 }}
                 >
-                    <Suspense fallback={
-                        <Html center>
-                            <div className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-mono whitespace-nowrap">
-                                Fabricating Model...
-                            </div>
-                        </Html>
-                    }>
+                    <Suspense fallback={null}>
                         <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={30} />
 
                         <ambientLight intensity={0.6} />
@@ -176,34 +182,6 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                         </div>
                     ))}
                 </div>
-
-                <motion.a
-                    href="/projects/vasemotion/index.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 group flex items-center gap-3 py-3 px-5 border border-white/5 bg-white/2 backdrop-blur-md hover:border-white/40 transition-all duration-500 w-fit rounded-lg"
-                    whileHover={{ x: 10 }}
-                >
-                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    <span className="text-[9px] font-mono tracking-[0.2em] text-white/60 group-hover:text-white transition-colors uppercase">
-                        Lab Archives
-                    </span>
-                    <span className="text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all text-xs">→</span>
-                </motion.a>
-
-                <motion.a
-                    href="/projects/rolls_royce/code.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 group flex items-center gap-3 py-3 px-5 border border-purple-500/10 bg-purple-500/5 backdrop-blur-md hover:border-purple-500/40 transition-all duration-500 w-fit rounded-lg"
-                    whileHover={{ x: 10 }}
-                >
-                    <div className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-                    <span className="text-[9px] font-mono tracking-[0.2em] text-purple-400 group-hover:text-purple-300 transition-colors uppercase">
-                        Ghost Configurator
-                    </span>
-                    <span className="text-purple-400/60 group-hover:text-purple-300 group-hover:translate-x-1 transition-all text-xs">→</span>
-                </motion.a>
             </div>
         </div>
     );
