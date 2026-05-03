@@ -815,7 +815,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                     className="w-14 h-14 md:w-20 md:h-20 object-contain relative z-10 animate-pulse group-hover:animate-none group-hover:scale-110 transition-all duration-300 filter drop-shadow-[0_0_15px_rgba(104,242,235,0.4)]"
                   />
                 </div>
-                <p className="text-sm md:text-base font-mono tracking-widest text-white/40 uppercase animate-pulse text-center max-w-md whitespace-nowrap">
+                <p className="text-[10px] sm:text-xs md:text-sm font-mono tracking-widest text-white/40 uppercase animate-pulse text-center w-full max-w-[90vw] md:max-w-2xl whitespace-normal leading-relaxed">
                   {sectionT.instructions?.mouse || "Move cursor to attract • Hover button to form shapes"}
                 </p>
               </motion.div>
@@ -829,7 +829,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                   exit={{ opacity: 0, y: -10 }}
                   className="flex flex-col items-center gap-4"
                 >
-                  <div className="flex items-center gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                  <div className="flex flex-col md:flex-row items-center gap-3 md:gap-5 bg-white/5 backdrop-blur-2xl border border-white/10 px-6 py-3 md:px-8 md:py-4 rounded-2xl md:rounded-full shadow-[0_0_50px_rgba(0,0,0,0.5)] text-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -838,14 +838,14 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`w-6 h-6 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}
+                      className={`w-5 h-5 md:w-6 md:h-6 ${handDetected ? 'animate-pulse' : 'text-white/40'}`}
                     >
                       <path d="M18 11V6a2 2 0 0 0-4 0v5" />
                       <path d="M14 10V4a2 2 0 0 0-4 0v6" />
                       <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
                       <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                     </svg>
-                    <span className="text-[11px] md:text-xs font-mono tracking-[0.4em] uppercase text-white font-bold whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[11px] md:text-xs font-mono tracking-[0.2em] md:tracking-[0.4em] uppercase text-white font-bold max-w-[85vw] md:max-w-lg whitespace-normal leading-relaxed">
                       {handDetected
                         ? (lang === 'EN' ? 'Sculpt with your palm • Pinch to morph' : 'Esculpir com a palma • Aperte para transformar')
                         : (lang === 'EN' ? 'Setup Complete • Show hand to track' : 'Configuração Concluída • Mostre a mão')}
@@ -881,7 +881,7 @@ const Section01Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
               <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
             </svg>
 
-            <span className={`text-xs uppercase font-mono tracking-[0.2em] transition-colors duration-300 whitespace-nowrap ${handTrackingActive ? 'text-[#b48c50]' : 'text-[#b48c50] group-hover:text-white'
+            <span className={`text-[10px] sm:text-[11px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] transition-colors duration-300 text-center whitespace-normal leading-relaxed max-w-[70vw] md:max-w-md ${handTrackingActive ? 'text-[#b48c50]' : 'text-[#b48c50] group-hover:text-white'
               }`}>
               {handTrackingActive ? t.ui.exitExperience : (lang === 'EN' ? 'use your webcam and play with hands' : 'use a sua webcam e jogue com as mãos')}
             </span>
