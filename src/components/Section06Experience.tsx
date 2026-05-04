@@ -1,11 +1,11 @@
-import React, { Suspense, useMemo, useState, useEffect } from 'react';
+import React, { Suspense, useMemo, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html, OrbitControls } from '@react-three/drei';
+import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import LottieBackground from './LottieBackground';
 
-const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress: number, mouseRotation: THREE.Euler }) => {
+const Model = ({ modelId, progress, rotationX, rotationY }: { modelId: string, progress: number, rotationX: number, rotationY: number }) => {
     const { scene } = useGLTF(`/assets/3d/s06/${modelId}.gltf`);
 
     // Ensure shadows and materials
@@ -33,9 +33,9 @@ const Model = ({ modelId, progress, mouseRotation }: { modelId: string, progress
             object={scene}
             scale={scale}
             rotation={[
-                isComplete ? mouseRotation.x : 0,
-                isComplete ? mouseRotation.y : Math.PI * progress * 0.5,
-                isComplete ? mouseRotation.z : 0
+                isComplete ? rotationX : 0,
+                isComplete ? rotationY : Math.PI * progress * 0.5,
+                0
             ]}
         />
     );
@@ -49,25 +49,49 @@ interface Section06ExperienceProps {
 }
 
 const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded }) => {
-    const [mouseRotation, setMouseRotation] = useState(new THREE.Euler(0, 0, 0));
     const [isMobile, setIsMobile] = useState(false);
+    const [rotationX, setRotationX] = useState(0);
+    const [rotationY, setRotationY] = useState(0);
+    const isMouseDownRef = useRef(false);
+    const lastMouseXRef = useRef(0);
+    const lastMouseYRef = useRef(0);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener('resize', checkMobile);
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMouseDown = (e: MouseEvent) => {
             if (scrollProgress > 0.98) {
-                const x = (e.clientY / window.innerHeight - 0.5) * 0.5;
-                const y = (e.clientX / window.innerWidth - 0.5) * 0.5;
-                setMouseRotation(new THREE.Euler(x, y, 0));
+                isMouseDownRef.current = true;
+                lastMouseXRef.current = e.clientX;
+                lastMouseYRef.current = e.clientY;
             }
         };
 
+        const handleMouseUp = () => {
+            isMouseDownRef.current = false;
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            if (isMouseDownRef.current && scrollProgress > 0.98) {
+                const deltaX = e.clientX - lastMouseXRef.current;
+                const deltaY = e.clientY - lastMouseYRef.current;
+                lastMouseXRef.current = e.clientX;
+                lastMouseYRef.current = e.clientY;
+                setRotationY((prev) => prev + deltaX * 0.01);
+                setRotationX((prev) => prev + deltaY * 0.01);
+            }
+        };
+
+        window.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mouseup', handleMouseUp);
         window.addEventListener('mousemove', handleMouseMove);
+
         return () => {
             window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mouseup', handleMouseUp);
             window.removeEventListener('mousemove', handleMouseMove);
         };
     }, [scrollProgress]);
@@ -105,7 +129,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
 
                         <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
                             <Center position={[-4, -1.5, 8]}>
-                                <Model modelId={modelId} progress={scrollProgress} mouseRotation={mouseRotation} />
+                                <Model modelId={modelId} progress={scrollProgress} rotationX={rotationX} rotationY={rotationY} />
                             </Center>
                         </Float>
 
@@ -132,7 +156,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                         >
                             <div className="w-2 h-2 rounded-full bg-purple-500 animate-ping" />
                             <span className="text-xs font-mono tracking-widest text-white uppercase font-bold bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
-                                Click & Drag to Inspect
+                                Click &amp; Drag to Inspect
                             </span>
                         </motion.div>
                     ) : (
