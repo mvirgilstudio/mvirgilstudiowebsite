@@ -111,10 +111,10 @@ const WorkModal: React.FC<WorkModalProps> = ({ work, onClose, lang, activeSectio
                         activeWork.mediaType === 'iframe' ? (
                             <iframe
                                 src={activeWork.mediaUrl}
-                                className={activeWork.id === 'w8' 
+                                className={(activeWork.id === 'w8' || activeWork.id === 'w2')
                                     ? "absolute top-0 left-1/2 -translate-x-1/2 h-full aspect-[16/9] border-0 pointer-events-none"
                                     : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-0 pointer-events-none"}
-                                style={activeWork.id === 'w8' ? { zIndex: 30 } : {
+                                style={(activeWork.id === 'w8' || activeWork.id === 'w2') ? { zIndex: 30 } : {
                                     transform: 'scale(1.8)',
                                     transformOrigin: 'center',
                                     zIndex: 30
