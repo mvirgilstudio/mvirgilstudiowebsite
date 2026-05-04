@@ -36,7 +36,7 @@ const LottieBackground: React.FC<LottieBackgroundProps> = ({ url, className, opa
 
                 const anim = lottie.loadAnimation({
                     container: containerRef.current,
-                    renderer: 'svg',
+                    renderer: 'canvas',
                     loop: progress === undefined,
                     autoplay: progress === undefined,
                     animationData: data,
