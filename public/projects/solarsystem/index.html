@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Michroma&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Michroma&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;700&family=Sora:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <!-- Components & Icons -->
     <link
@@ -49,7 +49,6 @@
                         michroma: ['Michroma', 'sans-serif'],
                         jakarta: ['Plus Jakarta Sans', 'sans-serif'],
                         "display": ["Sora", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
                         "orbitron": ["Orbitron", "sans-serif"],
                         "tech": ["Oswald", "sans-serif"]
                     },
@@ -65,15 +64,20 @@
     <style>
         /* Navbar entry animation */
         @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
         }
-        
+
         .animate-slide-down {
             animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
             animation-delay: 0.5s;
         }
-        
+
         header {
             transform: translateY(-100%);
         }
@@ -100,71 +104,102 @@
             <div class="w-full bg-white/5 h-[0.5px]"></div>
             <div class="flex items-center gap-2">
                 <div class="w-1 h-1 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
-                <span class="text-[9px] font-michroma text-nebula-cyan tracking-widest" data-t="hud.status">LINK STABLE</span>
+                <span class="text-[9px] font-michroma text-nebula-cyan tracking-widest" data-t="hud.status">LINK
+                    STABLE</span>
             </div>
         </div>
     </div>
 
     <!-- Main Portfolio Integration Navbar -->
-    <header class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down" id="main-header">
+    <header
+        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down"
+        id="main-header">
         <div class="flex justify-between items-center w-full">
-            <div class="cursor-pointer pointer-events-auto group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+            <div class="cursor-pointer pointer-events-auto group"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
-                            <path d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
-                            <path d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
-                            <path d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
-                            <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
+                            <path
+                                d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
+                            <path
+                                d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
+                            <path
+                                d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
+                            <path
+                                d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                         </g>
                     </svg>
-                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+                    <span
+                        class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL
+                        VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
                 </div>
             </div>
 
             <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
-                <a href="/#expertise" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.expertise">
+                <a href="/#expertise"
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.expertise">
                     ESPECIALIDADE
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/#about" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.about">
+                <a href="/#about"
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.about">
                     SOBRE
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.contact">
+                <a href="/#contact"
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.contact">
                     CONTACTO
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
 
-                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLang()">
+                <span
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
+                    onclick="toggleLang()">
                     PT
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
             </nav>
 
-            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn" onclick="toggleMenu()">
-                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text" data-t="nav.menu">Menu</span>
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn"
+                onclick="toggleMenu()">
+                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text"
+                    data-t="nav.menu">Menu</span>
                 <div class="relative w-6 h-4 group cursor-pointer">
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0" id="hamburger-top"></span>
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2" id="hamburger-mid"></span>
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4" id="hamburger-bottom"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"
+                        id="hamburger-top"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2"
+                        id="hamburger-mid"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"
+                        id="hamburger-bottom"></span>
                 </div>
             </button>
         </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
+    <div id="mobile-menu"
+        class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
                 <span data-t="nav.expertise">ESPECIALIDADE</span>
             </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 <span data-t="nav.about">SOBRE</span>
             </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
                 <span data-t="nav.contact">CONTACTO</span>
             </div>
@@ -173,7 +208,8 @@
             <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
                 <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
                 <span class="text-white/20">/</span>
-                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile" onclick="toggleLang()">EN</span>
+                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile"
+                    onclick="toggleLang()">EN</span>
             </div>
         </div>
     </div>
@@ -189,7 +225,11 @@
             <!-- Hero Background Visual -->
             <div class="absolute inset-0 z-0 scale-110" id="hero-img-container">
                 <!-- Using the generated high-impact Saturn image -->
-                <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/526466f4-03ff-496e-9dc1-a38a60fc2091?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                <div style="position:relative;padding-top:56.25%;"><iframe
+                        src="https://player.mediadelivery.net/embed/625906/526466f4-03ff-496e-9dc1-a38a60fc2091?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                        allowfullscreen="true"></iframe></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-deep-space via-transparent to-deep-space/20"></div>
                 <!-- Deep background for "Tonal Layering" -->
                 <div class="absolute inset-0 bg-[#05070A]/40 backdrop-blur-[2px]"></div>
@@ -206,20 +246,23 @@
                     <div class="h-[0.5px] w-24 bg-nebula-cyan/40"></div>
                 </div>
 
-                <h1 class="font-michroma text-6xl lg:text-8xl leading-[1.1] tracking-tight mb-8 reveal-up" data-t="hero.h1">
+                <h1 class="font-michroma text-6xl lg:text-8xl leading-[1.1] tracking-tight mb-8 reveal-up"
+                    data-t="hero.h1">
                     The Galaxy,<br />
                     <span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-nebula-cyan to-[#e1fdff] opacity-90">Within
                         Reach.</span>
                 </h1>
 
-                <p class="text-xl lg:text-2xl text-white/60 font-light max-w-2xl mb-12 leading-relaxed reveal-up" data-t="hero.p">
+                <p class="text-xl lg:text-2xl text-white/60 font-light max-w-2xl mb-12 leading-relaxed reveal-up"
+                    data-t="hero.p">
                     Experience Orbitarium - gesture-controlled 3D solar system. Touch the stars without a screen.
                 </p>
 
                 <div class="flex items-center gap-8 reveal-up">
                     <button id="launch-btn"
-                        class="btn-primary font-michroma text-[11px] uppercase tracking-widest px-12 py-5 rounded-none" data-t="hero.launch">
+                        class="btn-primary font-michroma text-[11px] uppercase tracking-widest px-12 py-5 rounded-none"
+                        data-t="hero.launch">
                         Launch Simulation
                     </button>
                     <button id="watch-demo-btn"
@@ -255,7 +298,8 @@
                         </div>
                         <span class="material-symbols-outlined text-nebula-cyan text-4xl mb-6">front_hand</span>
                         <h3 class="font-michroma text-xl mb-4 tracking-widest" data-t="feat1.h3">Hand Control</h3>
-                        <p class="text-white/40 font-light text-lg max-w-md" data-t="feat1.p">Manipulate planetary bodies with natural
+                        <p class="text-white/40 font-light text-lg max-w-md" data-t="feat1.p">Manipulate planetary
+                            bodies with natural
                             hand movements in 3D space. No controllers, no gloves—just physical gravity at your
                             fingertips.</p>
 
@@ -266,21 +310,29 @@
                     <div class="md:col-span-4 bento-card p-10 bg-white/5 border-none">
                         <span class="material-symbols-outlined text-solar-gold text-4xl mb-6">biotech</span>
                         <h3 class="font-michroma text-xl mb-4 tracking-widest" data-t="feat2.h3">Interactive Orrery</h3>
-                        <p class="text-white/40 font-light" data-t="feat2.p">Explore a carefully crafted, stylized model of our solar system. Planetary scales and orbits are aesthetically tuned for fluid gestures, breathtaking visuals, and cinematic exploration.</p>
+                        <p class="text-white/40 font-light" data-t="feat2.p">Explore a carefully crafted, stylized model
+                            of our solar system. Planetary scales and orbits are aesthetically tuned for fluid gestures,
+                            breathtaking visuals, and cinematic exploration.</p>
                     </div>
 
                     <!-- Bottom Grid -->
                     <div class="md:col-span-4 bento-card p-10">
                         <span class="material-symbols-outlined text-nebula-cyan text-4xl mb-6">high_quality</span>
-                        <h4 class="font-michroma text-sm uppercase tracking-widest mb-4" data-t="feat3.h4">Infinite Fidelity</h4>
-                        <p class="text-white/40 text-sm" data-t="feat3.p">Sub-millimeter detail on surface topography and atmospheric
+                        <h4 class="font-michroma text-sm uppercase tracking-widest mb-4" data-t="feat3.h4">Infinite
+                            Fidelity</h4>
+                        <p class="text-white/40 text-sm" data-t="feat3.p">Sub-millimeter detail on surface topography
+                            and atmospheric
                             effects. 8K texture mapping of any celestial body.</p>
                     </div>
 
                     <div
                         class="md:col-span-8 p-10 bg-[rgba(25,28,31,0.6)] backdrop-blur-md overflow-hidden flex flex-col justify-end aspect-video">
                         <div class="absolute inset-0 z-0">
-                            <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/a17c1648-d277-4aac-8917-d3c4231436e7?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                            <div style="position:relative;padding-top:56.25%;"><iframe
+                                    src="https://player.mediadelivery.net/embed/625906/a17c1648-d277-4aac-8917-d3c4231436e7?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                                    allowfullscreen="true"></iframe></div>
                         </div>
                         <!-- Text overlay removed based on user request -->
                     </div>
@@ -294,7 +346,8 @@
             <div class="absolute inset-0 z-0">
                 <img src="assets/planetary/space_bck.jpg" alt="Space Background" class="w-full h-full object-cover">
                 <!-- Deep space fade overlay to maintain text readability -->
-                <div class="absolute inset-0 bg-gradient-to-b from-deep-space/90 via-deep-space/60 to-deep-space/90"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-deep-space/90 via-deep-space/60 to-deep-space/90">
+                </div>
                 <div class="absolute inset-0 bg-[#05070A]/50 mix-blend-multiply"></div>
             </div>
 
@@ -305,10 +358,12 @@
                 <div class="flex items-end justify-between border-none mb-4">
                     <div>
                         <span class="telemetry text-nebula-cyan" data-t="cinematic.badge">CINEMATIC ARCHIVES</span>
-                        <h2 class="font-michroma text-4xl mt-4 tracking-wider" data-t="cinematic.h2">Event Horizon Portal</h2>
+                        <h2 class="font-michroma text-4xl mt-4 tracking-wider" data-t="cinematic.h2">Event Horizon
+                            Portal</h2>
                     </div>
                     <div class="hidden md:block">
-                        <span class="font-michroma text-[10px] text-white/30 uppercase tracking-[0.4em]" data-t="cinematic.stream">Main Stream
+                        <span class="font-michroma text-[10px] text-white/30 uppercase tracking-[0.4em]"
+                            data-t="cinematic.stream">Main Stream
                             Active</span>
                     </div>
                 </div>
@@ -319,7 +374,11 @@
                         class="absolute -inset-1 bg-nebula-cyan/20 blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-1000">
                     </div>
                     <div class="relative glass rounded-none overflow-hidden ambient-glow border-none">
-                        <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/f8d6aaf3-4a0d-4132-a492-8a66f89d44ae?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                        <div style="position:relative;padding-top:56.25%;"><iframe
+                                src="https://player.mediadelivery.net/embed/625906/f8d6aaf3-4a0d-4132-a492-8a66f89d44ae?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                                allowfullscreen="true"></iframe></div>
 
                         <!-- Stream Data Overlay removed based on user request -->
                     </div>
@@ -328,35 +387,50 @@
         </section>
 
         <!-- Main Portfolio Integration Footer -->
-        <footer class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <footer
+            class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
 
             <!-- Social Media Links -->
             <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10 flex-row">
-                <a href="https://linkedin.com/in/miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/linkedin.svg" alt="LinkedIn" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://linkedin.com/in/miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/linkedin.svg" alt="LinkedIn"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
-                <a href="https://instagram.com/miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/instagram.svg" alt="Instagram" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://instagram.com/miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/instagram.svg" alt="Instagram"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
-                <a href="https://x.com/miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/X.svg" alt="X" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://x.com/miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/X.svg" alt="X"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
-                <a href="https://facebook.com/miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/facebook.svg" alt="Facebook" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://facebook.com/miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/facebook.svg" alt="Facebook"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
-                <a href="https://youtube.com/@miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/youtube.svg" alt="YouTube" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://youtube.com/@miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/youtube.svg" alt="YouTube"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
-                <a href="https://vimeo.com/miguelvirgilio" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
-                    <img src="/assets/images/social/vimeo.svg" alt="Vimeo" class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                <a href="https://vimeo.com/miguelvirgilio" target="_blank" rel="noopener noreferrer"
+                    class="text-white/60 hover:text-white transition-transform hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="/assets/images/social/vimeo.svg" alt="Vimeo"
+                        class="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
                 </a>
             </div>
 
-            <p class="font-mono text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-[#b0b0b0] uppercase mt-4 mb-2 relative z-10 px-4 md:px-0" data-t="footer.rights">
+            <p class="font-mono text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-[#b0b0b0] uppercase mt-4 mb-2 relative z-10 px-4 md:px-0"
+                data-t="footer.rights">
                 © 2026 MIGUEL VIRGÍLIO. ALL RIGHTS RESERVED.
             </p>
-            <p class="font-mono text-[8.5px] md:text-[10px] text-white/40 relative z-10 max-w-[90%] md:max-w-full mx-auto" data-t="footer.specialist">
+            <p class="font-mono text-[8.5px] md:text-[10px] text-white/40 relative z-10 max-w-[90%] md:max-w-full mx-auto"
+                data-t="footer.specialist">
                 Interactive Systems Developer | Creative Coder | WebGL Specialist
             </p>
         </footer>
@@ -372,9 +446,11 @@
                 <div>
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-2 h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
-                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="modal.status">INSTRUMENT 0-ORRERY ACTIVE</span>
+                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="modal.status">INSTRUMENT 0-ORRERY
+                            ACTIVE</span>
                     </div>
-                    <h2 class="font-michroma text-2xl tracking-wider uppercase" data-t="modal.h2">Planetary Viewport</h2>
+                    <h2 class="font-michroma text-2xl tracking-wider uppercase" data-t="modal.h2">Planetary Viewport
+                    </h2>
                 </div>
                 <button id="close-modal"
                     class="group flex items-center gap-4 text-white/40 hover:text-nebula-cyan transition-colors">
@@ -388,10 +464,12 @@
                 <!-- Navigation Instructions Indicator (Asymmetric Overlay) -->
                 <div class="absolute bottom-8 right-8 glass p-6 w-72 reveal-up z-10 ambient-glow border-none">
                     <div class="flex flex-col gap-4">
-                        <h4 class="font-michroma text-[10px] tracking-widest text-nebula-cyan" data-t="nav.matrix">NAVIGATION MATRIX</h4>
+                        <h4 class="font-michroma text-[10px] tracking-widest text-nebula-cyan" data-t="nav.matrix">
+                            NAVIGATION MATRIX</h4>
                         <div class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-nebula-cyan text-sm">mouse</span>
-                            <span class="text-[9px] font-michroma opacity-60" data-t="nav.rotate">LEFT CLICK › ROTATE</span>
+                            <span class="text-[9px] font-michroma opacity-60" data-t="nav.rotate">LEFT CLICK ›
+                                ROTATE</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-nebula-cyan text-sm">open_with</span>
@@ -421,19 +499,24 @@
     <div id="demo-modal"
         class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] hidden opacity-0 transition-opacity duration-500 w-[92%] h-[88vh] lg:w-[1100px] lg:h-[750px]">
         <!-- Glass Surface -->
-        <div class="relative w-full h-full glass rounded-none ambient-glow flex flex-col overflow-hidden" style="box-shadow: 0 40px 80px -20px rgba(0, 219, 231, 0.12), 0 0 120px -30px rgba(0, 242, 255, 0.06);">
+        <div class="relative w-full h-full glass rounded-none ambient-glow flex flex-col overflow-hidden"
+            style="box-shadow: 0 40px 80px -20px rgba(0, 219, 231, 0.12), 0 0 120px -30px rgba(0, 242, 255, 0.06);">
             <!-- Modal Header / Drag Handle -->
-            <div id="demo-modal-header" class="p-6 flex justify-between items-center cursor-move bg-white/5 flex-shrink-0">
+            <div id="demo-modal-header"
+                class="p-6 flex justify-between items-center cursor-move bg-white/5 flex-shrink-0">
                 <div class="flex items-center gap-6">
                     <div class="flex items-center gap-3">
                         <div class="w-2 h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
-                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="demo.status">DEMO STREAM ACTIVE</span>
+                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="demo.status">DEMO STREAM
+                            ACTIVE</span>
                     </div>
                     <div class="h-4 w-[0.5px] bg-white/10"></div>
-                    <h2 class="font-michroma text-sm tracking-wider uppercase text-white/80" data-t="demo.h2">Cosmos Explorer</h2>
+                    <h2 class="font-michroma text-sm tracking-wider uppercase text-white/80" data-t="demo.h2">Cosmos
+                        Explorer</h2>
                 </div>
                 <div class="flex items-center gap-6">
-                    <span class="telemetry text-[8px] text-white/30 hidden md:inline" data-t="demo.preview">EMBEDDED PREVIEW</span>
+                    <span class="telemetry text-[8px] text-white/30 hidden md:inline" data-t="demo.preview">EMBEDDED
+                        PREVIEW</span>
                     <button id="close-demo-modal"
                         class="group flex items-center gap-3 text-white/40 hover:text-nebula-cyan transition-colors">
                         <span class="telemetry text-[9px]" data-t="demo.close">CLOSE</span>
@@ -446,10 +529,12 @@
             <div class="flex-1 relative overflow-hidden bg-[#0c0e12]">
                 <iframe id="demo-iframe" src="" class="w-full h-full border-none" style="background: #0c0e12;"></iframe>
                 <!-- Loading State -->
-                <div id="demo-loader" class="absolute inset-0 flex items-center justify-center bg-[#0c0e12] pointer-events-none transition-opacity duration-500">
+                <div id="demo-loader"
+                    class="absolute inset-0 flex items-center justify-center bg-[#0c0e12] pointer-events-none transition-opacity duration-500">
                     <div class="flex flex-col items-center gap-4">
                         <div class="w-20 h-[1px] bg-white/5 overflow-hidden">
-                            <div class="w-full h-full bg-nebula-cyan shadow-[0_0_10px_#00F2FF] animate-pulse" style="animation: loadPulse 1.5s ease-in-out infinite;"></div>
+                            <div class="w-full h-full bg-nebula-cyan shadow-[0_0_10px_#00F2FF] animate-pulse"
+                                style="animation: loadPulse 1.5s ease-in-out infinite;"></div>
                         </div>
                         <span class="telemetry text-[8px] animate-pulse">LOADING ENCYCLOPEDIA...</span>
                     </div>

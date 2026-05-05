@@ -134,7 +134,8 @@
         class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
         <div class="flex justify-between items-center">
             <a href="/" class="flex items-center gap-2 sm:gap-3 group">
-                <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto transition-transform duration-500 group-hover:scale-105">
+                <svg viewBox="0 0 1920 1080"
+                    class="h-8 md:h-[38.4px] w-auto transition-transform duration-500 group-hover:scale-105">
                     <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
                         <path
                             d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
@@ -170,41 +171,53 @@
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLang()">
+                <span
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
+                    onclick="toggleLang()">
                     EN
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
             </div>
 
             <div class="lg:hidden flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
-                <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">MENU</div>
+                <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">
+                    MENU</div>
                 <div class="relative w-6 h-4 group">
-                    <span id="line1" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
-                    <span id="line2" class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
-                    <span id="line3" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
+                    <span id="line1"
+                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
+                    <span id="line2"
+                        class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
+                    <span id="line3"
+                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none">
+    <div id="mobile-menu"
+        class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
                 EXPERTISE
             </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 ABOUT
             </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
                 CONTACT
             </div>
 
             <div class="mt-12 pt-12 border-t border-white/10 flex justify-between items-center">
-                <div class="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors" onclick="toggleLang(); toggleMenu();">
+                <div class="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors"
+                    onclick="toggleLang(); toggleMenu();">
                     <span class="opacity-100 text-white" id="lang-pt">PT-BR</span>
                     <span class="text-[10px] opacity-20">/</span>
                     <span class="opacity-40" id="lang-en">ENGLISH</span>
@@ -224,9 +237,11 @@
         </div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 text-center px-6 max-w-4xl">
-            <span class="text-on-primary font-label text-[10px] uppercase tracking-[0.4em] mb-8 block" data-t="hero_span">The Digital
+            <span class="text-on-primary font-label text-[10px] uppercase tracking-[0.4em] mb-8 block"
+                data-t="hero_span">The Digital
                 Surface</span>
-            <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-headline tracking-tight leading-[1.1] mb-12" data-t="hero_h1">
+            <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-headline tracking-tight leading-[1.1] mb-12"
+                data-t="hero_h1">
                 Touch Materials.<br />Explore Digitally.
             </h1>
 
@@ -236,7 +251,8 @@
     <section class="py-32 px-8 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div class="space-y-12">
-                <span class="text-primary font-label text-[10px] uppercase tracking-[0.3em]" data-t="narrative_span">Vision &amp;
+                <span class="text-primary font-label text-[10px] uppercase tracking-[0.3em]"
+                    data-t="narrative_span">Vision &amp;
                     Integration</span>
                 <h2 class="text-4xl md:text-5xl font-headline leading-tight text-on-background" data-t="narrative_h2">
                     A hybrid experience where physical material samples are linked to a dynamic digital catalog.
@@ -271,56 +287,66 @@
     <!-- 4. System Capabilities (Bento Grid) -->
     <section class="py-32 px-8 bg-[#1a1c1d] text-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-headline mb-16 text-center text-primary-container" data-t="system_h2">System Capabilities</h2>
+            <h2 class="text-4xl font-headline mb-16 text-center text-primary-container" data-t="system_h2">System
+                Capabilities</h2>
             <div class="grid grid-cols-1 md:grid-cols-6 gap-6 h-auto">
-            <!-- Real-time Selection Video -->
-            <div class="md:col-span-6 bg-black flex items-center justify-center overflow-hidden rounded-xl">
-                <div style="position:relative;padding-top:56.25%;width:100%;">
-                    <iframe
-                        src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                        loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
-                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
-                        allowfullscreen="true"></iframe>
+                <!-- Real-time Selection Video -->
+                <div class="md:col-span-6 bg-black flex items-center justify-center overflow-hidden rounded-xl">
+                    <div style="position:relative;padding-top:56.25%;width:100%;">
+                        <iframe
+                            src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                            allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                            allowfullscreen="true"></iframe>
+                    </div>
                 </div>
-            </div>
-            <!-- Large Card: 8K Texture -->
-            <div class="md:col-span-2 bg-surface-container-low group overflow-hidden flex flex-col rounded-xl text-black">
-                <div class="p-10 flex-1">
-                    <h3 class="text-2xl font-headline mb-4" data-t="cap1_h3">8K Texture Visualization</h3>
-                    <p class="text-secondary text-sm max-w-sm mb-8 font-body" data-t="cap1_p">Ultra-high fidelity scans capturing every
-                        microscopic vein and mineral deposit.</p>
+                <!-- Large Card: 8K Texture -->
+                <div
+                    class="md:col-span-2 bg-surface-container-low group overflow-hidden flex flex-col rounded-xl text-black">
+                    <div class="p-10 flex-1">
+                        <h3 class="text-2xl font-headline mb-4" data-t="cap1_h3">8K Texture Visualization</h3>
+                        <p class="text-secondary text-sm max-w-sm mb-8 font-body" data-t="cap1_p">Ultra-high fidelity
+                            scans capturing every
+                            microscopic vein and mineral deposit.</p>
+                    </div>
+                    <div class="px-10 pb-10">
+                        <img class="w-full h-48 object-cover rounded-sm group-hover:scale-105 transition-transform duration-700"
+                            data-alt="Extreme close-up of polished white marble with delicate grey veins and crystal clarity"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCejNiwrZ46hMAejNgk7wephkgm4XhMIRubKoc25mBoEs7HdDgfUbICSTjyN52X2gHPRby6ZTNawsu2re-9ilDsASQxwmn-ynMVR5FuYX6EsIlie1BnmfFcru_a_BrCl_wk3TM5wtFKBFFMEey1SBpvxLCYbGLtJzOkNvhIYHavVzDsBqfxOYYGsultF62XEKEYdaZfYKm_l5IMRAaAN2os5P21vWROx49gxFcTjetQ7ZrLC9HjHje0k-pNaHWed_Ncg1eYQqPBvK2Z" />
+                    </div>
                 </div>
-                <div class="px-10 pb-10">
-                    <img class="w-full h-48 object-cover rounded-sm group-hover:scale-105 transition-transform duration-700"
-                        data-alt="Extreme close-up of polished white marble with delicate grey veins and crystal clarity"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCejNiwrZ46hMAejNgk7wephkgm4XhMIRubKoc25mBoEs7HdDgfUbICSTjyN52X2gHPRby6ZTNawsu2re-9ilDsASQxwmn-ynMVR5FuYX6EsIlie1BnmfFcru_a_BrCl_wk3TM5wtFKBFFMEey1SBpvxLCYbGLtJzOkNvhIYHavVzDsBqfxOYYGsultF62XEKEYdaZfYKm_l5IMRAaAN2os5P21vWROx49gxFcTjetQ7ZrLC9HjHje0k-pNaHWed_Ncg1eYQqPBvK2Z" />
-                </div>
-            </div>
 
-            <!-- Comparison -->
-            <div class="md:col-span-2 bg-primary-container p-10 flex flex-col justify-between rounded-xl text-black">
-                <div>
-                    <h3 class="text-xl font-headline mb-4" data-t="cap2_h3">Comparison Engine</h3>
-                    <p class="text-on-primary-container text-xs font-body leading-relaxed" data-t="cap2_p">Side-by-side technical
-                        analytics between different material families.</p>
+                <!-- Comparison -->
+                <div
+                    class="md:col-span-2 bg-primary-container p-10 flex flex-col justify-between rounded-xl text-black">
+                    <div>
+                        <h3 class="text-xl font-headline mb-4" data-t="cap2_h3">Comparison Engine</h3>
+                        <p class="text-on-primary-container text-xs font-body leading-relaxed" data-t="cap2_p">
+                            Side-by-side technical
+                            analytics between different material families.</p>
+                    </div>
+                    <span class="material-symbols-outlined text-4xl text-primary"
+                        data-icon="compare_arrows">compare_arrows</span>
                 </div>
-                <span class="material-symbols-outlined text-4xl text-primary"
-                    data-icon="compare_arrows">compare_arrows</span>
+                <!-- Real-time selection -->
+                <div
+                    class="md:col-span-2 bg-surface-container-highest p-10 flex flex-col justify-between rounded-xl text-black">
+                    <div>
+                        <h3 class="text-xl font-headline mb-4" data-t="cap3_h3">Real-time Selection</h3>
+                        <p class="text-on-surface-variant text-xs font-body leading-relaxed" data-t="cap3_p">
+                            Cloud-synced curation across
+                            all your firm's active design projects.</p>
+                    </div>
+                    <div class="flex -space-x-4">
+                        <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-300">
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-500">
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-700">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Real-time selection -->
-            <div class="md:col-span-2 bg-surface-container-highest p-10 flex flex-col justify-between rounded-xl text-black">
-                <div>
-                    <h3 class="text-xl font-headline mb-4" data-t="cap3_h3">Real-time Selection</h3>
-                    <p class="text-on-surface-variant text-xs font-body leading-relaxed" data-t="cap3_p">Cloud-synced curation across
-                        all your firm's active design projects.</p>
-                </div>
-                <div class="flex -space-x-4">
-                    <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-300"></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-500"></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-surface-container-highest bg-stone-700"></div>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- 3. Process Section -->
     <section class="bg-surface-container-low py-32 px-8">
@@ -336,9 +362,11 @@
                         class="text-on-surface-variant/40 font-headline text-6xl block mb-6 group-hover:text-primary transition-colors">01</span>
                     <div class="flex items-center gap-3 mb-4">
                         <span class="material-symbols-outlined text-primary" data-icon="touch_app">touch_app</span>
-                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step1_h3">Select</h3>
+                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step1_h3">Select
+                        </h3>
                     </div>
-                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step1_p">Choose from our curated
+                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step1_p">Choose from
+                        our curated
                         physical library of stones, woods, and composites.</p>
                 </div>
                 <!-- Step 2 -->
@@ -347,9 +375,11 @@
                         class="text-on-surface-variant/40 font-headline text-6xl block mb-6 group-hover:text-primary transition-colors">02</span>
                     <div class="flex items-center gap-3 mb-4">
                         <span class="material-symbols-outlined text-primary" data-icon="sync">sync</span>
-                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step2_h3">Sync</h3>
+                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step2_h3">Sync
+                        </h3>
                     </div>
-                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step2_p">Tap the sample to your
+                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step2_p">Tap the sample
+                        to your
                         workstation to launch the digital twin in real-time.</p>
                 </div>
                 <!-- Step 3 -->
@@ -358,9 +388,11 @@
                         class="text-on-surface-variant/40 font-headline text-6xl block mb-6 group-hover:text-primary transition-colors">03</span>
                     <div class="flex items-center gap-3 mb-4">
                         <span class="material-symbols-outlined text-primary" data-icon="refresh">refresh</span>
-                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step3_h3">Update</h3>
+                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step3_h3">Update
+                        </h3>
                     </div>
-                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step3_p">Modify finish, size, and grout
+                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step3_p">Modify finish,
+                        size, and grout
                         options digitally to see immediate changes.</p>
                 </div>
                 <!-- Step 4 -->
@@ -369,9 +401,11 @@
                         class="text-on-surface-variant/40 font-headline text-6xl block mb-6 group-hover:text-primary transition-colors">04</span>
                     <div class="flex items-center gap-3 mb-4">
                         <span class="material-symbols-outlined text-primary" data-icon="description">description</span>
-                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step4_h3">Detail</h3>
+                        <h3 class="font-label uppercase tracking-widest text-[10px] font-bold" data-t="step4_h3">Detail
+                        </h3>
                     </div>
-                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step4_p">Export spec sheets and BIM
+                    <p class="text-on-surface-variant text-xs leading-relaxed font-body" data-t="step4_p">Export spec
+                        sheets and BIM
                         files ready for construction documents.</p>
                 </div>
             </div>
@@ -381,9 +415,11 @@
     <section class="py-32 bg-on-background text-on-primary">
         <div class="max-w-7xl mx-auto px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-end mb-24">
-                <h2 class="text-4xl md:text-5xl font-headline leading-tight" data-t="eco_h2">Integration Across the Architectural
+                <h2 class="text-4xl md:text-5xl font-headline leading-tight" data-t="eco_h2">Integration Across the
+                    Architectural
                     Ecosystem.</h2>
-                <p class="text-stone-400 text-sm leading-relaxed max-w-sm font-body" data-t="eco_p">From private studios to global
+                <p class="text-stone-400 text-sm leading-relaxed max-w-sm font-body" data-t="eco_p">From private studios
+                    to global
                     showrooms, Touchstone redefines the material procurement journey.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -393,7 +429,8 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5hRd2NM6FahYMF61GwoJWlkFinmpP7BOXAoGNiaBifAYYp9LvYTiUokyTZgrAge3d45gn9L6ThNHnJZ29oEqKZY_bl_rj8RlG3sqFLudWeOmjBu1DtgjobDr92yHRYjPRPzunYwx5B7G7BX6viCYHfhWtzimCoHFew2G8_eSRMgg0oAd4-NUb7ZGPxXUbeKAZJQGs2SeQIpnlbF7pdIWg55Mz4GbbjG3jCKb4kj1vdG3ZJIE0mzmoPCIDNuG_Dpu-3gEKyrYnzvuR" />
                     <div class="absolute bottom-6 left-6">
                         <span
-                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1" data-t="eco1_span">Architecture
+                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1"
+                            data-t="eco1_span">Architecture
                             Studios</span>
                     </div>
                 </div>
@@ -403,7 +440,8 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFtQ-XFboI3bMOf1RTgwcWsh8Joxa_WKzNK99f67vmTLqKkR5KKbWr8BxaSDpj9n_T3beRDiolpWVzCBpgobbgQa42mvtoKxxp84osWUujFvqQfbx2-7nmrkqFtuivVpMV0NWsODBMWKE_yu_FEt4LgqkMhi2qrcDi-e83tXxXT2nrMDwZoGaAjjSHA51jOscBGFFYFyT-khtZhlHgr3LmKeklKNr5D9M8GJGoB5f4FNowl_gMlHZ101_Tl7n8ptyyqIqLQpt3Y8_Y" />
                     <div class="absolute bottom-6 left-6">
                         <span
-                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1" data-t="eco2_span">Interior
+                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1"
+                            data-t="eco2_span">Interior
                             Showrooms</span>
                     </div>
                 </div>
@@ -413,7 +451,8 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm2ZhkmFC3DyO2CjCni20gUJQ0rlNMSXXmvl69NheFO9hS9PL8Ei90UsIeqfhlkPB0EgvIV7xazj4s-xKs-lpzlDSmHnm4TUmgT89D-i6iiw2uyOrXW_Gbh02K5XxokodfQ_8JEVkNVSdWotijDajrzK6O9LrmM9dY38B1C43MzS_E6XGJhZyS9JWZAklT9qpnykSiLpA6kWNymr56luJ-OBKyoHdPmeoBbm-Dssmf7oH1NpfwCNGtDd5ih-k5NlfrnSmEnwUfO6SU" />
                     <div class="absolute bottom-6 left-6">
                         <span
-                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1" data-t="eco3_span">Material
+                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1"
+                            data-t="eco3_span">Material
                             Libraries</span>
                     </div>
                 </div>
@@ -423,7 +462,8 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO82FWVxft3XhF0stkc_HFBi2xHP8WWuOQTmDAeoY9JucHZdMgBoIJVH5UtL9YUofgJkwUCxrA5nVVPo9pelLSUQMjct2S8IuOSA9ncnMfA5ZCI-DL6RmT0yOm99_tkcbarL3lTTrDw_uEB6nQH2dOrcdh6Cwn59k73gMmVD0i5f19n9nZZyYEdRlU3MB7GHlznC4lvRyjIV1SXxKqsb0pAh-PvcvPbgugO7QWUNEvdA3P8jEd9PU5L35oCpb2njOwgCB3-rvpdENB" />
                     <div class="absolute bottom-6 left-6">
                         <span
-                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1" data-t="eco4_span">Retail
+                            class="text-[10px] font-label uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1"
+                            data-t="eco4_span">Retail
                             Exhibitions</span>
                     </div>
                 </div>
@@ -436,7 +476,8 @@
             class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-surface-container-low rounded-full blur-[120px] -z-10">
         </div>
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-headline mb-12 tracking-tight" data-t="conv_h2">Bring Materials to Life</h2>
+            <h2 class="text-5xl md:text-6xl font-headline mb-12 tracking-tight" data-t="conv_h2">Bring Materials to Life
+            </h2>
             <p class="text-secondary mb-16 font-body leading-relaxed" data-t="conv_p">
                 Experience the intersection of geological history and digital foresight. Join the ranks of firms
                 redefining the specification workflow.
@@ -476,7 +517,8 @@
             </a>
         </div>
 
-        <p class="font-tech text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-concrete uppercase mb-2 relative z-10">
+        <p
+            class="font-tech text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-concrete uppercase mb-2 relative z-10">
             © 2024 MV INTERACTIVE SYSTEMS
         </p>
         <p class="font-mono text-[8.5px] md:text-[10px] text-concrete/40 relative z-10" data-t="footer_p">

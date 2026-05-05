@@ -262,7 +262,7 @@
                 <span
                     class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer relative group w-6 text-center pointer-events-auto"
                     onclick="toggleLang()" id="lang-toggle">
-                    PT
+                    EN
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
@@ -270,8 +270,8 @@
 
             <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn"
                 onclick="toggleMenu()">
-                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase"
-                    id="menu-text">Menu</span>
+                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text"
+                    data-t="nav.menu">Menu</span>
                 <div class="relative w-6 h-4 group cursor-pointer">
                     <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"
                         id="hamburger-top"></span>
@@ -306,10 +306,10 @@
 
             <!-- Mobile Language Switcher -->
             <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
-                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
+                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang('pt')">PT</span>
                 <span class="text-white/20">/</span>
                 <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile"
-                    onclick="toggleLang()">EN</span>
+                    onclick="toggleLang('en')">EN</span>
             </div>
         </div>
     </div>
@@ -336,27 +336,28 @@
 
             <div class="relative z-10 text-left px-12 md:px-24 w-full max-w-[1400px] mx-auto">
                 <div class="overflow-hidden mb-6">
-                    <span
-                        class="block font-serif text-[11px] tracking-[0.4em] uppercase text-primary/60 stagger-item">3D
+                    <span class="block font-serif text-[11px] tracking-[0.4em] uppercase text-primary/60 stagger-item"
+                        data-t="hero.subtitle">3D
                         Printing • Motion Graphics • Form Exploration</span>
                 </div>
                 <h1 class="hero-title font-serif italic mb-10">
                     <div class="overflow-hidden">
-                        <span class="block text-reveal font-serif">VaseMotion</span>
+                        <span class="block text-reveal font-serif" data-t="hero.title1">VaseMotion</span>
                     </div>
                     <div class="overflow-hidden -mt-[0.5em]">
-                        <span class="block text-reveal text-primary font-serif">Prototype</span>
+                        <span class="block text-reveal text-primary font-serif" data-t="hero.title2">Prototype</span>
                     </div>
                 </h1>
                 <div class="max-w-xl overflow-hidden">
-                    <p
-                        class="font-sans text-xs md:text-sm text-neutral-500 leading-relaxed uppercase tracking-widest stagger-item">
+                    <p class="font-sans text-xs md:text-sm text-neutral-500 leading-relaxed uppercase tracking-widest stagger-item"
+                        data-t="hero.desc">
                         A unique 3D-printed vase with its own dedicated animated presentation. A creative exploration of
                         3D printing, form, and animation.
                     </p>
                 </div>
                 <div class="mt-20 flex flex-col items-start gap-4 stagger-item">
-                    <div class="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20">Scroll to Initiate</div>
+                    <div class="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20" data-t="hero.scroll">
+                        Scroll to Initiate</div>
                     <div class="w-[1px] h-24 bg-gradient-to-b from-primary/50 to-transparent"></div>
                 </div>
             </div>
@@ -369,29 +370,34 @@
 
             <div class="sticky top-0 h-screen flex flex-col items-center justify-center px-10 relative z-20">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
-                    <h2 class="text-[25vw] font-serif font-black uppercase italic whitespace-nowrap -rotate-6">Synthesis
+                    <h2 class="text-[25vw] font-serif font-black uppercase italic whitespace-nowrap -rotate-6"
+                        data-t="lottie.bg_text">Synthesis
                     </h2>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center w-full max-w-[1400px] mx-auto">
                     <div class="space-y-12">
                         <div class="space-y-px">
-                            <span
-                                class="font-serif text-[10px] text-primary/60 tracking-[0.3em] uppercase block mb-4">Sequence
+                            <span class="font-serif text-[10px] text-primary/60 tracking-[0.3em] uppercase block mb-4"
+                                data-t="lottie.sequence">Sequence
                                 01.04_A</span>
                             <h3 class="font-serif text-6xl md:text-8xl italic leading-[1.1] py-4">
                                 <div class="overflow-hidden">
-                                    <span class="block scroll-text-reveal" data-delay="0">Tactile</span>
+                                    <span class="block scroll-text-reveal" data-delay="0"
+                                        data-t="lottie.title1">Tactile</span>
                                 </div>
                                 <div class="overflow-hidden -mt-2 md:-mt-4">
-                                    <span class="block scroll-text-reveal text-white/20" data-delay="0.12">Design</span>
+                                    <span class="block scroll-text-reveal text-white/20" data-delay="0.12"
+                                        data-t="lottie.title2">Design</span>
                                 </div>
                                 <div class="overflow-hidden -mt-2 md:-mt-4">
-                                    <span class="block scroll-text-reveal" data-delay="0.24">Storytelling.</span>
+                                    <span class="block scroll-text-reveal" data-delay="0.24"
+                                        data-t="lottie.title3">Storytelling.</span>
                                 </div>
                             </h3>
                         </div>
-                        <p class="font-sans text-neutral-400 text-sm max-w-sm leading-relaxed tracking-wide">
+                        <p class="font-sans text-neutral-400 text-sm max-w-sm leading-relaxed tracking-wide"
+                            data-t="lottie.desc">
                             A unique 3D-printed vase with its own dedicated animated presentation. Motion graphics
                             reveal every angle, curve, and detail of the object. The project blends tactile design
                             with dynamic visual storytelling.
@@ -399,12 +405,14 @@
 
                         <div class="grid grid-cols-2 gap-10">
                             <div>
-                                <div class="font-mono text-[8px] text-neutral-500 uppercase mb-2 tracking-widest">
+                                <div class="font-mono text-[8px] text-neutral-500 uppercase mb-2 tracking-widest"
+                                    data-t="lottie.res_label">
                                     Resolution</div>
                                 <div class="text-xl font-serif">0.02 μm</div>
                             </div>
                             <div>
-                                <div class="font-mono text-[8px] text-neutral-500 uppercase mb-2 tracking-widest">Nodes
+                                <div class="font-mono text-[8px] text-neutral-500 uppercase mb-2 tracking-widest"
+                                    data-t="lottie.nodes_label">Nodes
                                 </div>
                                 <div class="text-xl font-serif">1.284.901</div>
                             </div>
@@ -458,7 +466,8 @@
                             <!-- Three.js will inject here -->
                             <div
                                 class="absolute top-8 left-8 p-4 border border-white/10 bg-black/40 backdrop-blur-sm z-20">
-                                <div class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Technical
+                                <div class="font-mono text-xs uppercase tracking-[0.2em] text-primary"
+                                    data-t="tech.preview">Technical
                                     Preview</div>
                             </div>
                             <div
@@ -467,33 +476,37 @@
                                     class="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500 space-y-1">
                                     <div class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full bg-primary/40 animate-pulse"></span>
-                                        <span>Left Click — Rotate</span>
+                                        <span data-t="tech.rotate">Left Click — Rotate</span>
                                     </div>
                                     <div class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                                        <span>Scroll — Zoom</span>
+                                        <span data-t="tech.zoom">Scroll — Zoom</span>
                                     </div>
                                     <div class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                                        <span>Right Click — Pan</span>
+                                        <span data-t="tech.pan">Right Click — Pan</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="p-6 glass border border-white/5 space-y-4">
-                                <h4 class="font-serif italic text-primary">Layer Precision</h4>
-                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest">
+                                <h4 class="font-serif italic text-primary" data-t="tech.layer_title">Layer Precision
+                                </h4>
+                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest"
+                                    data-t="tech.layer_desc">
                                     0.2mm adaptive height resolution.</p>
                             </div>
                             <div class="p-6 glass border border-white/5 space-y-4">
-                                <h4 class="font-serif italic text-primary">Gyroid Infill</h4>
-                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest">
+                                <h4 class="font-serif italic text-primary" data-t="tech.infill_title">Gyroid Infill</h4>
+                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest"
+                                    data-t="tech.infill_desc">
                                     15% density for structural integrity.</p>
                             </div>
                             <div class="p-6 glass border border-white/5 space-y-4">
-                                <h4 class="font-serif italic text-primary">Eco PLA+</h4>
-                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest">
+                                <h4 class="font-serif italic text-primary" data-t="tech.material_title">Eco PLA+</h4>
+                                <p class="text-[9px] text-neutral-500 uppercase leading-relaxed tracking-widest"
+                                    data-t="tech.material_desc">
                                     Recycled high-impact filament.</p>
                             </div>
                             <div
@@ -505,18 +518,21 @@
 
                     <div class="lg:col-span-4 flex flex-col justify-center space-y-8">
                         <div class="space-y-4">
-                            <span
-                                class="font-serif text-[10px] text-primary/60 tracking-widest uppercase block">Prototype_01</span>
+                            <span class="font-serif text-[10px] text-primary/60 tracking-widest uppercase block"
+                                data-t="tech.proto_label">Prototype_01</span>
                             <h3 class="font-serif text-4xl italic leading-relaxed py-2">
                                 <div class="overflow-hidden">
-                                    <span class="block scroll-text-reveal" data-delay="0">Physical & Digital</span>
+                                    <span class="block scroll-text-reveal" data-delay="0"
+                                        data-t="tech.showcase_title1">Physical & Digital</span>
                                 </div>
                                 <div class="overflow-hidden">
-                                    <span class="block scroll-text-reveal" data-delay="0.12">Showcase.</span>
+                                    <span class="block scroll-text-reveal" data-delay="0.12"
+                                        data-t="tech.showcase_title2">Showcase.</span>
                                 </div>
                             </h3>
                         </div>
-                        <p class="font-sans text-neutral-400 text-xs leading-relaxed tracking-wide uppercase">
+                        <p class="font-sans text-neutral-400 text-xs leading-relaxed tracking-wide uppercase"
+                            data-t="tech.desc">
                             Physical and digital representations create a cohesive showcase experience. A creative
                             exploration of 3D printing, form, and animation focusing on the FDM prototype workflow.
                         </p>
@@ -537,19 +553,22 @@
             <div class="relative z-10 w-full max-w-[1400px] mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 items-center">
                 <div class="lg:col-start-2 space-y-16 text-center lg:text-right">
                     <div class="space-y-4">
-                        <span class="font-serif text-[11px] tracking-[0.3em] uppercase text-primary/40 block">Drop
+                        <span class="font-serif text-[11px] tracking-[0.3em] uppercase text-primary/40 block"
+                            data-t="cta.availability">Drop
                             Availability: Q2 2024</span>
                         <h2 class="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-[1.1] py-4 inline-block">
                             <div class="overflow-hidden">
-                                <span class="block scroll-text-reveal" data-delay="0">Command</span>
+                                <span class="block scroll-text-reveal" data-delay="0" data-t="cta.title1">Command</span>
                             </div>
                             <div class="overflow-hidden -mt-2 md:-mt-6">
-                                <span class="block scroll-text-reveal text-primary" data-delay="0.12">Succession.</span>
+                                <span class="block scroll-text-reveal text-primary" data-delay="0.12"
+                                    data-t="cta.title2">Succession.</span>
                             </div>
                         </h2>
                     </div>
                     <div class="flex flex-col items-center lg:items-end gap-12">
-                        <p class="font-sans text-xs uppercase tracking-[0.3em] text-neutral-500 max-w-sm">Join the Inner
+                        <p class="font-sans text-xs uppercase tracking-[0.3em] text-neutral-500 max-w-sm"
+                            data-t="cta.desc">Join the Inner
                             Circle for priority allocation of the first limited batch.</p>
 
                         <div class="flex gap-10 md:gap-20">
@@ -610,7 +629,8 @@
         <p class="font-sans text-[10px] md:text-xs tracking-[0.2em] text-neutral-400 uppercase mb-2 relative z-10 px-4">
             © 2024 MV Interactive Systems
         </p>
-        <p class="font-mono text-[8.5px] md:text-[10px] text-neutral-600 relative z-10 max-w-[90%] mx-auto">
+        <p class="font-mono text-[8.5px] md:text-[10px] text-neutral-600 relative z-10 max-w-[90%] mx-auto"
+            data-t="footer.slogan">
             Designed for Performance & Precision
         </p>
     </footer>
@@ -987,32 +1007,109 @@
                 "nav.expertise": "ESPECIALIDADE",
                 "nav.about": "SOBRE",
                 "nav.contact": "CONTACTO",
-                // Add more translations as needed
+                "nav.menu": "MENU",
+                "hero.subtitle": "Impressão 3D • Motion Graphics • Exploração de Forma",
+                "hero.title1": "VaseMotion",
+                "hero.title2": "Protótipo",
+                "hero.desc": "Um vaso único impresso em 3D com a sua própria apresentação animada dedicada. Uma exploração criativa de impressão 3D, forma e animação.",
+                "hero.scroll": "Deslize para Iniciar",
+                "lottie.bg_text": "Síntese",
+                "lottie.sequence": "Sequência 01.04_A",
+                "lottie.title1": "Design",
+                "lottie.title2": "Tátil",
+                "lottie.title3": "Storytelling.",
+                "lottie.desc": "Um vaso único impresso em 3D com a sua própria apresentação animada dedicada. Gráficos em movimento revelam cada ângulo, curva e detalhe do objeto. O projeto combina design tátil com narrativa visual dinâmica.",
+                "lottie.res_label": "Resolução",
+                "lottie.nodes_label": "Nós",
+                "tech.preview": "Pré-visualização Técnica",
+                "tech.rotate": "Clique Esquerdo — Rodar",
+                "tech.zoom": "Roda — Zoom",
+                "tech.pan": "Clique Direito — Panorâmica",
+                "tech.layer_title": "Precisão de Camada",
+                "tech.layer_desc": "Resolução de altura adaptativa de 0.2mm.",
+                "tech.infill_title": "Preenchimento Gyroid",
+                "tech.infill_desc": "15% de densidade para integridade estrutural.",
+                "tech.material_title": "Eco PLA+",
+                "tech.material_desc": "Filamento reciclado de alto impacto.",
+                "tech.proto_label": "Protótipo_01",
+                "tech.showcase_title1": "Exposição Física",
+                "tech.showcase_title2": "& Digital.",
+                "tech.desc": "Representações físicas e digitais criam uma experiência de exposição coesa. Uma exploração criativa de impressão 3D, forma e animação focada no fluxo de trabalho de protótipo FDM.",
+                "cta.availability": "Disponibilidade: Q2 2024",
+                "cta.title1": "Sucessão de",
+                "cta.title2": "Comando.",
+                "cta.desc": "Junte-se ao Círculo Restrito para alocação prioritária do primeiro lote limitado.",
+                "footer.slogan": "Projetado para Performance & Precisão"
             },
             en: {
                 "nav.expertise": "EXPERTISE",
                 "nav.about": "ABOUT",
                 "nav.contact": "CONTACT",
-                // Add more translations as needed
+                "nav.menu": "MENU",
+                "hero.subtitle": "3D Printing • Motion Graphics • Form Exploration",
+                "hero.title1": "VaseMotion",
+                "hero.title2": "Prototype",
+                "hero.desc": "A unique 3D-printed vase with its own dedicated animated presentation. A creative exploration of 3D printing, form, and animation.",
+                "hero.scroll": "Scroll to Initiate",
+                "lottie.bg_text": "Synthesis",
+                "lottie.sequence": "Sequence 01.04_A",
+                "lottie.title1": "Tactile",
+                "lottie.title2": "Design",
+                "lottie.title3": "Storytelling.",
+                "lottie.desc": "A unique 3D-printed vase with its own dedicated animated presentation. Motion graphics reveal every angle, curve, and detail of the object. The project blends tactile design with dynamic visual storytelling.",
+                "lottie.res_label": "Resolution",
+                "lottie.nodes_label": "Nodes",
+                "tech.preview": "Technical Preview",
+                "tech.rotate": "Left Click — Rotate",
+                "tech.zoom": "Scroll — Zoom",
+                "tech.pan": "Right Click — Pan",
+                "tech.layer_title": "Layer Precision",
+                "tech.layer_desc": "0.2mm adaptive height resolution.",
+                "tech.infill_title": "Gyroid Infill",
+                "tech.infill_desc": "15% density for structural integrity.",
+                "tech.material_title": "Eco PLA+",
+                "tech.material_desc": "Recycled high-impact filament.",
+                "tech.proto_label": "Prototype_01",
+                "tech.showcase_title1": "Physical & Digital",
+                "tech.showcase_title2": "Showcase.",
+                "tech.desc": "Physical and digital representations create a cohesive showcase experience. A creative exploration of 3D printing, form, and animation focusing on the FDM prototype workflow.",
+                "cta.availability": "Drop Availability: Q2 2024",
+                "cta.title1": "Command",
+                "cta.title2": "Succession.",
+                "cta.desc": "Join the Inner Circle for priority allocation of the first limited batch.",
+                "footer.slogan": "Designed for Performance & Precision"
             }
         };
 
-        let currentLang = 'pt';
+        let currentLang = 'en'; // Start in English as the source text is English
 
         function updateLanguage() {
+            document.documentElement.lang = currentLang;
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
-                if (translations[currentLang][key]) {
+                if (translations[currentLang] && translations[currentLang][key]) {
                     el.textContent = translations[currentLang][key];
                 }
             });
 
-            // Update toggle buttons
+            // Update toggle buttons: show the CURRENT language
             const toggle = document.getElementById('lang-toggle');
             if (toggle) toggle.textContent = currentLang.toUpperCase();
 
             const ptMobile = document.getElementById('lang-pt-mobile');
             const enMobile = document.getElementById('lang-en-mobile');
+            const menuText = document.getElementById('menu-text');
+
+            // Handle Menu text translation for "Close" state
+            if (menuText) {
+                const menu = document.getElementById('mobile-menu');
+                const isOpen = !menu.classList.contains('translate-x-full');
+                if (isOpen) {
+                    menuText.textContent = currentLang === 'pt' ? 'Fechar' : 'Close';
+                } else {
+                    menuText.textContent = translations[currentLang]["nav.menu"];
+                }
+            }
 
             if (ptMobile && enMobile) {
                 if (currentLang === 'pt') {
@@ -1029,8 +1126,13 @@
             }
         }
 
-        function toggleLang() {
-            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+        function toggleLang(lang) {
+            if (lang) {
+                if (currentLang === lang) return;
+                currentLang = lang;
+            } else {
+                currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            }
             updateLanguage();
         }
 
@@ -1046,14 +1148,14 @@
             if (!isOpen) {
                 menu.classList.remove('translate-x-full', 'pointer-events-none');
                 menu.classList.add('translate-x-0', 'opacity-100');
-                if (menuText) menuText.textContent = 'Fechar';
+                if (menuText) menuText.textContent = currentLang === 'pt' ? 'Fechar' : 'Close';
                 if (hamburgerTop) hamburgerTop.style.transform = 'translateY(8px) rotate(45deg)';
                 if (hamburgerMid) hamburgerMid.style.opacity = '0';
                 if (hamburgerBottom) hamburgerBottom.style.transform = 'translateY(-8px) rotate(-45deg)';
             } else {
                 menu.classList.add('translate-x-full', 'pointer-events-none');
                 menu.classList.remove('translate-x-0', 'opacity-100');
-                if (menuText) menuText.textContent = 'Menu';
+                if (menuText) menuText.textContent = translations[currentLang]["nav.menu"];
                 if (hamburgerTop) hamburgerTop.style.transform = 'none';
                 if (hamburgerMid) hamburgerMid.style.opacity = '1';
                 if (hamburgerBottom) hamburgerBottom.style.transform = 'none';
