@@ -20,20 +20,71 @@
             theme: {
                 extend: {
                     colors: {
-                        background: "#131313",
-                        surface: "#0e0e0e",
-                        primary: "#ffffff",
-                        "concrete": "#b0b0b0",
+                        "on-tertiary-fixed": "#1c0055",
+                        "error-dim": "#d7383b",
+                        "secondary": "#ff734a",
+                        "surface-dim": "#0e0e0e",
+                        "outline-variant": "#484847",
+                        "surface-container-highest": "#262626",
+                        "surface-tint": "#81ecff",
+                        "on-secondary-fixed-variant": "#982700",
+                        "on-tertiary": "#25006b",
+                        "on-surface": "#ffffff",
+                        "on-primary": "#005762",
+                        "inverse-surface": "#fcf9f8",
+                        "on-background": "#ffffff",
+                        "surface": "#0e0e0e",
+                        "secondary-dim": "#ff734a",
+                        "secondary-fixed": "#ffc4b4",
+                        "on-surface-variant": "#adaaaa",
+                        "primary": "#81ecff",
+                        "inverse-primary": "#006976",
+                        "tertiary-dim": "#7e51ff",
+                        "on-secondary-fixed": "#661700",
+                        "tertiary-container": "#7c4dff",
+                        "primary-container": "#00e3fd",
+                        "on-secondary": "#430c00",
+                        "on-error-container": "#ffa8a3",
+                        "surface-variant": "#262626",
+                        "secondary-container": "#b02f00",
+                        "background": "#0e0e0e",
+                        "primary-dim": "#00d4ec",
+                        "secondary-fixed-dim": "#ffb19b",
+                        "on-error": "#490006",
+                        "outline": "#767575",
+                        "surface-bright": "#2c2c2c",
+                        "primary-fixed": "#00e3fd",
+                        "primary-fixed-dim": "#00d4ec",
+                        "on-primary-container": "#004d57",
+                        "surface-container-low": "#131313",
+                        "inverse-on-surface": "#565555",
+                        "surface-container-high": "#20201f",
+                        "on-primary-fixed-variant": "#005762",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-container": "#ffffff",
+                        "error-container": "#9f0519",
+                        "error": "#ff716c",
+                        "on-tertiary-fixed-variant": "#4000ad",
+                        "on-secondary-container": "#fff6f4",
+                        "tertiary": "#a68cff",
+                        "tertiary-fixed": "#b8a3ff",
+                        "on-primary-fixed": "#003840",
+                        "tertiary-fixed-dim": "#ab93ff",
+                        "surface-container": "#1a1a1a",
                         "charcoal": "#050505",
                         "graphite": "#0a0a0a",
+                        "concrete": "#b0b0b0",
+                        "accent": "#ffffff"
                     },
                     fontFamily: {
-                        headline: ["Epilogue"],
-                        body: ["Manrope"],
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"],
+                        "sans": ["Inter", "sans-serif"],
                         "display": ["Sora", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
+                        "tech": ["Oswald", "sans-serif"],
                         "orbitron": ["Orbitron", "sans-serif"],
-                        "tech": ["Oswald", "sans-serif"]
+                        "mono": ["Fira Code", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
                     },
                     borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
                 },
@@ -96,30 +147,15 @@
         .delay-500 {
             animation-delay: 500ms;
         }
-
-        /* Navbar entry animation */
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-        
-        .animate-slide-down {
-            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            animation-delay: 0.5s;
-        }
-        
-        header {
-            transform: translateY(-100%);
-        }
     </style>
 </head>
 
 <body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
     <!-- Navbar -->
     <!-- Header / Logo Fixed -->
-    <!-- Main Portfolio Integration Navbar -->
-    <header class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down" id="main-header">
-        <div class="flex justify-between items-center w-full">
+    <header
+        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
+        <div class="flex justify-between items-center">
             <div class="cursor-pointer pointer-events-auto group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
@@ -130,62 +166,67 @@
                             <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                         </g>
                     </svg>
-                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO</span>
                 </div>
             </div>
 
-            <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
-                <a href="/#expertise" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.expertise">
-                    ESPECIALIDADE
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+                <a href="#instrumento" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
+                    <span data-t="nav.expertise">EXPERTISE</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/#about" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.about">
-                    SOBRE
+                <a href="#experiencia" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
+                    <span data-t="nav.about">ABOUT</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.contact">
-                    CONTACTO
+                <a href="#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
+                    <span data-t="nav.contact">CONTACT</span>
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
 
-                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer relative group w-6 text-center pointer-events-auto" onclick="toggleLang()" id="lang-toggle">
+                <!-- Language Toggle (Desktop) -->
+                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLang()">
                     PT
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
-            </nav>
+            </div>
 
-            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn" onclick="toggleMenu()">
-                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">Menu</span>
-                <div class="relative w-6 h-4 group cursor-pointer">
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0" id="hamburger-top"></span>
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2" id="hamburger-mid"></span>
-                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4" id="hamburger-bottom"></span>
+            <!-- Mobile Menu Toggle -->
+            <div class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" onclick="toggleMenu()">
+                <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">
+                    MENU
                 </div>
-            </button>
+                <div class="relative w-6 h-4 group cursor-pointer transition-transform duration-300 active:scale-90">
+                    <span id="menu-bar-1" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
+                    <span id="menu-bar-2" class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
+                    <span id="menu-bar-3" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
+                </div>
+            </div>
         </div>
     </header>
-
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
-        <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
+    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 hidden opacity-0 transition-opacity duration-300">
+        <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                <span data-t="nav.expertise">ESPECIALIDADE</span>
+                <span data-t="nav.expertise">EXPERTISE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
-                <span data-t="nav.about">SOBRE</span>
+                <span data-t="nav.about">ABOUT</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
-                <span data-t="nav.contact">CONTACTO</span>
+                <span data-t="nav.contact">CONTACT</span>
             </div>
 
-            <!-- Mobile Language Switcher -->
-            <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
-                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
-                <span class="text-white/20">/</span>
-                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile" onclick="toggleLang()">EN</span>
+            <div class="mt-12 pt-12 border-t border-white/10 flex justify-between items-center">
+                <div class="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors" onclick="toggleLang(); toggleMenu();">
+                    <span id="lang-pt-mobile" class="text-white">PT-BR</span>
+                    <span class="text-[10px] opacity-20">/</span>
+                    <span id="lang-en-mobile" class="opacity-40">ENGLISH</span>
+                </div>
             </div>
         </div>
     </div>
@@ -566,34 +607,31 @@
         let currentLang = 'PT';
 
         function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
             const menu = document.getElementById('mobile-menu');
             const menuText = document.getElementById('menu-text');
-            const hamburgerTop = document.getElementById('hamburger-top');
-            const hamburgerMid = document.getElementById('hamburger-mid');
-            const hamburgerBottom = document.getElementById('hamburger-bottom');
+            const bar1 = document.getElementById('menu-bar-1');
+            const bar2 = document.getElementById('menu-bar-2');
+            const bar3 = document.getElementById('menu-bar-3');
 
-            const isOpen = !menu.classList.contains('translate-x-full');
-
-            if (!isOpen) {
-                menu.classList.remove('pointer-events-none', 'translate-x-full');
-                menu.classList.add('translate-x-0', 'opacity-100');
-                menuText.textContent = 'FECHAR';
-                hamburgerTop.style.top = '8px';
-                hamburgerTop.style.transform = 'rotate(45deg)';
-                hamburgerMid.style.opacity = '0';
-                hamburgerBottom.style.top = '8px';
-                hamburgerBottom.style.transform = 'rotate(-45deg)';
-                isMenuOpen = true;
+            if (isMenuOpen) {
+                menu.classList.remove('hidden');
+                setTimeout(() => menu.classList.add('opacity-100'), 10);
+                menuText.textContent = currentLang === 'PT' ? 'FECHAR' : 'CLOSE';
+                bar1.classList.add('top-2', 'rotate-45');
+                bar1.classList.remove('top-0');
+                bar2.classList.add('opacity-0');
+                bar3.classList.add('top-2', '-rotate-45');
+                bar3.classList.remove('top-4');
             } else {
-                menu.classList.remove('translate-x-0', 'opacity-100');
-                menu.classList.add('translate-x-full', 'pointer-events-none');
-                menuText.textContent = 'MENU';
-                hamburgerTop.style.top = '0';
-                hamburgerTop.style.transform = '';
-                hamburgerMid.style.opacity = '1';
-                hamburgerBottom.style.top = '16px';
-                hamburgerBottom.style.transform = '';
-                isMenuOpen = false;
+                menu.classList.remove('opacity-100');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+                menuText.textContent = currentLang === 'PT' ? 'MENU' : 'MENU';
+                bar1.classList.remove('top-2', 'rotate-45');
+                bar1.classList.add('top-0');
+                bar2.classList.remove('opacity-0');
+                bar3.classList.remove('top-2', '-rotate-45');
+                bar3.classList.add('top-4');
             }
         }
 
@@ -608,18 +646,31 @@
                 }
             });
 
-            // Update desktop lang toggle text
-            const langToggle = document.getElementById('lang-toggle');
-            if (langToggle) {
-                langToggle.innerHTML = `${currentLang}<span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>`;
-            }
+            // Update all lang buttons displays
+            const langButtons = document.querySelectorAll('[onclick="toggleLang()"], [onclick="toggleLang(); toggleMenu();"]');
+            langButtons.forEach(btn => {
+                // Desktop toggle button (span)
+                const span = btn.closest('span');
+                if (span && span.childNodes.length > 0 && span.tagName === 'SPAN' && !span.id) {
+                    span.childNodes[0].textContent = currentLang + ' ';
+                }
+            });
             
             // Mobile lang update
             const ptMobile = document.getElementById('lang-pt-mobile');
             const enMobile = document.getElementById('lang-en-mobile');
             if (ptMobile && enMobile) {
-                ptMobile.className = currentLang === 'PT' ? 'text-white cursor-pointer' : 'opacity-40 hover:opacity-100 transition-opacity cursor-pointer';
-                enMobile.className = currentLang === 'EN' ? 'text-white cursor-pointer' : 'opacity-40 hover:opacity-100 transition-opacity cursor-pointer';
+                if (currentLang === 'PT') {
+                    ptMobile.classList.add('text-white');
+                    ptMobile.classList.remove('opacity-40');
+                    enMobile.classList.add('opacity-40');
+                    enMobile.classList.remove('text-white');
+                } else {
+                    enMobile.classList.add('text-white');
+                    enMobile.classList.remove('opacity-40');
+                    ptMobile.classList.add('opacity-40');
+                    ptMobile.classList.remove('text-white');
+                }
             }
 
             // Update Menu Text if mobile menu is open
