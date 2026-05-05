@@ -12,9 +12,31 @@ import { TRANSLATIONS } from './data/translations';
 const App: React.FC = () => {
   const [isIndexVisible, setIsIndexVisible] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
-  const [lang, setLang] = useState<'EN' | 'PT'>('PT');
+  const [lang, setLang] = useState<'EN' | 'PT'>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('mv_lang') as 'EN' | 'PT') || 'PT';
+    }
+    return 'PT';
+  });
   const [isAnySectionExpanded, setIsAnySectionExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('mv_lang', lang);
+    document.documentElement.lang = lang === 'PT' ? 'pt-PT' : 'en';
+    
+    // Update SEO meta
+    document.title = lang === 'PT' 
+      ? 'MV Interactive Systems - Soluções Interativas e 3D' 
+      : 'MV Interactive Systems - Interactive & 3D Solutions';
+    
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', lang === 'PT'
+        ? 'Experiências digitais imersivas, visualização 3D em tempo real e sistemas interactivos híbridos.'
+        : 'Immersive digital experiences, real-time 3D visualization, and hybrid interactive systems.');
+    }
+  }, [lang]);
 
   const t = TRANSLATIONS[lang];
 
@@ -108,17 +130,22 @@ const App: React.FC = () => {
               </motion.span>
             ))}
 
-            {/* Language Toggle (Desktop) */}
-            <motion.span
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
-              onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
-              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
-            >
-              {lang}
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-            </motion.span>
+            {/* Language Selector (Desktop) */}
+            <div className="flex items-center gap-2 font-mono text-xs tracking-widest text-concrete">
+              <span 
+                onClick={() => setLang('EN')}
+                className={`cursor-pointer transition-colors hover:text-white ${lang === 'EN' ? 'text-white' : 'opacity-40'}`}
+              >
+                EN
+              </span>
+              <span className="opacity-20">/</span>
+              <span 
+                onClick={() => setLang('PT')}
+                className={`cursor-pointer transition-colors hover:text-white ${lang === 'PT' ? 'text-white' : 'opacity-40'}`}
+              >
+                PT
+              </span>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -174,15 +201,27 @@ const App: React.FC = () => {
                 className="mt-12 pt-12 border-t border-white/10 flex justify-between items-center"
               >
                 <div
-                  className="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors"
-                  onClick={() => {
-                    setLang(prev => prev === 'EN' ? 'PT' : 'EN');
-                    setIsMenuOpen(false);
-                  }}
+                  className="text-concrete font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest flex items-center gap-2 sm:gap-3 transition-colors"
                 >
-                  <span className={lang === 'PT' ? 'text-white' : 'opacity-40'}>PT-BR</span>
+                  <span 
+                    className={`cursor-pointer hover:text-white transition-colors ${lang === 'PT' ? 'text-white' : 'opacity-40'}`}
+                    onClick={() => {
+                      setLang('PT');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    PORTUGUÊS
+                  </span>
                   <span className="text-[10px] opacity-20">/</span>
-                  <span className={lang === 'EN' ? 'text-white' : 'opacity-40'}>ENGLISH</span>
+                  <span 
+                    className={`cursor-pointer hover:text-white transition-colors ${lang === 'EN' ? 'text-white' : 'opacity-40'}`}
+                    onClick={() => {
+                      setLang('EN');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    ENGLISH
+                  </span>
                 </div>
               </motion.div>
             </div>
