@@ -5,80 +5,27 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MONOLITH | Architectural Visualization</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@300;400;700&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;family=Oswald:wght@400;500;700&amp;family=Sora:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "surface-container-lowest": "#ffffff",
-                        "surface": "#f9f9f9",
-                        "on-primary-fixed": "#3e3f42",
-                        "surface-container-highest": "#dde4e5",
-                        "tertiary-fixed-dim": "#3292e9",
-                        "on-surface-variant": "#5a6061",
-                        "on-surface": "#2d3435",
-                        "error-container": "#fe8983",
-                        "primary-fixed-dim": "#d4d4d7",
-                        "on-primary": "#f7f7fa",
-                        "secondary-fixed-dim": "#ffcaa2",
-                        "primary-dim": "#515255",
-                        "on-tertiary-fixed": "#000000",
-                        "secondary-fixed": "#ffdcc3",
-                        "on-background": "#2d3435",
-                        "surface-container-high": "#e4e9ea",
-                        "on-primary-container": "#505254",
-                        "surface-container": "#ebeeef",
-                        "outline": "#757c7d",
-                        "on-tertiary-fixed-variant": "#00284a",
-                        "on-error": "#fff7f6",
-                        "primary": "#5d5e61",
-                        "error-dim": "#4e0309",
-                        "secondary": "#805633",
-                        "tertiary": "#0062a7",
-                        "surface-container-low": "#f2f4f4",
-                        "secondary-container": "#ffdcc3",
-                        "primary-fixed": "#e2e2e5",
-                        "surface-tint": "#5d5e61",
-                        "on-tertiary-container": "#001e3a",
-                        "on-tertiary": "#f7f9ff",
-                        "tertiary-container": "#449ff8",
-                        "on-secondary": "#fff7f4",
-                        "tertiary-fixed": "#449ff8",
-                        "on-secondary-fixed-variant": "#7c5230",
-                        "tertiary-dim": "#005593",
-                        "on-secondary-container": "#714927",
-                        "on-error-container": "#752121",
-                        "error": "#9f403d",
-                        "on-primary-fixed-variant": "#5a5c5e",
-                        "inverse-primary": "#f9f9fc",
-                        "on-secondary-fixed": "#5b3717",
-                        "surface-bright": "#f9f9f9",
-                        "background": "#f9f9f9",
-                        "primary-container": "#e2e2e5",
-                        "secondary-dim": "#724a28",
-                        "surface-dim": "#d4dbdd",
-                        "inverse-on-surface": "#9c9d9d",
-                        "inverse-surface": "#0c0f0f",
-                        "outline-variant": "#adb3b4",
-                        "surface-variant": "#dde4e5"
+                        background: "#131313",
+                        surface: "#1a1a1a",
+                        primary: "#5d5e61",
+                        secondary: "#805633",
+                        concrete: "#b0b0b0",
                     },
                     fontFamily: {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0px",
-                        "lg": "0px",
-                        "xl": "0px",
-                        "full": "9999px"
+                        sans: ["Inter", "sans-serif"],
+                        display: ["Outfit", "sans-serif"],
+                        orbitron: ["Orbitron", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
                     },
                 },
-            },
+            }
         }
     </script>
     <style>
@@ -133,92 +80,96 @@
             transform: translateX(0);
             opacity: 1;
         }
+
+        /* Navbar entry animation */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .animate-slide-down {
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        
+        header {
+            transform: translateY(-100%);
+        }
     </style>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&amp;family=Oswald:wght@400;500;700&amp;family=Sora:wght@300;400;600;700&amp;display=swap"
         rel="stylesheet" />
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-tertiary/30">
-    <!-- Header -->
-    <header
-        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
-        <div class="flex justify-between items-center">
-            <a href="/" class="flex items-center gap-2 sm:gap-3 group">
-                <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto transition-transform duration-500 group-hover:scale-105">
-                    <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
-                        <path
-                            d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
-                        <path
-                            d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
-                        <path
-                            d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
-                        <path
-                            d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
-                    </g>
-                </svg>
-                <span
-                    class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase whitespace-nowrap flex-shrink-0">MIGUEL
-                    VIRGÍLIO</span>
-            </a>
-
-            <div class="hidden lg:flex gap-6 xl:gap-8 items-center">
-                <a href="/#expertise"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    EXPERTISE
-                    <span
-                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/#about"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    ABOUT
-                    <span
-                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/#contact"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    CONTACT
-                    <span
-                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLang()">
-                    EN
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </span>
-            </div>
-
-            <div class="lg:hidden flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
-                <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">MENU</div>
-                <div class="relative w-6 h-4 group">
-                    <span id="line1" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
-                    <span id="line2" class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
-                    <span id="line3" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
+    <!-- Main Portfolio Integration Navbar -->
+    <header class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down" id="main-header">
+        <div class="flex justify-between items-center w-full">
+            <div class="cursor-pointer pointer-events-auto group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
+                        <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
+                            <path d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
+                            <path d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
+                            <path d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
+                            <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
+                        </g>
+                    </svg>
+                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
                 </div>
             </div>
+
+            <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+                <a href="/#expertise" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.expertise">
+                    ESPECIALIDADE
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="/#about" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.about">
+                    SOBRE
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="/#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" data-t="nav.contact">
+                    CONTACTO
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer relative group w-6 text-center pointer-events-auto" onclick="toggleLang()" id="lang-toggle">
+                    PT
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
+            </nav>
+
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn" onclick="toggleMenu()">
+                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">Menu</span>
+                <div class="relative w-6 h-4 group cursor-pointer">
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0" id="hamburger-top"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2" id="hamburger-mid"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4" id="hamburger-bottom"></span>
+                </div>
+            </button>
         </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none">
+    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                EXPERTISE
+                <span data-t="nav.expertise">ESPECIALIDADE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
-                ABOUT
+                <span data-t="nav.about">SOBRE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
-                CONTACT
+                <span data-t="nav.contact">CONTACTO</span>
             </div>
 
-            <div class="mt-12 pt-12 border-t border-white/10 flex justify-between items-center">
-                <div class="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors" onclick="toggleLang(); toggleMenu();">
-                    <span class="opacity-100 text-white" id="lang-pt">PT-BR</span>
-                    <span class="text-[10px] opacity-20">/</span>
-                    <span class="opacity-40" id="lang-en">ENGLISH</span>
-                </div>
+            <!-- Mobile Language Switcher -->
+            <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
+                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
+                <span class="text-white/20">/</span>
+                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile" onclick="toggleLang()">EN</span>
             </div>
         </div>
     </div>
@@ -411,43 +362,37 @@
     <script>
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            const body = document.body;
-            const line1 = document.getElementById('line1');
-            const line2 = document.getElementById('line2');
-            const line3 = document.getElementById('line3');
             const menuText = document.getElementById('menu-text');
+            const hamburgerTop = document.getElementById('hamburger-top');
+            const hamburgerMid = document.getElementById('hamburger-mid');
+            const hamburgerBottom = document.getElementById('hamburger-bottom');
 
-            const isOpen = menu.classList.contains('active');
+            const isOpen = !menu.classList.contains('translate-x-full');
 
             if (!isOpen) {
-                menu.classList.add('active');
-                menu.classList.remove('pointer-events-none');
-                body.classList.add('menu-open');
-                line1.style.top = '8px';
-                line1.style.transform = 'rotate(45deg)';
-                line2.style.opacity = '0';
-                line3.style.top = '8px';
-                line3.style.transform = 'rotate(-45deg)';
-                menuText.innerText = 'CLOSE';
+                menu.classList.remove('pointer-events-none', 'translate-x-full');
+                menu.classList.add('translate-x-0', 'opacity-100');
+                menuText.textContent = 'FECHAR';
+                hamburgerTop.style.top = '8px';
+                hamburgerTop.style.transform = 'rotate(45deg)';
+                hamburgerMid.style.opacity = '0';
+                hamburgerBottom.style.top = '8px';
+                hamburgerBottom.style.transform = 'rotate(-45deg)';
             } else {
-                menu.classList.remove('active');
-                menu.classList.add('pointer-events-none');
-                body.classList.remove('menu-open');
-                line1.style.top = '0';
-                line1.style.transform = 'rotate(0)';
-                line2.style.opacity = '1';
-                line3.style.top = '16px';
-                line3.style.transform = 'rotate(0)';
-                menuText.innerText = 'MENU';
+                menu.classList.remove('translate-x-0', 'opacity-100');
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                menuText.textContent = 'MENU';
+                hamburgerTop.style.top = '0';
+                hamburgerTop.style.transform = '';
+                hamburgerMid.style.opacity = '1';
+                hamburgerBottom.style.top = '16px';
+                hamburgerBottom.style.transform = '';
             }
         }
 
-        let currentLang = 'EN';
+        let currentLang = 'PT';
         const dictionary = {
             'PT': {
-                'expertise': 'ESPECIALIDADE',
-                'about': 'SOBRE',
-                'contact': 'CONTACTO',
                 'hero_h1': 'Dê vida ao <br/> design arquitetónico.',
                 'hero_p': 'Uma visualização 3D imersiva onde caminha livremente por cada espaço. A modelação de precisão encontra a física da luz em tempo real.',
                 'hero_scroll': 'Deslize para Explorar',
@@ -470,9 +415,6 @@
                 'footer_p': 'EXPERIÊNCIAS DIGITAIS E VISUALIZAÇÃO'
             },
             'EN': {
-                'expertise': 'EXPERTISE',
-                'about': 'ABOUT',
-                'contact': 'CONTACT',
                 'hero_h1': 'Bring architectural <br/> design to life.',
                 'hero_p': 'An immersive 3D visualization where you freely walk through every space. Precision modeling meets real-time light physics.',
                 'hero_scroll': 'Scroll to Explore',
@@ -496,51 +438,87 @@
             }
         };
 
-        function toggleLang() {
-            currentLang = currentLang === 'EN' ? 'PT' : 'EN';
-            const langToggle = document.querySelector('.lg\\:flex span.text-center');
-            const langPt = document.getElementById('lang-pt');
-            const langEn = document.getElementById('lang-en');
-
-            if (langToggle) langToggle.childNodes[0].textContent = currentLang + ' ';
-
-            // Update UI indicators
-            if (currentLang === 'PT') {
-                langPt.classList.remove('opacity-40');
-                langPt.classList.add('opacity-100', 'text-white');
-                langEn.classList.remove('opacity-100', 'text-white');
-                langEn.classList.add('opacity-40');
-            } else {
-                langEn.classList.remove('opacity-40');
-                langEn.classList.add('opacity-100', 'text-white');
-                langPt.classList.remove('opacity-100', 'text-white');
-                langPt.classList.add('opacity-40');
-            }
-
-            // Update Nav Items
-            document.querySelectorAll('nav a, header a, #mobile-menu .group').forEach(el => {
-                const text = el.innerText.replace(/^\d{2}\s+/, '').trim();
-                if (text === 'EXPERTISE' || text === 'ESPECIALIDADE') {
-                    el.childNodes[el.childNodes.length - 1].textContent = currentLang === 'PT' ? 'ESPECIALIDADE' : 'EXPERTISE';
-                }
-                if (text === 'ABOUT' || text === 'SOBRE') {
-                    el.childNodes[el.childNodes.length - 1].textContent = currentLang === 'PT' ? 'SOBRE' : 'ABOUT';
-                }
-                if (text === 'CONTACT' || text === 'CONTACTO') {
-                    el.childNodes[el.childNodes.length - 1].textContent = currentLang === 'PT' ? 'CONTACTO' : 'CONTACT';
-                }
-            });
-
-            // Update Body Content
+        function updateLanguage() {
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
                 if (dictionary[currentLang][key]) {
                     el.innerHTML = dictionary[currentLang][key];
                 }
             });
+
+            // Update toggle buttons
+            const toggle = document.getElementById('lang-toggle');
+            if (toggle) toggle.textContent = currentLang;
+
+            const ptMobile = document.getElementById('lang-pt-mobile');
+            const enMobile = document.getElementById('lang-en-mobile');
+
+            if (ptMobile && enMobile) {
+                if (currentLang === 'PT') {
+                    ptMobile.classList.add('text-white');
+                    ptMobile.classList.remove('opacity-40');
+                    enMobile.classList.remove('text-white');
+                    enMobile.classList.add('opacity-40');
+                } else {
+                    enMobile.classList.add('text-white');
+                    enMobile.classList.remove('opacity-40');
+                    ptMobile.classList.remove('text-white');
+                    ptMobile.classList.add('opacity-40');
+                }
+            }
         }
+
+        function toggleLang() {
+            currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+            updateLanguage();
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuText = document.getElementById('menu-text');
+            const hamburgerTop = document.getElementById('hamburger-top');
+            const hamburgerMid = document.getElementById('hamburger-mid');
+            const hamburgerBottom = document.getElementById('hamburger-bottom');
+
+            const isOpen = menu.classList.contains('active') || menu.classList.contains('translate-x-0');
+
+            if (!isOpen) {
+                menu.classList.remove('translate-x-full', 'pointer-events-none');
+                menu.classList.add('translate-x-0', 'opacity-100', 'active');
+                if (menuText) menuText.textContent = 'Fechar';
+                if (hamburgerTop) hamburgerTop.style.transform = 'translateY(8px) rotate(45deg)';
+                if (hamburgerMid) hamburgerMid.style.opacity = '0';
+                if (hamburgerBottom) {
+                    hamburgerBottom.style.top = '8px';
+                    hamburgerBottom.style.transform = 'translateY(0px) rotate(-45deg)';
+                }
+            } else {
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                menu.classList.remove('translate-x-0', 'opacity-100', 'active');
+                if (menuText) menuText.textContent = 'Menu';
+                if (hamburgerTop) hamburgerTop.style.transform = 'none';
+                if (hamburgerMid) hamburgerMid.style.opacity = '1';
+                if (hamburgerBottom) {
+                    hamburgerBottom.style.top = '16px';
+                    hamburgerBottom.style.transform = 'none';
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 80) {
+                header.style.background = 'rgba(14, 21, 17, 0.95)';
+            } else {
+                header.style.background = '';
+            }
+        }, { passive: true });
     </script>
 </body>
-
 </html>
-</body></html>

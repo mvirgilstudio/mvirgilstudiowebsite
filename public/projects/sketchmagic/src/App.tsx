@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Gamepad2, Sparkles, Wand2, Zap, Layers, Share2, ArrowRight } from 'lucide-react';
 import { ImageComparisonSlider } from './components/ui/image-comparison-slider-vertical';
 import { ColoringPopup } from './components/ColoringPopup';
 
-const Nav = () => (
+const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: { 
+  lang: 'EN' | 'PT', 
+  setLang: (l: 'EN' | 'PT') => void,
+  isMenuOpen: boolean,
+  setIsMenuOpen: (o: boolean) => void
+}) => (
   <motion.header
-    className="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[100] pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
+    className="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[100] mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
     initial={{ y: -100 }}
     animate={{ y: 0 }}
     transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-    style={{ mixBlendMode: 'normal' }}
   >
     <div className="flex justify-between items-center">
       <a href="/" className="cursor-pointer pointer-events-auto group no-underline">
@@ -26,14 +30,16 @@ const Nav = () => (
               <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
             </g>
           </svg>
-          <span className="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+          <span className="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
         </div>
       </a>
+      
+      {/* Desktop Navigation */}
       <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
         {[
-          { label: 'ESPECIALIDADE', hash: '/' },
-          { label: 'SOBRE', hash: '/' },
-          { label: 'CONTACTO', hash: '/' }
+          { label: lang === 'PT' ? 'ESPECIALIDADE' : 'EXPERTISE', hash: '/#expertise' },
+          { label: lang === 'PT' ? 'SOBRE' : 'ABOUT', hash: '/#about' },
+          { label: lang === 'PT' ? 'CONTACTO' : 'CONTACT', hash: '/#contact' }
         ].map((item, i) => (
           <a
             key={item.label}
@@ -41,13 +47,38 @@ const Nav = () => (
             className="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white transition-colors relative group pointer-events-auto no-underline"
           >
             {item.label}
+            <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
-        <span className="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group w-6 text-center pointer-events-auto">PT</span>
+        
+        {/* Language Toggle (Desktop) */}
+        <span 
+          onClick={() => setLang(lang === 'EN' ? 'PT' : 'EN')}
+          className="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group w-6 text-center pointer-events-auto"
+        >
+          {lang}
+          <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </div>
+
+      {/* Mobile Menu Toggle */}
+      <div
+        className="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <div className="text-[10px] sm:text-xs font-mono tracking-widest text-[#b0b0b0] uppercase">
+          {isMenuOpen ? (lang === 'EN' ? 'Close' : 'Fechar') : (lang === 'EN' ? 'Menu' : 'Menu')}
+        </div>
+        <div className="relative w-6 h-4 group cursor-pointer transition-transform duration-300 active:scale-90">
+          <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 rotate-45' : 'top-0'}`}></span>
+          <span className={`absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+          <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 -rotate-45' : 'top-4'}`}></span>
+        </div>
       </div>
     </div>
   </motion.header>
 );
+
 
 const FloatingImage = ({ src, className, delay = 0 }: { src: string, className: string, delay?: number }) => (
   <motion.img
@@ -62,10 +93,70 @@ const FloatingImage = ({ src, className, delay = 0 }: { src: string, className: 
 
 export default function App() {
   const [isColoringOpen, setIsColoringOpen] = useState(false);
+  const [lang, setLang] = useState<'EN' | 'PT'>('PT');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="font-body selection:bg-accent selection:text-black">
-      <Nav />
+      <Nav 
+        lang={lang} 
+        setLang={setLang} 
+        isMenuOpen={isMenuOpen} 
+        setIsMenuOpen={setIsMenuOpen} 
+      />
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 min-h-screen bg-black z-[90] flex flex-col justify-center p-8 lg:hidden"
+          >
+            <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
+              {[
+                { label: lang === 'PT' ? 'ESPECIALIDADE' : 'EXPERTISE', hash: '/#expertise' },
+                { label: lang === 'PT' ? 'SOBRE' : 'ABOUT', hash: '/#about' },
+                { label: lang === 'PT' ? 'CONTACTO' : 'CONTACT', hash: '/#contact' }
+              ].map((item, i) => (
+                <motion.a
+                  key={item.label}
+                  href={item.hash}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + (i * 0.1), ease: "easeOut" }}
+                  className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group no-underline"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">0{i + 1}</span>
+                  {item.label}
+                </motion.a>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-12 pt-12 border-t border-white/10 flex justify-between items-center"
+              >
+                <div
+                  className="text-[#b0b0b0] hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors"
+                  onClick={() => {
+                    setLang(lang === 'EN' ? 'PT' : 'EN');
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <span className={lang === 'PT' ? 'text-white' : 'opacity-40'}>PT-BR</span>
+                  <span className="text-[10px] opacity-20">/</span>
+                  <span className={lang === 'EN' ? 'text-white' : 'opacity-40'}>ENGLISH</span>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Hero Section */}
       <main className="relative pt-40 pb-40 px-4 md:px-8 overflow-hidden min-h-screen flex items-center">

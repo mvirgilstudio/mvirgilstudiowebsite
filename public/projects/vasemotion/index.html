@@ -28,15 +28,16 @@
             theme: {
                 extend: {
                     colors: {
+                        background: "#131313",
+                        surface: "#1a1a1a",
                         primary: "#ffb400",
                         secondary: "#eebd8e",
-                        background: "#080808",
-                        surface: "#111111",
-                        outline: "#333333",
+                        concrete: "#b0b0b0",
                     },
                     fontFamily: {
                         sans: ["Inter", "sans-serif"],
-                        serif: ["DM Serif Display", "serif"],
+                        display: ["Outfit", "sans-serif"],
+                        orbitron: ["Orbitron", "sans-serif"],
                         mono: ["JetBrains Mono", "monospace"],
                     },
                 },
@@ -161,6 +162,30 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #ffb400;
         }
+
+        /* Navbar entry animation */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        header {
+            transform: translateY(-100%);
+        }
+
+        #mobile-menu {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+        }
     </style>
 </head>
 
@@ -185,10 +210,13 @@
     </div>
 
     <!-- Navigation -->
+    <!-- Main Portfolio Integration Navbar -->
     <header
-        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[100] mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
-        <div class="flex justify-between items-center">
-            <a href="/" class="cursor-pointer pointer-events-auto group">
+        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down"
+        id="main-header">
+        <div class="flex justify-between items-center w-full">
+            <div class="cursor-pointer pointer-events-auto group"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
@@ -203,66 +231,86 @@
                         </g>
                     </svg>
                     <span
-                        class="text-[10px] sm:text-sm md:text-base xl:text-lg font-black font-sans tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase whitespace-nowrap flex-shrink-0">Miguel
-                        Virgílio</span>
+                        class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL
+                        VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
                 </div>
-            </a>
+            </div>
 
-            <div class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+            <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
                 <a href="/#expertise"
-                    class="text-sm font-mono uppercase tracking-widest text-neutral-400 hover:text-white cursor-pointer transition-colors relative group">
-                    Expertise
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.expertise">
+                    ESPECIALIDADE
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/#about"
-                    class="text-sm font-mono uppercase tracking-widest text-neutral-400 hover:text-white cursor-pointer transition-colors relative group">
-                    About
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.about">
+                    SOBRE
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/#contact"
-                    class="text-sm font-mono uppercase tracking-widest text-neutral-400 hover:text-white cursor-pointer transition-colors relative group">
-                    Contact
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
+                    data-t="nav.contact">
+                    CONTACTO
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-            </div>
 
-            <!-- Mobile Menu Toggle -->
-            <div id="menu-toggle" class="lg:hidden flex items-center gap-4 pointer-events-auto cursor-pointer">
-                <div id="menu-text" class="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">Menu</div>
-                <div class="relative w-6 h-4 group">
-                    <span id="line-1"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 top-0"></span>
-                    <span id="line-2"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2"></span>
-                    <span id="line-3"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 top-4"></span>
+                <span
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer relative group w-6 text-center pointer-events-auto"
+                    onclick="toggleLang()" id="lang-toggle">
+                    PT
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
+            </nav>
+
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn"
+                onclick="toggleMenu()">
+                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase"
+                    id="menu-text">Menu</span>
+                <div class="relative w-6 h-4 group cursor-pointer">
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"
+                        id="hamburger-top"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2"
+                        id="hamburger-mid"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"
+                        id="hamburger-bottom"></span>
                 </div>
-            </div>
+            </button>
         </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 min-h-screen bg-black z-[90] flex flex-col justify-center p-8 lg:hidden translate-x-full transition-transform duration-500 ease-out">
-        <div class="flex flex-col gap-12 max-w-sm mx-auto w-full">
-            <a href="/#expertise"
-                class="text-3xl font-serif font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity flex items-center gap-6 group menu-link">
-                <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">01</span>
-                Expertise
-            </a>
-            <a href="/#about"
-                class="text-3xl font-serif font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity flex items-center gap-6 group menu-link">
-                <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">02</span>
-                About
-            </a>
-            <a href="/#contact"
-                class="text-3xl font-serif font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity flex items-center gap-6 group menu-link">
-                <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">03</span>
-                Contact
-            </a>
+        class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
+        <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
+                <span data-t="nav.expertise">ESPECIALIDADE</span>
+            </div>
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
+                <span data-t="nav.about">SOBRE</span>
+            </div>
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
+                <span data-t="nav.contact">CONTACTO</span>
+            </div>
+
+            <!-- Mobile Language Switcher -->
+            <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
+                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
+                <span class="text-white/20">/</span>
+                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile"
+                    onclick="toggleLang()">EN</span>
+            </div>
         </div>
     </div>
 
@@ -365,19 +413,19 @@
                 </div>
             </div>
 
-                <!-- Technical Floating Data -->
-                <div
-                    class="absolute top-10 left-10 font-mono text-[8px] text-primary/40 space-y-1 hidden lg:block uppercase">
-                    <div>XYZ_TRANSFORM(8.331)</div>
-                    <div>VECTOR_ALIGN(9.002)</div>
-                    <div>DENSITY_VULNERABILITY: 0.0%</div>
-                </div>
-                <div
-                    class="absolute bottom-10 right-10 font-mono text-[8px] text-primary/40 text-right hidden lg:block uppercase">
-                    <div>FLUID_SYNTH: DONE</div>
-                    <div>MESH_STABILITY: 100%</div>
-                    <div>BUFFER_WRITE_0xFF2</div>
-                </div>
+            <!-- Technical Floating Data -->
+            <div
+                class="absolute top-10 left-10 font-mono text-[8px] text-primary/40 space-y-1 hidden lg:block uppercase">
+                <div>XYZ_TRANSFORM(8.331)</div>
+                <div>VECTOR_ALIGN(9.002)</div>
+                <div>DENSITY_VULNERABILITY: 0.0%</div>
+            </div>
+            <div
+                class="absolute bottom-10 right-10 font-mono text-[8px] text-primary/40 text-right hidden lg:block uppercase">
+                <div>FLUID_SYNTH: DONE</div>
+                <div>MESH_STABILITY: 100%</div>
+                <div>BUFFER_WRITE_0xFF2</div>
+            </div>
             </div>
             </div>
         </section>
@@ -387,7 +435,11 @@
             <div class="max-w-[1400px] mx-auto px-10">
                 <div class="relative w-full glass border border-white/5 overflow-hidden shadow-2xl">
                     <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscrope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
+                        <iframe
+                            src="https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                            allow="accelerometer;gyroscrope;autoplay;encrypted-media;picture-in-picture;"
+                            allowfullscreen="true"></iframe>
                     </div>
                 </div>
             </div>
@@ -510,8 +562,8 @@
                                 Log</a>
                         </div>
                     </div>
-                    </div>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -929,45 +981,89 @@
         }
     </script>
     <script>
-        // Mobile Menu Logic
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuText = document.getElementById('menu-text');
-        const line1 = document.getElementById('line-1');
-        const line2 = document.getElementById('line-2');
-        const line3 = document.getElementById('line-3');
-        const menuLinks = document.querySelectorAll('.menu-link');
+        // Language content
+        const translations = {
+            pt: {
+                "nav.expertise": "ESPECIALIDADE",
+                "nav.about": "SOBRE",
+                "nav.contact": "CONTACTO",
+                // Add more translations as needed
+            },
+            en: {
+                "nav.expertise": "EXPERTISE",
+                "nav.about": "ABOUT",
+                "nav.contact": "CONTACT",
+                // Add more translations as needed
+            }
+        };
 
-        let isMenuOpen = false;
+        let currentLang = 'pt';
 
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
+        function updateLanguage() {
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
 
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('translate-x-full');
-                menuText.textContent = 'Close';
-                line1.style.top = '8px';
-                line1.style.transform = 'rotate(45deg)';
-                line2.style.opacity = '0';
-                line3.style.top = '8px';
-                line3.style.transform = 'rotate(-45deg)';
-                document.body.style.overflow = 'hidden';
-            } else {
-                mobileMenu.classList.add('translate-x-full');
-                menuText.textContent = 'Menu';
-                line1.style.top = '0';
-                line1.style.transform = 'rotate(0)';
-                line2.style.opacity = '1';
-                line3.style.top = '16px';
-                line3.style.transform = 'rotate(0)';
-                document.body.style.overflow = '';
+            // Update toggle buttons
+            const toggle = document.getElementById('lang-toggle');
+            if (toggle) toggle.textContent = currentLang.toUpperCase();
+
+            const ptMobile = document.getElementById('lang-pt-mobile');
+            const enMobile = document.getElementById('lang-en-mobile');
+
+            if (ptMobile && enMobile) {
+                if (currentLang === 'pt') {
+                    ptMobile.classList.add('text-white');
+                    ptMobile.classList.remove('opacity-40');
+                    enMobile.classList.remove('text-white');
+                    enMobile.classList.add('opacity-40');
+                } else {
+                    enMobile.classList.add('text-white');
+                    enMobile.classList.remove('opacity-40');
+                    ptMobile.classList.remove('text-white');
+                    ptMobile.classList.add('opacity-40');
+                }
             }
         }
 
-        menuToggle.addEventListener('click', toggleMenu);
-        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+        function toggleLang() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            updateLanguage();
+        }
 
-        // Smooth Scroll and existing logic continues...
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuText = document.getElementById('menu-text');
+            const hamburgerTop = document.getElementById('hamburger-top');
+            const hamburgerMid = document.getElementById('hamburger-mid');
+            const hamburgerBottom = document.getElementById('hamburger-bottom');
+
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (!isOpen) {
+                menu.classList.remove('translate-x-full', 'pointer-events-none');
+                menu.classList.add('translate-x-0', 'opacity-100');
+                if (menuText) menuText.textContent = 'Fechar';
+                if (hamburgerTop) hamburgerTop.style.transform = 'translateY(8px) rotate(45deg)';
+                if (hamburgerMid) hamburgerMid.style.opacity = '0';
+                if (hamburgerBottom) hamburgerBottom.style.transform = 'translateY(-8px) rotate(-45deg)';
+            } else {
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                menu.classList.remove('translate-x-0', 'opacity-100');
+                if (menuText) menuText.textContent = 'Menu';
+                if (hamburgerTop) hamburgerTop.style.transform = 'none';
+                if (hamburgerMid) hamburgerMid.style.opacity = '1';
+                if (hamburgerBottom) hamburgerBottom.style.transform = 'none';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+        });
     </script>
 </body>
 

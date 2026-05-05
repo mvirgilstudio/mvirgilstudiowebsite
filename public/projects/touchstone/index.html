@@ -125,59 +125,70 @@
             transform: translateX(0);
             opacity: 1;
         }
+
+        /* Navbar entry animation */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .animate-slide-down {
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        
+        header {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 
 <body class="bg-surface selection:bg-primary-container selection:text-primary">
     <!-- Header -->
     <header
-        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
+        class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down">
         <div class="flex justify-between items-center">
-            <a href="/" class="flex items-center gap-2 sm:gap-3 group">
-                <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto transition-transform duration-500 group-hover:scale-105">
-                    <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
-                        <path
-                            d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
-                        <path
-                            d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
-                        <path
-                            d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
-                        <path
-                            d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
-                    </g>
-                </svg>
-                <span
-                    class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase whitespace-nowrap flex-shrink-0">MIGUEL
-                    VIRGÍLIO</span>
-            </a>
+            <div class="cursor-pointer pointer-events-auto group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
+                        <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
+                            <path d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
+                            <path d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
+                            <path d="M881.5,94.04l299.47,360.49c29.61,34.48,27.99,79.47-4.96,110.98l-111.66,92.4c-1.32.24-2.1-1.14-2.88-1.89-9.68-9.42-21.33-25.61-30.45-36.55-88.98-106.73-176.67-214.56-266-321-31.21-36.14-28.65-81.31,6.5-113.45l109.97-90.98Z" />
+                            <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
+                        </g>
+                    </svg>
+                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+                </div>
+            </div>
 
-            <div class="hidden lg:flex gap-6 xl:gap-8 items-center">
+            <div class="hidden lg:flex gap-6 xl:gap-8 items-center pointer-events-auto">
                 <a href="/#expertise"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    EXPERTISE
+                    class="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group no-underline">
+                    ESPECIALIDADE
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/#about"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    ABOUT
+                    class="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group no-underline">
+                    SOBRE
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/#contact"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    CONTACT
+                    class="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group no-underline">
+                    CONTACTO
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLang()">
-                    EN
+                <span class="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group w-6 text-center">
+                    PT
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
             </div>
 
-            <div class="lg:hidden flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
-                <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">MENU</div>
+            <div class="lg:hidden flex items-center gap-2 sm:gap-4 cursor-pointer pointer-events-auto" onclick="toggleMenu()">
+                <div id="menu-text" class="text-[10px] sm:text-xs font-mono tracking-widest text-[#b0b0b0] uppercase">MENU</div>
                 <div class="relative w-6 h-4 group">
                     <span id="line1" class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
                     <span id="line2" class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
@@ -188,27 +199,19 @@
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none">
+    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                EXPERTISE
+                <span class="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">01</span>
+                <span>ESPECIALIDADE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
-                ABOUT
+                <span class="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">02</span>
+                <span>SOBRE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
-                CONTACT
-            </div>
-
-            <div class="mt-12 pt-12 border-t border-white/10 flex justify-between items-center">
-                <div class="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors" onclick="toggleLang(); toggleMenu();">
-                    <span class="opacity-100 text-white" id="lang-pt">PT-BR</span>
-                    <span class="text-[10px] opacity-20">/</span>
-                    <span class="opacity-40" id="lang-en">ENGLISH</span>
-                </div>
+                <span class="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">03</span>
+                <span>CONTACTO</span>
             </div>
         </div>
     </div>
@@ -487,34 +490,31 @@
     <script>
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            const body = document.body;
+            const menuText = document.getElementById('menu-text');
             const line1 = document.getElementById('line1');
             const line2 = document.getElementById('line2');
             const line3 = document.getElementById('line3');
-            const menuText = document.getElementById('menu-text');
 
-            const isOpen = menu.classList.contains('active');
+            const isOpen = !menu.classList.contains('translate-x-full');
 
             if (!isOpen) {
-                menu.classList.add('active');
-                menu.classList.remove('pointer-events-none');
-                body.classList.add('menu-open');
-                line1.style.top = '8px';
-                line1.style.transform = 'rotate(45deg)';
-                line2.style.opacity = '0';
-                line3.style.top = '8px';
-                line3.style.transform = 'rotate(-45deg)';
-                menuText.innerText = 'CLOSE';
+                menu.classList.remove('pointer-events-none', 'translate-x-full');
+                menu.classList.add('translate-x-0', 'opacity-100');
+                menuText.textContent = 'FECHAR';
+                line1.classList.add('top-2', 'rotate-45');
+                line1.classList.remove('top-0');
+                line2.classList.add('opacity-0');
+                line3.classList.add('top-2', '-rotate-45');
+                line3.classList.remove('top-4');
             } else {
-                menu.classList.remove('active');
-                menu.classList.add('pointer-events-none');
-                body.classList.remove('menu-open');
-                line1.style.top = '0';
-                line1.style.transform = 'rotate(0)';
-                line2.style.opacity = '1';
-                line3.style.top = '16px';
-                line3.style.transform = 'rotate(0)';
-                menuText.innerText = 'MENU';
+                menu.classList.remove('translate-x-0', 'opacity-100');
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                menuText.textContent = 'MENU';
+                line1.classList.remove('top-2', 'rotate-45');
+                line1.classList.add('top-0');
+                line2.classList.remove('opacity-0');
+                line3.classList.remove('top-2', '-rotate-45');
+                line3.classList.add('top-4');
             }
         }
 

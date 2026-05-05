@@ -20,14 +20,17 @@
                         background: "#131313",
                         surface: "#0e0e0e",
                         primary: "#ffffff",
-                        concrete: "#b0b0b0",
+                        "concrete": "#b0b0b0",
+                        "charcoal": "#050505",
+                        "graphite": "#0a0a0a",
                     },
                     fontFamily: {
                         headline: ["Playfair Display", "serif"],
                         body: ["Manrope", "sans-serif"],
-                        display: ["Sora", "sans-serif"],
-                        tech: ["Oswald", "sans-serif"],
-                        orbitron: ["Orbitron", "sans-serif"],
+                        "display": ["Sora", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "orbitron": ["Orbitron", "sans-serif"],
+                        "tech": ["Oswald", "sans-serif"]
                     }
                 },
             },
@@ -135,16 +138,32 @@
         .spec-card:hover {
             background: #1a1a1a;
         }
+
+        /* Navbar entry animation */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .animate-slide-down {
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        
+        header {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="selection:bg-white selection:text-black">
     <!-- Top Navigation -->
     <!-- Header / Logo Fixed -->
-    <header class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]">
-        <div class="flex justify-between items-center">
+    <!-- Main Portfolio Integration Navbar -->
+    <header class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[500] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%] animate-slide-down" id="main-header">
+        <div class="flex justify-between items-center w-full">
             <div class="cursor-pointer pointer-events-auto group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                 <div class="flex items-center gap-2 sm:gap-3">
-                    <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto transition-transform group-hover:scale-105 duration-500">
+                    <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
                             <path d="M424.86,291.14c1.02,11.16-1.19,22.28-1.85,33.37-10.01,168.36-21.31,336.76-33,505-1.58,22.77-1.36,47.42-4.13,69.87-5.95,48.25-44.76,75.11-92.37,69.61l-132.51-8.99,29.99-450.51c3.07-46.01,5.15-92.05,9-138,2.16-25.8,1.74-45,20.5-65.5,28.36-30.99,59.72-24.14,97.02-22,33.91,1.95,69.33,2.85,103,6.01,1.51.14,3,.47,4.35,1.14Z" />
                             <path d="M697.96,325.03l105.96,386.54c12.5,42.4-11.69,85.42-53.92,96.94l-138.01,37.49-106.53-388.97c-9.29-44.84,10.39-80.02,53.52-94.54,38.91-13.1,87.6-25.49,127.79-35.21,1.88-.46,10.36-2.97,11.18-2.25Z" />
@@ -152,50 +171,65 @@
                             <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                         </g>
                     </svg>
-                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+                    <span class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-concrete group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
                 </div>
             </div>
 
-            <!-- Desktop Navigation -->
-            <div class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
-                <a href="#" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    <span id="nav-expertise">ESPECIALIDADE</span>
+            <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+                <a href="/#expertise" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" id="nav-expertise">
+                    ESPECIALIDADE
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    <span id="nav-about">SOBRE</span>
+                <a href="/#about" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" id="nav-about">
+                    SOBRE
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group">
-                    <span id="nav-contact">CONTACTO</span>
+                <a href="/#contact" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline" id="nav-contact">
+                    CONTACTO
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <span id="lang-toggle" class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center" onclick="toggleLanguage()">
+
+                <span class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer relative group w-6 text-center pointer-events-auto" onclick="toggleLang()" id="lang-toggle">
                     PT
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
-            </div>
+            </nav>
 
-            <!-- Mobile Menu Toggle -->
-            <div class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto cursor-pointer" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">MENU</div>
-                <div class="relative w-6 h-4 group">
-                    <span class="absolute left-0 top-0 w-full h-[1px] bg-white transition-all"></span>
-                    <span class="absolute left-0 top-2 w-full h-[1px] bg-white transition-all"></span>
-                    <span class="absolute left-0 top-4 w-full h-[1px] bg-white transition-all"></span>
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn" onclick="toggleMenu()">
+                <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">Menu</span>
+                <div class="relative w-6 h-4 group cursor-pointer">
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0" id="hamburger-top"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2" id="hamburger-mid"></span>
+                    <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4" id="hamburger-bottom"></span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Simple Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden fixed inset-0 bg-black z-[45] flex flex-col justify-center p-8 pointer-events-auto">
-            <div class="flex flex-col gap-8 max-w-sm mx-auto w-full">
-                <a href="#" id="nav-expertise-mobile" class="text-3xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity">ESPECIALIDADE</a>
-                <a href="#" id="nav-about-mobile" class="text-3xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity">SOBRE</a>
-                <a href="#" id="nav-contact-mobile" class="text-3xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity">CONTACTO</a>
-            </div>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
+        <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
+                <span id="nav-expertise-mobile">ESPECIALIDADE</span>
+            </div>
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
+                <span id="nav-about-mobile">SOBRE</span>
+            </div>
+            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group" onclick="toggleMenu()">
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
+                <span id="nav-contact-mobile">CONTACTO</span>
+            </div>
+
+            <!-- Mobile Language Switcher -->
+            <div class="mt-8 flex gap-4 font-mono text-sm tracking-widest pointer-events-auto">
+                <span class="text-white cursor-pointer" id="lang-pt-mobile" onclick="toggleLang()">PT</span>
+                <span class="text-white/20">/</span>
+                <span class="opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="lang-en-mobile" onclick="toggleLang()">EN</span>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section & 3D Viewer -->
@@ -562,9 +596,48 @@
 
         let currentLang = 'PT';
 
-        function toggleLanguage() {
+        function toggleLang() {
             currentLang = currentLang === 'PT' ? 'EN' : 'PT';
+            
+            // Update toggle buttons highlighting
+            const ptMobile = document.getElementById('lang-pt-mobile');
+            const enMobile = document.getElementById('lang-en-mobile');
+            if (ptMobile && enMobile) {
+                ptMobile.className = currentLang === 'PT' ? 'text-white cursor-pointer' : 'opacity-40 hover:opacity-100 transition-opacity cursor-pointer';
+                enMobile.className = currentLang === 'EN' ? 'text-white cursor-pointer' : 'opacity-40 hover:opacity-100 transition-opacity cursor-pointer';
+            }
+
             updateLanguage();
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuText = document.getElementById('menu-text');
+            const hamburgerTop = document.getElementById('hamburger-top');
+            const hamburgerMid = document.getElementById('hamburger-mid');
+            const hamburgerBottom = document.getElementById('hamburger-bottom');
+
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (!isOpen) {
+                menu.classList.remove('pointer-events-none', 'translate-x-full');
+                menu.classList.add('translate-x-0', 'opacity-100');
+                menuText.textContent = 'FECHAR';
+                hamburgerTop.style.top = '8px';
+                hamburgerTop.style.transform = 'rotate(45deg)';
+                hamburgerMid.style.opacity = '0';
+                hamburgerBottom.style.top = '8px';
+                hamburgerBottom.style.transform = 'rotate(-45deg)';
+            } else {
+                menu.classList.remove('translate-x-0', 'opacity-100');
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                menuText.textContent = 'MENU';
+                hamburgerTop.style.top = '0';
+                hamburgerTop.style.transform = '';
+                hamburgerMid.style.opacity = '1';
+                hamburgerBottom.style.top = '16px';
+                hamburgerBottom.style.transform = '';
+            }
         }
 
         function updateLanguage() {
