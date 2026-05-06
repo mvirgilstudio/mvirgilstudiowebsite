@@ -5,6 +5,8 @@ import { useGLTF, Environment, ContactShadows, PerspectiveCamera, Center, Float,
 import * as THREE from 'three';
 import LottieBackground from './LottieBackground';
 
+import { TRANSLATIONS } from '../data/translations';
+
 const Model = ({ modelId, progress, rotationX, rotationY }: { modelId: string, progress: number, rotationX: number, rotationY: number }) => {
     const { scene } = useGLTF(`/assets/3d/s06/${modelId}.gltf`);
 
@@ -46,9 +48,11 @@ interface Section06ExperienceProps {
     modelId?: string;
     onModelChange?: (id: string) => void;
     onLottieLoaded?: () => void;
+    lang: string;
 }
 
-const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded }) => {
+const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded, lang }) => {
+    const t = TRANSLATIONS[lang as keyof typeof TRANSLATIONS] || TRANSLATIONS.EN;
     const [isMobile, setIsMobile] = useState(false);
     const [rotationX, setRotationX] = useState(0);
     const [rotationY, setRotationY] = useState(0);
@@ -129,7 +133,12 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
 
                         <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
                             <Center position={[-4, -1.5, 8]}>
-                                <Model modelId={modelId} progress={scrollProgress} rotationX={rotationX} rotationY={rotationY} />
+                                <Model 
+                                    modelId={modelId} 
+                                    progress={scrollProgress} 
+                                    rotationX={scrollProgress * Math.PI * 2}
+                                    rotationY={scrollProgress * Math.PI}
+                                />
                             </Center>
                         </Float>
 
@@ -156,7 +165,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                         >
                             <div className="w-2 h-2 rounded-full bg-purple-500 animate-ping" />
                             <span className="text-xs font-mono tracking-widest text-white uppercase font-bold bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
-                                Click &amp; Drag to Inspect
+                                {t.ui?.inspectExperience || "Click & Drag to Inspect"}
                             </span>
                         </motion.div>
                     ) : (
@@ -169,13 +178,13 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
                         >
                             <div className="w-[2px] h-10 bg-[#b46464]/50 animate-bounce" />
                             <span className="text-xs font-mono tracking-widest text-[#b46464] font-bold uppercase bg-black/40 px-3 py-1 rounded backdrop-blur-sm border border-[#b46464]/20">
-                                Scroll to Fabricate
+                                {t.sections.section_06.instructions?.mouse || "Scroll Mouse to Fabricate"}
                             </span>
                         </motion.div>
                     )}
                 </AnimatePresence>
                 <div className="text-xs font-tech text-white tracking-widest font-bold">
-                    {Math.round(scrollProgress * 100)}% Complete
+                    {Math.round(scrollProgress * 100)}% {lang === 'EN' ? 'Complete' : 'Completo'}
                 </div>
             </motion.div>
 

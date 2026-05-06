@@ -65,12 +65,16 @@ export const TRANSLATIONS = {
                 title: '3D PRINTING & FABRICATION',
                 titleLines: ['3D PRINTING', '& FABRICATION'],
                 backgroundText: ['FROM DIGITAL', 'TO PHYSICAL'],
+                instructions: {
+                    mouse: "Scroll Mouse to Fabricate"
+                }
             },
         },
         ui: {
             enterExperience: 'ENTER EXPERIENCE',
             exitExperience: 'EXIT EXPERIENCE',
             visitProject: 'VISIT PROJECT',
+            inspectExperience: 'Click & Drag to Inspect',
         },
         intel: {
             'CAPACITIVE SENSORS': {
@@ -288,12 +292,16 @@ export const TRANSLATIONS = {
                 title: 'IMPRESSÃO 3D E FABRICO',
                 titleLines: ['IMPRESSÃO 3D', 'E FABRICO'],
                 backgroundText: ['DO DIGITAL', 'PARA O FÍSICO'],
+                instructions: {
+                    mouse: "FAÇA SCROLL DO RATO PARA FABRICAR"
+                }
             },
         },
         ui: {
-            enterExperience: 'ENTER EXPERIENCE',
-            exitExperience: 'EXIT EXPERIENCE',
-            visitProject: 'VISIT PROJECT',
+            enterExperience: 'ENTRAR NA EXPERIÊNCIA',
+            exitExperience: 'SAIR DA EXPERIÊNCIA',
+            visitProject: 'VISITAR PROJETO',
+            inspectExperience: 'Clique e Arraste para Inspecionar',
         },
         intel: {
             'CAPACITIVE SENSORS': {
