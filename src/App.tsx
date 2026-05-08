@@ -62,10 +62,10 @@ const App: React.FC = () => {
 
       {/* Header / Logo Fixed */}
       <motion.header
-        className="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-50 mix-blend-difference pointer-events-none bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+        className="fixed top-0 left-0 w-full px-4 sm:px-12 md:px-16 py-3 md:py-5 z-50 pointer-events-none bg-black/40 backdrop-blur-xl border-b border-white/5"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex justify-between items-center">
           <div className="cursor-pointer pointer-events-auto group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -85,7 +85,10 @@ const App: React.FC = () => {
                   <path d="M1054.06,849.09l280.39-154.14,167.05-583.95c10.52-43.7,52.14-64.24,94.87-54.88l161.66,19.34c1.55,1.16.46,1.27.22,2.26-1.35,5.49-3.04,11.03-4.54,16.49-67.07,244.01-136.55,487.45-204.95,731.05-11.58,29.34-31.64,48.25-58.74,63.26-82.44,45.64-171.49,83.3-254.34,128.66-42.39,18.03-77.87,6.18-102.49-31.87-27.56-42.59-49.97-88.88-77.36-131.64l-1.78-4.58Z" />
                 </g>
               </motion.svg>
-              <span className="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity block whitespace-nowrap flex-shrink-0">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
+              <span className="text-[9px] min-[380px]:text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-white/90 group-hover:text-white transition-all flex items-baseline gap-1 whitespace-nowrap flex-shrink-0">
+                MIGUEL VIRGÍLIO 
+                <span className="opacity-40 font-light text-[0.8em] hidden min-[320px]:inline">STUDIO</span>
+              </span>
             </div>
           </div>
 
