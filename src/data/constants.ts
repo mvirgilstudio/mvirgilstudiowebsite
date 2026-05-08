@@ -29,7 +29,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'An experimental interface where a pile of real apples becomes a playable, touch-sensitive piano. Each section of the fruit cluster triggers a musical note, transforming organic matter into an instrument. Simultaneously, a projected 3D apple environment mirrors the user’s hand movements in real time. The physical and digital worlds blend into one tactile, immersive performance. A study in playful interaction, natural materials, and expressive motion.',
     mediaUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
     mediaType: 'image',
-    externalLink: 'https://example.com/apple-harmonics'
+    externalLink: '/projects/appleharmonics/index.html'
   },
   {
     id: 'w2',
