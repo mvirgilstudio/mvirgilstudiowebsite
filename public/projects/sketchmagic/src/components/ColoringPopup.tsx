@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Eraser, Paintbrush, Trash2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Eraser, Paintbrush, Trash2, PaintBucket } from 'lucide-react';
 
 const TOTAL_IMAGES = 16;
 const PALETTE_COLORS = [
@@ -12,6 +12,8 @@ const PALETTE_COLORS = [
   '#005AB4', // Blue
   '#A259FF', // Purple
   '#FF69B4', // Pink
+  '#000000', // Black
+  '#808080', // Gray
 ];
 
 function padIndex(n: number): string {
@@ -27,6 +29,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [selectedColor, setSelectedColor] = useState(PALETTE_COLORS[0]);
   const [isEraser, setIsEraser] = useState(false);
+  const [isBucket, setIsBucket] = useState(false);
   const [brushSize, setBrushSize] = useState(18);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -142,6 +145,82 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
     };
   };
 
+   const floodFill = (startX: number, startY: number) => {
+    const colorCanvas = colorLayerRef.current;
+    const canvas = canvasRef.current;
+    if (!colorCanvas || !canvas) return;
+    
+    const colorCtx = colorCanvas.getContext('2d', { willReadFrequently: true });
+    if (!colorCtx) return;
+
+    const lineartImg = (canvas as any).__lineartImg;
+    if (!lineartImg) return;
+
+    // Create temporary canvas for clean lineart sampling
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const tempCtx = tempCanvas.getContext('2d');
+    if (!tempCtx) return;
+    tempCtx.drawImage(lineartImg, 0, 0, canvas.width, canvas.height);
+    const lineartData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    const colorData = colorCtx.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
+    
+    const width = lineartData.width;
+    const height = lineartData.height;
+    const pixels = lineartData.data;
+    const colorPixels = colorData.data;
+
+    const fillR = parseInt(selectedColor.slice(1, 3), 16);
+    const fillG = parseInt(selectedColor.slice(3, 5), 16);
+    const fillB = parseInt(selectedColor.slice(5, 7), 16);
+
+    const x = Math.floor(startX);
+    const y = Math.floor(startY);
+    
+    if (x < 0 || x >= width || y < 0 || y >= height) return;
+    
+    const startIdx = (y * width + x) * 4;
+
+    // Boundary check: fill only areas that are white in the lineart
+    const isWhiteInLineart = (idx: number) => pixels[idx] > 220 && pixels[idx+1] > 220 && pixels[idx+2] > 220;
+    
+    if (!isWhiteInLineart(startIdx)) return;
+
+    // Optimized Flood Fill (Stack-based)
+    const stack: [number, number][] = [[x, y]];
+    const visited = new Uint8Array(width * height);
+    visited[y * width + x] = 1;
+
+    while (stack.length > 0) {
+      const [currX, currY] = stack.pop()!;
+      const idx = (currY * width + currX) * 4;
+
+      colorPixels[idx] = fillR;
+      colorPixels[idx + 1] = fillG;
+      colorPixels[idx + 2] = fillB;
+      colorPixels[idx + 3] = 255;
+
+      const neighbors = [[currX + 1, currY], [currX - 1, currY], [currX, currY + 1], [currX, currY - 1]];
+      for (const [nx, ny] of neighbors) {
+        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+          const vIdx = ny * width + nx;
+          if (!visited[vIdx]) {
+            const nIdx = vIdx * 4;
+            if (isWhiteInLineart(nIdx)) {
+              visited[vIdx] = 1;
+              stack.push([nx, ny]);
+            }
+          }
+        }
+      }
+    }
+
+    colorCtx.putImageData(colorData, 0, 0);
+    compositeCanvas(lineartImg);
+  };
+
   const drawStroke = (from: { x: number; y: number }, to: { x: number; y: number }) => {
     const colorCanvas = colorLayerRef.current;
     const canvas = canvasRef.current;
@@ -176,13 +255,16 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
     }
   };
 
-  const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
+   const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-    isDrawing.current = true;
     const pos = getCanvasPos(e);
-    if (pos) {
+    if (!pos) return;
+
+    if (isBucket) {
+      floodFill(pos.x, pos.y);
+    } else {
+      isDrawing.current = true;
       lastPos.current = pos;
-      // Draw a single dot
       drawStroke(pos, pos);
     }
   };
@@ -212,13 +294,20 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
     setCurrentIndex((prev) => (prev <= 1 ? TOTAL_IMAGES : prev - 1));
   };
 
-  const selectColor = (color: string) => {
+   const selectColor = (color: string) => {
     setSelectedColor(color);
+    setIsEraser(false);
+    // Keep bucket if it was selected
+  };
+
+  const toggleBucket = () => {
+    setIsBucket((prev) => !prev);
     setIsEraser(false);
   };
 
-  const toggleEraser = () => {
+   const toggleEraser = () => {
     setIsEraser((prev) => !prev);
+    setIsBucket(false);
   };
 
   const clearCanvas = () => {
@@ -239,12 +328,17 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
     }
   };
 
-  const cursorRadius = brushSize / 2;
+   const cursorRadius = brushSize / 2;
   const cursorColor = isEraser ? '#FF3131' : selectedColor;
-  const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="${brushSize}" height="${brushSize}" viewBox="0 0 ${brushSize} ${brushSize}"><circle cx="${cursorRadius}" cy="${cursorRadius}" r="${Math.max(1, cursorRadius - 1)}" fill="none" stroke="${cursorColor}" stroke-width="1.5"/></svg>`;
-  const hotSpot = Math.round(cursorRadius);
-  const base64Svg = btoa(svgString);
-  const customCursor = `url(data:image/svg+xml;base64,${base64Svg}) ${hotSpot} ${hotSpot}, crosshair`;
+  
+  // Custom cursor logic
+  let customCursor = 'crosshair';
+  if (!isBucket) {
+    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="${brushSize}" height="${brushSize}" viewBox="0 0 ${brushSize} ${brushSize}"><circle cx="${cursorRadius}" cy="${cursorRadius}" r="${Math.max(1, cursorRadius - 1)}" fill="none" stroke="${cursorColor}" stroke-width="1.5"/></svg>`;
+    const hotSpot = Math.round(cursorRadius);
+    const base64Svg = btoa(svgString);
+    customCursor = `url(data:image/svg+xml;base64,${base64Svg}) ${hotSpot} ${hotSpot}, crosshair`;
+  }
 
   return (
     <AnimatePresence>
@@ -254,7 +348,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center"
+          className="fixed inset-0 z-[1000] flex items-center justify-center"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)' }}
           onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
         >
@@ -383,6 +477,19 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
 
               {/* Divider */}
               <div className="lg:w-full lg:h-1 w-1 h-full bg-white/20 lg:my-1 mx-1 lg:mx-0" />
+
+               {/* Bucket button */}
+              <button
+                onClick={toggleBucket}
+                className={`w-10 h-10 lg:w-12 lg:h-12 border-4 flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${
+                  isBucket
+                    ? 'bg-secondary border-white text-white shadow-[0_0_15px_rgba(0,191,255,0.6)]'
+                    : 'bg-white/10 border-white/40 text-white/70 hover:bg-white/20'
+                }`}
+                title="Paint Bucket (Flood Fill)"
+              >
+                <PaintBucket className="w-6 h-6" />
+              </button>
 
               {/* Eraser button */}
               <button
