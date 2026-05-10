@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gamepad2, Sparkles, Wand2, Zap, Layers, Share2, ArrowRight } from 'lucide-react';
 import { ImageComparisonSlider } from './components/ui/image-comparison-slider-vertical';
@@ -97,6 +97,29 @@ export default function App() {
   const [isMemoryGameOpen, setIsMemoryGameOpen] = useState(false);
   const [lang, setLang] = useState<'EN' | 'PT'>('PT');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpticalInfoOpen, setIsOpticalInfoOpen] = useState(false);
+
+  // Show optical UI only when a popup is open
+  useEffect(() => {
+    const opticalUI = document.getElementById('optical-ui-wrapper');
+    if (isColoringOpen || isMemoryGameOpen) {
+      if (opticalUI) {
+        opticalUI.style.visibility = 'visible';
+        opticalUI.style.opacity = '1';
+        opticalUI.style.pointerEvents = 'auto'; // allow clicking the button
+      }
+    } else {
+      if (opticalUI) {
+        opticalUI.style.visibility = 'hidden';
+        opticalUI.style.opacity = '0';
+        opticalUI.style.pointerEvents = 'none';
+      }
+      // Turn off hand tracking if it is active
+      if (typeof window !== 'undefined' && (window as any).disableHandTracking) {
+        (window as any).disableHandTracking();
+      }
+    }
+  }, [isColoringOpen, isMemoryGameOpen]);
 
   return (
     <div className="font-body selection:bg-accent selection:text-black">
@@ -212,6 +235,18 @@ export default function App() {
                 MEMORY GAME!
               </button>
             </div>
+
+            {/* Optical Control Info Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              onClick={() => setIsOpticalInfoOpen(true)}
+              className="mt-6 flex items-center gap-3 px-6 py-3 bg-black/50 backdrop-blur-sm border-2 border-cyan-400/40 rounded-full hover:bg-cyan-400/10 hover:border-cyan-400 transition-all group"
+            >
+              <span className="text-cyan-400 text-lg group-hover:scale-110 transition-transform">✋</span>
+              <span className="font-pixel text-cyan-400 text-sm uppercase tracking-wider font-bold">{lang === 'PT' ? 'Instruções de Controlo Ótico' : 'Optical Control Instructions'}</span>
+            </motion.button>
           </motion.div>
 
           <div className="w-full lg:w-1/2 relative mt-8 lg:mt-0">
@@ -405,6 +440,87 @@ export default function App() {
 
       <ColoringPopup isOpen={isColoringOpen} onClose={() => setIsColoringOpen(false)} />
       <MemoryGamePopup isOpen={isMemoryGameOpen} onClose={() => setIsMemoryGameOpen(false)} />
+
+      {/* Optical Control Instructions Popup */}
+      <AnimatePresence>
+        {isOpticalInfoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[300] flex items-center justify-center"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)' }}
+            onClick={() => setIsOpticalInfoOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 30 }}
+              transition={{ type: 'spring', damping: 22, stiffness: 300 }}
+              className="relative bg-gradient-to-br from-gray-900 to-black border-4 border-cyan-400/60 rounded-2xl p-8 md:p-10 max-w-lg w-[95vw] shadow-[0_0_60px_rgba(0,255,255,0.2)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setIsOpticalInfoOpen(false)}
+                className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all text-lg"
+              >
+                ✕
+              </button>
+
+              {/* Header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-cyan-400/20 rounded-lg flex items-center justify-center">
+                  <span className="text-2xl">✋</span>
+                </div>
+                <div>
+                  <h3 className="font-headline text-white text-xl font-bold uppercase">{lang === 'PT' ? 'Controlo Ótico' : 'Optical Control'}</h3>
+                  <p className="font-pixel text-cyan-400/70 text-xs">{lang === 'PT' ? 'Instruções de Rastreamento Manual' : 'Hand Tracking Instructions'}</p>
+                </div>
+              </div>
+
+              {/* Steps */}
+              <div className="space-y-4 mb-6">
+                {(lang === 'PT' ? [
+                  { emoji: '👆', title: 'NAVEGAR', desc: 'Move a tua mão em frente à câmara para controlar o cursor no ecrã.' },
+                  { emoji: '🤏', title: 'CLICAR E DESENHAR', desc: 'Junta o polegar e o indicador para clicar em botões ou desenhar na tela.' },
+                  { emoji: '✊', title: 'SOLTAR', desc: 'Abre os dedos para parar de desenhar ou soltar um botão.' },
+                  { emoji: '🎯', title: 'SOBREVOAR', desc: 'Os botões brilham em ciano quando o cursor está sobre eles — junta os dedos para ativar!' },
+                ] : [
+                  { emoji: '👆', title: 'NAVIGATE', desc: 'Move your hand in front of the camera to control the cursor on screen.' },
+                  { emoji: '🤏', title: 'CLICK & DRAW', desc: 'Pinch your thumb and index finger together to click buttons or draw on the canvas.' },
+                  { emoji: '✊', title: 'RELEASE', desc: 'Open your fingers to stop drawing or release a button.' },
+                  { emoji: '🎯', title: 'HOVER', desc: 'Buttons glow cyan when the cursor is over them — pinch to activate!' },
+                ]).map((step, i) => (
+                  <motion.div
+                    key={step.title}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.08 }}
+                    className="flex items-start gap-4 bg-white/5 rounded-xl p-4 border border-white/10"
+                  >
+                    <span className="text-3xl flex-shrink-0 mt-0.5">{step.emoji}</span>
+                    <div>
+                      <span className="font-pixel text-cyan-400 text-sm font-bold">{step.title}</span>
+                      <p className="font-pixel text-white/70 text-xs leading-relaxed mt-1">{step.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Footer note */}
+              <div className="bg-cyan-400/10 border border-cyan-400/20 rounded-lg p-3 text-center">
+                <p className="font-pixel text-cyan-400/80 text-xs">
+                  💡 {lang === 'PT'
+                    ? <>Clica no botão <strong>"Controlo Ótico"</strong> dentro de cada jogo para ativar</>
+                    : <>Click the <strong>"Optical Control"</strong> button inside each game to activate</>}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
