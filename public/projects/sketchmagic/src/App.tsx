@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Gamepad2, Sparkles, Wand2, Zap, Layers, Share2, ArrowRight } from 'lucide-react';
 import { ImageComparisonSlider } from './components/ui/image-comparison-slider-vertical';
 import { ColoringPopup } from './components/ColoringPopup';
+import { MemoryGamePopup } from './components/MemoryGamePopup';
 
 const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: { 
   lang: 'EN' | 'PT', 
@@ -93,6 +94,7 @@ const FloatingImage = ({ src, className, delay = 0 }: { src: string, className: 
 
 export default function App() {
   const [isColoringOpen, setIsColoringOpen] = useState(false);
+  const [isMemoryGameOpen, setIsMemoryGameOpen] = useState(false);
   const [lang, setLang] = useState<'EN' | 'PT'>('PT');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -202,6 +204,12 @@ export default function App() {
                 className="px-10 py-6 bg-primary text-white font-headline text-2xl y2k-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all border-4 border-white font-bold"
               >
                 START MAGIC!
+              </button>
+              <button
+                onClick={() => setIsMemoryGameOpen(true)}
+                className="px-10 py-6 bg-secondary text-white font-headline text-2xl y2k-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all border-4 border-white font-bold"
+              >
+                MEMORY GAME!
               </button>
             </div>
           </motion.div>
@@ -396,6 +404,7 @@ export default function App() {
       </footer>
 
       <ColoringPopup isOpen={isColoringOpen} onClose={() => setIsColoringOpen(false)} />
+      <MemoryGamePopup isOpen={isMemoryGameOpen} onClose={() => setIsMemoryGameOpen(false)} />
     </div>
   );
 }
