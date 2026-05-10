@@ -16,8 +16,6 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-    <script type="module" crossorigin src="/projects/sketchmagic/assets/index-DQv_o4h3.js"></script>
-    <link rel="stylesheet" crossorigin href="/projects/sketchmagic/assets/index-DL_qCYQ6.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -44,6 +42,8 @@
             z-index: 1000 !important;
         }
     </style>
+  <script type="module" crossorigin src="/projects/sketchmagic/assets/index-cUsNlUIB.js"></script>
+  <link rel="stylesheet" crossorigin href="/projects/sketchmagic/assets/index-D1CKUm7f.css">
 </head>
 
 <body>
@@ -123,7 +123,7 @@
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 min-h-screen bg-black z-[150] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
+        class="fixed inset-0 min-h-screen bg-black z-[450] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
         <div class="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full pointer-events-auto">
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                 onclick="toggleMenu()">
@@ -346,10 +346,6 @@
             if (root) {
                 observer.observe(root, { childList: true, subtree: true });
             }
-            
-            // Force navbar z-index to be lower than popups
-            const header = document.getElementById('main-header');
-            if (header) header.style.setProperty('z-index', '100', 'important');
         });
     </script>
 </body>

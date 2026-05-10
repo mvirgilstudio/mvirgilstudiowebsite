@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Eraser, Paintbrush, Trash2, PaintBucket } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Eraser, Paintbrush, Trash2, PaintBucket, Wand2 } from 'lucide-react';
 
 const TOTAL_IMAGES = 16;
 const PALETTE_COLORS = [
@@ -217,6 +217,82 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
       }
     }
 
+    colorCtx.putImageData(colorData, 0, 0);
+    compositeCanvas(lineartImg);
+  };
+
+  const autoColor = () => {
+    const colorCanvas = colorLayerRef.current;
+    const canvas = canvasRef.current;
+    if (!colorCanvas || !canvas) return;
+    
+    const colorCtx = colorCanvas.getContext('2d', { willReadFrequently: true });
+    if (!colorCtx) return;
+
+    const lineartImg = (canvas as any).__lineartImg;
+    if (!lineartImg) return;
+
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const tempCtx = tempCanvas.getContext('2d');
+    if (!tempCtx) return;
+    tempCtx.drawImage(lineartImg, 0, 0, canvas.width, canvas.height);
+    const lineartData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    const colorData = colorCtx.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
+    
+    const width = lineartData.width;
+    const height = lineartData.height;
+    const pixels = lineartData.data;
+    const colorPixels = colorData.data;
+
+    const isWhiteInLineart = (idx: number) => pixels[idx] > 220 && pixels[idx+1] > 220 && pixels[idx+2] > 220;
+    
+    const visited = new Uint8Array(width * height);
+    const colorfulPalette = PALETTE_COLORS.slice(0, 8); // exclude black and gray
+    
+    for (let y = 0; y < height; y += 2) {
+      for (let x = 0; x < width; x += 2) {
+        const vIdx = y * width + x;
+        const startIdx = vIdx * 4;
+        
+        if (isWhiteInLineart(startIdx) && !visited[vIdx] && colorPixels[startIdx+3] === 0) {
+           const randomColor = colorfulPalette[Math.floor(Math.random() * colorfulPalette.length)];
+           const fillR = parseInt(randomColor.slice(1, 3), 16);
+           const fillG = parseInt(randomColor.slice(3, 5), 16);
+           const fillB = parseInt(randomColor.slice(5, 7), 16);
+           
+           const stack: [number, number][] = [[x, y]];
+           visited[vIdx] = 1;
+
+           while (stack.length > 0) {
+             const [currX, currY] = stack.pop()!;
+             const idx = (currY * width + currX) * 4;
+
+             colorPixels[idx] = fillR;
+             colorPixels[idx + 1] = fillG;
+             colorPixels[idx + 2] = fillB;
+             colorPixels[idx + 3] = 255;
+
+             const neighbors = [[currX + 1, currY], [currX - 1, currY], [currX, currY + 1], [currX, currY - 1]];
+             for (const [nx, ny] of neighbors) {
+               if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                 const nVIdx = ny * width + nx;
+                 if (!visited[nVIdx]) {
+                   const nIdx = nVIdx * 4;
+                   if (isWhiteInLineart(nIdx)) {
+                     visited[nVIdx] = 1;
+                     stack.push([nx, ny]);
+                   }
+                 }
+               }
+             }
+           }
+        }
+      }
+    }
+    
     colorCtx.putImageData(colorData, 0, 0);
     compositeCanvas(lineartImg);
   };
@@ -477,6 +553,15 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
 
               {/* Divider */}
               <div className="lg:w-full lg:h-1 w-1 h-full bg-white/20 lg:my-1 mx-1 lg:mx-0" />
+
+              {/* Magic Wand button */}
+              <button
+                onClick={autoColor}
+                className="w-10 h-10 lg:w-12 lg:h-12 border-4 bg-white/10 border-white/40 text-white/70 hover:bg-[#A259FF] hover:border-white hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+                title="Magic Auto-Color"
+              >
+                <Wand2 className="w-6 h-6" />
+              </button>
 
                {/* Bucket button */}
               <button
