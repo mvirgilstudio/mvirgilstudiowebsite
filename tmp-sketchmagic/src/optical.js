@@ -77,7 +77,7 @@
 
             const landmarks = results.multiHandLandmarks[0];
             const idx = landmarks[8];
-            
+
             // Shrink active zone so edges are easy to reach
             const margin = 0.20;
             const rawX = (idx.x - margin) / (1 - 2 * margin);
@@ -101,7 +101,7 @@
 
             const isPinch = isPinching(landmarks);
             const now = Date.now();
-            
+
             // Hide handCursor temporarily to avoid interfering with elementFromPoint
             if (handCursor) handCursor.style.display = 'none';
             const el = document.elementFromPoint(cx, cy);
@@ -129,7 +129,7 @@
                     el.dispatchEvent(new MouseEvent('mouseup', {
                         bubbles: true, cancelable: true, clientX: cx, clientY: cy, buttons: 0
                     }));
-                    
+
                     if (now - lastClickTime < 500) {
                         const btn = el.closest('button');
                         if (btn) {
@@ -160,7 +160,7 @@
                     drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#00ffff', lineWidth: 2 });
                     drawLandmarks(canvasCtx, landmarks, { color: '#ffffff', lineWidth: 1, radius: 2 });
                 }
-            } catch(e) {
+            } catch (e) {
                 console.error('Drawing skeleton failed:', e);
             }
         } else {
@@ -190,22 +190,6 @@
         console.error('MediaPipe init error:', e);
     }
 
-    const getTranslation = (key) => {
-        const lang = window.currentLang || 'pt';
-        // These keys should match what's in index.html translations
-        const trans = {
-            pt: {
-                'optical.control': 'Controlo Ótico',
-                'optical.active': 'Controlo Ótico: Ativo'
-            },
-            en: {
-                'optical.control': 'Optical Control',
-                'optical.active': 'Optical Control: Active'
-            }
-        };
-        return trans[lang][key] || key;
-    };
-
     window.toggleHandTracking = async function () {
         handTrackingEnabled = !handTrackingEnabled;
         const btnText = document.getElementById('tracking-button-text');
@@ -213,7 +197,7 @@
 
         if (handTrackingEnabled) {
             try {
-                if (btnText) btnText.innerText = getTranslation('optical.active');
+                if (btnText) btnText.innerText = 'Optical Control: Active';
                 if (toggleBtn) toggleBtn.classList.add('ring-4', 'ring-cyan-500/50');
                 if (cameraContainer) cameraContainer.classList.remove('opacity-0');
 
@@ -232,12 +216,12 @@
             } catch (e) {
                 console.error('Activation failed:', e);
                 handTrackingEnabled = false;
-                if (btnText) btnText.innerText = getTranslation('optical.control');
+                if (btnText) btnText.innerText = 'Optical Control';
                 if (toggleBtn) toggleBtn.classList.remove('ring-4', 'ring-cyan-500/50');
                 if (cameraContainer) cameraContainer.classList.add('opacity-0');
             }
         } else {
-            if (btnText) btnText.innerText = getTranslation('optical.control');
+            if (btnText) btnText.innerText = 'Optical Control';
             if (toggleBtn) toggleBtn.classList.remove('ring-4', 'ring-cyan-500/50');
             if (cameraContainer) cameraContainer.classList.add('opacity-0');
             if (cameraInstance) { await cameraInstance.stop(); }
@@ -246,7 +230,7 @@
         }
     };
 
-    window.disableHandTracking = async function() {
+    window.disableHandTracking = async function () {
         if (handTrackingEnabled) {
             await window.toggleHandTracking();
         }
