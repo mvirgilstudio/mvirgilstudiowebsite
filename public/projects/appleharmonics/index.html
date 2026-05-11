@@ -131,10 +131,10 @@
             <div
                 class="relative z-20 w-full max-w-container-max mx-auto px-gutter flex flex-col items-center text-center mt-section-padding">
                 <h1 data-t-en="THE APPLE SYMPHONY" data-t-pt="A SINFONIA DA MAÇÃ"
-                    class="font-headline-xl text-headline-xl mb-6 drop-shadow-2xl opacity-90 tracking-tighter mix-blend-screen shiny-text">
+                    class="font-headline-xl text-4xl sm:text-6xl md:text-headline-xl mb-6 drop-shadow-2xl opacity-90 tracking-tighter mix-blend-screen shiny-text">
                     THE APPLE SYMPHONY</h1>
-                <div class="corner-frame mb-12 group cursor-default">
-                    <p data-t-en="A tactile bridge between the orchard and the interface. Where organic matter meets digital sound." data-t-pt="Uma ponte tátil entre o pomar e o interface. Onde a matéria orgânica encontra o som digital." class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto" data-scramble>A tactile bridge between the orchard and the interface. Where organic matter meets digital sound.</p>
+                <div class="corner-frame mb-8 md:mb-12 group cursor-default">
+                    <p data-t-en="A tactile bridge between the orchard and the interface. Where organic matter meets digital sound." data-t-pt="Uma ponte tátil entre o pomar e o interface. Onde a matéria orgânica encontra o som digital." class="font-body-lg text-sm sm:text-base md:text-body-lg text-on-surface-variant max-w-2xl mx-auto px-4" data-scramble>A tactile bridge between the orchard and the interface. Where organic matter meets digital sound.</p>
                 </div>
                 <div class="flex flex-col items-center gap-4 animate-bounce mt-12 opacity-50">
                     <span data-t-en="Scroll to explore" data-t-pt="Deslize para explorar"
@@ -146,13 +146,13 @@
         </section>
 
         <!-- Three.js Interactive Section -->
-        <section class="w-full relative h-[600px] border-b border-outline-variant/10" id="threejs-canvas-container">
+        <section class="w-full relative h-[400px] md:h-[600px] border-b border-outline-variant/10" id="threejs-canvas-container">
             <div class="absolute inset-0 bg-background z-0" id="threejs-canvas"></div>
         </section>
 
         <!-- Piano Keyboard Section -->
         <section
-            class="pt-8 pb-section-padding w-full relative bg-background overflow-hidden border-b border-outline-variant/10"
+            class="pt-8 pb-16 md:pb-section-padding w-full relative bg-background overflow-hidden border-b border-outline-variant/10"
             id="piano-interface">
             <div class="max-w-container-max mx-auto px-gutter flex flex-col items-center">
                 <div class="piano-container relative flex items-start overflow-x-auto max-w-full">
@@ -223,11 +223,11 @@
                 </button>
 
                 <button id="hand-tracking-toggle" onclick="window.toggleHandTracking()"
-                    class="mt-4 flex items-center gap-3 px-10 py-5 bg-primary text-on-primary rounded-full font-label-caps text-label-caps uppercase tracking-[0.3em] hover:scale-105 transition-all duration-500 shadow-[0_0_50px_rgba(220,38,38,0.25)] group relative overflow-hidden cursor-pointer z-50">
+                    class="mt-4 flex items-center gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-primary text-on-primary rounded-full font-label-caps text-[10px] sm:text-label-caps uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:scale-105 transition-all duration-500 shadow-[0_0_50px_rgba(220,38,38,0.25)] group relative overflow-hidden cursor-pointer z-50">
                     <span
                         class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
-                    <span class="material-symbols-outlined text-[24px] relative z-10">back_hand</span>
-                    <span id="tracking-button-text" data-t-en="Enable your webcam for hand gestures" data-t-pt="Ative a sua webcam para gestos manuais" class="relative z-10 font-bold">Enable your webcam for hand gestures</span>
+                    <span class="material-symbols-outlined text-[20px] sm:text-[24px] relative z-10">back_hand</span>
+                    <span id="tracking-button-text" data-t-en="Enable webcam for hand gestures" data-t-pt="Ativar webcam para gestos" class="relative z-10 font-bold">Enable webcam for hand gestures</span>
                 </button>
             </div>
         </section>
@@ -473,7 +473,7 @@
         </script>
 
         <!-- Cinematic Showcase Section -->
-        <section class="py-section-padding w-full relative overflow-hidden border-b border-outline-variant/10" id="gallery">
+        <section class="py-16 md:py-section-padding w-full relative overflow-hidden border-b border-outline-variant/10" id="gallery">
             <!-- Background Image Overlay -->
             <div class="absolute inset-0 z-0 overflow-hidden">
                 <img src="images/apples_background.jpg?v=1.3" alt="Apples Background" class="w-full h-full object-cover opacity-50 scale-105 transition-transform duration-[20s] ease-out">
@@ -482,8 +482,8 @@
             </div>
             
             <div class="max-w-container-max mx-auto px-gutter relative z-10">
-                <div class="text-center mb-16">
-                    <h2 id="morphing-title" data-t-en="Cinematic Showcase" data-t-pt="Montra Cinemática" class="font-headline-lg text-headline-lg text-on-surface mb-4">Cinematic Showcase</h2>
+                <div class="text-center mb-8 md:mb-16">
+                    <h2 id="morphing-title" data-t-en="Cinematic Showcase" data-t-pt="Montra Cinemática" class="font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-on-surface mb-4">Cinematic Showcase</h2>
                     <p data-t-en="The organic symphony in motion" data-t-pt="A sinfonia orgânica em movimento"
                         class="reveal reveal-up font-body-md text-body-md text-on-surface-variant uppercase tracking-widest font-label-caps">
                         The organic symphony in motion</p>
@@ -508,11 +508,11 @@
 
         <!-- Project Philosophy Section -->
         <section
-            class="py-section-padding w-full relative bg-surface-container-low/30 border-y border-outline-variant/10"
+            class="py-16 md:py-section-padding w-full relative bg-surface-container-low/30 border-y border-outline-variant/10"
             id="philosophy">
             <div class="max-w-container-max mx-auto px-gutter">
-                <div class="max-w-4xl mx-auto text-center mb-20">
-                    <h2 data-t-en="The Philosophy of Interaction" data-t-pt="A Filosofia da Interação" class="reveal reveal-up font-headline-lg text-headline-lg text-on-surface mb-6">The Philosophy of Interaction
+                <div class="max-w-4xl mx-auto text-center mb-12 md:mb-20">
+                    <h2 data-t-en="The Philosophy of Interaction" data-t-pt="A Filosofia da Interação" class="reveal reveal-up font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-on-surface mb-6">The Philosophy of Interaction
                     </h2>
                     <p data-t-en="An experimental interface where a pile of real apples becomes a playable, touch-sensitive piano. Each section of the fruit cluster triggers a musical note, transforming organic matter into an instrument." data-t-pt="Um interface experimental onde uma pilha de maçãs reais se torna num piano tátil e tocável. Cada secção do conjunto de fruta ativa uma nota musical, transformando a matéria orgânica num instrumento." class="reveal reveal-up font-body-lg text-body-lg text-on-surface-variant leading-relaxed" style="transition-delay: 100ms;">
                         An experimental interface where a pile of real apples becomes a playable, touch-sensitive piano.

@@ -46,6 +46,14 @@
     box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+@media (max-width: 640px) {
+    .white-key {
+        width: 45px;
+        height: 180px;
+        border-radius: 0 0 4px 4px;
+    }
+}
+
 .white-key:hover {
     background: #ffffff;
     transform: translateY(1px);
@@ -70,6 +78,16 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 640px) {
+    .black-key {
+        width: 28px;
+        height: 110px;
+        margin-left: -14px;
+        margin-right: -14px;
+        border-radius: 0 0 3px 3px;
+    }
+}
+
 .black-key:hover {
     background: #353534;
 }
@@ -88,6 +106,13 @@
     box-shadow: 0 0 0 1px rgba(148, 92, 92, 0.2), 0 30px 60px rgba(0, 0, 0, 0.6);
     overflow-x: auto;
     max-width: 100%;
+}
+
+@media (max-width: 640px) {
+    .piano-container {
+        padding: 24px 12px;
+        border-radius: 8px;
+    }
 }
 
 #hand-cursor {
@@ -302,6 +327,12 @@
     height: 380px;
     width: 100%;
     cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .flipping-card-container {
+        height: 320px;
+    }
 }
 
 .flipping-card-inner {
