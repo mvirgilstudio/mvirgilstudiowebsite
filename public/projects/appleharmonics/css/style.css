@@ -93,13 +93,18 @@
     box-shadow: 0 0 0 1px rgba(148, 92, 92, 0.2), 0 30px 60px rgba(0, 0, 0, 0.6);
     overflow: hidden !important;
     width: 100%;
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     justify-content: center;
     align-items: flex-start;
 }
 
 /* ── Tablet (641–1024px) ── */
 @media (max-width: 1024px) {
+    .piano-container {
+        padding: 32px 20px;
+    }
     .white-key {
         width: 60px;
         height: 240px;
@@ -122,6 +127,9 @@
         flex-shrink: 1; /* Allow shrinking as safety net on mobile */
     }
     .piano-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
         padding: 16px 8px;
         border-radius: 10px;
         justify-content: center;
