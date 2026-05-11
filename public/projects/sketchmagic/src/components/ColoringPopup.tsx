@@ -508,14 +508,14 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
             </div>
 
             {/* Right side panel - Palette & Tools */}
-            <div className="lg:w-[100px] w-full lg:h-full flex lg:flex-col flex-row items-center justify-center gap-2 lg:gap-3 bg-black/60 border-l-0 lg:border-l-4 border-t-4 lg:border-t-0 border-white/30 p-3 lg:pt-16">
+            <div className="lg:w-[100px] w-full lg:h-full flex lg:flex-col flex-row items-center justify-start lg:justify-center gap-2 lg:gap-3 bg-black/60 border-l-0 lg:border-l-4 border-t-4 lg:border-t-0 border-white/30 p-3 lg:pt-16 overflow-x-auto shrink-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               {/* Color palette */}
-              <div className="flex lg:flex-col flex-row flex-wrap items-center justify-center gap-2">
+              <div className="flex lg:flex-col flex-row items-center justify-start lg:justify-center gap-2 shrink-0">
                 {PALETTE_COLORS.map((color) => (
                   <button
                     key={color}
                     onClick={() => selectColor(color)}
-                    className="relative w-9 h-9 lg:w-10 lg:h-10 border-4 transition-all hover:scale-110 active:scale-95"
+                    className="relative w-9 h-9 lg:w-10 lg:h-10 border-4 transition-all hover:scale-110 active:scale-95 shrink-0"
                     style={{
                       backgroundColor: color,
                       borderColor: selectedColor === color && !isEraser ? '#FFFFFF' : 'rgba(0,0,0,0.6)',
@@ -535,10 +535,10 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
               </div>
 
               {/* Divider */}
-              <div className="lg:w-full lg:h-1 w-1 h-full bg-white/20 lg:my-1 mx-1 lg:mx-0" />
+              <div className="lg:w-full lg:h-1 w-1 h-8 bg-white/20 lg:my-1 mx-1 lg:mx-0 shrink-0" />
 
               {/* Brush size */}
-              <div className="flex lg:flex-col flex-row items-center gap-1">
+              <div className="flex lg:flex-col flex-row items-center gap-2 shrink-0">
                 <span className="font-pixel text-white/60 text-[10px]">SIZE</span>
                 <input
                   type="range"
@@ -546,18 +546,18 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
                   max={50}
                   value={brushSize}
                   onChange={(e) => setBrushSize(Number(e.target.value))}
-                  className="lg:w-16 w-16 h-2 accent-secondary"
+                  className="lg:w-16 w-20 h-2 accent-secondary"
                   style={{ writingMode: 'horizontal-tb' }}
                 />
               </div>
 
               {/* Divider */}
-              <div className="lg:w-full lg:h-1 w-1 h-full bg-white/20 lg:my-1 mx-1 lg:mx-0" />
+              <div className="lg:w-full lg:h-1 w-1 h-8 bg-white/20 lg:my-1 mx-1 lg:mx-0 shrink-0" />
 
               {/* Magic Wand button */}
               <button
                 onClick={autoColor}
-                className="w-10 h-10 lg:w-12 lg:h-12 border-4 bg-white/10 border-white/40 text-white/70 hover:bg-[#A259FF] hover:border-white hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+                className="w-10 h-10 lg:w-12 lg:h-12 border-4 bg-white/10 border-white/40 text-white/70 hover:bg-[#A259FF] hover:border-white hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0"
                 title="Magic Auto-Color"
               >
                 <Wand2 className="w-6 h-6" />
@@ -566,7 +566,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
                {/* Bucket button */}
               <button
                 onClick={toggleBucket}
-                className={`w-10 h-10 lg:w-12 lg:h-12 border-4 flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${
+                className={`w-10 h-10 lg:w-12 lg:h-12 border-4 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0 ${
                   isBucket
                     ? 'bg-secondary border-white text-white shadow-[0_0_15px_rgba(0,191,255,0.6)]'
                     : 'bg-white/10 border-white/40 text-white/70 hover:bg-white/20'
@@ -579,7 +579,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
               {/* Eraser button */}
               <button
                 onClick={toggleEraser}
-                className={`w-10 h-10 lg:w-12 lg:h-12 border-4 flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${
+                className={`w-10 h-10 lg:w-12 lg:h-12 border-4 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0 ${
                   isEraser
                     ? 'bg-arcade-red border-white text-white shadow-[0_0_15px_rgba(255,49,49,0.6)]'
                     : 'bg-white/10 border-white/40 text-white/70 hover:bg-white/20'
@@ -592,7 +592,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
               {/* Clear button */}
               <button
                 onClick={clearCanvas}
-                className="w-10 h-10 lg:w-12 lg:h-12 border-4 bg-white/10 border-white/40 text-white/70 hover:bg-arcade-red hover:border-white hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+                className="w-10 h-10 lg:w-12 lg:h-12 border-4 bg-white/10 border-white/40 text-white/70 hover:bg-arcade-red hover:border-white hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0"
                 title="Clear All"
               >
                 <Trash2 className="w-6 h-6" />
