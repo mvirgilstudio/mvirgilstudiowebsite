@@ -37,9 +37,19 @@
         }
 
         /* Ensure SketchMagic popups appear above the main portfolio navbar (z-[500]) */
-        .fixed.inset-0.z-\[200\],
         .z-\[200\] {
             z-index: 1000 !important;
+        }
+
+        /* Image navigation buttons background color */
+        button[title="Previous image"],
+        button[title="Next image"] {
+            background-color: #00008B !important;
+        }
+        
+        button[title="Previous image"]:hover,
+        button[title="Next image"]:hover {
+            background-color: #0000CD !important;
         }
     </style>
   <script type="module" crossorigin src="/projects/sketchmagic/assets/index-CmcFZimG.js"></script>
