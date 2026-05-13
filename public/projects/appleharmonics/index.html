@@ -505,21 +505,33 @@
                 
                 window.isMuted = !window.isMuted;
                 
-                // Initialize Player.js if not already done
-                if (!window.heroPlayer && heroVideo) window.heroPlayer = new playerjs.Player(heroVideo);
-                if (!window.showcasePlayer && showcaseVideo) window.showcasePlayer = new playerjs.Player(showcaseVideo);
-                
-                if (window.isMuted) {
-                    if (window.heroPlayer) window.heroPlayer.mute();
-                    if (window.showcasePlayer) window.showcasePlayer.mute();
-                } else {
-                    if (window.heroPlayer) window.heroPlayer.unmute();
-                    if (window.showcasePlayer) window.showcasePlayer.unmute();
+                // Initialize players if not already done
+                if (heroVideo && !window.heroPlayer) {
+                    window.heroPlayer = new playerjs.Player(heroVideo);
                 }
+                if (showcaseVideo && !window.showcasePlayer) {
+                    window.showcasePlayer = new playerjs.Player(showcaseVideo);
+                }
+                
+                const performToggle = (player) => {
+                    if (!player) return;
+                    if (window.isMuted) {
+                        player.mute();
+                    } else {
+                        player.unmute();
+                        // Some players need an explicit volume set after unmuting
+                        if (typeof player.setVolume === 'function') player.setVolume(100);
+                    }
+                };
+
+                performToggle(window.heroPlayer);
+                performToggle(window.showcasePlayer);
                 
                 const iconName = window.isMuted ? 'volume_off' : 'volume_up';
                 if (soundIcon) soundIcon.innerText = iconName;
                 if (gallerySoundIcon) gallerySoundIcon.innerText = iconName;
+                
+                console.log('Sound toggled:', window.isMuted ? 'MUTED' : 'UNMUTED');
             };
         </script>
 
@@ -718,6 +730,12 @@
                 "Sonically Reactive",
                 "Organic Synthesis"
             ], { interval: 4000 });
+
+            // Pre-initialize video players
+            const heroVideo = document.getElementById('hero-video');
+            const showcaseVideo = document.getElementById('showcase-video');
+            if (heroVideo) window.heroPlayer = new playerjs.Player(heroVideo);
+            if (showcaseVideo) window.showcasePlayer = new playerjs.Player(showcaseVideo);
         });
     </script>
 

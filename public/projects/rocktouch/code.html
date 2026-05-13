@@ -213,20 +213,36 @@
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
+
+                <!-- Sound Toggle (Desktop) -->
+                <span
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center ml-2"
+                    onclick="toggleSound()">
+                    <span id="nav-sound-icon" class="material-symbols-outlined text-[20px]">volume_off</span>
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <div class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" onclick="toggleMenu()">
-                <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">
-                    MENU
+            <div class="lg:hidden flex items-center gap-4 sm:gap-6 pointer-events-auto">
+                <!-- Sound Toggle (Mobile) -->
+                <div class="cursor-pointer group flex items-center" onclick="toggleSound()">
+                    <span id="mobile-sound-icon" class="material-symbols-outlined text-concrete group-hover:text-white text-[20px]">volume_off</span>
                 </div>
-                <div class="relative w-6 h-4 group cursor-pointer transition-transform duration-300 active:scale-90">
-                    <span id="menu-bar-1"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
-                    <span id="menu-bar-2"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
-                    <span id="menu-bar-3"
-                        class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
+
+                <div class="flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
+                    <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">
+                        MENU
+                    </div>
+                    <div class="relative w-6 h-4 group transition-transform duration-300 active:scale-90">
+                        <span id="menu-bar-1"
+                            class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"></span>
+                        <span id="menu-bar-2"
+                            class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 opacity-100"></span>
+                        <span id="menu-bar-3"
+                            class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -551,7 +567,7 @@
         player.on('ready', () => {
             // Initial mute state check
             player.getMuted((muted) => {
-                muteIcon.textContent = muted ? 'volume_off' : 'volume_up';
+                updateSoundIcons(muted);
             });
 
             player.on('timeupdate', (data) => {
@@ -572,17 +588,28 @@
             });
         });
 
-        muteToggle.addEventListener('click', () => {
+        const updateSoundIcons = (muted) => {
+            const iconName = muted ? 'volume_off' : 'volume_up';
+            if (muteIcon) muteIcon.textContent = iconName;
+            const navIcon = document.getElementById('nav-sound-icon');
+            const mobileIcon = document.getElementById('mobile-sound-icon');
+            if (navIcon) navIcon.textContent = iconName;
+            if (mobileIcon) mobileIcon.textContent = iconName;
+        };
+
+        window.toggleSound = () => {
             player.getMuted((muted) => {
                 if (muted) {
                     player.unmute();
-                    muteIcon.textContent = 'volume_up';
+                    updateSoundIcons(false);
                 } else {
                     player.mute();
-                    muteIcon.textContent = 'volume_off';
+                    updateSoundIcons(true);
                 }
             });
-        });
+        };
+
+        muteToggle.addEventListener('click', window.toggleSound);
 
         const heroSection = document.getElementById('hero');
         const heroAnims = document.querySelectorAll('.hero-anim-target');
