@@ -53,7 +53,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A 3D-printed architectural model perfectly synchronized with a virtual 3D environment. Rotating or manipulating the physical building instantly updates the projected scene. Detachable floors reveal level-by-level exteriors in real time. Users can walk through interiors or orbit the structure using hand-tracking gestures. An integrated screen offers floor selection and precise camera control for exploration.',
     mediaUrl: 'https://videos.pexels.com/video-files/20770858/20770858-uhd_2560_1440_60fps.mp4',
     mediaType: 'video',
-    externalLink: 'https://example.com/archsync-model'
+    externalLink: '/projects/archsync_model/archsync_hero.html'
   },
   {
     id: 'w5',
