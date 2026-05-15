@@ -211,10 +211,7 @@ export const TRANSLATIONS = {
                 title: 'SKETCHMAGIC',
                 description: 'An immersive AI-powered drawing experience designed for children. Users create sketches with hand motions, which are instantly transformed into playful AI-generated images. Choose from cute cartoon monsters, rainbow stars, or abstract landscapes. Sensors capture gestures while projections or screens display the results in real time. A fun and interactive platform combining creativity, technology, and imagination.',
             },
-            w9: {
-                title: 'MOTIONSCAPE',
-                description: 'A series of interactive, immersive installations where visuals respond to body movement and audio. Wall projections and screen displays react dynamically to user gestures and motion sensors. Particle systems, abstract visuals, and environmental backgrounds shift in real time. Each interaction transforms the space into a living, responsive digital canvas. A fusion of motion, sound, and immersive visual storytelling for engaging experiences.',
-            },
+
             w10: {
                 title: 'GHOSTVIEW',
                 description: 'Experience the Rolls-Royce Ghost in a fully interactive 3D environment. Customize car paint, interiors, and explore the pinnacle of automotive luxury with intuitive controls. Switch between studio, urban street, and scenic road scenes. Every surface is rendered with absolute fidelity for an immersive digital showroom experience.',
@@ -438,10 +435,7 @@ export const TRANSLATIONS = {
                 title: 'SKETCHMAGIC',
                 description: 'Uma experiência de desenho imersiva potenciada por IA desenhada para crianças. Os utilizadores criam esboços com movimentos das mãos, que são instantaneamente transformados em imagens lúdicas geradas por IA. Escolha entre monstros de desenhos animados fofos, estrelas arco-íris ou paisagens abstratas. Sensores capturam gestos enquanto projeções ou ecrãs exibem os resultados em tempo real. Uma plataforma divertida e interativa que combina criatividade, tecnologia e imaginação.',
             },
-            w9: {
-                title: 'MOTIONSCAPE',
-                description: 'A série de instalações interativas e imersivas onde os visuais respondem ao movimento do corpo e áudio. Projeções de parede e exibições de ecrã reagem dinamicamente a gestos de utilizadores e sensores de movimento. Sistemas de partículas, visuais abstratos e fundos ambientais mudam em tempo real. Cada interação transforma o espaço numa tela digital viva e responsiva. Uma fusão de movimento, som e narrativa visual imersiva para experiências envolventes.',
-            },
+
             w10: {
                 title: 'GHOSTVIEW',
                 description: 'Experimente o Rolls-Royce Ghost num ambiente 3D totalmente interativo. Personalize a pintura, interiores e explore o auge do luxo automóvel com controlos intuitivos. Alterne entre cenários de estúdio, ruas urbanas e estradas panorâmicas. Cada superfície é renderizada com fidelidade absoluta para uma experiência de showroom digital imersiva.',

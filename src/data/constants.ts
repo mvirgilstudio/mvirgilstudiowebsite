@@ -51,8 +51,8 @@ export const WORKS_INDEX: WorkItem[] = [
     id: 'w4',
     title: 'ARCHSYNC MODEL',
     description: 'A 3D-printed architectural model perfectly synchronized with a virtual 3D environment. Rotating or manipulating the physical building instantly updates the projected scene. Detachable floors reveal level-by-level exteriors in real time. Users can walk through interiors or orbit the structure using hand-tracking gestures. An integrated screen offers floor selection and precise camera control for exploration.',
-    mediaUrl: 'https://videos.pexels.com/video-files/20770858/20770858-uhd_2560_1440_60fps.mp4',
-    mediaType: 'video',
+    mediaUrl: 'https://player.mediadelivery.net/embed/625906/cadd146c-d63e-473d-a1e2-9e8ba0a0d4e6?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
+    mediaType: 'iframe',
     externalLink: '/projects/archsync_model/archsync_hero.html'
   },
   {
@@ -87,14 +87,7 @@ export const WORKS_INDEX: WorkItem[] = [
     mediaType: 'iframe',
     externalLink: '/projects/sketchmagic/index.html'
   },
-  {
-    id: 'w9',
-    title: 'MOTIONSCAPE',
-    description: 'A series of interactive, immersive installations where visuals respond to body movement and audio. Wall projections and screen displays react dynamically to user gestures and motion sensors. Particle systems, abstract visuals, and environmental backgrounds shift in real time. Each interaction transforms the space into a living, responsive digital canvas. A fusion of motion, sound, and immersive visual storytelling for engaging experiences.',
-    mediaUrl: 'https://images.unsplash.com/photo-1633511090164-b43840ea1607?q=80&w=2574&auto=format&fit=crop',
-    mediaType: 'image',
-    externalLink: 'https://example.com/motionscape'
-  },
+
   {
     id: 'w10',
     title: 'GHOSTVIEW',
