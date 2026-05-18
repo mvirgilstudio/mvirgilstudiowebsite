@@ -211,7 +211,7 @@
 
     <!-- Fixed Lottie Container -->
     <div id="fixed-lottie-container"
-        class="fixed inset-0 z-[5] pointer-events-none flex items-center justify-center overflow-hidden">
+        class="fixed inset-0 z-[15] pointer-events-none flex items-center justify-center overflow-hidden">
         <div id="lottie-scroll-container" class="h-[85vh] aspect-square"></div>
     </div>
 
@@ -340,7 +340,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background"></div>
             </div>
 
-            <div class="relative z-10 text-left px-12 md:px-24 w-full max-w-[1400px] mx-auto">
+            <div class="relative z-20 text-left px-12 md:px-24 w-full max-w-[1400px] mx-auto">
                 <div class="overflow-hidden mb-6">
                     <span class="block font-serif text-[11px] tracking-[0.4em] uppercase text-primary/60 stagger-item"
                         data-t="hero.subtitle">3D
@@ -374,7 +374,7 @@
             <!-- Section Background -->
             <div class="absolute inset-0 z-0 bg-surface"></div>
 
-            <div class="sticky top-0 h-screen flex flex-col items-center justify-center px-10 relative z-20">
+            <div class="sticky top-0 h-screen flex flex-col items-center justify-center px-10 relative">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
                     <h2 class="text-[25vw] font-serif font-black uppercase italic whitespace-nowrap -rotate-6"
                         data-t="lottie.bg_text">Synthesis
@@ -382,21 +382,21 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center w-full max-w-[1400px] mx-auto">
-                    <div class="space-y-12">
+                    <div class="space-y-12 relative z-30">
                         <div class="space-y-px">
                             <span class="font-serif text-[10px] text-primary/60 tracking-[0.3em] uppercase block mb-4"
                                 data-t="lottie.sequence">Sequence
                                 01.04_A</span>
-                            <h3 class="font-serif text-6xl md:text-8xl italic leading-[1.1] py-4">
-                                <div class="overflow-hidden">
+                            <h3 class="font-serif text-6xl md:text-8xl italic leading-[1.1] py-4 pr-6">
+                                <div class="overflow-hidden pr-4">
                                     <span class="block scroll-text-reveal" data-delay="0"
                                         data-t="lottie.title1">Tactile</span>
                                 </div>
-                                <div class="overflow-hidden -mt-2 md:-mt-4">
+                                <div class="overflow-hidden -mt-2 md:-mt-4 pr-4">
                                     <span class="block scroll-text-reveal text-white/20" data-delay="0.12"
                                         data-t="lottie.title2">Design</span>
                                 </div>
-                                <div class="overflow-hidden -mt-2 md:-mt-4">
+                                <div class="overflow-hidden -mt-2 md:-mt-4 pr-4">
                                     <span class="block scroll-text-reveal" data-delay="0.24"
                                         data-t="lottie.title3">Storytelling.</span>
                                 </div>
@@ -424,37 +424,36 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Video Showcase Column -->
+                    <div class="w-full max-w-[420px] lg:max-w-[460px] mx-auto lg:mr-0 glass overflow-hidden shadow-2xl rounded-2xl relative z-10">
+                        <div style="position:relative;padding-top:177.78%;">
+                            <iframe src="https://player.mediadelivery.net/embed/625906/68c561ae-ad75-407c-9106-1944ac15799b?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Technical Floating Data -->
             <div
-                class="absolute top-10 left-10 font-mono text-[8px] text-primary/40 space-y-1 hidden lg:block uppercase">
+                class="absolute top-10 left-10 z-20 font-mono text-[8px] text-primary/40 space-y-1 hidden lg:block uppercase">
                 <div>XYZ_TRANSFORM(8.331)</div>
                 <div>VECTOR_ALIGN(9.002)</div>
                 <div>DENSITY_VULNERABILITY: 0.0%</div>
             </div>
             <div
-                class="absolute bottom-10 right-10 font-mono text-[8px] text-primary/40 text-right hidden lg:block uppercase">
+                class="absolute bottom-10 right-10 z-20 font-mono text-[8px] text-primary/40 text-right hidden lg:block uppercase">
                 <div>FLUID_SYNTH: DONE</div>
                 <div>MESH_STABILITY: 100%</div>
                 <div>BUFFER_WRITE_0xFF2</div>
             </div>
-            </div>
-            </div>
         </section>
 
         <!-- Cinematic Presentation Section -->
-        <section id="cinematic" class="relative py-20 bg-[#050505]">
+        <section id="cinematic" class="relative py-20 bg-[#050505] z-10">
             <div class="max-w-[1400px] mx-auto px-10">
                 <div class="relative w-full glass border border-white/5 overflow-hidden shadow-2xl">
-                    <div style="position:relative;padding-top:56.25%;">
-                        <iframe
-                            src="https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                            loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
-                            allow="accelerometer;gyroscrope;autoplay;encrypted-media;picture-in-picture;"
-                            allowfullscreen="true"></iframe>
-                    </div>
+                    <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/d25a835d-db29-4376-bff9-b0144c236ec0?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe></div>
                 </div>
             </div>
         </section>
@@ -475,6 +474,33 @@
                                 <div class="font-mono text-xs uppercase tracking-[0.2em] text-primary"
                                     data-t="tech.preview">Technical
                                     Preview</div>
+                            </div>
+
+                            <!-- Dynamic HUD Dimensions Overlay -->
+                            <div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center p-8 select-none" id="tech-hud-overlay">
+                                <svg class="absolute inset-0 w-full h-full text-primary/30" xmlns="http://www.w3.org/2000/svg">
+                                    <line id="hud-height-line" x1="12%" y1="25%" x2="12%" y2="75%" stroke="currentColor" stroke-width="1" stroke-dasharray="3,3" style="opacity: 0;" />
+                                    <line id="hud-height-top-tick" x1="10%" y1="25%" x2="14%" y2="25%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                    <line id="hud-height-bottom-tick" x1="10%" y1="75%" x2="14%" y2="75%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                    <line id="hud-top-line" x1="35%" y1="25%" x2="65%" y2="25%" stroke="currentColor" stroke-width="1" stroke-dasharray="3,3" style="opacity: 0;" />
+                                    <line id="hud-top-left-tick" x1="35%" y1="23%" x2="35%" y2="27%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                    <line id="hud-top-right-tick" x1="65%" y1="23%" x2="65%" y2="27%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                    <line id="hud-bottom-line" x1="42%" y1="75%" x2="58%" y2="75%" stroke="currentColor" stroke-width="1" stroke-dasharray="3,3" style="opacity: 0;" />
+                                    <line id="hud-bottom-left-tick" x1="42%" y1="73%" x2="42%" y2="77%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                    <line id="hud-bottom-right-tick" x1="58%" y1="73%" x2="58%" y2="77%" stroke="currentColor" stroke-width="1.5" style="opacity: 0;" />
+                                </svg>
+                                <div id="hud-height-label" class="absolute left-[15%] top-[50%] -translate-y-1/2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-primary bg-black/60 px-2.5 py-1.5 border border-white/5 backdrop-blur-[2px] opacity-0">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                                    <span>H: <span id="hud-val-height">0.0</span> cm</span>
+                                </div>
+                                <div id="hud-top-label" class="absolute left-[50%] top-[17%] -translate-x-1/2 flex flex-col items-center gap-0.5 font-mono text-[9px] tracking-widest text-primary bg-black/60 px-2.5 py-1.5 border border-white/5 backdrop-blur-[2px] opacity-0">
+                                    <span>TOP RAD: <span id="hud-val-top">0.0</span> cm</span>
+                                    <span class="text-[7px] text-neutral-500">DIAM: 15.0 cm</span>
+                                </div>
+                                <div id="hud-bottom-label" class="absolute left-[50%] top-[83%] -translate-x-1/2 flex flex-col items-center gap-0.5 font-mono text-[9px] tracking-widest text-primary bg-black/60 px-2.5 py-1.5 border border-white/5 backdrop-blur-[2px] opacity-0">
+                                    <span>BASE RAD: <span id="hud-val-bottom">0.0</span> cm</span>
+                                    <span class="text-[7px] text-neutral-500">DIAM: 8.0 cm</span>
+                                </div>
                             </div>
                             <div
                                 class="absolute bottom-8 right-8 p-3 border border-white/5 bg-black/40 backdrop-blur-sm z-20">
@@ -527,11 +553,11 @@
                             <span class="font-serif text-[10px] text-primary/60 tracking-widest uppercase block"
                                 data-t="tech.proto_label">Prototype_01</span>
                             <h3 class="font-serif text-4xl italic leading-relaxed py-2">
-                                <div class="overflow-hidden">
+                                <div class="overflow-hidden pr-4">
                                     <span class="block scroll-text-reveal" data-delay="0"
                                         data-t="tech.showcase_title1">Physical & Digital</span>
                                 </div>
-                                <div class="overflow-hidden">
+                                <div class="overflow-hidden pr-4">
                                     <span class="block scroll-text-reveal" data-delay="0.12"
                                         data-t="tech.showcase_title2">Showcase.</span>
                                 </div>
@@ -556,17 +582,16 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
             </div>
 
-            <div class="relative z-10 w-full max-w-[1400px] mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 items-center">
+            <div class="relative z-30 w-full max-w-[1400px] mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 items-center">
                 <div class="lg:col-start-2 space-y-16 text-center lg:text-right">
                     <div class="space-y-4">
                         <span class="font-serif text-[11px] tracking-[0.3em] uppercase text-primary/40 block"
-                            data-t="cta.availability">Drop
-                            Availability: Q2 2024</span>
+                            data-t="cta.availability">Drop Availability: Q2 2024</span>
                         <h2 class="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-[1.1] py-4 inline-block">
-                            <div class="overflow-hidden">
+                            <div class="overflow-hidden pr-4">
                                 <span class="block scroll-text-reveal" data-delay="0" data-t="cta.title1">Command</span>
                             </div>
-                            <div class="overflow-hidden -mt-2 md:-mt-6">
+                            <div class="overflow-hidden -mt-2 md:-mt-6 pr-4">
                                 <span class="block scroll-text-reveal text-primary" data-delay="0.12"
                                     data-t="cta.title2">Succession.</span>
                             </div>
@@ -574,8 +599,7 @@
                     </div>
                     <div class="flex flex-col items-center lg:items-end gap-12">
                         <p class="font-sans text-xs uppercase tracking-[0.3em] text-neutral-500 max-w-sm"
-                            data-t="cta.desc">Join the Inner
-                            Circle for priority allocation of the first limited batch.</p>
+                            data-t="cta.desc">Join the Inner Circle for priority allocation of the first limited batch.</p>
 
                         <div class="flex gap-10 md:gap-20">
                             <a href="#"
@@ -589,14 +613,13 @@
                     </div>
                 </div>
             </div>
-            </div>
         </section>
 
     </main>
 
     <!-- Footer -->
     <footer
-        class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
+        class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden z-20">
         <div class="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
 
         <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10">
@@ -658,7 +681,7 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // Loader Logic
-        window.addEventListener('load', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const tlLoader = gsap.timeline();
             tlLoader.to("#loader-percentage", {
                 innerHTML: 100,
@@ -854,6 +877,44 @@
                     delay: parseFloat(el.dataset.delay || 0)
                 });
             });
+
+            // HUD Animation on Scroll into the Technical section
+            const hudTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#vase-canvas-container",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            hudTl.to(["#hud-height-line", "#hud-height-top-tick", "#hud-height-bottom-tick"], { opacity: 1, duration: 0.5, stagger: 0.1 })
+                 .to("#hud-height-label", { opacity: 1, x: "+=10", duration: 0.4 }, "-=0.3")
+                 .to(["#hud-top-line", "#hud-top-left-tick", "#hud-top-right-tick"], { opacity: 1, duration: 0.5, stagger: 0.1 }, "-=0.2")
+                 .to("#hud-top-label", { opacity: 1, y: "+=5", duration: 0.4 }, "-=0.3")
+                 .to(["#hud-bottom-line", "#hud-bottom-left-tick", "#hud-bottom-right-tick"], { opacity: 1, duration: 0.5, stagger: 0.1 }, "-=0.2")
+                 .to("#hud-bottom-label", { opacity: 1, y: "-=5", duration: 0.4 }, "-=0.3");
+
+            // Odometer style counter animation
+            const counters = { height: 0, top: 0, bottom: 0 };
+            gsap.to(counters, {
+                height: 17.0,
+                top: 7.5,
+                bottom: 4.0,
+                duration: 2.0,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#vase-canvas-container",
+                    start: "top 75%"
+                },
+                onUpdate: () => {
+                    const hEl = document.getElementById('hud-val-height');
+                    const tEl = document.getElementById('hud-val-top');
+                    const bEl = document.getElementById('hud-val-bottom');
+                    if (hEl) hEl.innerText = counters.height.toFixed(1);
+                    if (tEl) tEl.innerText = counters.top.toFixed(1);
+                    if (bEl) bEl.innerText = counters.bottom.toFixed(1);
+                }
+            });
         }
 
         function setupAbstractBG() {
@@ -997,9 +1058,112 @@
             // Force initial resize
             handleResize();
 
+            function updateHUDDimensions() {
+                if (!model) return;
+                
+                const container = document.getElementById('vase-canvas-container');
+                if (!container) return;
+                
+                const size = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
+                const topY = size.y / 2;
+                const bottomY = -size.y / 2;
+                
+                // Get camera right vector in world space
+                const cameraRight = new THREE.Vector3();
+                cameraRight.setFromMatrixColumn(camera.matrixWorld, 0);
+                
+                // Proportional radii based on real dimension values (17cm height)
+                const topRadUnits = size.y * (7.5 / 17);
+                const bottomRadUnits = size.y * (4.0 / 17);
+                
+                // Define 3D positions
+                const pTopCenter = new THREE.Vector3(0, topY, 0);
+                const pBottomCenter = new THREE.Vector3(0, bottomY, 0);
+                
+                const pTopLeft = pTopCenter.clone().addScaledVector(cameraRight, -topRadUnits);
+                const pTopRight = pTopCenter.clone().addScaledVector(cameraRight, topRadUnits);
+                
+                const pBottomLeft = pBottomCenter.clone().addScaledVector(cameraRight, -bottomRadUnits);
+                const pBottomRight = pBottomCenter.clone().addScaledVector(cameraRight, bottomRadUnits);
+                
+                // Offset vertical height dimension axis to the left
+                const heightOffset = topRadUnits * 1.5;
+                const pHeightTop = pTopCenter.clone().addScaledVector(cameraRight, -heightOffset);
+                const pHeightBottom = pBottomCenter.clone().addScaledVector(cameraRight, -heightOffset);
+                
+                // Helper to project 3D coordinate to container pixels
+                const project = (pos) => {
+                    const vector = pos.clone().project(camera);
+                    const x = (vector.x * 0.5 + 0.5) * container.clientWidth;
+                    const y = (-(vector.y * 0.5) + 0.5) * container.clientHeight;
+                    return { x, y };
+                };
+                
+                // Project points
+                const sTopLeft = project(pTopLeft);
+                const sTopRight = project(pTopRight);
+                const sBottomLeft = project(pBottomLeft);
+                const sBottomRight = project(pBottomRight);
+                const sHeightTop = project(pHeightTop);
+                const sHeightBottom = project(pHeightBottom);
+                
+                // Project center points for height axis ticks
+                const sTopCenter = project(pTopCenter);
+                const sBottomCenter = project(pBottomCenter);
+                
+                // Update SVG elements directly
+                const setLine = (id, p1, p2) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.setAttribute('x1', p1.x);
+                        el.setAttribute('y1', p1.y);
+                        el.setAttribute('x2', p2.x);
+                        el.setAttribute('y2', p2.y);
+                    }
+                };
+                
+                // Top Radius Lines
+                setLine('hud-top-line', sTopLeft, sTopRight);
+                setLine('hud-top-left-tick', { x: sTopLeft.x, y: sTopLeft.y - 6 }, { x: sTopLeft.x, y: sTopLeft.y + 6 });
+                setLine('hud-top-right-tick', { x: sTopRight.x, y: sTopRight.y - 6 }, { x: sTopRight.x, y: sTopRight.y + 6 });
+                
+                // Bottom Radius Lines
+                setLine('hud-bottom-line', sBottomLeft, sBottomRight);
+                setLine('hud-bottom-left-tick', { x: sBottomLeft.x, y: sBottomLeft.y - 6 }, { x: sBottomLeft.x, y: sBottomLeft.y + 6 });
+                setLine('hud-bottom-right-tick', { x: sBottomRight.x, y: sBottomRight.y - 6 }, { x: sBottomRight.x, y: sBottomRight.y + 6 });
+                
+                // Height Lines
+                setLine('hud-height-line', sHeightTop, sHeightBottom);
+                setLine('hud-height-top-tick', { x: sHeightTop.x - 6, y: sHeightTop.y }, { x: sHeightTop.x + 6, y: sHeightTop.y });
+                setLine('hud-height-bottom-tick', { x: sHeightBottom.x - 6, y: sHeightBottom.y }, { x: sHeightBottom.x + 6, y: sHeightBottom.y });
+                
+                // Update HTML labels position
+                const setLabelPos = (id, pos) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.style.left = `${pos.x}px`;
+                        el.style.top = `${pos.y}px`;
+                        el.style.transform = 'translate(-50%, -50%)';
+                    }
+                };
+                
+                // Position top label centered above top rim
+                setLabelPos('hud-top-label', { x: sTopCenter.x, y: sTopCenter.y - 25 });
+                
+                // Position bottom label centered below base
+                setLabelPos('hud-bottom-label', { x: sBottomCenter.x, y: sBottomCenter.y + 25 });
+                
+                // Position height label on the left offset axis
+                setLabelPos('hud-height-label', { x: sHeightTop.x - 45, y: (sHeightTop.y + sHeightBottom.y) / 2 });
+            }
+
             const animate = () => {
                 handleResize(); // Check size every frame just in case
                 controls.update();
+                
+                // Track HUD Dimensions in 3D Space
+                updateHUDDimensions();
+                
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             };
@@ -1041,10 +1205,10 @@
                 "tech.showcase_title1": "Exposição Física",
                 "tech.showcase_title2": "& Digital.",
                 "tech.desc": "Representações físicas e digitais criam uma experiência de exposição coesa. Uma exploração criativa de impressão 3D, forma e animação focada no fluxo de trabalho de protótipo FDM.",
-                "cta.availability": "Disponibilidade: Q2 2024",
-                "cta.title1": "Sucessão de",
-                "cta.title2": "Comando.",
-                "cta.desc": "Junte-se ao Círculo Restrito para alocação prioritária do primeiro lote limitado.",
+                "cta.availability": "Integração Botânica • Q2 2024",
+                "cta.title1": "Sucessão",
+                "cta.title2": "Orgânica.",
+                "cta.desc": "Uma demonstração em 360° do design generativo que se funde com o crescimento biológico. Junte-se ao Círculo Restrito para alocação prioritária do primeiro lote limitado.",
                 "footer.slogan": "Projetado para Performance & Precisão"
             },
             en: {
@@ -1079,10 +1243,10 @@
                 "tech.showcase_title1": "Physical & Digital",
                 "tech.showcase_title2": "Showcase.",
                 "tech.desc": "Physical and digital representations create a cohesive showcase experience. A creative exploration of 3D printing, form, and animation focusing on the FDM prototype workflow.",
-                "cta.availability": "Drop Availability: Q2 2024",
-                "cta.title1": "Command",
+                "cta.availability": "Botanical Integration • Q2 2024",
+                "cta.title1": "Organic",
                 "cta.title2": "Succession.",
-                "cta.desc": "Join the Inner Circle for priority allocation of the first limited batch.",
+                "cta.desc": "A 360° showcase of generative design meeting biological growth. Join the Inner Circle for priority allocation of the first limited batch.",
                 "footer.slogan": "Designed for Performance & Precision"
             }
         };
