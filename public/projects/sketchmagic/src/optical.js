@@ -20,6 +20,8 @@
 
     // Track currently hovered element for highlight effect
     let lastHoveredBtn = null;
+    let hoverStartTime = null;
+    let hasTriggeredHoverClick = false;
 
     // Inject hover-highlight CSS once
     const style = document.createElement('style');
@@ -48,21 +50,42 @@
             ? (el.closest('button') || el.closest('a') || el.closest('input') || el.closest('[role="button"]'))
             : null;
 
-        if (interactive === lastHoveredBtn) return;
-
-        if (lastHoveredBtn) {
-            lastHoveredBtn.classList.remove('optical-hover');
+        if (interactive !== lastHoveredBtn) {
+            if (lastHoveredBtn) {
+                lastHoveredBtn.classList.remove('optical-hover');
+            }
+            if (interactive) {
+                interactive.classList.add('optical-hover');
+                hoverStartTime = Date.now();
+                hasTriggeredHoverClick = false;
+            } else {
+                hoverStartTime = null;
+            }
+            lastHoveredBtn = interactive;
+        } else if (interactive && !hasTriggeredHoverClick && hoverStartTime) {
+            const duration = Date.now() - hoverStartTime;
+            if (duration >= 2000) {
+                interactive.click();
+                hasTriggeredHoverClick = true;
+                interactive.style.transform = 'scale(0.95)';
+                setTimeout(() => interactive.style.transform = '', 150);
+                if (handCursor) {
+                    handCursor.style.background = 'rgba(0, 255, 255, 0.8)';
+                }
+            } else {
+                if (handCursor) {
+                    const pct = (duration / 2000) * 100;
+                    handCursor.style.background = `conic-gradient(rgba(0,255,255,0.8) ${pct}%, rgba(255,255,255,0.2) ${pct}%)`;
+                }
+            }
         }
-        if (interactive) {
-            interactive.classList.add('optical-hover');
-        }
-        lastHoveredBtn = interactive;
     }
 
     function clearHighlight() {
         if (lastHoveredBtn) {
             lastHoveredBtn.classList.remove('optical-hover');
             lastHoveredBtn = null;
+            hoverStartTime = null;
         }
     }
 

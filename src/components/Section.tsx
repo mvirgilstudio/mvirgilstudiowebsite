@@ -500,9 +500,9 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
       >
         {(() => {
           const SECTION_VIDEOS: Record<string, string> = {
-            'section_01': 'https://player.mediadelivery.net/embed/625906/7e5df995-6105-47b2-a059-82074611bd58',
-            'section_02': 'https://player.mediadelivery.net/embed/625906/c4b3b65e-ace7-448a-a592-c7706997a80e',
-            'section_03': 'https://player.mediadelivery.net/embed/625906/890f4a7a-3241-41f7-980a-fae068f464fb',
+            'section_01': 'https://player.mediadelivery.net/embed/625906/45d6b518-67a6-40b9-b9db-de43c439933c',
+            'section_02': 'https://player.mediadelivery.net/embed/625906/520fffed-d359-4181-989a-5eb79328c867',
+            'section_03': 'https://player.mediadelivery.net/embed/625906/d9aa63af-9ea8-4634-a738-bfadb3ceb7d1',
             'section_04': 'https://player.mediadelivery.net/embed/625906/41fa3c92-a66e-40e6-93b0-c24aa89eb669',
             'section_05': 'https://player.mediadelivery.net/embed/625906/d854698f-1a43-4446-8a06-ca47ce91b73e',
             'section_06': 'https://player.mediadelivery.net/embed/625906/41def5ac-ef62-4c89-9041-e34e5c145d8f'

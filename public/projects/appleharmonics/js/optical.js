@@ -121,6 +121,29 @@
             }
 
             results.multiHandLandmarks.forEach((landmarks, hi) => {
+                // Determine if the hand is in a "fist" gesture (used for scrolling)
+                let curledFingers = 0;
+                for (let i = 1; i <= 4; i++) {
+                    if (isFingerTapping(landmarks, i)) curledFingers++;
+                }
+                const isFist = (curledFingers >= 3); // 3 or 4 fingers curled
+
+                if (isFist) {
+                    const currentY = landmarks[9].y; // Middle finger MCP
+                    if (!window.isHandScrolling) {
+                        window.isHandScrolling = true;
+                        window.lastHandScrollY = currentY;
+                    } else {
+                        const deltaY = currentY - window.lastHandScrollY;
+                        // Grabbing and dragging page: hand moves up (deltaY < 0), page scrolls down
+                        window.scrollBy({ top: deltaY * 3000, behavior: 'auto' });
+                        window.lastHandScrollY = currentY;
+                    }
+                } else {
+                    window.isHandScrolling = false;
+                    window.lastHandScrollY = null;
+                }
+
                 // Process each fingertip
                 FINGER_TIPS.forEach((tipIdx, fi) => {
                     const tip = landmarks[tipIdx];
@@ -160,7 +183,8 @@
 
                     // --- KEY INTERACTION ---
                     // On new tap: check which piano key is under this finger
-                    if (tapping && !prev.pressed) {
+                    // Do not trigger keys if we are scrolling (isFist)
+                    if (tapping && !prev.pressed && !isFist) {
                         const lastTime = lastTriggerTime[fKey] || 0;
                         if (now - lastTime > DEBOUNCE_MS) {
                             const keyEl = getPianoKeyAt(sx, sy);
