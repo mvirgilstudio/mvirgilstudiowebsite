@@ -119,7 +119,7 @@ const App: React.FC = () => {
               onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
               className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
             >
-              {lang === 'EN' ? 'PT' : 'EN'}
+              {lang === 'EN' ? 'EN' : 'PT'}
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </motion.span>
           </div>
