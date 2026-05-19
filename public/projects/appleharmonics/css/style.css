@@ -399,14 +399,17 @@
 /* 3D Flipping Card System */
 .flipping-card-container {
     perspective: 1000px;
-    height: 380px;
+    height: 480px;
     width: 100%;
     cursor: pointer;
 }
 
 @media (max-width: 640px) {
     .flipping-card-container {
-        height: 320px;
+        height: 480px;
+    }
+    .flipping-card-front, .flipping-card-back {
+        padding: 1.25rem;
     }
 }
 
