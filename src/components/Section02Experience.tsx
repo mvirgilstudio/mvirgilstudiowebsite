@@ -99,6 +99,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
     const [category, setCategory] = useState<keyof typeof SECTION_02_VARIANTS>('bedroom');
     const [activeTexture, setActiveTexture] = useState(initialTexture);
     const [isButtonHovered, setIsButtonHovered] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [mediapipeStatus, setMediapipeStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
     const [mediapipeProgress, setMediapipeProgress] = useState(0);
     const [handDetected, setHandDetected] = useState(false);
@@ -287,7 +288,7 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                 </motion.div>
             )}
 
-            {/* Environment Selection UI (replicated from Section.tsx for better MP integration) */}
+            {/* Menu Toggle Button */}
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{
@@ -295,51 +296,124 @@ const Section02Experience: React.FC<Section02ExperienceProps> = ({ textureUrl: i
                     x: 0,
                     filter: isButtonHovered ? 'blur(10px)' : 'blur(0px)'
                 }}
-                className="fixed left-4 md:left-12 top-20 md:top-[380px] z-[3001] flex flex-col gap-4 md:gap-12 pointer-events-auto max-w-[calc(100vw-32px)] md:max-w-xl max-h-[calc(100vh-120px)] md:max-h-none overflow-y-auto md:overflow-visible no-scrollbar"
+                className="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-[3002] pointer-events-auto"
             >
-                <div className="flex flex-col gap-3 md:gap-5">
-                    <div className="flex items-center gap-3 md:gap-5 mb-1">
-                        <div className="w-8 md:w-12 h-[1px] bg-white/30" />
-                        <span className="text-[11px] md:text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Category</span>
+                <button
+                    onClick={() => setMenuOpen(v => !v)}
+                    className={`group relative w-[88px] h-[88px] md:w-24 md:h-24 rounded-2xl border-2 flex items-center justify-center transition-all duration-500 backdrop-blur-xl cursor-pointer
+                        ${menuOpen
+                            ? 'bg-white/15 border-[#5282be]/80 shadow-[0_0_40px_rgba(82,130,190,0.35)]'
+                            : 'bg-black/60 border-white/20 hover:border-white/50 hover:bg-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]'
+                        }`}
+                >
+                    {/* Animated icon: grid → close */}
+                    <div className="relative w-6 h-6 flex items-center justify-center">
+                        <motion.div
+                            animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 0 : -4 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className={`absolute w-5 h-0.5 rounded-full transition-colors duration-300 ${menuOpen ? 'bg-[#5282be]' : 'bg-white/70'}`}
+                        />
+                        <motion.div
+                            animate={{ opacity: menuOpen ? 0 : 1, scaleX: menuOpen ? 0 : 1 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute w-5 h-0.5 rounded-full bg-white/70"
+                        />
+                        <motion.div
+                            animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? 0 : 4 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className={`absolute w-5 h-0.5 rounded-full transition-colors duration-300 ${menuOpen ? 'bg-[#5282be]' : 'bg-white/70'}`}
+                        />
                     </div>
-                    <div className="flex flex-row flex-wrap gap-1.5 md:gap-4">
-                        {(Object.keys(SECTION_02_VARIANTS) as Array<keyof typeof SECTION_02_VARIANTS>).map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => { setCategory(cat); setActiveTexture(SECTION_02_VARIANTS[cat][0].sphere); }}
-                                className={`px-3 md:px-8 py-1.5 md:py-4 text-[10px] md:text-[14px] font-mono tracking-widest border transition-all duration-300 ${category === cat ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/10 text-white/70 border-white/20 hover:border-white/50 hover:text-white backdrop-blur-sm'}`}
-                            >
-                                {cat.toUpperCase()}
-                            </button>
-                        ))}
-                    </div>
-                </div>
 
-                <div className="flex flex-col gap-3 md:gap-5">
-                    <div className="flex items-center gap-3 md:gap-5 mb-1">
-                        <div className="w-8 md:w-12 h-[1px] bg-white/30" />
-                        <span className="text-[11px] md:text-[13px] font-mono tracking-widest text-white/60 uppercase font-bold">Environment</span>
-                    </div>
-                    <div className="flex flex-row gap-2 md:gap-6 overflow-x-auto md:overflow-visible pb-2 md:pb-0 no-scrollbar pr-6 md:pr-0">
-                        {SECTION_02_VARIANTS[category].map((item) => (
-                            <div
-                                key={item.id}
-                                onClick={() => setActiveTexture(item.sphere)}
-                                className="group relative cursor-pointer flex-shrink-0"
-                            >
-                                <div className={`w-16 h-16 md:w-32 md:h-32 p-0.5 md:p-1 rounded-xl md:rounded-2xl border transition-all duration-500 overflow-hidden ${activeTexture === item.sphere ? 'border-[#5282be] shadow-[0_0_25px_rgba(82,130,190,0.3)]' : 'border-white/10 grayscale hover:grayscale-0 bg-white/5'}`}>
-                                    <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-lg md:rounded-xl" />
+                    {/* Pulse ring when closed */}
+                    {!menuOpen && (
+                        <motion.span
+                            className="absolute inset-0 rounded-2xl border border-white/20"
+                            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0, 0.4] }}
+                            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                    )}
+                </button>
+
+                {/* Label below toggle */}
+                <motion.span
+                    animate={{ opacity: menuOpen ? 0 : 0.5 }}
+                    className="block text-[8px] md:text-[9px] font-mono tracking-[0.3em] uppercase text-white text-center mt-2 pointer-events-none"
+                >
+                    Menu
+                </motion.span>
+            </motion.div>
+
+            {/* Collapsible Menu Panel */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: -30, scale: 0.95 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: -30, scale: 0.95 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="fixed left-[76px] md:left-[100px] top-1/2 -translate-y-1/2 z-[3001] pointer-events-auto"
+                    >
+                        <div className="bg-black/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-5 md:p-7 shadow-[0_0_80px_rgba(0,0,0,0.8)] flex flex-col gap-6 md:gap-8 max-h-[70vh] overflow-y-auto no-scrollbar">
+
+                            {/* Category Section */}
+                            <div className="flex flex-col gap-3 md:gap-4">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="w-6 h-[1px] bg-[#5282be]/50" />
+                                    <span className="text-[10px] md:text-[11px] font-mono tracking-[0.4em] text-[#5282be]/80 uppercase font-bold">Category</span>
                                 </div>
-                                <div className="mt-1.5 md:mt-3 text-[8px] md:text-[12px] font-mono text-center tracking-widest opacity-40 group-hover:opacity-100 transition-opacity text-white font-bold">
-                                    {item.label}
+                                <div className="flex flex-col gap-2 md:gap-3">
+                                    {(Object.keys(SECTION_02_VARIANTS) as Array<keyof typeof SECTION_02_VARIANTS>).map((cat) => (
+                                        <button
+                                            key={cat}
+                                            onClick={() => { setCategory(cat); setActiveTexture(SECTION_02_VARIANTS[cat][0].sphere); }}
+                                            className={`w-full px-5 md:px-7 py-3.5 md:py-4 text-[11px] md:text-[13px] font-mono tracking-[0.3em] border rounded-xl transition-all duration-300 text-left cursor-pointer
+                                                ${category === cat
+                                                    ? 'bg-white text-black border-white shadow-[0_0_25px_rgba(255,255,255,0.25)] font-bold'
+                                                    : 'bg-white/5 text-white/70 border-white/10 hover:border-white/40 hover:text-white hover:bg-white/10'
+                                                }`}
+                                        >
+                                            {cat.toUpperCase()}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
 
+                            {/* Divider */}
+                            <div className="w-full h-[1px] bg-white/10" />
 
-            </motion.div>
+                            {/* Environment Section */}
+                            <div className="flex flex-col gap-3 md:gap-4">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="w-6 h-[1px] bg-[#5282be]/50" />
+                                    <span className="text-[10px] md:text-[11px] font-mono tracking-[0.4em] text-[#5282be]/80 uppercase font-bold">Environment</span>
+                                </div>
+                                <div className="flex flex-row gap-3 md:gap-4">
+                                    {SECTION_02_VARIANTS[category].map((item) => (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => { setActiveTexture(item.sphere); setMenuOpen(false); }}
+                                            className="group relative cursor-pointer flex-shrink-0 bg-transparent border-0 p-0"
+                                        >
+                                            <div className={`w-20 h-20 md:w-24 md:h-24 p-0.5 rounded-xl md:rounded-2xl border-2 transition-all duration-500 overflow-hidden
+                                                ${activeTexture === item.sphere
+                                                    ? 'border-[#5282be] shadow-[0_0_30px_rgba(82,130,190,0.35)]'
+                                                    : 'border-white/10 grayscale hover:grayscale-0 hover:border-white/30 bg-white/5'
+                                                }`}
+                                            >
+                                                <img src={item.btn} alt={item.label} className="w-full h-full object-cover rounded-lg md:rounded-xl" />
+                                            </div>
+                                            <div className="mt-2 text-[9px] md:text-[11px] font-mono text-center tracking-[0.2em] opacity-50 group-hover:opacity-100 transition-opacity text-white font-bold">
+                                                {item.label}
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <motion.div
                 className="absolute inset-0 z-[2501]"

@@ -1072,35 +1072,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                   />
                 )}
 
-                {/* Expanded Title & Index */}
-                <motion.div
-                  layoutId={`section-title-${data.id}`}
-                  style={{
-                    position: 'absolute',
-                    top: isMobile ? '60px' : '100px',
-                    left: isMobile ? '44px' : '60px',
-                    right: 'auto',
-                    width: isMobile ? '80%' : '45%',
-                    zIndex: 3001,
-                    opacity: 0.8,
-                    transformOrigin: 'left top'
-                  }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.8 }}
-                  exit={{ opacity: 0 }}
-                  className="pointer-events-none flex flex-col gap-4"
-                >
-                  <div className="flex items-center gap-4 opacity-60 scale-75 origin-left">
-                    <div
-                      className="h-[1px] bg-white/40"
-                      style={{ width: isMobile ? '30px' : '50px' }}
-                    />
-                    <span className="text-xs font-mono text-gray-200/60">0{index + 1}</span>
-                  </div>
-                  <div>
-                    {renderTitle(true)}
-                  </div>
-                </motion.div>
+                {/* Expanded Title & Index — disabled for all sections */}
 
                 {/* Expanded Toggle Button */}
                 <motion.div

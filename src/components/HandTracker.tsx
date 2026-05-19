@@ -47,8 +47,14 @@ const HandTracker: React.FC<HandTrackerProps> = ({ onHandMove, active, onStatusC
                     const dist = Math.sqrt(Math.pow(indexTip.x - thumbTip.x, 2) + Math.pow(indexTip.y - thumbTip.y, 2));
                     const isPinching = dist < 0.05;
 
-                    const x = (1 - lm.x) * 2 - 1;
-                    const y = -(lm.y * 2 - 1);
+                    // Reduced tracking area: central 60% of camera maps to full screen
+                    // This makes edge UI (menu button) reachable without extreme hand movement
+                    const MARGIN = 0.2; // 20% margin on each side
+                    const range = 1 - 2 * MARGIN;
+                    const rawX = Math.max(0, Math.min(1, ((1 - lm.x) - MARGIN) / range));
+                    const rawY = Math.max(0, Math.min(1, (lm.y - MARGIN) / range));
+                    const x = rawX * 2 - 1;
+                    const y = -(rawY * 2 - 1);
                     onHandMoveRef.current({ x, y, isPinching });
                     setHandDetected(true);
                 } else {
