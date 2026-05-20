@@ -1032,11 +1032,11 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileHover={!isMobile ? { scale: 1.05, letterSpacing: '0.6em' } : {}}
               transition={{ duration: 0.8 }}
-              className="text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 whitespace-nowrap text-center"
+              className={`text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 ${isMobile ? 'whitespace-pre-line leading-relaxed' : 'whitespace-nowrap'} text-center`}
               style={{ color: isMobile ? 'rgba(255, 255, 255, 0.5)' : accent.hoverHex }}
             >
               {isMobile 
-                ? (t.ui?.desktopReminder || "View on desktop to enter experience.") 
+                ? (t.ui?.desktopReminder || "View on desktop\nto enter experience") 
                 : ((sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE")
               }
             </motion.span>
