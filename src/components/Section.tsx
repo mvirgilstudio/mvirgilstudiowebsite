@@ -998,32 +998,32 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               opacity: btnOpacity,
               y: isMobile ? 0 : btnY,
             }}
-            onClick={() => setIsExpanded(true)}
-            onHoverStart={() => setIsBtnHovered(true)}
-            onHoverEnd={() => setIsBtnHovered(false)}
-            className={`${isMobile ? 'relative mt-12 mb-8 mx-auto' : 'absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2'} z-[40] pointer-events-auto flex flex-col items-center gap-4 group cursor-pointer w-fit`}
+            onClick={isMobile ? undefined : () => setIsExpanded(true)}
+            onHoverStart={isMobile ? undefined : () => setIsBtnHovered(true)}
+            onHoverEnd={isMobile ? undefined : () => setIsBtnHovered(false)}
+            className={`${isMobile ? 'relative mt-12 mb-8 mx-auto pointer-events-none' : 'absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer'} z-[40] flex flex-col items-center gap-4 group w-fit`}
           >
             {/* Icon Wrapper with enhanced Glow */}
             <motion.div
               className="w-16 h-16 md:w-18 md:h-18 rounded-full border-2 flex items-center justify-center opacity-100 backdrop-blur-md transition-all duration-300 relative z-10"
               style={{
-                borderColor: `rgba(${accent.rgb}, 0.55)`,
-                backgroundColor: `rgba(${accent.rgb}, 0.1)`,
-                boxShadow: `0 0 35px rgba(${accent.rgb}, 0.2)`
+                borderColor: isMobile ? `rgba(${accent.rgb}, 0.2)` : `rgba(${accent.rgb}, 0.55)`,
+                backgroundColor: isMobile ? 'transparent' : `rgba(${accent.rgb}, 0.1)`,
+                boxShadow: isMobile ? 'none' : `0 0 35px rgba(${accent.rgb}, 0.2)`
               }}
-              whileHover={{
+              whileHover={isMobile ? {} : {
                 scale: 1.1,
                 rotate: 90,
                 borderColor: accent.hoverHex,
                 boxShadow: `0 0 60px rgba(${accent.rgb}, 0.4)`
               }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={isMobile ? {} : { scale: 0.9 }}
             >
               <motion.div
                 className={`rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-2 h-2'} relative z-20`}
-                style={{ backgroundColor: accent.hoverHex }}
-                animate={theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ backgroundColor: isMobile ? `rgba(${accent.rgb}, 0.4)` : accent.hoverHex }}
+                animate={isMobile ? { opacity: 0.5 } : (theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] })}
+                transition={isMobile ? {} : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
 
@@ -1033,9 +1033,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               whileHover={!isMobile ? { scale: 1.05, letterSpacing: '0.6em' } : {}}
               transition={{ duration: 0.8 }}
               className="text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 whitespace-nowrap text-center"
-              style={{ color: accent.hoverHex }}
+              style={{ color: isMobile ? 'rgba(255, 255, 255, 0.5)' : accent.hoverHex }}
             >
-              {(sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE"}
+              {isMobile 
+                ? (t.ui?.desktopReminder || "View on desktop to enter experience.") 
+                : ((sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE")
+              }
             </motion.span>
           </motion.div>
         )}

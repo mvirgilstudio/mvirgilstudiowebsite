@@ -75,6 +75,7 @@ export const TRANSLATIONS = {
             exitExperience: 'EXIT EXPERIENCE',
             visitProject: 'VISIT PROJECT',
             inspectExperience: 'Click & Drag to Inspect',
+            desktopReminder: 'View on desktop to enter experience.',
         },
         intel: {
             'CAPACITIVE SENSORS': {
@@ -299,6 +300,7 @@ export const TRANSLATIONS = {
             exitExperience: 'SAIR DA EXPERIÊNCIA',
             visitProject: 'VISITAR PROJETO',
             inspectExperience: 'Clique e Arraste para Inspecionar',
+            desktopReminder: 'Visualizar no computador para entrar na experiência.',
         },
         intel: {
             'CAPACITIVE SENSORS': {
