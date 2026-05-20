@@ -45,13 +45,21 @@ const Model = ({ modelId, progress, rotationX, rotationY }: { modelId: string, p
 
 interface Section06ExperienceProps {
     scrollProgress: number;
+    setScrollProgress: React.Dispatch<React.SetStateAction<number>>;
     modelId?: string;
     onModelChange?: (id: string) => void;
     onLottieLoaded?: () => void;
     lang: string;
 }
 
-const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgress, modelId = 'print01', onModelChange, onLottieLoaded, lang }) => {
+const Section06Experience: React.FC<Section06ExperienceProps> = ({ 
+    scrollProgress, 
+    setScrollProgress, 
+    modelId = 'print01', 
+    onModelChange, 
+    onLottieLoaded, 
+    lang 
+}) => {
     const t = TRANSLATIONS[lang as keyof typeof TRANSLATIONS] || TRANSLATIONS.EN;
     const [isMobile, setIsMobile] = useState(false);
     const [rotationX, setRotationX] = useState(0);
@@ -88,17 +96,53 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({ scrollProgres
             }
         };
 
+        const handleWheel = (e: WheelEvent) => {
+            // Prevent default scroll behavior of the page while inside the experience
+            e.preventDefault();
+            
+            setScrollProgress((prev) => {
+                const change = e.deltaY * 0.001;
+                return Math.min(Math.max(prev + change, 0), 1);
+            });
+        };
+
+        let touchStartY = 0;
+        const handleTouchStart = (e: TouchEvent) => {
+            touchStartY = e.touches[0].clientY;
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            // Prevent default scrolling on mobile
+            if (e.cancelable) {
+                e.preventDefault();
+            }
+            const touchEndY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchEndY; // Positive when swiping up (scrolling down)
+            touchStartY = touchEndY;
+
+            setScrollProgress((prev) => {
+                const change = deltaY * 0.003;
+                return Math.min(Math.max(prev + change, 0), 1);
+            });
+        };
+
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart);
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
         return () => {
             window.removeEventListener('resize', checkMobile);
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mouseup', handleMouseUp);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
         };
-    }, [scrollProgress]);
+    }, [scrollProgress, setScrollProgress]);
 
     return (
         <div className="absolute inset-0 z-[10] flex items-center justify-center bg-black">

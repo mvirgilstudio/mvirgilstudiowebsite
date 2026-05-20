@@ -1056,6 +1056,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
                 {data.id === 'section_06' && (
                   <Section06Experience
                     scrollProgress={scrollProgress}
+                    setScrollProgress={setScrollProgress}
                     modelId={activeModelId}
                     lang={lang}
                     onModelChange={(id) => {
