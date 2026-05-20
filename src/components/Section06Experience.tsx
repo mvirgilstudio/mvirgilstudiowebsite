@@ -71,17 +71,17 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
         checkMobile();
         window.addEventListener('resize', checkMobile);
 
-        const handleMouseDown = (e: MouseEvent) => {
+        const handlePointerDown = (e: PointerEvent) => {
             isMouseDownRef.current = true;
             lastMouseXRef.current = e.clientX;
             lastMouseYRef.current = e.clientY;
         };
 
-        const handleMouseUp = () => {
+        const handlePointerUp = () => {
             isMouseDownRef.current = false;
         };
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handlePointerMove = (e: PointerEvent) => {
             if (isMouseDownRef.current) {
                 const deltaX = e.clientX - lastMouseXRef.current;
                 const deltaY = e.clientY - lastMouseYRef.current;
@@ -122,18 +122,18 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
             });
         };
 
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mouseup', handleMouseUp);
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('pointerdown', handlePointerDown);
+        window.addEventListener('pointerup', handlePointerUp);
+        window.addEventListener('pointermove', handlePointerMove);
         window.addEventListener('wheel', handleWheel, { passive: false });
         window.addEventListener('touchstart', handleTouchStart);
         window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
         return () => {
             window.removeEventListener('resize', checkMobile);
-            window.removeEventListener('mousedown', handleMouseDown);
-            window.removeEventListener('mouseup', handleMouseUp);
-            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('pointerdown', handlePointerDown);
+            window.removeEventListener('pointerup', handlePointerUp);
+            window.removeEventListener('pointermove', handlePointerMove);
             window.removeEventListener('wheel', handleWheel);
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchmove', handleTouchMove);
