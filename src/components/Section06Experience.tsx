@@ -28,15 +28,13 @@ const Model = ({ modelId, progress, rotationX, rotationY }: { modelId: string, p
     const easedProgress = Math.max(0, (progress - 0.02) / 0.98);
     const scale = (0.1 + easedProgress * 0.9) * 0.034;
 
-    const isComplete = progress > 0.98;
-
     return (
         <primitive
             object={scene}
             scale={scale}
             rotation={[
-                isComplete ? rotationX : 0,
-                isComplete ? rotationY : Math.PI * progress * 0.5,
+                rotationX,
+                rotationY + Math.PI * progress * 0.5,
                 0
             ]}
         />
@@ -74,11 +72,9 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
         window.addEventListener('resize', checkMobile);
 
         const handleMouseDown = (e: MouseEvent) => {
-            if (scrollProgress > 0.98) {
-                isMouseDownRef.current = true;
-                lastMouseXRef.current = e.clientX;
-                lastMouseYRef.current = e.clientY;
-            }
+            isMouseDownRef.current = true;
+            lastMouseXRef.current = e.clientX;
+            lastMouseYRef.current = e.clientY;
         };
 
         const handleMouseUp = () => {
@@ -86,7 +82,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
         };
 
         const handleMouseMove = (e: MouseEvent) => {
-            if (isMouseDownRef.current && scrollProgress > 0.98) {
+            if (isMouseDownRef.current) {
                 const deltaX = e.clientX - lastMouseXRef.current;
                 const deltaY = e.clientY - lastMouseYRef.current;
                 lastMouseXRef.current = e.clientX;
@@ -142,7 +138,7 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchmove', handleTouchMove);
         };
-    }, [scrollProgress, setScrollProgress]);
+    }, [setScrollProgress]);
 
     return (
         <div className="absolute inset-0 z-[10] flex items-center justify-center bg-black">
@@ -180,8 +176,8 @@ const Section06Experience: React.FC<Section06ExperienceProps> = ({
                                 <Model 
                                     modelId={modelId} 
                                     progress={scrollProgress} 
-                                    rotationX={scrollProgress * Math.PI * 2}
-                                    rotationY={scrollProgress * Math.PI}
+                                    rotationX={rotationX}
+                                    rotationY={rotationY}
                                 />
                             </Center>
                         </Float>
