@@ -370,7 +370,7 @@ const Sculpture = ({ collidersRef, occluderMeshes }: {
     useEffect(() => {
         const meshes: THREE.Mesh[] = [];
         const toRemove: THREE.Object3D[] = [];
-        
+
         scene.traverse((child) => {
             const nameLower = child.name.toLowerCase();
             if (nameLower.includes('cell')) {

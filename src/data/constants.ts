@@ -26,7 +26,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w1',
     title: 'APPLE HARMONICS',
-    description: 'An experimental interface where a pile of real apples becomes a playable, touch-sensitive piano. Each section of the fruit cluster triggers a musical note, transforming organic matter into an instrument. Simultaneously, a projected 3D apple environment mirrors the user’s hand movements in real time. The physical and digital worlds blend into one tactile, immersive performance. A study in playful interaction, natural materials, and expressive motion.',
+    description: 'A playful project that turns real apples into piano keys. Touching the apples plays musical notes, while a projected 3D apple on screen mimics your hand movements. It\'s a fun blend of nature and technology that shows how everyday objects can come to life.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/9d2922a9-4e5a-4525-8d05-0e3125be754a?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/appleharmonics/index.html'
@@ -34,7 +34,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w2',
     title: 'ROCKTOUCH POSTER',
-    description: 'An interactive rock-festival poster transformed into a playable instrument. Touching the guitar strings and fret area triggers real notes and chords. Each illustrated speaker activates a song from its featured band. The poster becomes a tactile musical stage where graphics turn into sound. A fusion of design, interactivity, and rock culture.',
+    description: 'An interactive poster that you can play like a real guitar. Touch the illustrated guitar strings to hear chords, or tap the speakers to play songs from featured rock bands. It combines graphic design and touch technology into a musical experience.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/cf77af7f-ca47-4a8b-b944-45c6fe3c8eb3?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/rocktouch/code.html'
@@ -42,7 +42,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w3',
     title: 'TOUCHSTONE CATALOG',
-    description: 'A hands-on catalog where touching a stone activates its digital counterpart. The system instantly changes the projected 3D scene to match the selected material. Printed buttons allow smooth transitions between curated environments. Users experience materials not just by seeing, but by interacting. A hybrid interface combining samples, sensors, and immersive visualization.',
+    description: 'A physical catalog of stone samples connected to a screen. Touching any real stone immediately displays its detailed 3D version on the screen, letting you explore different design materials in a hands-on way.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/d7781688-242b-40ba-9d7a-ef77c558a697?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/touchstone/index.html'
@@ -50,7 +50,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w4',
     title: 'ARCHSYNC MODEL',
-    description: 'A 3D-printed architectural model perfectly synchronized with a virtual 3D environment. Rotating or manipulating the physical building instantly updates the projected scene. Detachable floors reveal level-by-level exteriors in real time. Users can walk through interiors or orbit the structure using hand-tracking gestures. An integrated screen offers floor selection and precise camera control for exploration.',
+    description: 'A physical, 3D-printed building miniature synced with a screen. Turning the physical model rotates the virtual building on the screen in real time, and lifting off floors shows the room layouts instantly.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/cadd146c-d63e-473d-a1e2-9e8ba0a0d4e6?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/archsync_model/archsync_hero.html'
@@ -58,7 +58,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w5',
     title: 'LIVESPACE',
-    description: 'An immersive 3D visualization of a house where users can freely walk through every space. Interactively change furniture, colors, interior styles, and lighting in real time. Open and close doors or adjust lights to experiment with different atmospheres. Daylight and environmental settings respond dynamically to user actions. A fully interactive platform that brings architectural design to life.',
+    description: 'An interactive virtual home tour. You can walk through the house, customize the furniture and colors in real time, and see how the sunlight changes at different times of day.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/7ce0e237-7f69-403e-990d-8e5ed7005a45?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/livespace/code.html'
@@ -66,7 +66,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w6',
     title: 'GREENHAVEN INTERACTIVE',
-    description: 'Explore a forest house in an interactive, photorealistic 3D environment. Modify interior styles, furniture layouts, colors, and lighting on the fly. Walk through the space, open doors, and adjust lights with intuitive controls. Dynamic daylight and natural forest surroundings enhance realism. A digital experience connecting architectural exploration with immersive nature.',
+    description: 'A beautiful 3D walkthrough of a forest cabin. Change furniture layouts, wall colors, and lighting to see updates instantly against a realistic woodland backdrop.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/4f613faf-a1f8-4505-892e-2a92a6288309?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/greenhaven/code.html'
@@ -74,7 +74,7 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w7',
     title: 'ORBITARIUM INTERACTIVE',
-    description: 'Explore the solar system in an interactive, hand-controlled 3D environment. Navigate between planets and examine them up close with intuitive gestures. Each planet features immersive videos detailing its characteristics and features. Experience the movement, scale, and orbiting dynamics of our cosmic neighborhood. A unique fusion of interactivity, education, and astronomical visualization.',
+    description: 'A 3D solar system controlled with your hands. Fly between planets using simple hand gestures in the air, and watch educational videos about space.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/67ba8e61-32a5-44bf-a110-a635ec840c06?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/solarsystem/index.html'
@@ -82,25 +82,23 @@ export const WORKS_INDEX: WorkItem[] = [
   {
     id: 'w8',
     title: 'SKETCHMAGIC',
-    description: 'An immersive AI-powered drawing experience designed for children. Users create sketches with hand motions, which are instantly transformed into playful AI-generated images. Choose from cute cartoon monsters, rainbow stars, or abstract landscapes. Sensors capture gestures while projections or screens display the results in real time. A fun and interactive platform combining creativity, technology, and imagination.',
+    description: 'A drawing app for kids that uses AI to bring sketches to life. Waves of your hands in front of sensors turn simple outlines into cute cartoon monsters or colorful stars instantly.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/6c067489-8672-4e37-a042-6c1a52474c78?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/sketchmagic/index.html'
   },
-
   {
     id: 'w10',
     title: 'GHOSTVIEW',
-    description: 'Experience the Rolls-Royce Ghost in a fully interactive 3D environment. Customize car paint, interiors, and explore the pinnacle of automotive luxury with intuitive controls. Switch between studio, urban street, and scenic road scenes. Every surface is rendered with absolute fidelity for an immersive digital showroom experience.',
+    description: 'An interactive 3D showroom for the Rolls-Royce Ghost. Customize paint colors, explore the luxury interior, and view the car in different settings like studio lights or city streets.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/3fc8c5e8-84a2-466a-b9e6-0d022d51005e?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/rolls_royce/code.html'
   },
-
   {
     id: 'w12',
     title: 'VASEMOTION',
-    description: 'A unique 3D-printed vase with its own dedicated animated presentation. Motion graphics reveal every angle, curve, and detail of the object. The project blends tactile design with dynamic visual storytelling. Physical and digital representations create a cohesive showcase experience. A creative exploration of 3D printing, form, and animation.',
+    description: 'A custom 3D-printed vase presented through video animations. The animation highlights its curves and texture, showing how physical crafting and digital art work together.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
     externalLink: '/projects/vasemotion/index.html'
@@ -110,54 +108,54 @@ export const WORKS_INDEX: WorkItem[] = [
 export const SECTIONS: SectionData[] = [
   {
     id: 'section_01',
-    title: 'HUMAN–OBJECT INTERACTION',
+    title: 'TOUCH & GESTURE INTERACTION',
     backgroundText: ['TOUCH', 'MOVE', 'CONTROL'],
     description: [
-      'CAPACITIVE SENSORS',
-      'TOUCH INTERFACES',
-      'HAND TRACKING',
-      'MOTION SENSING'
+      'TOUCH-SENSITIVE SURFACES',
+      'TAP & SWIPE INTERFACES',
+      'CAMERA GESTURE CONTROLS',
+      'BODY MOVEMENT SENSORS'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop', // Cybernetic hand/touch
-    videoUrl: 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4' // Abstract touch
+    videoPoster: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+    videoUrl: 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4'
   },
   {
     id: 'section_02',
     title: 'REAL-TIME 3D VISUALIZATION',
     backgroundText: ['INTERACTIVE', 'WORLDS', 'IN MOTION'],
     description: [
-      'INTERACTIVE INTERIORS AND EXTERIORS',
-      'DESIGN EXPLORATION',
-      'PHYSICAL-DIGITAL MODELS',
-      'IMMERSIVE EXPERIENCES'
+      'VIRTUAL WALKTHROUGHS',
+      'CUSTOM DECOR & STYLING',
+      'SMART SCALE MODELS',
+      'FIRST-PERSON EXPLORATION'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop', // Abstract flow
+    videoPoster: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
     videoUrl: 'https://videos.pexels.com/video-files/20770858/20770858-uhd_2560_1440_60fps.mp4'
   },
   {
     id: 'section_03',
-    title: 'HYBRID PHYSICAL DIGITAL SYSTEMS',
+    title: 'CONNECTING PHYSICAL & DIGITAL',
     backgroundText: ['BRIDGING', 'MATTER', 'AND PIXELS'],
     description: [
-      'DIGITAL TWINS',
-      'TANGIBLE INTERFACES',
-      'PROJECTION MAPPING',
-      'PHYSICAL-DIGITAL SYNC'
+      'LIVE DIGITAL REPLICAS',
+      'PHYSICAL CONTROLLERS',
+      'LIGHT PROJECTION ON OBJECTS',
+      'PHYSICAL-DIGITAL HARMONY'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop', // Tech hardware/light
+    videoPoster: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
     videoUrl: 'https://videos.pexels.com/video-files/852422/852422-hd_1920_1080_30fps.mp4'
   },
   {
     id: 'section_04',
-    title: 'AI & GENERATIVE INTERACTION',
+    title: 'CREATING WITH AI',
     backgroundText: ['SYSTEMS THAT', 'CREATE', 'WITH YOU'],
     description: [
-      'AI IMAGE GENERATION',
-      'GENERATIVE VISUALS',
-      'CREATIVE CODING',
-      'ADAPTIVE USER INTERFACES'
+      'AI INTERACTIVE WEBPAGES',
+      'LIVE-ART PATTERNS',
+      'ART WITH CODE',
+      'SMART RESPONSIVE LAYOUTS'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop', // Abstract nodes/AI
+    videoPoster: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop',
     videoUrl: 'https://videos.pexels.com/video-files/3141208/3141208-uhd_2560_1440_25fps.mp4'
   },
   {
@@ -171,87 +169,87 @@ export const SECTIONS: SectionData[] = [
       'LOOK DEVELOPMENT',
       'VFX & MOTION DESIGN'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1633511090164-b43840ea1607?q=80&w=2574&auto=format&fit=crop', // 3D abstract shapes
+    videoPoster: 'https://images.unsplash.com/photo-1633511090164-b43840ea1607?q=80&w=2574&auto=format&fit=crop',
     videoUrl: 'https://videos.pexels.com/video-files/5527739/5527739-uhd_2560_1440_25fps.mp4'
   },
   {
     id: 'section_06',
-    title: '3D PRINTING & FABRICATION',
+    title: '3D PRINTING & DESIGN',
     backgroundText: ['FROM DIGITAL', 'TO PHYSICAL'],
     description: [
       '3D PRINTING',
-      'DIGITAL FABRICATION',
-      'PHYSICAL PROTOTYPING',
-      'OBJECT DESIGN'
+      'DIGITAL CRAFTING',
+      'BUILDING PROTOTYPES',
+      'PRODUCT DESIGN'
     ],
-    videoPoster: 'https://images.unsplash.com/photo-1631557022789-9828d5d4d385?q=80&w=2070&auto=format&fit=crop', // 3D printing/tech
+    videoPoster: 'https://images.unsplash.com/photo-1631557022789-9828d5d4d385?q=80&w=2070&auto=format&fit=crop',
     videoUrl: 'https://videos.pexels.com/video-files/3845070/3845070-uhd_2560_1440_30fps.mp4'
   }
 ];
 
 export const INTEL_DATA: Record<string, { description: string, image?: string, video?: string }> = {
-  'CAPACITIVE SENSORS': {
-    description: 'CAPACITIVE SENSORS DETECT HUMAN TOUCH BY MEASURING CHANGES IN ELECTRICAL FIELDS.\nTHEY ENABLE PRECISE, RESPONSIVE INTERACTION BETWEEN PHYSICAL SURFACES AND DIGITAL SYSTEMS.',
+  'TOUCH-SENSITIVE SURFACES': {
+    description: 'SURFACES THAT DETECT PHYSICAL TOUCH USING SMART SENSORS.\nTHEY TURN ORDINARY OBJECTS INTO RESPONSIVE DIGITAL CONTROLLERS.',
     video: '/assets/videos/capacitive_sensors.mp4'
   },
-  'TOUCH INTERFACES': {
-    description: 'TOUCH INTERFACES TRANSFORM PHYSICAL CONTACT INTO DIRECT DIGITAL INPUT.\nTHEY CREATE INTUITIVE, IMMEDIATE CONNECTIONS BETWEEN HUMAN ACTION AND RESPONSIVE SYSTEMS.',
+  'TAP & SWIPE INTERFACES': {
+    description: 'SCREENS AND PANEL SURFACES THAT RESPOND INSTANTLY TO TAPS AND GESTURES, MAKING DIGITAL NAVIGATION FEEL NATURAL AND IMMEDIATE.',
     video: '/assets/videos/touch_interfaces.mp4'
   },
-  'HAND TRACKING': {
-    description: 'HAND TRACKING CAPTURES NATURAL HUMAN MOVEMENT TO CONTROL DIGITAL ENVIRONMENTS IN REAL TIME.\nIT ENABLES TOUCHLESS, INTUITIVE INTERACTION WHERE THE BODY BECOMES THE INTERFACE.',
+  'CAMERA GESTURE CONTROLS': {
+    description: 'CAMERAS THAT READ THE POSITION AND SHAPE OF YOUR HANDS, LETTING YOU INTERACT WITH SCREENS IN THE AIR WITHOUT TOUCHING A PHYSICAL DEVICE.',
     video: '/assets/videos/hand_tracking.mp4'
   },
-  'MOTION SENSING': {
-    description: 'MOTION SENSING DETECTS BODY MOVEMENT TO DRIVE REAL-TIME DIGITAL RESPONSE.\nIT ENABLES SPATIAL, INTUITIVE INTERACTION WITHOUT PHYSICAL CONTACT.',
+  'BODY MOVEMENT SENSORS': {
+    description: 'INTELLIGENT SENSORS THAT REACT TO HOW A PERSON MOVES IN A SPACE, AUTOMATICALLY CHANGING THE VISUALS AND SOUNDS AROUND THEM.',
     video: '/assets/videos/motion_sensing.mp4'
   },
-  'INTERACTIVE INTERIORS AND EXTERIORS': {
-    description: 'INTERACTIVE ARCHVIZ INTERIORS AND EXTERIORS ALLOW REAL-TIME EXPLORATION OF ARCHITECTURAL SPACES.\nUSERS CAN MOVE, CUSTOMIZE, AND EXPERIENCE DESIGN WITH FULL CONTROL AND IMMERSION.',
+  'VIRTUAL WALKTHROUGHS': {
+    description: 'FULLY EXPLORABLE 3D SIMULATIONS OF SPACES AND HOUSES.\nUSERS CAN FREELY WALK AROUND AND CHANGE DECORATIONS, FURNITURE, AND STYLES ON THE FLY.',
     video: '/assets/videos/interactive_int_ext.mp4'
   },
-  'DESIGN EXPLORATION': {
-    description: 'DESIGN EXPLORATION ENABLES REAL-TIME TESTING OF SPACES, MATERIALS, AND LIGHT.\nIT TRANSFORMS STATIC VISUALIZATION INTO AN INTERACTIVE DECISION-MAKING TOOL.',
+  'CUSTOM DECOR & STYLING': {
+    description: 'INTERACTIVE CONTROLS TO SWAP WALL COLORS, FLOORS, AND TEXTURES INSTANTLY, GIVING AN IMMEDIATE SENSE OF HOW DIFFERENT DESIGN CHOICES LOOK.',
     video: '/assets/videos/design_exploration.mp4'
   },
-  'PHYSICAL-DIGITAL MODELS': {
-    description: 'ARCHVIZ PHYSICAL–DIGITAL MODELS CONNECT TANGIBLE ARCHITECTURAL MAQUETTES WITH REAL-TIME 3D ENVIRONMENTS.\nPHYSICAL INTERACTION INSTANTLY DRIVES DIGITAL UPDATES FOR IMMERSIVE DESIGN EXPLORATION.',
+  'SMART SCALE MODELS': {
+    description: 'PHYSICAL 3D-PRINTED MINIATURES CONNECTED TO SCREENS.\nROTATING AND INTERACTING WITH THE REAL MODEL AUTOMATICALLY ROTATES THE VIRTUAL SCENE.',
     video: '/assets/videos/physical_digital_models.mp4'
   },
-  'IMMERSIVE EXPERIENCES': {
-    description: 'IMMERSIVE EXPERIENCES PLACE USERS INSIDE REACTIVE DIGITAL ENVIRONMENTS.\nTHEY ENGAGE SENSES, MOTION, AND SPACE TO CREATE DEEP, MEMORABLE INTERACTION.',
+  'FIRST-PERSON EXPLORATION': {
+    description: 'EXPERIENCES THAT PUT THE USER INSIDE THE 3D WORLD, DRIVING ENGAGEMENT THROUGH NATURAL CONTROLS AND A RESPONSIVE SENSE OF DEPTH.',
     video: '/assets/videos/immersive_experiences.mp4'
   },
-  'DIGITAL TWINS': {
-    description: 'DIGITAL TWINS ARE REAL-TIME VIRTUAL REPRESENTATIONS OF PHYSICAL OBJECTS OR SPACES.\nTHEY ENABLE SIMULATION, MONITORING, AND INTERACTIVE EXPLORATION WITH HIGH ACCURACY.',
+  'LIVE DIGITAL REPLICAS': {
+    description: 'VIRTUAL 3D CLONES OF PHYSICAL OBJECTS.\nANY CHANGE TO THE PHYSICAL STATE IS INSTANTLY UPDATED AND DISPLAYED ON ITS VIRTUAL COUNTERPART.',
     video: '/assets/videos/digital_twins.mp4'
   },
-  'TANGIBLE INTERFACES': {
-    description: 'TANGIBLE INTERFACES USE PHYSICAL OBJECTS AS DIRECT CONTROLS FOR DIGITAL SYSTEMS.\nTHEY BRIDGE TOUCH, MATERIALITY, AND COMPUTATION FOR INTUITIVE INTERACTION.',
+  'PHYSICAL CONTROLLERS': {
+    description: 'USING REAL, PHYSICAL OBJECTS AS HANDS-ON BUTTONS OR DIALS TO INTERACT DIRECTLY WITH SOFTWARE AND GAMES.',
     video: '/assets/videos/tangible_interfaces.mp4'
   },
-  'PROJECTION MAPPING': {
-    description: 'PROJECTION MAPPING TRANSFORMS PHYSICAL SURFACES INTO DYNAMIC VISUAL DISPLAYS.\nIT MERGES ARCHITECTURE, LIGHT, AND MOTION TO CREATE IMMERSIVE EXPERIENCES.',
+  'LIGHT PROJECTION ON OBJECTS': {
+    description: 'PROJECTING VISUALS PRECISELY ONTO 3D SURFACES OR OBJECTS, CREATING THE ILLUSION OF MOTION AND ALIVE COLOR ON THE PHYSICAL SHAPE.',
     video: '/assets/videos/projection_mapping.mp4'
   },
-  'PHYSICAL-DIGITAL SYNC': {
-    description: 'PHYSICAL–DIGITAL SYNC LINKS REAL-WORLD ACTIONS WITH REAL-TIME DIGITAL RESPONSE.\nIT CREATES COHERENT SYSTEMS WHERE TOUCH, MOTION, AND DATA MOVE AS ONE.',
+  'PHYSICAL-DIGITAL HARMONY': {
+    description: 'A ZERO-DELAY CONNECTION BETWEEN DOING SOMETHING IN THE PHYSICAL WORLD AND SEEING ITS EFFECT IN THE DIGITAL WORLD.',
     video: '/assets/videos/physical_digital_sync.mp4'
   },
-  'AI IMAGE GENERATION': {
-    description: 'AI IMAGE GENERATION USES MACHINE LEARNING TO CREATE VISUALS FROM DATA OR PROMPTS.\nIT ENABLES RAPID, ADAPTIVE VISUAL CREATION FOR INTERACTIVE AND CREATIVE SYSTEMS.',
+  'AI INTERACTIVE WEBPAGES': {
+    description: 'DEVELOPING WEB PAGES THAT USE ARTIFICIAL INTELLIGENCE TO INTERACT, ADAPT, AND GENERATE CONTENTS IN REAL TIME BASED ON USER INPUTS.',
     video: '/assets/videos/ai_image_generation.mp4'
   },
-  'GENERATIVE VISUALS': {
-    description: 'GENERATIVE VISUALS USE ALGORITHMS AND DATA TO CREATE EVER-CHANGING IMAGES IN REAL TIME.\nTHEY ENABLE DYNAMIC, REACTIVE AESTHETICS THAT EVOLVE THROUGH INTERACTION AND INPUT.',
+  'LIVE-ART PATTERNS': {
+    description: 'LIVE ART THAT IS CONTINUOUSLY CALCULATED BY A COMPUTER, RESPONDING DYNAMICALLY TO HUMAN TOUCH AND AUDIO INPUTS.',
     video: '/assets/videos/generative_visuals.mp4'
   },
-  'CREATIVE CODING': {
-    description: 'CREATIVE CODING USES PROGRAMMING AS A MEDIUM FOR VISUAL, INTERACTIVE, AND EXPERIMENTAL EXPRESSION.\nIT ENABLES CUSTOM SYSTEMS WHERE LOGIC, DESIGN, AND MOTION CONVERGE.',
+  'ART WITH CODE': {
+    description: 'USING COMPUTER PROGRAMMING NOT JUST FOR UTILITY, BUT TO INVENT UNIQUE VISUAL EXPERIENCES, LIGHT SHOWS, AND INTERACTIVE ARTWORKS.',
     video: '/assets/videos/creative_coding.mp4'
   },
-  'ADAPTIVE USER INTERFACES': {
-    description: 'ADAPTIVE USER INTERFACES CHANGE IN REAL TIME BASED ON USER BEHAVIOR AND CONTEXT.\nTHEY CREATE MORE INTUITIVE, RESPONSIVE, AND PERSONALIZED INTERACTION EXPERIENCES.',
+  'SMART RESPONSIVE LAYOUTS': {
+    description: 'WEBSITES AND APP SCREEN LAYOUTS THAT AUTOMATICALLY REORGANIZE AND CHANGE TO SUIT HOW A VISITOR IS CURRENTLY INTERACTING.',
     video: '/assets/videos/adaptive_user_interfaces.mp4'
   },
   '3D MODELING': {
@@ -275,19 +273,19 @@ export const INTEL_DATA: Record<string, { description: string, image?: string, v
     video: '/assets/videos/vfx_motion_design.mp4'
   },
   '3D PRINTING': {
-    description: '3D PRINTING TRANSFORMS DIGITAL MODELS INTO PHYSICAL OBJECTS WITH HIGH PRECISION.\nIT ENABLES RAPID PROTOTYPING AND THE CREATION OF TANGIBLE, FUNCTIONAL FORMS.',
+    description: 'USING A 3D PRINTER TO CREATE REAL, SOLID PLASTIC OR RESIN OBJECTS DIRECTLY FROM COMPUTER DESIGNS.',
     video: '/assets/videos/3d_printing.mp4'
   },
-  'DIGITAL FABRICATION': {
-    description: 'DIGITAL FABRICATION USES COMPUTER-CONTROLLED TOOLS TO TURN DIGITAL DESIGNS INTO PHYSICAL OBJECTS.\nIT BRIDGES DESIGN, TECHNOLOGY, AND CRAFTSMANSHIP THROUGH PROCESSES LIKE 3D PRINTING AND CNC.',
+  'DIGITAL CRAFTING': {
+    description: 'USING COMPUTER-GUIDED MACHINERY (LIKE LASER CUTTERS AND 3D PRINTERS) TO MANUFACTURE CUSTOM PHYSICAL PARTS.',
     video: '/assets/videos/digital_fabrication.mp4'
   },
-  'PHYSICAL PROTOTYPING': {
-    description: 'PHYSICAL PROTOTYPING INVOLVES BUILDING TANGIBLE MODELS TO TEST IDEAS, FORM, AND FUNCTION.\nIT HELPS DESIGNERS VALIDATE CONCEPTS EARLY THROUGH HANDS-ON EXPERIMENTATION.',
+  'BUILDING PROTOTYPES': {
+    description: 'CREATING QUICK, RAW PHYSICAL MODELS OF AN OBJECT OR PRODUCT TO TEST HOW IT FEELS IN THE HAND AND HOW IT WORKS.',
     video: '/assets/videos/physical_prototyping.mp4'
   },
-  'OBJECT DESIGN': {
-    description: 'OBJECT DESIGN FOCUSES ON SHAPING FUNCTIONAL AND AESTHETIC PRODUCTS FOR EVERYDAY USE.\nIT COMBINES CREATIVITY, ERGONOMICS, AND MATERIALS TO SOLVE REAL-WORLD PROBLEMS.',
+  'PRODUCT DESIGN': {
+    description: 'THE ENTIRE PROCESS OF DESIGNING BEAUTIFUL, USEFUL PHYSICAL PRODUCTS — FROM HOUSEHOLD GADGETS TO CUSTOM FURNITURE.',
     video: '/assets/videos/object_design.mp4'
   }
 };
