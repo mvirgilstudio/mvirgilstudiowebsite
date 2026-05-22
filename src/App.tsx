@@ -67,6 +67,29 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === '#expertise') {
+        setIsExpertiseOpen(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#about') {
+        setTimeout(() => scrollToSection('section_about'), 600);
+      } else if (hash === '#contact') {
+        setTimeout(() => scrollToSection('section_contact'), 600);
+      }
+    };
+
+    // Delay run on mount to ensure GSAP and DOM elements are fully initialized
+    const timeoutId = setTimeout(handleHash, 800);
+
+    window.addEventListener('hashchange', handleHash);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('hashchange', handleHash);
+    };
+  }, []);
+
   return (
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black md:cursor-none">
       <SvgFilters />
