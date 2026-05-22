@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="utf-8" />
@@ -788,7 +788,7 @@
                 <!-- Language Toggle (Desktop) -->
                 <span onclick="window.toggleLanguage()"
                     class="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group w-6 text-center pointer-events-auto">
-                    <span id="lang-text-desktop">EN</span>
+                    <span id="lang-text-desktop">PT</span>
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
@@ -833,7 +833,7 @@
             </a>
             <div class="mt-12 pt-12 border-t border-white/10">
                 <div class="text-[#b0b0b0] hover:text-white font-mono text-xs tracking-widest cursor-pointer uppercase transition-colors"
-                    onclick="window.toggleLanguage()" id="lang-text-mobile">Português</div>
+                    onclick="window.toggleLanguage()" id="lang-text-mobile">ENGLISH</div>
             </div>
         </div>
     </div>
@@ -1316,12 +1316,10 @@
             }
         };
 
-        window.toggleLanguage = function () {
+        window.setLanguage = function (newLang) {
             const desktopLangText = document.getElementById('lang-text-desktop');
             const mobileLangText = document.getElementById('lang-text-mobile');
             if (!desktopLangText) return;
-            const isCurrentlyEN = desktopLangText.innerText === 'EN';
-            const newLang = isCurrentlyEN ? 'PT' : 'EN';
 
             desktopLangText.innerText = newLang;
             mobileLangText.innerText = newLang === 'EN' ? 'ENGLISH' : 'PORTUGUÊS';
@@ -1330,8 +1328,17 @@
 
             // Update all tagged elements
             document.querySelectorAll('[data-t-en]').forEach(el => {
-                el.innerHTML = newLang === 'PT' ? el.getAttribute('data-t-pt') : el.getAttribute('data-t-en');
+                const translation = newLang === 'PT' ? el.getAttribute('data-t-pt') : el.getAttribute('data-t-en');
+                if (translation !== null) {
+                    el.innerHTML = translation;
+                }
             });
+        };
+
+        window.toggleLanguage = function () {
+            const isCurrentlyEN = window.currentLang === 'EN';
+            const newLang = isCurrentlyEN ? 'PT' : 'EN';
+            window.setLanguage(newLang);
 
             // Re-apply hero title character splitting and animation
             const heroLines = document.querySelectorAll('.hero-title-line');
@@ -1684,6 +1691,9 @@
         // 7. Hero Text Reveal Animation (GSAP)
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
+
+            // Initialize default language as PT
+            window.setLanguage('PT');
 
             const heroLines = document.querySelectorAll('.hero-title-line');
             heroLines.forEach(line => {

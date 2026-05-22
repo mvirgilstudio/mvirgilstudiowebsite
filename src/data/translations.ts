@@ -464,7 +464,7 @@ export const TRANSLATIONS = {
             },
             w4: {
                 title: 'ARCHSYNC MODEL',
-                description: 'Uma miniatura física de um edifício impressa em 3D ligada a um ecrã. Rodar o modelo físico roda o edifício virtual no ecrã em tempo real, e retirar os pisos revela a disposição das salas instantaneamente.',
+                description: 'Uma miniatura física de um edifício impresso em 3D ligado a um ecrã. Rodar o modelo físico roda o edifício virtual no ecrã em tempo real, e retirar os pisos revela a disposição das salas instantaneamente.',
             },
             w5: {
                 title: 'LIVESPACE',
