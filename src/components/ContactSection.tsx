@@ -26,17 +26,39 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setFormState('SENDING');
 
-    // Simulate telemetry transmission
-    setTimeout(() => {
-      setFormState('SUCCESS');
-      setFormData({ name: '', email: '', message: '' });
-    }, 2000);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/vfxmiguel@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}`
+        })
+      });
+
+      if (response.ok) {
+        setFormState('SUCCESS');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setFormState('ERROR');
+        setTimeout(() => setFormState('IDLE'), 5000);
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      setFormState('ERROR');
+      setTimeout(() => setFormState('IDLE'), 5000);
+    }
   };
 
   return (
@@ -208,7 +230,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
               <motion.button
                 type="submit"
                 disabled={formState !== 'IDLE'}
-                className="w-full font-mono text-xs sm:text-sm tracking-widest font-bold bg-white text-black py-4 px-6 rounded-xl hover:bg-concrete transition-all disabled:bg-white/10 disabled:text-concrete flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer"
+                className={`w-full font-mono text-xs sm:text-sm tracking-widest font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer ${
+                  formState === 'ERROR' 
+                    ? 'bg-red-950/40 text-red-500 border border-red-500/20' 
+                    : 'bg-white text-black hover:bg-concrete disabled:bg-white/10 disabled:text-concrete'
+                }`}
                 whileHover={formState === 'IDLE' ? { scale: 1.01 } : {}}
               >
                 {formState === 'SENDING' && (
@@ -220,6 +246,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                 {formState === 'IDLE' && t.form.submit}
                 {formState === 'SENDING' && t.form.sending}
                 {formState === 'SUCCESS' && t.form.success}
+                {formState === 'ERROR' && t.form.error}
               </motion.button>
             </div>
           </form>
