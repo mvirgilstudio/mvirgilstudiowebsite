@@ -849,6 +849,11 @@
 
             window.addEventListener('resize', updateCanvasSize);
             updateCanvasSize();
+
+            // Set default language to PT
+            if (typeof window.toggleLanguage === 'function') {
+                window.toggleLanguage();
+            }
         })();
     </script>
 </body>
