@@ -220,6 +220,52 @@ export const TRANSLATIONS = {
                 title: 'VASEMOTION',
                 description: 'A custom 3D-printed vase presented through video animations. The animation highlights its curves and texture, showing how physical crafting and digital art work together.',
             },
+        },
+        about: {
+            title: 'ABOUT THE STUDIO',
+            subtitle: 'Miguel Virgílio — Interactive Systems & 3D Generalist',
+            bio: 'Bridging physical-digital boundaries, the studio specializes in the creation of complete presentation packages or individual components. From simple 3D image renders and cinematic videos to fully immersive, interactive experiences and custom interactive webpages, we build tailor-made systems that amplify visual storytelling and engage audiences dynamically.',
+            bioExtended: 'Whether you need a singular high-fidelity 3D visualization, a promotional video, or a complete digital ecosystem combining WebGL frameworks and responsive UI, our modular approach adapts to any scale. We craft end-to-end presentation environments that blend artistic direction with high-performance creative coding.',
+        },
+        contact: {
+            title: 'GET IN TOUCH',
+            subtitle: 'Let\'s build the future of physical-digital interfaces together.',
+            form: {
+                name: 'Name',
+                email: 'Email',
+                message: 'Message',
+                submit: 'SEND DIRECT MESSAGE',
+                sending: 'SENDING TRANSMISSION...',
+                success: 'TRANSMISSION RECEIVED SUCCESSFULLY.',
+                error: 'TRANSMISSION FAILED. PLEASE TRY AGAIN.'
+            },
+            info: {
+                email: 'EMAIL',
+                location: 'LOCATION',
+                status: 'STATUS',
+                locationVal: 'Alcobaça, Portugal',
+                statusVal: 'Available for Global Collaborations'
+            }
+        },
+        expertiseModal: {
+            title: 'EXPERTISE & TECH STACK',
+            close: 'CLOSE',
+            capabilitiesTitle: 'CORE CAPABILITIES',
+            techTitle: 'TECHNOLOGIES & TOOLS',
+            skills: [
+                'Interactive 3D & Creative Coding',
+                'Real-Time 3D Visualization',
+                'Physical-Digital Harmony',
+                'Creative AI Systems',
+                '3D Art & Modeling (Generalist)',
+                'Digital & Physical Fabrication'
+            ],
+            techCategories: {
+                coding: 'Web & Creative Coding',
+                art: '3D Art & Modeling',
+                physical: 'Physical Computing',
+                fabrication: 'Digital Fabrication & CAD'
+            }
         }
     },
     PT: {
@@ -443,6 +489,52 @@ export const TRANSLATIONS = {
                 title: 'VASEMOTION',
                 description: 'Uma jarra impressa em 3D apresentada através de animações em vídeo. A animação destaca as suas curvas e texturas, mostrando como o fabrico físico e a arte digital se unem.',
             },
+        },
+        about: {
+            title: 'SOBRE O ESTÚDIO',
+            subtitle: 'Miguel Virgílio — Sistemas Interativos & Generalista 3D',
+            bio: 'Unindo as fronteiras físico-digitais, o estúdio especializa-se na criação de pacotes de apresentação completos ou componentes individuais. Desde simples renderizações de imagem 3D e vídeos cinemáticos a experiências imersivas totalmente interativas e páginas web interativas personalizadas, construímos sistemas à medida que amplificam a narrativa visual e envolvem o público de forma dinâmica.',
+            bioExtended: 'Quer necessite de uma visualização 3D de alta fidelidade singular, um vídeo promocional ou de um ecossistema digital completo combinando frameworks WebGL e interfaces responsivas, a nossa abordagem modular adapta-se a qualquer escala. Desenhamos ambientes de apresentação de ponta a ponta que fundem direção artística com código criativo de alta performance.',
+        },
+        contact: {
+            title: 'CONTACTAR',
+            subtitle: 'Vamos construir juntos o futuro das interfaces físico-digitais.',
+            form: {
+                name: 'Nome',
+                email: 'Email',
+                message: 'Mensagem',
+                submit: 'ENVIAR MENSAGEM DIRETA',
+                sending: 'A ENVIAR TRANSMISSÃO...',
+                success: 'TRANSMISSÃO RECEBIDA COM SUCESSO.',
+                error: 'FALHA NA TRANSMISSÃO. POR FAVOR, TENTE NOVAMENTE.'
+            },
+            info: {
+                email: 'EMAIL',
+                location: 'LOCALIZAÇÃO',
+                status: 'ESTADO',
+                locationVal: 'Alcobaça, Portugal',
+                statusVal: 'Disponível para Colaborações Globais'
+            }
+        },
+        expertiseModal: {
+            title: 'ESPECIALIDADE & STACK',
+            close: 'FECHAR',
+            capabilitiesTitle: 'CAPACIDADES PRINCIPAIS',
+            techTitle: 'TECNOLOGIAS & FERRAMENTAS',
+            skills: [
+                '3D Interativo & Creative Coding',
+                'Visualização 3D em Tempo Real',
+                'Harmonia Físico-Digital',
+                'Sistemas de IA Criativa',
+                'Arte 3D & Modelação (Generalista)',
+                'Fabricação Física & Digital'
+            ],
+            techCategories: {
+                coding: 'Web & Creative Coding',
+                art: 'Arte 3D & Modelação',
+                physical: 'Computação Física',
+                fabrication: 'Fabricação Digital & CAD'
+            }
         }
     }
 };

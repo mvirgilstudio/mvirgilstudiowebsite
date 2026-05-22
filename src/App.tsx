@@ -8,15 +8,29 @@ import CustomCursor from './components/CustomCursor';
 import SvgFilters from './components/SvgFilters';
 import { SECTIONS } from './data/constants';
 import { TRANSLATIONS } from './data/translations';
+import ExpertiseModal from './components/ExpertiseModal';
+import AboutSection from './components/AboutSection';
+import ContactSection from './components/ContactSection';
 
 const App: React.FC = () => {
   const [isIndexVisible, setIsIndexVisible] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
-  const [lang, setLang] = useState<'EN' | 'PT'>('EN');
+  const [lang, setLang] = useState<'EN' | 'PT'>('PT');
   const [isAnySectionExpanded, setIsAnySectionExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isExpertiseOpen, setIsExpertiseOpen] = useState(false);
 
   const t = TRANSLATIONS[lang];
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetY = rect.top + scrollTop;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     // Standard IntersectionObserver doesn't work well with GSAP-pinned stacked sections
@@ -57,6 +71,7 @@ const App: React.FC = () => {
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black md:cursor-none">
       <SvgFilters />
       <CustomCursor />
+      <ExpertiseModal isOpen={isExpertiseOpen} onClose={() => setIsExpertiseOpen(false)} lang={lang} />
 
       {/* Fixed UI - Hidden on Hero or when a section is expanded */}
 
@@ -104,6 +119,13 @@ const App: React.FC = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + (i * 0.1) }}
+                onClick={() => {
+                  if (item.key === 'expertise') {
+                    setIsExpertiseOpen(true);
+                  } else {
+                    scrollToSection(`section_${item.key}`);
+                  }
+                }}
                 className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group"
               >
                 {item.label}
@@ -163,7 +185,16 @@ const App: React.FC = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + (i * 0.1), ease: "easeOut" }}
                   className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setTimeout(() => {
+                      if (item.key === 'expertise') {
+                        setIsExpertiseOpen(true);
+                      } else {
+                        scrollToSection(`section_${item.key}`);
+                      }
+                    }, 300);
+                  }}
                 >
                   <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">0{i + 1}</span>
                   {item.label}
@@ -200,6 +231,8 @@ const App: React.FC = () => {
             lang={lang}
             onExpandChange={setIsAnySectionExpanded}
           />
+          <AboutSection lang={lang} />
+          <ContactSection lang={lang} />
         </div>
 
         {/* Footer */}
