@@ -84,8 +84,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
           className="lg:col-span-5 flex flex-col gap-6 lg:h-full"
         >
           <div>
-            <span className="text-[10px] sm:text-xs font-mono tracking-[0.4em] text-concrete/60 uppercase">03 / CONTACT INTERFACE</span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tight text-white mt-2 leading-[1.05]">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tight text-white leading-[1.05]">
               {t.title}
             </h2>
           </div>
@@ -124,13 +123,26 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                       className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-colors"
                     >
                       <svg className="w-3.5 h-3.5 text-concrete group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002 2h2a2 2 0 002-2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                       </svg>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             </div>
+
+            {/* Phone Badge */}
+            <a
+              href="tel:+351933628268"
+              className="group p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04] transition-all cursor-pointer flex flex-col gap-1"
+            >
+              <span className="text-[9px] tracking-widest text-concrete/40 group-hover:text-concrete/60 transition-colors uppercase">
+                {t.info.phone}
+              </span>
+              <span className="text-sm sm:text-base font-medium text-white tracking-wide">
+                +351 933 628 268
+              </span>
+            </a>
 
             {/* Location Badge */}
             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col gap-1">

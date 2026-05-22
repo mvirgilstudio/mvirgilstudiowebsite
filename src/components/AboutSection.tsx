@@ -56,8 +56,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
           className="lg:col-span-5 flex flex-col gap-6"
         >
           <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs font-mono tracking-[0.4em] text-concrete/60 uppercase">02 / STUDIO PROFILE</span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tight text-white mt-2 leading-[1.05]">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tight text-white leading-[1.05]">
               {t.title}
             </h2>
           </div>

@@ -241,6 +241,7 @@ export const TRANSLATIONS = {
             },
             info: {
                 email: 'EMAIL',
+                phone: 'PHONE',
                 location: 'LOCATION',
                 status: 'STATUS',
                 locationVal: 'Alcobaça, Portugal',
@@ -510,6 +511,7 @@ export const TRANSLATIONS = {
             },
             info: {
                 email: 'EMAIL',
+                phone: 'TELEFONE',
                 location: 'LOCALIZAÇÃO',
                 status: 'ESTADO',
                 locationVal: 'Alcobaça, Portugal',
