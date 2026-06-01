@@ -19,6 +19,7 @@ const App: React.FC = () => {
   const [isAnySectionExpanded, setIsAnySectionExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isExpertiseOpen, setIsExpertiseOpen] = useState(false);
+  const isEmbeddedExperience = new URLSearchParams(window.location.search).has('experience');
 
   const t = TRANSLATIONS[lang];
 
@@ -33,6 +34,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    if (isEmbeddedExperience) return;
     // Standard IntersectionObserver doesn't work well with GSAP-pinned stacked sections
     // because pinned sections stay 'intersecting' even when visually covered.
     const triggers: ScrollTrigger[] = [];
@@ -99,12 +101,13 @@ const App: React.FC = () => {
       {/* Fixed UI - Hidden on Hero or when a section is expanded */}
 
       {/* Header / Logo Fixed */}
-      <motion.header
-        className="fixed top-0 left-0 w-full px-4 sm:px-12 md:px-16 py-3 md:py-5 z-50 pointer-events-none bg-black/40 backdrop-blur-xl border-b border-white/5"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
+      {!isEmbeddedExperience && (
+        <motion.header
+          className="fixed top-0 left-0 w-full px-4 sm:px-12 md:px-16 py-3 md:py-5 z-50 pointer-events-none bg-black/40 backdrop-blur-xl border-b border-white/5"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
         <div className="flex justify-between items-center">
           <div className="cursor-pointer pointer-events-auto group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="flex items-center gap-2 sm:gap-3">
@@ -134,6 +137,7 @@ const App: React.FC = () => {
           <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
             {[
               { label: t.nav.expertise, key: 'expertise' },
+              { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
               { label: t.nav.about, key: 'about' },
               { label: t.nav.contact, key: 'contact' }
             ].map((item, i) => (
@@ -143,7 +147,9 @@ const App: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + (i * 0.1) }}
                 onClick={() => {
-                  if (item.key === 'expertise') {
+                  if ('url' in item && item.url) {
+                    window.location.href = item.url;
+                  } else if (item.key === 'expertise') {
                     setIsExpertiseOpen(true);
                   } else {
                     scrollToSection(`section_${item.key}`);
@@ -185,6 +191,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </motion.header>
+      )}
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -199,6 +206,7 @@ const App: React.FC = () => {
             <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
               {[
                 { label: t.nav.expertise, key: 'expertise' },
+                { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
                 { label: t.nav.about, key: 'about' },
                 { label: t.nav.contact, key: 'contact' }
               ].map((item, i) => (
@@ -211,7 +219,9 @@ const App: React.FC = () => {
                   onClick={() => {
                     setIsMenuOpen(false);
                     setTimeout(() => {
-                      if (item.key === 'expertise') {
+                      if ('url' in item && item.url) {
+                        window.location.href = item.url;
+                      } else if (item.key === 'expertise') {
                         setIsExpertiseOpen(true);
                       } else {
                         scrollToSection(`section_${item.key}`);
@@ -246,65 +256,69 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       <main>
-        <Hero lang={lang} />
+        {!isEmbeddedExperience && <Hero lang={lang} />}
 
-        <div className="relative z-10">
+        <div className={isEmbeddedExperience ? "relative z-10 h-screen w-screen" : "relative z-10"}>
           <StackedSections
-            sections={SECTIONS}
+            sections={isEmbeddedExperience
+              ? SECTIONS.filter(s => s.id === new URLSearchParams(window.location.search).get('experience'))
+              : SECTIONS}
             lang={lang}
             onExpandChange={setIsAnySectionExpanded}
           />
-          <AboutSection lang={lang} />
-          <ContactSection lang={lang} />
+          {!isEmbeddedExperience && <AboutSection lang={lang} />}
+          {!isEmbeddedExperience && <ContactSection lang={lang} />}
         </div>
 
         {/* Footer */}
-        <footer className="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
+        {!isEmbeddedExperience && (
+          <footer className="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
 
-          {/* Social Media Links */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10">
-            {[
-              { icon: '/assets/images/social/linkedin.svg', url: 'https://linkedin.com/in/miguelvirgilio', label: 'LinkedIn' },
-              { icon: '/assets/images/social/instagram.svg', url: 'https://instagram.com/miguelvirgilio', label: 'Instagram' },
-              { icon: '/assets/images/social/X.svg', url: 'https://x.com/miguelvirgilio', label: 'X' },
-              { icon: '/assets/images/social/facebook.svg', url: 'https://facebook.com/miguelvirgilio', label: 'Facebook' },
-              { icon: '/assets/images/social/youtube.svg', url: 'https://youtube.com/@miguelvirgilio', label: 'YouTube' },
-              { icon: '/assets/images/social/vimeo.svg', url: 'https://vimeo.com/miguelvirgilio', label: 'Vimeo' },
-            ].map((social, i) => (
-              <motion.a
-                key={social.label}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
-                whileHover={{ scale: 1.1 }}
-                className="text-concrete hover:text-white transition-colors"
-              >
-                <img src={social.icon} alt={social.label} className="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
-              </motion.a>
-            ))}
-          </div>
+            {/* Social Media Links */}
+            <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10">
+              {[
+                { icon: '/assets/images/social/linkedin.svg', url: 'https://linkedin.com/in/miguelvirgilio', label: 'LinkedIn' },
+                { icon: '/assets/images/social/instagram.svg', url: 'https://instagram.com/miguelvirgilio', label: 'Instagram' },
+                { icon: '/assets/images/social/X.svg', url: 'https://x.com/miguelvirgilio', label: 'X' },
+                { icon: '/assets/images/social/facebook.svg', url: 'https://facebook.com/miguelvirgilio', label: 'Facebook' },
+                { icon: '/assets/images/social/youtube.svg', url: 'https://youtube.com/@miguelvirgilio', label: 'YouTube' },
+                { icon: '/assets/images/social/vimeo.svg', url: 'https://vimeo.com/miguelvirgilio', label: 'Vimeo' },
+              ].map((social, i) => (
+                <motion.a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
+                  whileHover={{ scale: 1.1 }}
+                  className="text-concrete hover:text-white transition-colors"
+                >
+                  <img src={social.icon} alt={social.label} className="w-8 h-8 md:w-10 md:h-10 opacity-60 hover:opacity-100 transition-all" />
+                </motion.a>
+              ))}
+            </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="font-tech text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-concrete uppercase mb-2 relative z-10 px-4 md:px-0"
-          >
-            © {new Date().getFullYear()} {t.footer.copyright}
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-mono text-[8.5px] md:text-[10px] text-concrete/40 relative z-10 max-w-[90%] md:max-w-full mx-auto"
-          >
-            {t.footer.tagline}
-          </motion.p>
-        </footer>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="font-tech text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-concrete uppercase mb-2 relative z-10 px-4 md:px-0"
+            >
+              © {new Date().getFullYear()} {t.footer.copyright}
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-mono text-[8.5px] md:text-[10px] text-concrete/40 relative z-10 max-w-[90%] md:max-w-full mx-auto"
+            >
+              {t.footer.tagline}
+            </motion.p>
+          </footer>
+        )}
       </main>
     </div>
   );

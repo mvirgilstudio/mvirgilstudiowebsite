@@ -4,6 +4,7 @@ export const TRANSLATIONS = {
             expertise: 'Expertise',
             about: 'About',
             contact: 'Contact',
+            convento: 'ArchViz',
         },
         hero: {
             system: 'Interactive Design System',
@@ -274,6 +275,7 @@ export const TRANSLATIONS = {
             expertise: 'Especialidade',
             about: 'Sobre',
             contact: 'Contacto',
+            convento: 'ArchViz',
         },
         hero: {
             system: 'Sistema de Design Interativo',

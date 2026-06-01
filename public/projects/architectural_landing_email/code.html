@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ARC.TECH | Interactive Virtual Showcase</title>
+    <!-- PP Neue Montreal Font -->
+    <style>
+        @font-face {
+            font-family: 'PP Neue Montreal';
+            src: url('https://db.onlinewebfonts.com/t/4366ceae6f7564999a0f0c3e8698a4ad.woff2?v=2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'PP Neue Montreal';
+            src: url('https://db.onlinewebfonts.com/t/ca60ecf8682ee50619811d94af8db7d4.woff2?v=2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "secondary": "#5c5f60",
+                        "background": "#f0f1f1",
+                        "surface": "#ffffff",
+                        "border-color": "#e2e2e2"
+                    },
+                    fontFamily: {
+                        sans: ["PP Neue Montreal", "Arial", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS keyframes to simulate panorama panning */
+        @keyframes pan-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .panning-simulation {
+            animation: pan-bg 12s linear infinite;
+            background-size: 200% auto;
+        }
+
+        /* 3D Orbit Rotate simulation */
+        @keyframes orbit-sim {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.04) rotate(1.5deg); }
+            50% { transform: scale(1.06) rotate(0deg); }
+            75% { transform: scale(1.04) rotate(-1.5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .orbit-simulation {
+            animation: orbit-sim 8s ease-in-out infinite;
+        }
+
+        /* Responsive Flex Accordion Gallery */
+        .accordion-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            height: auto;
+        }
+
+        .accordion-card {
+            flex: 1;
+            height: 180px; /* Uniform height on mobile */
+            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+            will-change: flex;
+        }
+
+        @media (min-width: 640px) {
+            .accordion-gallery {
+                flex-direction: row;
+                height: 320px; /* Uniform height on desktop */
+            }
+
+            .accordion-card {
+                height: 100%; /* Fills the parent height, keeping all cards at 320px */
+                flex: 1;
+            }
+
+            /* Expand on hover or when marked active */
+            .accordion-gallery:not(:hover) .accordion-card.active {
+                flex: 4;
+            }
+
+            .accordion-gallery:hover .accordion-card:hover {
+                flex: 4;
+            }
+
+            /* Rotates titles 90 degrees bottom-to-top on desktop viewports */
+            .vertical-title {
+                writing-mode: vertical-rl;
+                transform: rotate(180deg);
+                white-space: nowrap;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background py-8 px-4 font-sans text-[#1a1c1c] antialiased">
+    <!-- Email Container -->
+    <div class="max-w-[640px] mx-auto bg-white border border-[#e2e2e2] shadow-xl overflow-hidden font-sans">
+        
+        <!-- Header -->
+        <header class="bg-white px-8 py-6 border-b border-[#f0f1f1] flex justify-between items-center">
+            <div class="text-lg font-bold tracking-widest text-primary uppercase">
+                ARC.TECH
+            </div>
+            <div class="text-[9px] tracking-[0.25em] text-secondary uppercase font-semibold">
+                Interactive Showcase
+            </div>
+        </header>
+
+        <!-- Hero: Interactive Model Feature -->
+        <section class="relative w-full aspect-[16/9] bg-neutral-950 overflow-hidden flex items-center p-8 md:p-12">
+            <!-- Background Image -->
+            <img src="/projects/architectural_landing_page/assets/hero_background.jpg" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-60" 
+                 alt="Stunning Interactive Virtual Model">
+            <!-- Dark Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent"></div>
+            
+            <!-- Hero Text content -->
+            <div class="relative z-10 max-w-md text-white space-y-6">
+                <h1 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-snug">
+                    Step inside and explore your space remotely with our immersive 3D models.
+                </h1>
+                <a href="https://example.com" class="inline-block px-6 py-3 bg-white text-primary text-xs font-bold tracking-widest uppercase hover:bg-neutral-100 transition-all duration-300">
+                    Explore the Interactive Model
+                </a>
+            </div>
+        </section>
+
+        <!-- Main Body Wrapper -->
+        <div class="p-8 md:p-12 space-y-12">
+            
+            <!-- Core Capabilities Breakdown (3 columns, simplified copy) -->
+            <section class="space-y-4">
+                <h2 class="text-xs tracking-[0.2em] text-secondary uppercase font-bold">
+                    Core Capabilities
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+                    <!-- Col 1 -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-primary uppercase tracking-wider">
+                            Interactive Models
+                        </h3>
+                        <p class="text-[11px] text-secondary leading-relaxed">
+                            Real-time 3D exploration and spatial understanding from any angle.
+                        </p>
+                    </div>
+                    <!-- Col 2 -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-primary uppercase tracking-wider">
+                            Virtual Panoramas
+                        </h3>
+                        <p class="text-[11px] text-secondary leading-relaxed">
+                            High-fidelity 360° views of key spaces, showing rich material finishes.
+                        </p>
+                    </div>
+                    <!-- Col 3 -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-primary uppercase tracking-wider">
+                            Virtual Tours
+                        </h3>
+                        <p class="text-[11px] text-secondary leading-relaxed">
+                            Seamless, self-guided digital walkthroughs of complex interiors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Accordion Gallery -->
+            <section class="space-y-4">
+                <div class="flex justify-between items-end border-b border-[#f0f1f1] pb-3">
+                    <h2 class="text-sm font-bold text-primary uppercase tracking-wider">
+                        Immersive Showcase
+                    </h2>
+                    <span class="text-[9px] text-secondary/60 uppercase tracking-widest font-mono">Hover to expand cards</span>
+                </div>
+
+                <!-- Flex Accordion Structure -->
+                <div class="accordion-gallery w-full">
+                    
+                    <!-- Card 1: 01 / Interactive Model -->
+                    <div id="acc-card-1" onclick="toggleAccordionSim('acc-card-1', 'orbit')"
+                         class="accordion-card active group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
+                        <!-- Image Render layer -->
+                        <img src="/projects/archsync_model/images/img_01.png" 
+                             class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700 orbit-simulation" 
+                             alt="ArchSync Model">
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
+                        
+                        <!-- Content -->
+                        <div class="relative z-10 text-white">
+                            <h4 class="font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-sans vertical-title">01 / Interactive Model</h4>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: 02 / Panorama -->
+                    <div id="acc-card-2" onclick="toggleAccordionSim('acc-card-2', 'pan')"
+                         class="accordion-card group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
+                        <div class="sim-bg-layer absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-all duration-700" style="background-image: url('/projects/greenhaven/assets/img_02.jpg');"></div>
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
+                        
+                        <div class="relative z-10 text-white">
+                            <h4 class="font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-sans vertical-title">02 / Panorama</h4>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: 03 / Walkthrough -->
+                    <div id="acc-card-3" onclick="toggleAccordionSim('acc-card-3', 'tour')"
+                         class="accordion-card group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
+                        <img src="/projects/livespace/public/img_01.jpg" 
+                             class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700" 
+                             alt="Concrete Facade">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
+                        
+                        <div class="relative z-10 text-white">
+                            <h4 class="font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-sans vertical-title">03 / Walkthrough</h4>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: 04 / Model Configuration -->
+                    <div id="acc-card-4" onclick="toggleAccordionSim('acc-card-4', 'orbit')"
+                         class="accordion-card group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
+                        <img src="/projects/livespace/public/img_02.jpg" 
+                             class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700" 
+                             alt="Lounge interior">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
+                        
+                        <div class="relative z-10 text-white">
+                            <h4 class="font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-sans vertical-title">04 / Model Configuration</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Cloud Video Walkthrough Tour (Simulated Player) -->
+            <section class="space-y-4 border-t border-[#f0f1f1] pt-8">
+                <h2 class="text-sm font-bold text-primary uppercase tracking-wider">
+                    Guided Virtual Walkthrough
+                </h2>
+                <div id="video-player-frame" class="relative w-full aspect-video bg-neutral-900 border border-border-color overflow-hidden group">
+                    <img id="video-poster-img" src="/projects/archsync_model/images/img_05.png" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:scale-102 transition-transform duration-700" 
+                         alt="Model Walkthrough Teaser">
+                    <div class="absolute inset-0 bg-black/25"></div>
+                    
+                    <video id="player-active-video" class="hidden w-full h-full object-cover" controls loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-architectural-shot-of-a-building-with-arched-windows-40280-large.mp4" type="video/mp4">
+                    </video>
+
+                    <div id="player-trigger-overlay" class="absolute inset-0 flex items-center justify-center z-20">
+                        <button onclick="playWalkthroughVideo()" class="w-14 h-14 bg-white/95 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer">
+                            <span class="material-symbols-outlined text-primary text-3xl font-fill pl-0.5">play_arrow</span>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-3 left-3 bg-black/60 text-white text-[9px] px-2.5 py-1 uppercase tracking-widest rounded-sm font-bold pointer-events-none z-10">
+                        Cloud guided visual tour
+                    </div>
+                </div>
+                <div class="text-center pt-2">
+                    <button onclick="playWalkthroughVideo()" class="inline-flex items-center gap-1.5 px-6 py-3 bg-primary text-white text-xs font-bold tracking-widest uppercase hover:bg-secondary transition-colors duration-300">
+                        <span id="player-btn-label">Watch the Virtual Model Walkthrough</span>
+                        <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#f9f9f9] px-8 py-8 border-t border-[#f0f1f1] text-center text-[10px] text-secondary font-mono">
+            <div class="mb-2">ARC.TECH Systems</div>
+            <div class="flex justify-center gap-4 text-[9px] uppercase tracking-wider">
+                <a href="#" class="hover:text-primary transition-colors">Privacy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-primary transition-colors">Contact</a>
+                <span>|</span>
+                <a href="#" class="hover:text-primary transition-colors">Unsubscribe</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Active simulator scripts -->
+    <script>
+        // Simulating orbit, pan, or tour preview modes inside the Accordion Gallery
+        function toggleAccordionSim(cardId, type) {
+            const card = document.getElementById(cardId);
+            const isAlreadyActive = card.classList.contains('active');
+
+            // Deactivate all cards
+            document.querySelectorAll('.accordion-card').forEach(c => {
+                c.classList.remove('active');
+            });
+
+            // Reset animations
+            resetAllAnimations();
+
+            if (!isAlreadyActive) {
+                // Activate this card
+                card.classList.add('active');
+                
+                if (type === 'orbit') {
+                    const img = card.querySelector('.sim-image');
+                    img.classList.add('orbit-simulation');
+                } else if (type === 'pan') {
+                    const bgLayer = card.querySelector('.sim-bg-layer');
+                    bgLayer.classList.add('panning-simulation');
+                } else if (type === 'tour') {
+                    const img = card.querySelector('.sim-image');
+                    img.classList.add('orbit-simulation');
+                }
+            } else {
+                // Default back to Card 1 active
+                document.getElementById('acc-card-1').classList.add('active');
+                const img = document.getElementById('acc-card-1').querySelector('.sim-image');
+                img.classList.add('orbit-simulation');
+            }
+        }
+
+        function resetAllAnimations() {
+            document.querySelectorAll('.sim-image').forEach(img => {
+                img.classList.remove('orbit-simulation');
+            });
+            document.querySelectorAll('.sim-bg-layer').forEach(bg => {
+                bg.classList.remove('panning-simulation');
+            });
+        }
+
+        // Play teaser walkthrough video inline
+        function playWalkthroughVideo() {
+            const poster = document.getElementById('video-poster-img');
+            const playOverlay = document.getElementById('player-trigger-overlay');
+            const video = document.getElementById('player-active-video');
+            const btnLabel = document.getElementById('player-btn-label');
+
+            if (video.classList.contains('hidden')) {
+                poster.classList.add('hidden');
+                playOverlay.classList.add('hidden');
+                video.classList.remove('hidden');
+                video.play();
+                btnLabel.innerText = "Launch full screen walkthrough";
+            } else {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

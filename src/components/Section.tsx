@@ -265,6 +265,14 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   const [s02ActiveTexture, setS02ActiveTexture] = useState('/assets/images/bedroom_01.jpg');
   const [isBtnHovered, setIsBtnHovered] = useState(false);
 
+  // Listen for query params to force expand this section's experience
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('experience') === data.id) {
+      setIsExpanded(true);
+    }
+  }, [data.id]);
+
   useEffect(() => {
     onExpandChange?.(isExpanded);
     if (isExpanded && data.id === 'section_06') {
@@ -276,10 +284,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
 
   // Auto-collapse when section goes out of view
   useEffect(() => {
-    if (!isInView && isExpanded) {
+    const params = new URLSearchParams(window.location.search);
+    const isForcedExperience = params.get('experience') === data.id;
+    if (!isInView && isExpanded && !isForcedExperience) {
       setIsExpanded(false);
     }
-  }, [isInView, isExpanded]);
+  }, [isInView, isExpanded, data.id]);
 
   // Wheel scrubbing for Section 06 experience
   useEffect(() => {
