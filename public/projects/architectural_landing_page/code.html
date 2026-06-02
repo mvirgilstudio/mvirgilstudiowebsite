@@ -542,7 +542,7 @@
         <!-- Anchor Navigation Menu -->
         <div class="relative w-full bg-white border-b border-black/10 z-30">
             <div
-                class="max-w-[1920px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/10 border-l border-r border-black/5">
+                class="max-w-[1920px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-black/10 border-l border-r border-black/5">
                 <!-- Item 1: Showcase -->
                 <a href="#showcase-sec"
                     class="group flex flex-col justify-between p-8 hover:bg-[#f3f3f4] transition-all duration-500 relative overflow-hidden">
@@ -597,11 +597,29 @@
                         <span class="material-symbols-outlined text-xl">arrow_forward</span>
                     </div>
                 </a>
-                <!-- Item 4: Precision Prototyping -->
-                <a href="#precision-prototyping-sec"
+                <!-- Item 4: 3D Viewer -->
+                <a href="#gaussian-splatting-sec"
                     class="group flex flex-col justify-between p-8 hover:bg-[#f3f3f4] transition-all duration-500 relative overflow-hidden">
                     <span class="text-[10px] font-normal text-secondary/60 tracking-[0.25em] uppercase mb-8">SECTION
                         04</span>
+                    <div class="flex flex-col gap-1">
+                        <h4
+                            class="font-headline-md text-lg uppercase text-[#1a1a1a] tracking-wider transition-transform duration-500 group-hover:translate-x-1">
+                            3D Viewer</h4>
+                        <p
+                            class="text-[11px] text-secondary font-body-md leading-normal opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-12 transition-all duration-500">
+                            High-fidelity real-time 3D Gaussian Splatting scan.</p>
+                    </div>
+                    <div
+                        class="absolute right-6 bottom-6 text-[#1a1a1a] opacity-35 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                    </div>
+                </a>
+                <!-- Item 5: Precision Prototyping -->
+                <a href="#precision-prototyping-sec"
+                    class="group flex flex-col justify-between p-8 hover:bg-[#f3f3f4] transition-all duration-500 relative overflow-hidden">
+                    <span class="text-[10px] font-normal text-secondary/60 tracking-[0.25em] uppercase mb-8">SECTION
+                        05</span>
                     <div class="flex flex-col gap-1">
                         <h4
                             class="font-headline-md text-lg uppercase text-[#1a1a1a] tracking-wider transition-transform duration-500 group-hover:translate-x-1">
@@ -627,7 +645,12 @@
             <div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-[1920px] mx-auto">
                 <!-- Showcase Header -->
                 <div class="flex flex-col mb-4">
-                    <h3 class="font-headline-md text-headline-md uppercase text-[#1a1a1a]">Showcase</h3>
+                    <h4 class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-2">
+                        01 / Showcase
+                    </h4>
+                    <h3 class="font-headline-lg text-3xl md:text-5xl uppercase text-[#1a1a1a] mb-4 leading-tight">
+                        Visual Showcase
+                    </h3>
                 </div>
 
                 <!-- Flow Navigation Bar -->
@@ -917,13 +940,7 @@
                     <div class="walkthrough-grid-card flex flex-col gap-4">
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
-                            <div style="position:relative;padding-top:56.25%;">
-                                <iframe
-                                    src="https://player.mediadelivery.net/embed/625906/061b719b-0949-415d-b6ea-0a0f0e2f11e6?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
-                                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
-                                    allowfullscreen="true"></iframe>
-                            </div>
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/10b021e4-dbc0-4e46-996e-2d626ee0cead?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe></div>
                         </div>
                         <div class="flex flex-col">
                             <span
@@ -948,13 +965,7 @@
                     <div class="walkthrough-grid-card flex flex-col gap-4">
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
-                            <div style="position:relative;padding-top:56.25%;">
-                                <iframe
-                                    src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
-                                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
-                                    allowfullscreen="true"></iframe>
-                            </div>
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe></div>
                         </div>
                         <div class="flex flex-col">
                             <span
@@ -1196,7 +1207,7 @@
                     <!-- Pipeline Info (3/5 width) -->
                     <div class="w-full md:w-3/5">
                         <h2 class="font-body-md text-label-md uppercase tracking-widest text-white/60 mb-6">
-                            Our Hybrid Pipeline</h2>
+                            05 / Our Hybrid Pipeline</h2>
                         <p class="font-body-lg text-body-lg leading-relaxed text-white/90">
                             We merge classical 3D modeling and rendering craftsmanship (3ds Max,
                             Blender, Corona) with state-of-the-art AI synthesis (Midjourney, Stable
@@ -1231,8 +1242,9 @@
             <!-- Header Info (Above the Video/Grid) -->
             <div class="flex flex-col mb-12 reveal-up">
                 <div class="w-20 h-1 bg-white/40 mb-8"></div>
-                <h4 class="font-body-md text-label-md uppercase tracking-widest text-[#c4c7c7] mb-4">Digital Twin
-                    Experience</h4>
+                <h4 class="font-body-md text-label-md uppercase tracking-widest text-[#c4c7c7] mb-4">
+                    02 / Digital Twin Experience
+                </h4>
                 <h2 class="font-headline-lg text-3xl md:text-5xl uppercase text-white leading-tight">The
                     Physical-to-Digital Bridge.</h2>
             </div>
@@ -1314,7 +1326,7 @@
             <!-- Header Info -->
             <div class="flex flex-col mb-12 reveal-up">
                 <h4 class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-2">
-                    04B / Interactive Viewer
+                    03 / Interactive Viewer
                 </h4>
                 <h3 class="font-headline-lg text-3xl md:text-5xl uppercase text-[#1a1a1a] mb-4 leading-tight">
                     Digital Twin Interactive Viewer
@@ -1444,9 +1456,12 @@
 
         <div class="max-w-[1920px] mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
             <!-- Header Info -->
-            <div class="flex flex-col md:flex-row justify-start items-start md:items-center mb-12 reveal-up gap-6 md:gap-10">
+            <div
+                class="flex flex-col md:flex-row justify-start items-start md:items-center mb-12 reveal-up gap-6 md:gap-10">
                 <div class="flex-shrink-0">
-                    <img src="/projects/architectural_landing_page/assets/convento/fundacao_orada.png" alt="Fundação Orada Logo" class="h-16 md:h-20 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-300">
+                    <img src="/projects/architectural_landing_page/assets/convento/fundacao_orada.png"
+                        alt="Fundação Orada Logo"
+                        class="h-16 md:h-20 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-300">
                 </div>
                 <div class="flex flex-col">
                     <h4
@@ -1456,13 +1471,14 @@
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a1a1a] opacity-40"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-[#1a1a1a]"></span>
                         </span>
-                        04C / Gaussian Splatting
+                        04 / 3D Viewer
                     </h4>
                     <h3 class="font-headline-lg text-3xl md:text-5xl uppercase text-[#1a1a1a] mb-4 leading-tight">
                         CONVENTO DA ORADA
                     </h3>
                     <p class="font-body-md text-body-md text-secondary max-w-3xl">
-                        Explore a dense, high-fidelity spatial capture of the historic Convento. By utilizing 3D Gaussian
+                        Explore a dense, high-fidelity spatial capture of the historic Convento. By utilizing 3D
+                        Gaussian
                         Splatting, we preserve light fields, volumetric depth, and raw textures as a navigable real-time
                         digital twin.
                     </p>
@@ -1470,15 +1486,11 @@
             </div>
 
             <!-- Main Layout Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
-                <!-- Left Side: Interactive 3D Splat Canvas (8/12) -->
-                <div class="flex flex-col gap-3 lg:col-span-8 reveal-left">
+            <div class="flex flex-col gap-8 w-full">
+                <!-- Top Side: Interactive 3D Splat Canvas (Full Width) -->
+                <div class="flex flex-col gap-3 w-full reveal-left">
                     <div class="flex justify-between items-center">
-                        <span class="font-body-md text-xs uppercase tracking-wider text-secondary">Interactive WebGL
-                            Splat Canvas</span>
-                        <span
-                            class="text-[10px] font-mono text-primary tracking-wider uppercase border border-black/25 px-2 py-0.5 bg-black/5">Active
-                            Session</span>
+                        <span class="font-body-md text-xs uppercase tracking-wider text-secondary">Interactive WebGL Splat Canvas</span>
                     </div>
 
                     <div
@@ -1489,96 +1501,44 @@
                             title="Convento Gaussian Splatting Viewer">
                         </iframe>
 
-                        <!-- Futuristic Telemetry HUD Overlay (Top-Right) -->
-                        <div
-                            class="absolute top-4 right-4 z-20 flex flex-col gap-1.5 pointer-events-none font-mono text-[9px] md:text-[10px] text-secondary bg-white/90 backdrop-blur-md p-3 border border-black/10">
-                            <div class="flex justify-between gap-4">
-                                <span class="text-secondary/60">RESOLUTION:</span>
-                                <span class="text-primary font-semibold">100% (WEBGL2)</span>
-                            </div>
-                            <div class="flex justify-between gap-4">
-                                <span class="text-secondary/60">SPLAT COUNT:</span>
-                                <span class="text-primary font-semibold">1,847,902</span>
-                            </div>
-                            <div class="flex justify-between gap-4">
-                                <span class="text-secondary/60">RENDER BUDGET:</span>
-                                <span class="text-primary font-semibold">Unlimited</span>
-                            </div>
-                            <div class="flex justify-between gap-4">
-                                <span class="text-secondary/60">MEMORY USAGE:</span>
-                                <span class="text-primary font-semibold">312.4 MB</span>
-                            </div>
-                        </div>
-
                         <!-- Interaction Helper Overlay (Bottom-Left) -->
                         <div class="absolute bottom-4 left-4 z-20 flex gap-2 pointer-events-none">
                             <div
                                 class="px-2.5 py-1 bg-white/90 backdrop-blur-md border border-black/10 text-[9px] text-secondary font-mono tracking-widest uppercase flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-[10px] animate-pulse text-primary">explore</span>
+                                <span
+                                    class="material-symbols-outlined text-[10px] animate-pulse text-primary">explore</span>
                                 <span>DRAG TO ROTATE / SCROLL TO ZOOM</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Side: Walkthrough Video & Controls Dashboard (4/12) -->
-                <div class="flex flex-col gap-8 lg:col-span-4 reveal-right">
-                    <!-- Video Window -->
+                <!-- Bottom Side: Video Windows (Side-by-side on desktop) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full reveal-right">
+                    <!-- Video Window 1: Cinematic Scan Path -->
                     <div class="flex flex-col gap-3">
-                        <span class="font-body-md text-xs uppercase tracking-wider text-secondary">Cinematic Scan
-                            Path</span>
-                        <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden" style="position:relative;padding-top:56.25%;">
-                            <iframe src="https://player.mediadelivery.net/embed/625906/85232b4e-9df5-47de-8a27-3b4aa1d19348?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
-                            <div class="absolute top-3 left-3 bg-black/85 px-2 py-0.5 text-[9px] font-mono text-white border border-black/10 uppercase tracking-widest pointer-events-none z-10">
-                                REC // PRE-RENDERED
-                            </div>
+                        <span class="font-body-md text-xs uppercase tracking-wider text-secondary">Cinematic Scan Path</span>
+                        <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
+                            style="position:relative;padding-top:56.25%;">
+                            <iframe
+                                src="https://player.mediadelivery.net/embed/625906/85232b4e-9df5-47de-8a27-3b4aa1d19348?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+                                allowfullscreen="true"></iframe>
                         </div>
                     </div>
 
-                    <!-- Live Dashboard HUD -->
-                    <div class="flex flex-col border border-black/10 bg-white p-6 gap-5 shadow-architectural">
-                        <h5
-                            class="font-headline-md text-sm uppercase tracking-wider text-primary border-b border-black/10 pb-2.5 flex items-center justify-between">
-                            <span>Telemetry HUD</span>
-                            <span class="material-symbols-outlined text-sm text-secondary">analytics</span>
-                        </h5>
-
-                        <!-- Live changing coordinate tracker -->
-                        <div class="grid grid-cols-2 gap-4 font-mono text-[10px]">
-                            <div class="flex flex-col bg-neutral-100 p-2.5 border border-black/5">
-                                <span class="text-secondary/60 uppercase text-[8px] mb-1">Target Coordinates</span>
-                                <span id="splat-coords" class="text-primary font-medium">X: 12.42 Y: -54.91 Z: 3.12</span>
-                            </div>
-                            <div class="flex flex-col bg-neutral-100 p-2.5 border border-black/5">
-                                <span class="text-secondary/60 uppercase text-[8px] mb-1">Scanner Pitch</span>
-                                <span id="splat-pitch" class="text-primary font-medium">85.4°</span>
-                            </div>
+                    <!-- Video Window 2: 3D Print Prototype -->
+                    <div class="flex flex-col gap-3">
+                        <span class="font-body-md text-xs uppercase tracking-wider text-secondary">3D Print Prototype</span>
+                        <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
+                            style="position:relative;padding-top:56.25%;">
+                            <iframe
+                                src="https://player.mediadelivery.net/embed/625906/2faee777-3c96-4354-a9e6-50aa234c11ba?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+                                allowfullscreen="true"></iframe>
                         </div>
-
-                        <!-- Scanner Control Modes -->
-                        <div class="flex flex-col gap-2.5">
-                            <span class="font-body-md text-[9px] uppercase tracking-wider text-secondary/60">Select Visual
-                                Preset</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button id="btn-mode-splat"
-                                    class="btn-preset active flex items-center justify-center gap-1.5 py-2 px-3 bg-primary text-white font-body-md text-[9px] uppercase tracking-wider cursor-pointer border border-primary transition-all duration-300 rounded-none">
-                                    <span class="material-symbols-outlined text-[10px]">cloud</span>
-                                    <span>Dense Splat</span>
-                                </button>
-                                <button id="btn-mode-mesh"
-                                    class="btn-preset flex items-center justify-center gap-1.5 py-2 px-3 bg-transparent text-secondary font-body-md text-[9px] uppercase tracking-wider cursor-pointer border border-black/10 hover:border-primary hover:text-primary transition-all duration-300 rounded-none">
-                                    <span class="material-symbols-outlined text-[10px]">grid_3d</span>
-                                    <span>Point Cloud</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Refresh View Trigger -->
-                        <button id="btn-reload-splat"
-                            class="w-full flex items-center justify-center gap-2 py-3 bg-black/5 text-primary hover:bg-primary hover:text-white transition-all duration-300 font-body-md text-[10px] uppercase tracking-widest cursor-pointer border border-black/10 rounded-none">
-                            <span class="material-symbols-outlined text-sm">refresh</span>
-                            <span>Reload Splat Viewer</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1597,11 +1557,9 @@
                         class="absolute inset-0 bg-[#e2e2e2] transform translate-x-6 -translate-y-6 lg:translate-x-12 lg:-translate-y-12 z-0">
                     </div>
                     <div
-                        class="relative z-10 h-[500px] md:h-[700px] shadow-architectural hover-track-wrap overflow-hidden group">
+                        class="relative z-10 w-full aspect-video shadow-architectural hover-track-wrap overflow-hidden group">
                         <div class="hover-track-inner h-full w-full">
-                            <img alt="Architectural 3D Printing Prototyping"
-                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj37pQzh6bAGf5T6kCMvMif5bGMbjN_EpoN-F1Sp_43mvnzW2njYa1lDkr9_iOnjdw6qRKjKIDZNwoP90g93zM3YPKmKvMPesiyfs2vTit35V5R5M5rMSR3d13enl8VbB40w0_QHuHhz0Dj09aaaDQ8NglkbowhlOCWOJpkMAfs4QGRYNym-KuhHd7sVYN0K2vR0HIIAfF8wipES8bkBf8197z-u5s8LAIZDYh96nDoXfJC51Yq1D56WsiVQyj4ImexHApf6Eb-D5-" />
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="https://player.mediadelivery.net/embed/625906/d9499d77-34d3-43b0-8052-fb4cb37a787c?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe></div>
                         </div>
                     </div>
                 </div>
@@ -1609,11 +1567,12 @@
                 <div class="w-full md:w-5/12 flex flex-col justify-center reveal-right">
                     <div
                         class="bg-white p-12 lg:p-16 shadow-floating -mr-0 md:-mr-32 relative z-20 max-w-xl border-l-4 border-primary">
-                        <h2 class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-6">Precision
-                            Prototyping</h2>
-                        <h2 class="font-headline-md text-headline-md text-[#1a1a1a] uppercase mb-8">
-                            Architectural 3D Printing Prototyping.
-                        </h2>
+                        <h4 class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-2">
+                            05 / Precision Prototyping
+                        </h4>
+                        <h3 class="font-headline-lg text-3xl md:text-5xl uppercase text-[#1a1a1a] mb-4 leading-tight">
+                            Architectural 3D Printing Prototyping
+                        </h3>
                         <p class="font-body-lg text-body-lg text-secondary leading-relaxed mb-6">
                             We transition from digital twins to high-fidelity physical models with surgical precision.
                             Our process bridges the gap between vision and reality.
@@ -1877,7 +1836,7 @@
 
             // GreenHaven Videos (15-16)
             { src: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-modern-housing-complex-40546-large.mp4', type: 'video', caption: 'GreenHaven — Biophilic Canopy Drone View' },
-            { src: 'https://player.mediadelivery.net/embed/625906/061b719b-0949-415d-b6ea-0a0f0e2f11e6?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'GreenHaven — Lobby Walkthrough & Biophilic Elements' },
+            { src: 'https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'GreenHaven — Lobby Walkthrough & Biophilic Elements' },
 
             // LiveSpace (17-30)
             { src: '/projects/livespace/public/img_01.jpg', type: 'image', caption: 'LiveSpace — Brutalist Raw Concrete Exterior' },
@@ -1896,7 +1855,7 @@
             { src: '/projects/livespace/public/img_14.png', type: 'image', caption: 'LiveSpace — Sectional Architectural Drawing' },
 
             // LiveSpace Videos (31-32)
-            { src: 'https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'LiveSpace — Courtyard Daylight Simulation' },
+            { src: 'https://player.mediadelivery.net/embed/625906/9dee079e-24f0-47c7-a0f1-74932c2cb0a4?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'LiveSpace — Courtyard Daylight Simulation' },
             { src: 'https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-building-interior-31846-large.mp4', type: 'video', caption: 'LiveSpace — Concrete Cantilever Detail' },
 
             // Eco-Tents (33-39)
