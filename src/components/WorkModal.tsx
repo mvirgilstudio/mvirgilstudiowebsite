@@ -192,7 +192,7 @@ const WorkModal: React.FC<WorkModalProps> = ({ work, onClose, lang, activeSectio
                             {activeWork.externalLink && (
                                 <a
                                     href={activeWork.externalLink}
-                                    target="_blank"
+                                    target="_self"
                                     rel="noopener noreferrer"
                                     className="group/btn relative inline-flex items-center gap-6 px-8 py-4 border border-white/20 transition-all duration-500 mb-12 self-start overflow-hidden bg-white/2 shadow-[0_0_40px_rgba(0,0,0,0.3)]"
                                     style={{ borderColor: `rgba(${accent.rgb}, 0.3)` }}
