@@ -154,6 +154,90 @@
     <!-- MediaPipe Tasks Vision CDN -->
     <script type="module">
 
+        // Translation support
+        let currentLang = 'EN';
+        const dictionary = {
+            'EN': {
+                'category': 'Category',
+                'variant': 'Variant',
+                'drag_rotate': 'DRAG TO ROTATE SCENE',
+                'initializing': 'Initializing AI Engine...',
+                'setup_complete': 'Setup Complete • Show hand to track',
+                'pinch_rotate': 'Pinch to Rotate • Open hand to click',
+                'show_hand': 'Show hand to track',
+                'failed_load': 'Camera or model failed to load',
+                'use_webcam': 'use your webcam and play with hands',
+                'exit_experience': 'Exit Experience',
+                'bedroom': 'Bedroom',
+                'kitchen': 'Kitchen',
+                'livingroom': 'Living Room',
+                'exterior': 'Exterior',
+                'interior': 'Interior'
+            },
+            'PT': {
+                'category': 'Categoria',
+                'variant': 'Variante',
+                'drag_rotate': 'ARRASTE PARA RODAR A CENA',
+                'initializing': 'A Inicializar o Motor de IA...',
+                'setup_complete': 'Configuração Concluída • Mostre a mão para detetar',
+                'pinch_rotate': 'Faça Pinça para Rodar • Abra a mão para clicar',
+                'show_hand': 'Mostre a mão para detetar',
+                'failed_load': 'Falha ao carregar a câmara ou o modelo',
+                'use_webcam': 'use a sua câmara e jogue com as mãos',
+                'exit_experience': 'Sair da Experiência',
+                'bedroom': 'Quarto',
+                'kitchen': 'Cozinha',
+                'livingroom': 'Sala de Estar',
+                'exterior': 'Exterior',
+                'interior': 'Interior'
+            }
+        };
+
+        function translate(key) {
+            return dictionary[currentLang][key] || key;
+        }
+
+        function updateIframeLanguage() {
+            // Translate instruction text based on current state
+            if (handTrackingActive) {
+                if (handDetected) {
+                    if (handPos && handPos.isPinching) {
+                        // Pinch rotation active
+                    } else {
+                        instructionText.innerText = translate('pinch_rotate');
+                    }
+                } else {
+                    if (instructionText.innerText.includes('Initializing') || instructionText.innerText.includes('Inicializar')) {
+                        instructionText.innerText = translate('initializing');
+                    } else if (instructionText.innerText.includes('Setup') || instructionText.innerText.includes('Configuração')) {
+                        instructionText.innerText = translate('setup_complete');
+                    } else if (instructionText.innerText.includes('Camera') || instructionText.innerText.includes('Falha')) {
+                        instructionText.innerText = translate('failed_load');
+                    } else {
+                        instructionText.innerText = translate('show_hand');
+                    }
+                }
+            } else {
+                instructionText.innerText = translate('drag_rotate');
+            }
+
+            // Translate webcam button text
+            if (handTrackingActive) {
+                webcamBtnText.innerText = translate('exit_experience');
+            } else {
+                webcamBtnText.innerText = translate('use_webcam');
+            }
+
+            // Rerender categories to update their labels
+            renderCategories();
+
+            // Translate panels text if needed
+            const catHeader = document.querySelector('#panel-content span:first-child');
+            if (catHeader) catHeader.innerText = translate('category').toUpperCase();
+            const varHeader = document.querySelector('#panel-content div.shrink-0 span:first-child');
+            if (varHeader) varHeader.innerText = translate('variant').toUpperCase();
+        }
+
         // Constants Data mapping
         const PROJECT_DATA = {
             house: {
@@ -409,6 +493,9 @@
                         if (handTrackingActive) {
                             stopHandTracking();
                         }
+                    } else if (event.data.action === 'setLanguage') {
+                        currentLang = event.data.lang;
+                        updateIframeLanguage();
                     }
                 }
             });
@@ -458,7 +545,7 @@
                         : 'border-white/15 bg-white/5 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/10'
                 }`;
                 btn.setAttribute('data-cat', cat);
-                btn.innerText = cat.toUpperCase();
+                btn.innerText = translate(cat).toUpperCase();
 
                 btn.addEventListener('click', () => {
                     currentCategory = cat;
@@ -516,7 +603,7 @@
             handTrackingActive = true;
             webcamToggleBtn.classList.add('bg-white', 'text-black', 'border-white', 'shadow-[0_0_30px_rgba(255,255,255,0.25)]');
             webcamToggleBtn.classList.remove('bg-black/80', 'text-white', 'border-white/20');
-            webcamBtnText.innerText = 'Exit Experience';
+            webcamBtnText.innerText = translate('exit_experience');
             pingRing.classList.remove('hidden');
             
             // Show webcam loader/panel
@@ -526,7 +613,7 @@
             webcamPanel.classList.add('opacity-100', 'scale-100');
             webcamLoader.classList.remove('hidden');
 
-            instructionText.innerText = 'Initializing AI Engine...';
+            instructionText.innerText = translate('initializing');
             updateLoader(10);
 
             try {
@@ -591,7 +678,7 @@
                     statusIndicator.className = 'w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse';
                     statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-white/70';
                     statusLabel.innerText = 'Tracking...';
-                    instructionText.innerText = 'Setup Complete • Show hand to track';
+                    instructionText.innerText = translate('setup_complete');
                     
                     // Show custom cursor
                     virtualCursor.classList.remove('hidden');
@@ -609,7 +696,7 @@
                 statusIndicator.className = 'w-1.5 h-1.5 rounded-full bg-red-500';
                 statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-red-400';
                 statusLabel.innerText = 'Error';
-                instructionText.innerText = 'Camera or model failed to load';
+                instructionText.innerText = translate('failed_load');
             }
         }
 
@@ -617,7 +704,7 @@
             handTrackingActive = false;
             webcamToggleBtn.classList.remove('bg-white', 'text-black', 'border-white', 'shadow-[0_0_30px_rgba(255,255,255,0.25)]');
             webcamToggleBtn.classList.add('bg-black/80', 'text-white', 'border-white/20');
-            webcamBtnText.innerText = 'use your webcam and play with hands';
+            webcamBtnText.innerText = translate('use_webcam');
             pingRing.classList.add('hidden');
 
             // Hide webcam panel/cursor
@@ -628,7 +715,7 @@
             }, 500);
             virtualCursor.classList.add('hidden');
 
-            instructionText.innerText = 'DRAG TO ROTATE SCENE';
+            instructionText.innerText = translate('drag_rotate');
 
             // Clean resources
             if (rafId) cancelAnimationFrame(rafId);
@@ -679,7 +766,7 @@
                     statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-white';
                     statusLabel.innerText = 'Hand Detected';
 
-                    instructionText.innerText = 'Pinch to Rotate • Open hand to click';
+                    instructionText.innerText = translate('pinch_rotate');
 
                     // Update cursor rendering
                     updateCursor(x, y, isPinching);
@@ -697,7 +784,7 @@
                     statusIndicator.className = 'w-1.5 h-1.5 rounded-full bg-white/20';
                     statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-white/40';
                     statusLabel.innerText = 'Tracking...';
-                    instructionText.innerText = 'Show hand to track';
+                    instructionText.innerText = translate('show_hand');
                     
                     cursorRing.className = 'w-full h-full rounded-full border-2 border-white/20';
                     cursorProgress.classList.add('hidden');
