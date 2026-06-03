@@ -225,8 +225,8 @@ export const TRANSLATIONS = {
         about: {
             title: 'ABOUT THE STUDIO',
             subtitle: 'Miguel Virgílio — Interactive Systems & 3D Generalist',
-            bio: 'Bridging physical-digital boundaries, the studio specializes in the creation of complete presentation packages or individual components. From simple 3D image renders and cinematic videos to fully immersive, interactive experiences and custom interactive webpages, we build tailor-made systems that amplify visual storytelling and engage audiences dynamically.',
-            bioExtended: 'Whether you need a singular high-fidelity 3D visualization, a promotional video, or a complete digital ecosystem combining WebGL frameworks and responsive UI, our modular approach adapts to any scale. We craft end-to-end presentation environments that blend artistic direction with high-performance creative coding.',
+            bio: 'We bridge the gap between the physical and digital worlds. Our studio creates everything from simple 3D renders and cinematic videos to fully immersive interactive experiences and custom web projects. We build custom-made solutions that tell your story and engage your audience in dynamic ways.',
+            bioExtended: 'From stunning 3D graphics and videos to interactive websites and physical installations, we bring ideas to life. Whether you need a simple visual model, a promotional film, or a fully interactive digital display that responds to touch and movement, we tailor our solutions to your needs. We blend artistic style with modern technology to build unique experiences that engage your audience.',
         },
         contact: {
             title: 'GET IN TOUCH',
@@ -497,8 +497,8 @@ export const TRANSLATIONS = {
         about: {
             title: 'SOBRE O ESTÚDIO',
             subtitle: 'Miguel Virgílio — Sistemas Interativos & Generalista 3D',
-            bio: 'Unindo as fronteiras físico-digitais, o estúdio especializa-se na criação de pacotes de apresentação completos ou componentes individuais. Desde simples renderizações de imagem 3D e vídeos cinemáticos a experiências imersivas totalmente interativas e páginas web interativas personalizadas, construímos sistemas à medida que amplificam a narrativa visual e envolvem o público de forma dinâmica.',
-            bioExtended: 'Quer necessite de uma visualização 3D de alta fidelidade singular, um vídeo promocional ou de um ecossistema digital completo combinando frameworks WebGL e interfaces responsivas, a nossa abordagem modular adapta-se a qualquer escala. Desenhamos ambientes de apresentação de ponta a ponta que fundem direção artística com código criativo de alta performance.',
+            bio: 'Ligamos o mundo físico ao digital. O nosso estúdio cria desde simples imagens 3D e vídeos cinemáticos a experiências interativas envolventes e projetos web personalizados. Desenvolvemos soluções à medida que contam a sua história e envolvem o seu público de forma dinâmica.',
+            bioExtended: 'Desde gráficos 3D e vídeos impressionantes até websites interativos e instalações físicas, damos vida a ideias. Quer precise de um modelo visual simples, um vídeo promocional ou uma experiência digital totalmente interativa que reaja ao toque e movimento, adaptamos as nossas soluções às suas necessidades. Misturamos estilo artístico com tecnologia moderna para criar experiências únicas que cativam o seu público.',
         },
         contact: {
             title: 'CONTACTAR',
