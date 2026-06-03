@@ -259,14 +259,15 @@ export const TRANSLATIONS = {
                 'Real-Time 3D Visualization',
                 'Physical-Digital Harmony',
                 'Creative AI Systems',
-                '3D Art & Modeling (Generalist)',
+                '3D Modeling, Animation & VFX (Generalist)',
                 'Digital & Physical Fabrication'
             ],
             techCategories: {
                 coding: 'Web & Creative Coding',
-                art: '3D Art & Modeling',
+                art: '3D Modeling, Animation & VFX',
+                composition: 'Video/Image Composition',
                 physical: 'Physical Computing',
-                fabrication: 'Digital Fabrication & CAD'
+                fabrication: 'Digital Fabrication'
             }
         }
     },
@@ -530,14 +531,15 @@ export const TRANSLATIONS = {
                 'Visualização 3D em Tempo Real',
                 'Harmonia Físico-Digital',
                 'Sistemas de IA Criativa',
-                'Arte 3D & Modelação (Generalista)',
+                'Modelação 3D, Animação & VFX (Generalista)',
                 'Fabricação Física & Digital'
             ],
             techCategories: {
                 coding: 'Web & Creative Coding',
-                art: 'Arte 3D & Modelação',
+                art: 'Modelação 3D, Animação & VFX',
+                composition: 'Composição de Vídeo/Imagem',
                 physical: 'Computação Física',
-                fabrication: 'Fabricação Digital & CAD'
+                fabrication: 'Fabricação Digital'
             }
         }
     }

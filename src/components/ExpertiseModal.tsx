@@ -35,20 +35,21 @@ const ExpertiseModal: React.FC<ExpertiseModalProps> = ({ isOpen, onClose, lang }
   // Tech stack items
   const techStack = {
     coding: [
-      'Three.js', 'React Three Fiber', 'GLSL Shaders', 'WebGL', 'WebXR', 
-      'GSAP Animations', 'TypeScript', 'Vite', 'React', 'Next.js'
+      'Three.js', 'WebGL', 'GSAP Animations', 'React'
     ],
     art: [
-      'Blender 3D', 'Substance Painter', 'Octane Render', 'Cycles Engine', 
-      'Marvelous Designer', 'ZBrush', 'Look Development', 'UV Texturing'
+      'Sidefx  Houdini', 'Autodesk Maya', 'Audesk 3DS Max', 'Blender 3D', 
+      'Unreal Engine', 'Touchdesigner', 'PF Track', 'Zbrush'
+    ],
+    composition: [
+      'Foundry Nuke', 'After Effects', 'Davinci Resolve', 'Mocha Pro', 'Adobe Suite'
     ],
     physical: [
-      'Arduino', 'ESP32 / ESP8266', 'MediaPipe', 'Kinect SDK', 
-      'Raspberry Pi', 'I2C / SPI Sensors', 'MQTT & WebSockets'
+      'Arduino', 'Raspeberry Pi', 'ESP32/ESP8266', 'Kinect SDK', 
+      'I2C/SPI Sensors'
     ],
     fabrication: [
-      'Fusion 360', 'Cura / PrusaSlicer', 'FDM 3D Printing', 
-      'SLA Resin Printing', 'CNC Milling / G-Code', 'Laser Vector Cutting'
+      'Solidworks', 'Cura/PrusaSlicer', 'OrcaSlicer', 'FDM 3D Printing'
     ]
   };
 
@@ -138,12 +139,15 @@ const ExpertiseModal: React.FC<ExpertiseModalProps> = ({ isOpen, onClose, lang }
                   {[
                     { key: 'coding', title: t.techCategories.coding, color: 'from-[#b48c50]/20 to-transparent' },
                     { key: 'art', title: t.techCategories.art, color: 'from-[#5282be]/20 to-transparent' },
+                    { key: 'composition', title: t.techCategories.composition, color: 'from-[#e15b64]/20 to-transparent' },
                     { key: 'physical', title: t.techCategories.physical, color: 'from-[#46aa8c]/20 to-transparent' },
                     { key: 'fabrication', title: t.techCategories.fabrication, color: 'from-[#825ab4]/20 to-transparent' },
                   ].map(({ key, title, color }) => (
                     <div 
                       key={key} 
-                      className="p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors flex flex-col gap-3 relative overflow-hidden group"
+                      className={`p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors flex flex-col gap-3 relative overflow-hidden group ${
+                        key === 'composition' ? 'sm:col-span-2' : ''
+                      }`}
                     >
                       {/* Subtle Ambient Hover Backdrop Glow */}
                       <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none`}></div>
