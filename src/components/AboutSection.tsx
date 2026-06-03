@@ -92,16 +92,17 @@ const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
           </p>
 
           {/* Core Vision Mappings */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4 border-t border-white/5 pt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4 border-t border-white/5 pt-6">
             {[
-              { num: '01', title: lang === 'EN' ? 'PHYSICAL DESIGN' : 'DESIGN FÍSICO', desc: lang === 'EN' ? 'Custom 3d prototypes.' : 'Protótipos 3d personalizados.' },
-              { num: '02', title: lang === 'EN' ? 'CREATIVE CODE' : 'CÓDIGO CRIATIVO', desc: lang === 'EN' ? 'WebGL architectures and responsive systems.' : 'Arquiteturas WebGL e sistemas reativos.' },
-              { num: '03', title: lang === 'EN' ? 'INTERACTION' : 'INTERAÇÃO', desc: lang === 'EN' ? 'Real-world sensor triggers and direct experiences.' : 'Ativações por sensores reais e experiências diretas.' }
+              { num: '01', title: lang === 'EN' ? '3D Modeling, Animation, 3D Tracking & VFX' : 'Modelação 3D, Animação, Tracking 3D & VFX' },
+              { num: '02', title: lang === 'EN' ? 'Video/Image Composition' : 'Composição de Vídeo/Imagem' },
+              { num: '03', title: 'Web & Creative Coding' },
+              { num: '04', title: lang === 'EN' ? 'Physical Computing' : 'Computação Física' },
+              { num: '05', title: lang === 'EN' ? 'Digital Fabrication' : 'Fabricação Digital' }
             ].map((pillar) => (
               <div key={pillar.num} className="flex flex-col gap-2">
                 <span className="font-orbitron font-medium text-xs text-concrete/40">{pillar.num} //</span>
                 <span className="font-sans font-bold text-xs tracking-wider text-white uppercase">{pillar.title}</span>
-                <span className="font-sans font-light text-xs text-concrete/60 leading-normal">{pillar.desc}</span>
               </div>
             ))}
           </div>

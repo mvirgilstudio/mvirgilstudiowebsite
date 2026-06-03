@@ -21,7 +21,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('vfxmiguel@gmail.com');
+    navigator.clipboard.writeText('contact@mvirgilstudio.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -33,7 +33,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
     setFormState('SENDING');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/vfxmiguel@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/contact@mvirgilstudio.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
             >
               <div className="flex flex-col gap-1">
                 <span className="text-[9px] tracking-widest text-concrete/40 group-hover:text-concrete/60 transition-colors uppercase">{t.info.email}</span>
-                <span className="text-sm sm:text-base font-medium text-white tracking-wide">vfxmiguel@gmail.com</span>
+                <span className="text-sm sm:text-base font-medium text-white tracking-wide">contact@mvirgilstudio.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <AnimatePresence mode="wait">

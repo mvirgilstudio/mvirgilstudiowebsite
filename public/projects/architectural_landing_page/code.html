@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>ARC.TECH | Architectural Visualization</title>
+    <title>MVs Archviz | Architectural Visualization</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico" />
     <!-- PP Neue Montreal Font -->
     <style>
         @font-face {
@@ -1715,7 +1716,7 @@
                             <span data-t="contact_badge_email"
                                 class="text-[9px] text-secondary/60 transition-colors font-sans tracking-widest uppercase">EMAIL</span>
                             <span
-                                class="text-xs md:text-sm font-medium text-[#1a1a1a] tracking-wide normal-case font-sans">vfxmiguel@gmail.com</span>
+                                class="text-xs md:text-sm font-medium text-[#1a1a1a] tracking-wide normal-case font-sans">contact@mvirgilstudio.com</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span id="copied-toast" data-t="contact_copied"
@@ -3366,7 +3367,7 @@
 
             if (emailBadge && copiedToast && copyIconContainer) {
                 emailBadge.addEventListener('click', () => {
-                    navigator.clipboard.writeText('vfxmiguel@gmail.com').then(() => {
+                    navigator.clipboard.writeText('contact@mvirgilstudio.com').then(() => {
                         copiedToast.classList.remove('hidden');
                         copyIconContainer.classList.add('hidden');
                         setTimeout(() => {
@@ -3400,7 +3401,7 @@
                     `;
 
                     try {
-                        const response = await fetch("https://formsubmit.co/ajax/vfxmiguel@gmail.com", {
+                        const response = await fetch("https://formsubmit.co/ajax/contact@mvirgilstudio.com", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",

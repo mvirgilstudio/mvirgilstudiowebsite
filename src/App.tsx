@@ -136,8 +136,8 @@ const App: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
             {[
-              { label: t.nav.expertise, key: 'expertise' },
               { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
+              { label: t.nav.expertise, key: 'expertise' },
               { label: t.nav.about, key: 'about' },
               { label: t.nav.contact, key: 'contact' }
             ].map((item, i) => (
@@ -205,8 +205,8 @@ const App: React.FC = () => {
           >
             <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
               {[
-                { label: t.nav.expertise, key: 'expertise' },
                 { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
+                { label: t.nav.expertise, key: 'expertise' },
                 { label: t.nav.about, key: 'about' },
                 { label: t.nav.contact, key: 'contact' }
               ].map((item, i) => (
