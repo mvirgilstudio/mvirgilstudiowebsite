@@ -259,12 +259,12 @@ export const TRANSLATIONS = {
                 'Real-Time 3D Visualization',
                 'Physical-Digital Harmony',
                 'Creative AI Systems',
-                '3D Modeling, Animation & VFX (Generalist)',
+                '3D Modeling, Animation, 3D Tracking & VFX (Generalist)',
                 'Digital & Physical Fabrication'
             ],
             techCategories: {
                 coding: 'Web & Creative Coding',
-                art: '3D Modeling, Animation & VFX',
+                art: '3D Modeling, Animation, 3D Tracking & VFX',
                 composition: 'Video/Image Composition',
                 physical: 'Physical Computing',
                 fabrication: 'Digital Fabrication'
@@ -531,12 +531,12 @@ export const TRANSLATIONS = {
                 'Visualização 3D em Tempo Real',
                 'Harmonia Físico-Digital',
                 'Sistemas de IA Criativa',
-                'Modelação 3D, Animação & VFX (Generalista)',
+                'Modelação 3D, Animação, Tracking 3D & VFX (Generalista)',
                 'Fabricação Física & Digital'
             ],
             techCategories: {
                 coding: 'Web & Creative Coding',
-                art: 'Modelação 3D, Animação & VFX',
+                art: 'Modelação 3D, Animação, Tracking 3D & VFX',
                 composition: 'Composição de Vídeo/Imagem',
                 physical: 'Computação Física',
                 fabrication: 'Fabricação Digital'
