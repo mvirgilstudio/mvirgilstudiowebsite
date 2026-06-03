@@ -240,16 +240,14 @@
 
             <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
                 <a href="/#about"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
-                    data-t="nav.about">
-                    SOBRE
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline">
+                    <span data-t="nav.about">SOBRE</span>
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/#contact"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
-                    data-t="nav.contact">
-                    CONTACTO
+                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline">
+                    <span data-t="nav.contact">CONTACTO</span>
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
@@ -827,7 +825,9 @@
                 'switcher_slides': 'SLIDES',
                 'switcher_grid': 'GRELHA',
                 'cta_h2': 'Pronto para entrar?',
-                'footer_p': 'EXPERIÊNCIAS DIGITAIS E VISUALIZAÇÃO'
+                'footer_p': 'EXPERIÊNCIAS DIGITAIS E VISUALIZAÇÃO',
+                'nav.about': 'SOBRE',
+                'nav.contact': 'CONTACTO'
             },
             'EN': {
                 'hero_h1': 'Bring architectural <br/> design to life.',
@@ -851,7 +851,9 @@
                 'switcher_slides': 'SLIDES',
                 'switcher_grid': 'GRID',
                 'cta_h2': 'Ready to step inside?',
-                'footer_p': 'DIGITAL EXPERIENCES & VISUALIZATION'
+                'footer_p': 'DIGITAL EXPERIENCES & VISUALIZATION',
+                'nav.about': 'ABOUT',
+                'nav.contact': 'CONTACT'
             }
         };
 
@@ -924,6 +926,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
             updateLanguage();
 
             // Carousel Slider Interactions
@@ -959,8 +962,17 @@
                 thumbs.forEach((thumb, idx) => {
                     if (idx === currentIndex) {
                         thumb.classList.add('active');
-                        // Center thumbnail in container
-                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        // Center thumbnail in container without scrolling the window
+                        const container = document.getElementById('carousel-thumbnails');
+                        if (container) {
+                            const containerRect = container.getBoundingClientRect();
+                            const thumbRect = thumb.getBoundingClientRect();
+                            const relativeLeft = thumbRect.left - containerRect.left + container.scrollLeft;
+                            container.scrollTo({
+                                left: relativeLeft - (containerRect.width / 2) + (thumbRect.width / 2),
+                                behavior: 'smooth'
+                            });
+                        }
                     } else {
                         thumb.classList.remove('active');
                     }
