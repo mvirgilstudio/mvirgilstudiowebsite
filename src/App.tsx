@@ -135,8 +135,30 @@ const App: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+            {/* Archviz Button */}
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              onClick={() => {
+                window.location.href = '/projects/architectural_landing_page/code.html';
+              }}
+              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group"
+            >
+              {t.nav.convento}
+              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+            </motion.span>
+
+            {/* Separator */}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.2 }}
+              transition={{ delay: 1.1 }}
+              className="h-4 w-[1px] bg-white pointer-events-none"
+            />
+
+            {/* Other buttons */}
             {[
-              { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
               { label: t.nav.expertise, key: 'expertise' },
               { label: t.nav.about, key: 'about' },
               { label: t.nav.contact, key: 'contact' }
@@ -145,11 +167,9 @@ const App: React.FC = () => {
                 key={item.key}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + (i * 0.1) }}
+                transition={{ delay: 1.2 + (i * 0.1) }}
                 onClick={() => {
-                  if ('url' in item && item.url) {
-                    window.location.href = item.url;
-                  } else if (item.key === 'expertise') {
+                  if (item.key === 'expertise') {
                     setIsExpertiseOpen(true);
                   } else {
                     scrollToSection(`section_${item.key}`);
@@ -166,7 +186,7 @@ const App: React.FC = () => {
             <motion.span
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
+              transition={{ delay: 1.5 }}
               onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
               className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
             >
@@ -204,8 +224,33 @@ const App: React.FC = () => {
             className="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden"
           >
             <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
+              {/* Archviz Mobile Button */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1, ease: "easeOut" }}
+                className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setTimeout(() => {
+                    window.location.href = '/projects/architectural_landing_page/code.html';
+                  }, 300);
+                }}
+              >
+                <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
+                {t.nav.convento}
+              </motion.div>
+
+              {/* Mobile Separator */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.2 }}
+                transition={{ delay: 0.15 }}
+                className="h-[1px] w-full bg-white/10"
+              />
+
+              {/* Other Mobile Buttons */}
               {[
-                { label: t.nav.convento, key: 'convento', url: '/projects/architectural_landing_page/code.html' },
                 { label: t.nav.expertise, key: 'expertise' },
                 { label: t.nav.about, key: 'about' },
                 { label: t.nav.contact, key: 'contact' }
@@ -214,14 +259,12 @@ const App: React.FC = () => {
                   key={item.key}
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + (i * 0.1), ease: "easeOut" }}
+                  transition={{ delay: 0.2 + (i * 0.1), ease: "easeOut" }}
                   className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                   onClick={() => {
                     setIsMenuOpen(false);
                     setTimeout(() => {
-                      if ('url' in item && item.url) {
-                        window.location.href = item.url;
-                      } else if (item.key === 'expertise') {
+                      if (item.key === 'expertise') {
                         setIsExpertiseOpen(true);
                       } else {
                         scrollToSection(`section_${item.key}`);
@@ -229,7 +272,7 @@ const App: React.FC = () => {
                     }, 300);
                   }}
                 >
-                  <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">0{i + 1}</span>
+                  <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">0{i + 2}</span>
                   {item.label}
                 </motion.div>
               ))}
