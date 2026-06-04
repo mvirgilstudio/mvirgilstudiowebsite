@@ -295,8 +295,8 @@ function animate() {
 function openModal() {
     modal.classList.remove('hidden');
     gsap.fromTo(modal,
-        { opacity: 0, scale: 0.9, y: "-=50" },
-        { opacity: 1, scale: 1, y: "-=0", duration: 1, ease: "expo.out" }
+        { opacity: 0, scale: 0.9, xPercent: -50, yPercent: -50, y: -50 },
+        { opacity: 1, scale: 1, xPercent: -50, yPercent: -50, y: 0, duration: 1, ease: "expo.out" }
     );
 
     const bottomHud = document.querySelector('nav.fixed.bottom-12');
@@ -378,6 +378,9 @@ demoModalHeader.addEventListener('mousedown', (e) => {
     demoOffset.x = e.clientX - rect.left;
     demoOffset.y = e.clientY - rect.top;
     demoModal.style.transition = 'none';
+    if (demoIframe) {
+        demoIframe.style.pointerEvents = 'none';
+    }
 });
 
 document.addEventListener('mousemove', (e) => {
@@ -387,8 +390,13 @@ document.addEventListener('mousemove', (e) => {
 });
 
 document.addEventListener('mouseup', () => {
-    isDemoDrawing = false;
-    demoModal.style.transition = 'opacity 0.5s ease';
+    if (isDemoDrawing) {
+        isDemoDrawing = false;
+        demoModal.style.transition = 'opacity 0.5s ease';
+        if (demoIframe) {
+            demoIframe.style.pointerEvents = 'auto';
+        }
+    }
 });
 
 function openDemoModal() {
@@ -400,6 +408,10 @@ function openDemoModal() {
     demoIframe.addEventListener('load', () => {
         demoLoader.style.opacity = '0';
         demoLoader.style.pointerEvents = 'none';
+        if (demoIframe.contentWindow) {
+            const lang = window.currentLang || 'PT';
+            demoIframe.contentWindow.postMessage({ type: 'setLanguage', lang: lang }, '*');
+        }
     }, { once: true });
 
     // Show backdrop
@@ -412,8 +424,8 @@ function openDemoModal() {
     demoModal.style.left = '50%';
     demoModal.style.top = '50%';
     gsap.fromTo(demoModal,
-        { opacity: 0, scale: 0.92, y: '-=40' },
-        { opacity: 1, scale: 1, y: '-=0', duration: 0.8, ease: 'expo.out' }
+        { opacity: 0, scale: 0.92, xPercent: -50, yPercent: -50, y: -40 },
+        { opacity: 1, scale: 1, xPercent: -50, yPercent: -50, y: 0, duration: 0.8, ease: 'expo.out' }
     );
 }
 

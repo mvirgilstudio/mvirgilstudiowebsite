@@ -101,14 +101,14 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary/30">
 <header class="bg-[#0c0e12]/80 dark:bg-[#0c0e12]/80 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-center items-center px-8 py-4">
 <nav class="flex items-center gap-8">
-<a class="text-blue-300 border-b-2 border-blue-400 pb-1 font-['Space_Grotesk'] tracking-tight transition-all" href="#Mercury">Mercury</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Venus">Venus</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Earth">Earth</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Mars">Mars</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Jupiter">Jupiter</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Saturn">Saturn</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Uranus">Uranus</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Neptune">Neptune</a>
+<a class="text-blue-300 border-b-2 border-blue-400 pb-1 font-['Space_Grotesk'] tracking-tight transition-all" href="#Mercury" data-t="nav.mercury">Mercury</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Venus" data-t="nav.venus">Venus</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Earth" data-t="nav.earth">Earth</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Mars" data-t="nav.mars">Mars</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Jupiter" data-t="nav.jupiter">Jupiter</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Saturn" data-t="nav.saturn">Saturn</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Uranus" data-t="nav.uranus">Uranus</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Neptune" data-t="nav.neptune">Neptune</a>
 </nav>
 </header>
 <!-- Hero Section -->
@@ -117,12 +117,12 @@
 <div class="container mx-auto px-6 text-center z-10">
 <div class="mb-6 inline-flex items-center gap-2 bg-surface-container-high px-4 py-1.5 rounded-full border border-outline-variant/20">
 <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="text-xs font-bold tracking-[0.2em] uppercase text-on-surface-variant">Deep Space Observation Log</span>
+<span class="text-xs font-bold tracking-[0.2em] uppercase text-on-surface-variant" data-t="hero.badge">Deep Space Observation Log</span>
 </div>
-<h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-gradient-to-b from-on-surface to-on-surface-variant bg-clip-text text-transparent">
+<h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-gradient-to-b from-on-surface to-on-surface-variant bg-clip-text text-transparent" data-t="hero.title">
                 Cosmos Explorer
             </h1>
-<p class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 font-light">
+<p class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 font-light" data-t="hero.desc">
                 An editorial odyssey through the celestial bodies of our local star system. Experience high-fidelity planetary data rendered through the lens of modern astrophysics.
             </p>
 
@@ -140,27 +140,27 @@
 </div>
 <div class="space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 0.39 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Mercury</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary" data-t="mercury.distance">Distance: 0.39 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="mercury.name">Mercury</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="mercury.desc">
                         The smallest planet in our solar system and closest to the Sun—is only slightly larger than Earth's Moon. Mercury is the fastest planet, zipping around the Sun every 88 Earth days.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-primary">4,879 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-primary">59 Earth Days</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="mercury.dayValue">59 Earth Days</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-primary">0</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Temp Range</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.tempRange">Temp Range</span>
 <span class="text-xl font-headline font-bold text-primary">-173°C to 427°C</span>
 </div>
 </div>
@@ -170,27 +170,27 @@
 <section class="relative grid md:grid-cols-2 gap-12 items-center" id="Venus">
 <div class="order-2 md:order-1 space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 0.72 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Venus</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary" data-t="venus.distance">Distance: 0.72 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="venus.name">Venus</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="venus.desc">
                         Spinning slowly in the opposite direction from most planets, Venus is the hottest planet in our solar system. Its thick atmosphere traps heat in a runaway greenhouse effect, making it hot enough to melt lead.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-secondary">12,104 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-secondary">243 Earth Days</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary" data-t="venus.dayValue">243 Earth Days</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-secondary">0</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Atmosphere</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.atmosphere">Atmosphere</span>
 <span class="text-xl font-headline font-bold text-secondary">96% CO2</span>
 </div>
 </div>
@@ -208,28 +208,28 @@
 </div>
 <div class="space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 1.00 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Earth</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary" data-t="earth.distance">Distance: 1.00 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="earth.name">Earth</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="earth.desc">
                         Our home planet is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-primary">12,742 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-primary">24 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="earth.dayValue">24 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-primary">1</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Population</span>
-<span class="text-xl font-headline font-bold text-primary">8.1 Billion</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.population">Population</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="earth.popValue">8.1 Billion</span>
 </div>
 </div>
 </div>
@@ -238,28 +238,28 @@
 <section class="relative grid md:grid-cols-2 gap-12 items-center" id="Mars">
 <div class="order-2 md:order-1 space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 1.52 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Mars</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary" data-t="mars.distance">Distance: 1.52 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="mars.name">Mars</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="mars.desc">
                         A dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was—billions of years ago—much wetter and warmer, with a thicker atmosphere.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-secondary">6,779 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-secondary">24.6 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary" data-t="mars.dayValue">24.6 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-secondary">2</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Mission Count</span>
-<span class="text-xl font-headline font-bold text-secondary">50+</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.missions">Mission Count</span>
+<span class="text-xl font-headline font-bold text-secondary" data-t="mars.missionsValue">50+</span>
 </div>
 </div>
 </div>
@@ -276,28 +276,28 @@
 </div>
 <div class="space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 5.20 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Jupiter</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary" data-t="jupiter.distance">Distance: 5.20 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="jupiter.name">Jupiter</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="jupiter.desc">
                         Jupiter is more than twice as massive than the other planets of our solar system combined. The giant planet's Great Red spot is a centuries-old storm bigger than Earth.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-primary">139,820 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-primary">9.9 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="jupiter.dayValue">9.9 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-primary">95</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Mass</span>
-<span class="text-xl font-headline font-bold text-primary">318 x Earth</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.mass">Mass</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="jupiter.massValue">318 x Earth</span>
 </div>
 </div>
 </div>
@@ -306,28 +306,28 @@
 <section class="relative grid md:grid-cols-2 gap-12 items-center" id="Saturn">
 <div class="order-2 md:order-1 space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary">Distance: 9.58 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Saturn</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-secondary" data-t="saturn.distance">Distance: 9.58 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="saturn.name">Saturn</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="saturn.desc">
                         Adorned with a dazzling, complex system of icy rings, Saturn is unique in our solar system. The other giant planets have rings, but none are as spectacular as Saturn's.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-secondary">116,460 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-secondary">10.7 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-secondary" data-t="saturn.dayValue">10.7 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-secondary">146</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Rings</span>
-<span class="text-xl font-headline font-bold text-secondary">7 Main Sets</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.rings">Rings</span>
+<span class="text-xl font-headline font-bold text-secondary" data-t="saturn.ringsValue">7 Main Sets</span>
 </div>
 </div>
 </div>
@@ -344,28 +344,28 @@
 </div>
 <div class="space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 19.20 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Uranus</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary" data-t="uranus.distance">Distance: 19.20 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="uranus.name">Uranus</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="uranus.desc">
                         Uranus—seventh planet from the Sun—rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-primary">50,724 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-primary">17.2 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="uranus.dayValue">17.2 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-primary">28</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Classification</span>
-<span class="text-xl font-headline font-bold text-primary">Ice Giant</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.classification">Classification</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="uranus.classValue">Ice Giant</span>
 </div>
 </div>
 </div>
@@ -374,28 +374,28 @@
 <section class="relative grid md:grid-cols-2 gap-12 items-center" id="Neptune">
 <div class="order-2 md:order-1 space-y-8">
 <div class="space-y-4">
-<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary">Distance: 30.05 AU</span>
-<h2 class="font-headline text-5xl font-bold tracking-tight">Neptune</h2>
-<p class="text-on-surface-variant text-lg leading-relaxed">
+<span class="font-headline text-sm uppercase tracking-[0.3em] text-primary" data-t="neptune.distance">Distance: 30.05 AU</span>
+<h2 class="font-headline text-5xl font-bold tracking-tight" data-t="neptune.name">Neptune</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed" data-t="neptune.desc">
                         Dark, cold, and whipped by supersonic winds, ice giant Neptune is the eighth and most distant major planet orbiting our Sun. It was the first planet located through mathematical calculations.
                     </p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Diameter</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.diameter">Diameter</span>
 <span class="text-xl font-headline font-bold text-primary">49,244 KM</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Day Length</span>
-<span class="text-xl font-headline font-bold text-primary">16.1 Hours</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.dayLength">Day Length</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="neptune.dayValue">16.1 Hours</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Moons</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.moons">Moons</span>
 <span class="text-xl font-headline font-bold text-primary">16</span>
 </div>
 <div class="glass-panel p-6 rounded-xl">
-<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Wind Speed</span>
-<span class="text-xl font-headline font-bold text-primary">2,100 KM/H</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-widest block mb-1" data-t="stats.windSpeed">Wind Speed</span>
+<span class="text-xl font-headline font-bold text-primary" data-t="neptune.windValue">2,100 KM/H</span>
 </div>
 </div>
 </div>
@@ -406,5 +406,229 @@
 </section>
 </main>
 
+<script>
+const dictionary = {
+  PT: {
+    "nav.mercury": "Mercúrio",
+    "nav.venus": "Vénus",
+    "nav.earth": "Terra",
+    "nav.mars": "Marte",
+    "nav.jupiter": "Júpiter",
+    "nav.saturn": "Saturno",
+    "nav.uranus": "Úrano",
+    "nav.neptune": "Neptuno",
+    "hero.badge": "Registo de Observação do Espaço Profundo",
+    "hero.title": "Explorador do Cosmos",
+    "hero.desc": "Uma odisseia editorial pelos corpos celestes do nosso sistema solar local. Experimente dados planetários de alta fidelidade renderizados sob a lente da astrofísica moderna.",
+    
+    "stats.diameter": "Diâmetro",
+    "stats.dayLength": "Duração do Dia",
+    "stats.moons": "Luas",
+    "stats.tempRange": "Intervalo de Temp.",
+    "stats.atmosphere": "Atmosfera",
+    "stats.population": "População",
+    "stats.missions": "N.º de Missões",
+    "stats.mass": "Massa",
+    "stats.rings": "Anéis",
+    "stats.classification": "Classificação",
+    "stats.windSpeed": "Velocidade do Vento",
 
+    "mercury.distance": "Distância: 0.39 UA",
+    "mercury.name": "Mercúrio",
+    "mercury.desc": "O mais pequeno planeta no nosso sistema solar e o mais próximo do Sol — é apenas ligeiramente maior do que a Lua da Terra. Mercúrio é o planeta mais rápido, orbitando o Sol a cada 88 dias terrestres.",
+    "mercury.dayValue": "59 Dias Terrestres",
+
+    "venus.distance": "Distância: 0.72 UA",
+    "venus.name": "Vénus",
+    "venus.desc": "Rodando lentamente na direção oposta à da maioria dos planetas, Vénus é o planeta mais quente do nosso sistema solar. A sua atmosfera espessa retém o calor num efeito de estufa descontrolado, tornando-o suficientemente quente para derreter chumbo.",
+    "venus.dayValue": "243 Dias Terrestres",
+
+    "earth.distance": "Distância: 1.00 UA",
+    "earth.name": "Terra",
+    "earth.desc": "O nosso planeta natal é o único local que conhecemos até agora que é habitado por seres vivos. É também o único planeta no nosso sistema solar com água líquida na superfície.",
+    "earth.dayValue": "24 Horas",
+    "earth.popValue": "8.1 Mil Milhões",
+
+    "mars.distance": "Distância: 1.52 UA",
+    "mars.name": "Marte",
+    "mars.desc": "Um mundo desértico, frio e poeirento, com uma atmosfera muito fina. Existem fortes evidências de que Marte era — há milhares de milhões de anos — muito mais húmido e quente, com uma atmosfera mais espessa.",
+    "mars.dayValue": "24.6 Horas",
+    "mars.missionsValue": "50+",
+
+    "jupiter.distance": "Distância: 5.20 UA",
+    "jupiter.name": "Júpiter",
+    "jupiter.desc": "Júpiter é mais de duas vezes mais massivo do que os outros planetas do nosso sistema solar juntos. A Grande Mancha Vermelha do planeta gigante é uma tempestade com séculos, maior do que a Terra.",
+    "jupiter.dayValue": "9.9 Horas",
+    "jupiter.massValue": "318 x Terra",
+
+    "saturn.distance": "Distância: 9.58 UA",
+    "saturn.name": "Saturno",
+    "saturn.desc": "Adornado com um deslumbrante e complexo sistema de anéis de gelo, Saturno é único no nosso sistema solar. Os outros planetas gigantes têm anéis, mas nenhuns são tão espetaculares como os de Saturno.",
+    "saturn.dayValue": "10.7 Horas",
+    "saturn.ringsValue": "7 Conjuntos Principais",
+
+    "uranus.distance": "Distância: 19.20 UA",
+    "uranus.name": "Úrano",
+    "uranus.desc": "Úrano — o sétimo planeta a partir do Sol — roda num ângulo de quase 90 graus em relação ao plano da sua órbita. Esta inclinação única faz com que Úrano pareça rodar de lado.",
+    "uranus.dayValue": "17.2 Horas",
+    "uranus.classValue": "Gigante de Gelo",
+
+    "neptune.distance": "Distância: 30.05 UA",
+    "neptune.name": "Neptuno",
+    "neptune.desc": "Escuro, frio e açoitado por ventos supersónicos, o gigante de gelo Neptuno é o oitavo e mais distante planeta principal a orbitar o nosso Sol. Foi o primeiro planeta localizado através de cálculos matemáticos.",
+    "neptune.dayValue": "16.1 Horas",
+    "neptune.windValue": "2.100 KM/H"
+  },
+  EN: {
+    "nav.mercury": "Mercury",
+    "nav.venus": "Venus",
+    "nav.earth": "Earth",
+    "nav.mars": "Mars",
+    "nav.jupiter": "Jupiter",
+    "nav.saturn": "Saturn",
+    "nav.uranus": "Uranus",
+    "nav.neptune": "Neptune",
+    "hero.badge": "Deep Space Observation Log",
+    "hero.title": "Cosmos Explorer",
+    "hero.desc": "An editorial odyssey through the celestial bodies of our local star system. Experience high-fidelity planetary data rendered through the lens of modern astrophysics.",
+    
+    "stats.diameter": "Diameter",
+    "stats.dayLength": "Day Length",
+    "stats.moons": "Moons",
+    "stats.tempRange": "Temp Range",
+    "stats.atmosphere": "Atmosphere",
+    "stats.population": "Population",
+    "stats.missions": "Mission Count",
+    "stats.mass": "Mass",
+    "stats.rings": "Rings",
+    "stats.classification": "Classification",
+    "stats.windSpeed": "Wind Speed",
+
+    "mercury.distance": "Distance: 0.39 AU",
+    "mercury.name": "Mercury",
+    "mercury.desc": "The smallest planet in our solar system and closest to the Sun—is only slightly larger than Earth's Moon. Mercury is the fastest planet, zipping around the Sun every 88 Earth days.",
+    "mercury.dayValue": "59 Earth Days",
+
+    "venus.distance": "Distance: 0.72 AU",
+    "venus.name": "Venus",
+    "venus.desc": "Spinning slowly in the opposite direction from most planets, Venus is the hottest planet in our solar system. Its thick atmosphere traps heat in a runaway greenhouse effect, making it hot enough to melt lead.",
+    "venus.dayValue": "243 Earth Days",
+
+    "earth.distance": "Distance: 1.00 AU",
+    "earth.name": "Earth",
+    "earth.desc": "Our home planet is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.",
+    "earth.dayValue": "24 Hours",
+    "earth.popValue": "8.1 Billion",
+
+    "mars.distance": "Distance: 1.52 AU",
+    "mars.name": "Mars",
+    "mars.desc": "A dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was—billions of years ago—much wetter and warmer, with a thicker atmosphere.",
+    "mars.dayValue": "24.6 Hours",
+    "mars.missionsValue": "50+",
+
+    "jupiter.distance": "Distance: 5.20 AU",
+    "jupiter.name": "Jupiter",
+    "jupiter.desc": "Jupiter is more than twice as massive than the other planets of our solar system combined. The giant planet's Great Red spot is a centuries-old storm bigger than Earth.",
+    "jupiter.dayValue": "9.9 Hours",
+    "jupiter.massValue": "318 x Earth",
+
+    "saturn.distance": "Distance: 9.58 AU",
+    "saturn.name": "Saturn",
+    "saturn.desc": "Adorned with a dazzling, complex system of icy rings, Saturn is unique in our solar system. The other giant planets have rings, but none are as spectacular as Saturn's.",
+    "saturn.dayValue": "10.7 Hours",
+    "saturn.ringsValue": "7 Main Sets",
+
+    "uranus.distance": "Distance: 19.20 AU",
+    "uranus.name": "Uranus",
+    "uranus.desc": "Uranus—seventh planet from the Sun—rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side.",
+    "uranus.dayValue": "17.2 Hours",
+    "uranus.classValue": "Ice Giant",
+
+    "neptune.distance": "Distance: 30.05 AU",
+    "neptune.name": "Neptune",
+    "neptune.desc": "Dark, cold, and whipped by supersonic winds, ice giant Neptune is the eighth and most distant major planet orbiting our Sun. It was the first planet located through mathematical calculations.",
+    "neptune.dayValue": "16.1 Hours",
+    "neptune.windValue": "2,100 KM/H"
+  }
+};
+
+function setLanguage(lang) {
+  const currentLang = (lang === 'PT' || lang === 'pt') ? 'PT' : 'EN';
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    if (dictionary[currentLang] && dictionary[currentLang][key]) {
+      el.innerHTML = dictionary[currentLang][key];
+    }
+  });
+}
+
+// Receive message from parent window
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'setLanguage') {
+    setLanguage(event.data.lang);
+  }
+});
+
+// Check parent's language on load
+document.addEventListener('DOMContentLoaded', () => {
+  let parentLang = 'EN';
+  try {
+    if (window.parent && window.parent.currentLang) {
+      parentLang = window.parent.currentLang;
+    }
+  } catch (e) {
+    console.warn("Could not read parent language directly due to cross-origin restrictions. Relying on message passing.", e);
+  }
+  setLanguage(parentLang);
+
+  // Enable smooth scroll behavior programmatically
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  // Navigation link highlighting logic
+  const navLinks = document.querySelectorAll('header nav a');
+  const sections = Array.from(navLinks).map(link => {
+    const id = link.getAttribute('href').substring(1);
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  function setActiveLink(activeLink) {
+    navLinks.forEach(link => {
+      if (link === activeLink) {
+        link.classList.remove('text-slate-400', 'hover:text-slate-200');
+        link.classList.add('text-blue-300', 'border-b-2', 'border-blue-400', 'pb-1');
+      } else {
+        link.classList.add('text-slate-400', 'hover:text-slate-200');
+        link.classList.remove('text-blue-300', 'border-b-2', 'border-blue-400', 'pb-1');
+      }
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      setActiveLink(link);
+    });
+  });
+
+  // IntersectionObserver for scroll-spy effect
+  const observerOptions = {
+    root: null,
+    rootMargin: '-30% 0px -50% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const correspondingLink = document.querySelector(`header nav a[href="#${id}"]`);
+        if (correspondingLink) {
+          setActiveLink(correspondingLink);
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+});
+</script>
 </body></html>

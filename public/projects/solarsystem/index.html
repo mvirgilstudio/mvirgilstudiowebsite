@@ -97,7 +97,7 @@
 <body class="selection:bg-nebula-cyan/30 selection:text-nebula-cyan">
 
     <!-- Telemetry HUD (Floating corner metadata) -->
-    <div class="fixed top-8 right-8 z-[100] glass p-6 rounded-sm w-64 hidden lg:block ambient-glow">
+    <div class="fixed top-24 right-8 z-[100] glass p-6 rounded-sm w-64 hidden lg:block ambient-glow">
         <div class="flex flex-col gap-4">
             <div class="flex justify-between items-center">
                 <span class="telemetry" data-t="hud.sector">SECTOR COORDINATES</span>
@@ -122,7 +122,7 @@
         id="main-header">
         <div class="flex justify-between items-center w-full">
             <div class="cursor-pointer pointer-events-auto group"
-                onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                onclick="window.location.href='/'">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
@@ -143,13 +143,6 @@
             </div>
 
             <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
-                <a href="/#expertise"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
-                    data-t="nav.expertise">
-                    ESPECIALIDADE
-                    <span
-                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
                 <a href="/#about"
                     class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
                     data-t="nav.about">
@@ -168,7 +161,7 @@
                 <span
                     class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
                     onclick="toggleLang()">
-                    PT
+                    <span id="lang-toggle">PT</span>
                     <span
                         class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </span>
@@ -197,16 +190,11 @@
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                 onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                <span data-t="nav.expertise">ESPECIALIDADE</span>
-            </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
-                onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 <span data-t="nav.about">SOBRE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                 onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 <span data-t="nav.contact">CONTACTO</span>
             </div>
 
@@ -433,18 +421,18 @@
 
             <p class="font-mono text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-[#b0b0b0] uppercase mt-4 mb-2 relative z-10 px-4 md:px-0"
                 data-t="footer.rights">
-                © 2026 MIGUEL VIRGÍLIO. ALL RIGHTS RESERVED.
+                © 2026 MV Interactive Systems
             </p>
             <p class="font-mono text-[8.5px] md:text-[10px] text-white/40 relative z-10 max-w-[90%] md:max-w-full mx-auto"
                 data-t="footer.specialist">
-                Interactive Systems Developer | Creative Coder | WebGL Specialist
+                Designed for Performance & Precision
             </p>
         </footer>
     </main>
 
     <!-- 3D Planetary Simulation: Floating Instrument Window -->
     <div id="planet-modal"
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] hidden opacity-0 transition-opacity duration-500 w-[90%] h-[80vh] lg:w-[1000px] lg:h-[650px]">
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[90%] h-[80vh] lg:w-[1000px] lg:h-[650px]">
         <!-- Glass Surface (Tonal shift vs border) -->
         <div class="relative w-full h-full glass rounded-none ambient-glow-gold flex flex-col overflow-hidden">
             <!-- Modal Header / Drag Handle (Asymmetric) -->
@@ -503,7 +491,7 @@
 
     <!-- Demo Popup: Solar System Encyclopedia -->
     <div id="demo-modal"
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] hidden opacity-0 transition-opacity duration-500 w-[92%] h-[88vh] lg:w-[1100px] lg:h-[750px]">
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[92%] h-[88vh] lg:w-[1100px] lg:h-[750px]">
         <!-- Glass Surface -->
         <div class="relative w-full h-full glass rounded-none ambient-glow flex flex-col overflow-hidden"
             style="box-shadow: 0 40px 80px -20px rgba(0, 219, 231, 0.12), 0 0 120px -30px rgba(0, 242, 255, 0.06);">
@@ -533,10 +521,10 @@
 
             <!-- Iframe Container -->
             <div class="flex-1 relative overflow-hidden bg-[#0c0e12]">
-                <iframe id="demo-iframe" src="" class="w-full h-full border-none" style="background: #0c0e12;"></iframe>
+                <iframe id="demo-iframe" src="assets/planetary/solar_system_encyclopedia/code.html" class="w-full h-full border-none" style="background: #0c0e12;"></iframe>
                 <!-- Loading State -->
                 <div id="demo-loader"
-                    class="absolute inset-0 flex items-center justify-center bg-[#0c0e12] pointer-events-none transition-opacity duration-500">
+                    class="absolute inset-0 flex items-center justify-center bg-[#0c0e12] pointer-events-none transition-opacity duration-500 opacity-0">
                     <div class="flex flex-col items-center gap-4">
                         <div class="w-20 h-[1px] bg-white/5 overflow-hidden">
                             <div class="w-full h-full bg-nebula-cyan shadow-[0_0_10px_#00F2FF] animate-pulse"
@@ -551,7 +539,7 @@
             <div class="p-4 flex justify-between items-center bg-white/[0.02] flex-shrink-0">
                 <div class="flex items-center gap-4">
                     <span class="material-symbols-outlined text-nebula-cyan text-sm">public</span>
-                    <span class="telemetry text-[8px] text-white/40">COSMOS EXPLORER — 8 PLANETARY BODIES</span>
+                    <span class="telemetry text-[8px] text-white/40" data-t="demo.footer">COSMOS EXPLORER — 8 PLANETARY BODIES</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="material-symbols-outlined text-nebula-cyan text-sm">verified</span>
@@ -562,7 +550,7 @@
     </div>
 
     <!-- Demo Modal Backdrop -->
-    <div id="demo-backdrop" class="fixed inset-0 z-[199] hidden bg-black/60 backdrop-blur-sm"></div>
+    <div id="demo-backdrop" class="fixed inset-0 z-[599] hidden opacity-0 bg-black/60 backdrop-blur-sm"></div>
 
     <!-- Scripts -->
     <script>
@@ -595,8 +583,8 @@
                 "cinematic.badge": "ARQUIVOS CINEMATOGRÁFICOS",
                 "cinematic.h2": "Portal do Horizonte de Eventos",
                 "cinematic.stream": "Transmissão Principal Ativa",
-                "footer.rights": "© 2026 MIGUEL VIRGÍLIO. TODOS OS DIREITOS RESERVADOS.",
-                "footer.specialist": "Desenvolvedor de Sistemas Interativos | Programador Criativo | Especialista WebGL",
+                "footer.rights": "© 2026 MV Interactive Systems",
+                "footer.specialist": "Concebido para Desempenho e Precisão",
                 "modal.status": "INSTRUMENTO 0-ORRERY ATIVO",
                 "modal.h2": "Viewport Planetário",
                 "modal.close": "DESLIGAR",
@@ -604,7 +592,8 @@
                 "demo.status": "DEMO STREAM ATIVA",
                 "demo.h2": "Explorador do Cosmos",
                 "demo.preview": "PRÉ-VISUALIZAÇÃO INTEGRADA",
-                "demo.close": "FECHAR"
+                "demo.close": "FECHAR",
+                "demo.footer": "EXPLORADOR DO COSMOS — 8 CORPOS PLANETÁRIOS"
             },
             'EN': {
                 "nav.expertise": "EXPERTISE",
@@ -633,8 +622,8 @@
                 "cinematic.badge": "CINEMATIC ARCHIVES",
                 "cinematic.h2": "Event Horizon Portal",
                 "cinematic.stream": "Main Stream Active",
-                "footer.rights": "© 2026 MIGUEL VIRGÍLIO. ALL RIGHTS RESERVED.",
-                "footer.specialist": "Interactive Systems Developer | Creative Coder | WebGL Specialist",
+                "footer.rights": "© 2026 MV Interactive Systems",
+                "footer.specialist": "Designed for Performance & Precision",
                 "modal.status": "INSTRUMENT 0-ORRERY ACTIVE",
                 "modal.h2": "Planetary Viewport",
                 "modal.close": "DISCONNECT",
@@ -642,11 +631,12 @@
                 "demo.status": "DEMO STREAM ACTIVE",
                 "demo.h2": "Cosmos Explorer",
                 "demo.preview": "EMBEDDED PREVIEW",
-                "demo.close": "CLOSE"
+                "demo.close": "CLOSE",
+                "demo.footer": "COSMOS EXPLORER — 8 PLANETARY BODIES"
             }
         };
 
-        let currentLang = 'PT';
+        var currentLang = 'PT';
 
         function updateLanguage() {
             document.querySelectorAll('[data-t]').forEach(el => {
@@ -686,6 +676,12 @@
                 } else {
                     menuText.textContent = currentLang === 'PT' ? 'Menu' : 'Menu';
                 }
+            }
+
+            // Send language change to iframe if it exists
+            const iframe = document.getElementById('demo-iframe');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({ type: 'setLanguage', lang: currentLang }, '*');
             }
         }
 
