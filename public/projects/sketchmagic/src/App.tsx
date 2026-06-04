@@ -426,7 +426,7 @@ export default function App() {
           transition={{ duration: 0.8 }}
           className="font-sans text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.2em] text-[#b0b0b0] uppercase mb-2 relative z-10 px-4 md:px-0"
         >
-          © {new Date().getFullYear()} DIREITOS RESERVADOS
+          © {new Date().getFullYear()} MV Interactive Systems
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 20 }}

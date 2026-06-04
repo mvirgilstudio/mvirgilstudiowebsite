@@ -200,7 +200,7 @@
         id="main-header">
         <div class="flex justify-between items-center w-full">
             <div class="cursor-pointer pointer-events-auto group"
-                onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                onclick="window.location.href='/'">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
@@ -221,13 +221,6 @@
             </div>
 
             <nav class="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
-                <a href="/#expertise"
-                    class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
-                    id="nav-expertise">
-                    ESPECIALIDADE
-                    <span
-                        class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
                 <a href="/#about"
                     class="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group no-underline"
                     id="nav-about">
@@ -275,16 +268,11 @@
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                 onclick="toggleMenu()">
                 <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
-                <span id="nav-expertise-mobile">ESPECIALIDADE</span>
-            </div>
-            <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
-                onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 <span id="nav-about-mobile">SOBRE</span>
             </div>
             <div class="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
                 onclick="toggleMenu()">
-                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">03</span>
+                <span class="text-xs font-mono text-concrete group-hover:text-white transition-colors">02</span>
                 <span id="nav-contact-mobile">CONTACTO</span>
             </div>
 
@@ -347,10 +335,10 @@
             <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6 z-20">
                 <!-- Hint -->
                 <div id="interaction-hint"
-                    class="flex flex-col items-center mb-10 opacity-60 transition-opacity duration-1000">
+                    class="flex flex-col items-center mb-10 opacity-60 transition-opacity duration-300">
                     <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-white font-bold">
-                        <span class="material-symbols-outlined text-[16px]">swipe</span>
-                        <span id="hint-drag">Clique e Arraste para Rodar</span>
+                        <span class="material-symbols-outlined text-[16px]">mouse</span>
+                        <span id="hint-drag">Clique e Arraste o Rato para Rodar</span>
                     </div>
                     <div class="w-px h-12 bg-gradient-to-b from-white/40 to-transparent mt-4"></div>
                 </div>
@@ -648,7 +636,7 @@
                 hero_presentation: 'Interactive Presentation',
                 hero_title: 'The Rolls-Royce <span class="text-white/70 font-style-italic">Ghost.</span>',
                 hero_desc: 'Explore the pinnacle of automotive luxury in an immersive 3D environment. Every stitch, every surface, rendered with absolute fidelity.',
-                hint_drag: 'Click & Drag to Rotate',
+                hint_drag: 'Click & Drag Mouse to Rotate',
                 label_exterior: 'Exterior Paint',
                 label_interior: 'Interior Leather',
                 label_perspective: 'Perspective',
@@ -712,7 +700,7 @@
                 hero_presentation: 'Apresentação Interativa',
                 hero_title: 'O Rolls-Royce <span class="text-white/70 font-style-italic">Ghost.</span>',
                 hero_desc: 'Explore o auge do luxo automóvel num ambiente 3D imersivo. Cada ponto, cada superfície, renderizados com fidelidade absoluta.',
-                hint_drag: 'Clique e Arraste para Rodar',
+                hint_drag: 'Clique e Arraste o Rato para Rodar',
                 label_exterior: 'Pintura Exterior',
                 label_interior: 'Interior',
                 label_perspective: 'Perspetiva',
@@ -820,15 +808,22 @@
             const t = GHOST_TRANSLATIONS[currentLang];
 
             // Update Navbar
-            document.getElementById('nav-expertise').innerText = t.nav_expertise;
-            document.getElementById('nav-about').innerText = t.nav_about;
-            document.getElementById('nav-contact').innerText = t.nav_contact;
+            const navExpertise = document.getElementById('nav-expertise');
+            if (navExpertise) navExpertise.innerText = t.nav_expertise;
+            const navAbout = document.getElementById('nav-about');
+            if (navAbout) navAbout.innerText = t.nav_about;
+            const navContact = document.getElementById('nav-contact');
+            if (navContact) navContact.innerText = t.nav_contact;
 
-            document.getElementById('nav-expertise-mobile').innerText = t.nav_expertise;
-            document.getElementById('nav-about-mobile').innerText = t.nav_about;
-            document.getElementById('nav-contact-mobile').innerText = t.nav_contact;
+            const navExpertiseMobile = document.getElementById('nav-expertise-mobile');
+            if (navExpertiseMobile) navExpertiseMobile.innerText = t.nav_expertise;
+            const navAboutMobile = document.getElementById('nav-about-mobile');
+            if (navAboutMobile) navAboutMobile.innerText = t.nav_about;
+            const navContactMobile = document.getElementById('nav-contact-mobile');
+            if (navContactMobile) navContactMobile.innerText = t.nav_contact;
 
-            document.getElementById('lang-toggle').innerHTML = `${currentLang}<span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>`;
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) langToggle.innerHTML = `${currentLang}<span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>`;
 
             // Update Hero
             document.getElementById('hero-brand').innerText = t.hero_brand;
@@ -1195,17 +1190,16 @@
             isDragging = true;
             startX = e.pageX; startY = e.pageY;
             startFrame = currentFrame;
+
+            // Hide hint immediately on click
+            const hint = document.getElementById('interaction-hint');
+            if (hint) hint.style.opacity = '0';
         });
 
         window.addEventListener('mousemove', e => {
             if (!isDragging || isAnimating) return;
 
-            // Fade out hint on first interaction
-            const hint = document.getElementById('interaction-hint');
-            if (hint && hint.style.opacity !== '0') {
-                hint.style.opacity = '0';
-                setTimeout(() => hint.style.display = 'none', 1000);
-            }
+            // Removed permanent hide on mousemove
 
             const dx = e.pageX - startX;
             const dy = e.pageY - startY;
@@ -1220,7 +1214,13 @@
             requestAnimationFrame(draw);
         });
 
-        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            
+            // Show hint again when mouse is released
+            const hint = document.getElementById('interaction-hint');
+            if (hint) hint.style.opacity = '0.6';
+        });
 
         // UI Listeners
         document.querySelectorAll('#paint-selectors button').forEach(btn => {
