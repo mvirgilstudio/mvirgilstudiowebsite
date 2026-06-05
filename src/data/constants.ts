@@ -108,7 +108,7 @@ export const WORKS_INDEX: WorkItem[] = [
 export const SECTIONS: SectionData[] = [
   {
     id: 'section_01',
-    title: 'TOUCH & GESTURE INTERACTION',
+    title: 'INTERACTIVE SURFACES & MOTION CONTROLS',
     backgroundText: ['TOUCH', 'MOVE', 'CONTROL'],
     description: [
       'TOUCH-SENSITIVE SURFACES',

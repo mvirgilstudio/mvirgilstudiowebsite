@@ -23,8 +23,8 @@ export const TRANSLATIONS = {
         },
         sections: {
             section_01: {
-                title: 'TOUCH & GESTURE INTERACTION',
-                titleLines: ['TOUCH & GESTURE', 'INTERACTION'],
+                title: 'INTERACTIVE SURFACES & MOTION CONTROLS',
+                titleLines: ['INTERACTIVE SURFACES', '& MOTION CONTROLS'],
                 backgroundText: ['TOUCH', 'MOVE', 'CONTROL'],
                 instructions: {
                     mouse: "Move cursor to attract • Hover button to form shapes • Click to rotate",
@@ -298,8 +298,8 @@ export const TRANSLATIONS = {
         },
         sections: {
             section_01: {
-                title: 'INTERAÇÃO POR TOQUE E GESTO',
-                titleLines: ['INTERAÇÃO POR TOQUE', 'E GESTO'],
+                title: 'SUPERFÍCIES INTERATIVAS E CONTROLOS DE MOVIMENTO',
+                titleLines: ['SUPERFÍCIES INTERATIVAS', 'E CONTROLOS DE MOVIMENTO'],
                 backgroundText: ['TOQUE', 'MOVIMENTO', 'CONTROLO'],
                 instructions: {
                     mouse: "Mova o cursor para atrair • Passe sobre o botão para formar formas • Clique para rodar",
