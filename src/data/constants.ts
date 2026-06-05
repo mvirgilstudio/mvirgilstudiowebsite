@@ -134,7 +134,7 @@ export const SECTIONS: SectionData[] = [
   },
   {
     id: 'section_03',
-    title: 'CONNECTING PHYSICAL & DIGITAL',
+    title: 'CONNECTING REAL OBJECTS TO THE DIGITAL WORLD',
     backgroundText: ['BRIDGING', 'MATTER', 'AND PIXELS'],
     description: [
       'LIVE DIGITAL REPLICAS',

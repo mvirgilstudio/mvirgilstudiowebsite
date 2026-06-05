@@ -41,8 +41,8 @@ export const TRANSLATIONS = {
                 }
             },
             section_03: {
-                title: 'CONNECTING PHYSICAL & DIGITAL',
-                titleLines: ['CONNECTING PHYSICAL', '& DIGITAL'],
+                title: 'CONNECTING REAL OBJECTS TO THE DIGITAL WORLD',
+                titleLines: ['CONNECTING REAL OBJECTS', 'TO THE DIGITAL WORLD'],
                 backgroundText: ['BRIDGING', 'MATTER', 'AND PIXELS'],
                 game: {
                     objective: 'Objective',
@@ -316,8 +316,8 @@ export const TRANSLATIONS = {
                 }
             },
             section_03: {
-                title: 'CONECTAR FÍSICO E DIGITAL',
-                titleLines: ['CONECTAR FÍSICO', 'E DIGITAL'],
+                title: 'CONECTAR OBJETOS REAIS AO MUNDO DIGITAL',
+                titleLines: ['CONECTAR OBJETOS REAIS', 'AO MUNDO DIGITAL'],
                 backgroundText: ['LIGAÇÃO', 'MATÉRIA', 'E PIXÉIS'],
                 game: {
                     objective: 'Objetivo',
