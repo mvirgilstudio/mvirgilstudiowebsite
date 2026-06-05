@@ -160,7 +160,9 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.8 }}
           >
-            {t.subtitle}
+            {t.subtitle.map((line, idx) => (
+              <span key={idx} className="block">{line}</span>
+            ))}
           </motion.p>
         </motion.div>
       </motion.div>

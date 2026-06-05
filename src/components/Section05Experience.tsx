@@ -427,27 +427,79 @@ const LoadingSection05 = () => (
     </div>
 );
 
+const BACKGROUND_IFRAMES = [
+    'https://player.mediadelivery.net/embed/625906/c4f7268d-51fe-4779-9adb-45bccb8447bd?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/115ccb02-3030-449e-9b6e-a3bc8f6ce89f?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/bf93b238-80ea-4fa2-bc70-6251862943b1?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/7b5e168d-de03-46c4-9d8e-dcc4b20fdcbe?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/83fad43c-984c-43e5-b3bc-82ce27c79387?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/d25a835d-db29-4376-bff9-b0144c236ec0?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/f8f86efb-97a9-4bde-b366-3cadf6744759?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/ccd63d74-9583-426e-ba5c-f54833d049eb?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/4e52ccb3-82c1-4c48-b0f1-6806a0de5330?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/5226c06d-525a-4ac6-a6db-726b5748fbe6?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/9e6a9e17-7546-4f8f-8834-2c411d46af83?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false',
+    'https://player.mediadelivery.net/embed/625906/2445c0cc-495c-4d63-8fd8-f7e26bc69402?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false'
+];
+
 const Section05Experience: React.FC = () => {
     const sculptureColliders = useRef<THREE.Mesh[]>([]);
     const sculptureOccluderMeshes = useRef<THREE.Mesh[]>([]);
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
+    const randomizedIframes = useMemo(() => {
+        return [...BACKGROUND_IFRAMES].sort(() => Math.random() - 0.5);
+    }, []);
+
     return (
         <div className="absolute inset-0 z-[50] pointer-events-none">
-            <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+            {/* Background Layer with Video Grid */}
+            <div className="absolute inset-0 z-0 bg-[#040404] pointer-events-none overflow-hidden">
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? 'repeat(3, 1fr)' : 'repeat(4, 1fr)',
+                        gridTemplateRows: isMobile ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)',
+                        gap: 0,
+                        width: '100%',
+                        height: '100%',
+                        opacity: 0.7
+                    }}
+                >
+                    {randomizedIframes.map((src, i) => (
+                        <div key={i} className="relative w-full h-full overflow-hidden">
+                            <iframe
+                                src={src}
+                                loading="lazy"
+                                className="absolute pointer-events-none border-0"
+                                style={{
+                                    width: isMobile ? '300%' : '250%',
+                                    height: isMobile ? '115%' : '110%',
+                                    left: isMobile ? '-100%' : '-75%',
+                                    top: isMobile ? '-7.5%' : '-5%',
+                                }}
+                                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                            />
+                        </div>
+                    ))}
+                </div>
+                {/* Vignette / Dark gradient overlays */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#040404] via-transparent to-[#040404] opacity-40 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#040404] via-transparent to-[#040404] opacity-40 pointer-events-none" />
+            </div>
+
+            <div style={{ width: '100%', height: '100%', pointerEvents: 'auto', position: 'relative', zIndex: 1 }}>
                 <Canvas
                     shadows={false}
                     gl={{ antialias: false, alpha: true, powerPreference: "high-performance", stencil: false, depth: true }}
                     dpr={isMobile ? [1, 1] : [1, 1.25]}
                 >
-                    <color attach="background" args={['#040404']} />
                     <fog attach="fog" args={['#040404', 18, 50]} />
                     <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={35} />
 
                     <Suspense fallback={null}>
                         <NebulaBackground count={15} />
-                        <GlowingOrbs count={10} />
                         <AmbientDust count={50} />
 
                         <OrbitingParticles count={80} colliders={[sculptureColliders]} hoveredPlaneIdx={null} />

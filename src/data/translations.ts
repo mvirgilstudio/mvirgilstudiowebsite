@@ -8,7 +8,10 @@ export const TRANSLATIONS = {
         },
         hero: {
             system: 'Interactive Design System',
-            subtitle: 'Interactive 3D Systems & Creative AI Experiences',
+            subtitle: [
+                'Interactive 3D Systems',
+                '& create AI experiences'
+            ],
             scroll: 'Scroll to Explore',
         },
         works: {
@@ -280,7 +283,10 @@ export const TRANSLATIONS = {
         },
         hero: {
             system: 'Sistema de Design Interativo',
-            subtitle: 'Sistemas 3D Interativos e Experiências Criativas com IA',
+            subtitle: [
+                'Sistemas 3D Interativos',
+                '& criar experiências de IA'
+            ],
             scroll: 'Deslize para Explorar',
         },
         works: {
