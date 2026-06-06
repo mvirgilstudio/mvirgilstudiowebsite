@@ -5,8 +5,15 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#f9f9f9" />
     <title>MVs Archviz | Architectural Visualization</title>
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico" />
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <!-- Preload primary font weight -->
+    <link rel="preload" href="https://db.onlinewebfonts.com/t/4366ceae6f7564999a0f0c3e8698a4ad.woff2?v=2" as="font" type="font/woff2" crossorigin />
     <!-- PP Neue Montreal Font -->
     <style>
         @font-face {
@@ -50,12 +57,12 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
     <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <!-- Lottie Player -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
     <!-- Model Viewer -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js" defer></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Tailwind Config -->
@@ -226,6 +233,7 @@
 
         body {
             @apply bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Motion utilities */
@@ -275,6 +283,25 @@
             will-change: transform, opacity;
         }
 
+        /* On mobile, use smaller translateX to prevent content clipping with overflow-x-hidden */
+        @media (max-width: 767px) {
+            .reveal-section-left {
+                transform: translateX(-40px) scale(0.98);
+            }
+            .reveal-section-right {
+                transform: translateX(40px) scale(0.98);
+            }
+        }
+
+        /* Reduced motion: show content immediately */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-section-left,
+            .reveal-section-right {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
         /* Hover effect wrapper */
         .hover-track-wrap {
             perspective: 1000px;
@@ -314,12 +341,20 @@
 
         @media (max-width: 767px) {
             .accordion-card {
-                height: 90px;
+                height: 80px;
                 width: 100%;
+                flex-shrink: 0;
             }
 
             .accordion-card.active {
-                height: 320px;
+                height: 280px;
+                flex-shrink: 0;
+            }
+
+            /* Let accordion gallery containers auto-size to fit stacked cards on mobile */
+            .accordion-gallery {
+                height: auto !important;
+                overflow: visible !important;
             }
         }
 
@@ -587,7 +622,7 @@
                 class="absolute inset-0 flex flex-col justify-end px-margin-mobile md:px-margin-desktop max-w-[1920px] mx-auto pb-24 z-30 pointer-events-none">
                 <div class="w-full max-w-none reveal-up text-on-primary parallax-layer" data-speed="0.2">
                     <p id="hero-subtitle" data-t="hero_subtitle"
-                        class="w-full mb-10 text-gray-700 drop-shadow-md uppercase tracking-widest whitespace-nowrap pointer-events-auto"
+                        class="w-full mb-10 text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-nowrap pointer-events-auto"
                         style="font-size: clamp(0.75rem, 2vw, 2.5rem); letter-spacing: 0.3em; opacity: 0; transform: translateY(20px);">
                         High-end architectural
                         techniques for visionary designs</p>
@@ -718,7 +753,7 @@
 
                 <!-- Flow Navigation Bar -->
                 <div id="flow-nav-container"
-                    class="sticky top-[80px] z-30 w-full max-w-full bg-white/95 backdrop-blur border-b border-black/10 py-4 mb-8 flex flex-nowrap gap-6 md:gap-8 overflow-x-auto scrollbar-none cursor-grab select-none">
+                    class="sticky top-[56px] md:top-[80px] z-30 w-full max-w-full bg-white/95 backdrop-blur border-b border-black/10 py-4 mb-8 flex flex-nowrap gap-6 md:gap-8 overflow-x-auto scrollbar-none cursor-grab select-none">
                     <a href="#image-renders-sec" data-t="flow_tab1"
                         class="flow-nav-item active font-body-md text-xs md:text-sm uppercase tracking-wider pb-2 whitespace-nowrap shrink-0">01
                         / Image Renders</a>
@@ -739,7 +774,7 @@
                 <div class="flex flex-col w-full gap-12 relative">
                     <!-- Section 01: Image Renders -->
                     <div id="image-renders-sec"
-                        class="w-full bg-white shadow-architectural z-10 reveal-section-left p-12 lg:p-20 relative flow-section">
+                        class="w-full bg-white shadow-architectural z-10 reveal-section-left p-6 md:p-12 lg:p-20 relative flow-section">
                         <div class="absolute top-0 left-0 w-2 h-full bg-[#1a1a1a]"></div>
                         <div>
                             <h4
@@ -871,26 +906,31 @@
                                     <div class="absolute inset-0 image-display-layer active" data-idx="0">
                                         <img src="/projects/greenhaven/assets/img_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
+                                            loading="lazy"
                                             alt="GreenHaven Atrium Deck">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="1">
                                         <img src="/projects/livespace/public/img_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
+                                            loading="lazy"
                                             alt="LiveSpace Concrete Exterior">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="2">
                                         <img src="/projects/architectural_landing_page/assets/tent/06.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
+                                            loading="lazy"
                                             alt="Echologic Tents Canvas Structure">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="3">
                                         <img src="/projects/architectural_landing_page/assets/bungalow/bung_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
+                                            loading="lazy"
                                             alt="Riverstone Meadows Modern Bungalow">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="4">
                                         <img src="/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
+                                            loading="lazy"
                                             alt="House Bridge Garden Modern Architecture">
                                     </div>
 
@@ -917,7 +957,7 @@
 
                 <!-- Section 02: Cinematic Animations -->
                 <div id="video-renders-sec"
-                    class="w-full bg-white shadow-architectural z-10 reveal-section-right p-12 lg:p-20 relative flow-section">
+                    class="w-full bg-white shadow-architectural z-10 reveal-section-right p-6 md:p-12 lg:p-20 relative flow-section">
                     <div class="absolute top-0 left-0 w-2 h-full bg-[#1a1a1a]"></div>
                     <div>
                         <h4
@@ -925,7 +965,7 @@
                             <span class="material-symbols-outlined text-xl">videocam</span>
                             <span data-t="video_title">02 / Cinematic Animations</span>
                         </h4>
-                        <div class="flex flex-col md:flex-row w-full gap-4 h-[590px] md:h-[380px] overflow-hidden accordion-gallery"
+                        <div class="flex flex-col md:flex-row w-full gap-4 h-[520px] md:h-[380px] overflow-hidden accordion-gallery"
                             id="video-gallery">
                             <!-- Card 2: GreenHaven Video -->
                             <div class="accordion-card group relative w-full md:w-auto h-24 md:h-full flex-none md:flex-1 overflow-hidden bg-neutral-900 border border-white/5 cursor-pointer active"
@@ -936,7 +976,9 @@
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
                                     <iframe
-                                        src="https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        src="about:blank"
+                                        data-src="https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        class="lazy-iframe"
                                         loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -957,7 +999,9 @@
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
                                     <iframe
-                                        src="https://player.mediadelivery.net/embed/625906/9dee079e-24f0-47c7-a0f1-74932c2cb0a4?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        src="about:blank"
+                                        data-src="https://player.mediadelivery.net/embed/625906/9dee079e-24f0-47c7-a0f1-74932c2cb0a4?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        class="lazy-iframe"
                                         loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -978,7 +1022,9 @@
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
                                     <iframe
-                                        src="https://player.mediadelivery.net/embed/625906/fefdd3a4-e87f-4373-9b05-5aa52b9d2d05?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        src="about:blank"
+                                        data-src="https://player.mediadelivery.net/embed/625906/fefdd3a4-e87f-4373-9b05-5aa52b9d2d05?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        class="lazy-iframe"
                                         loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1000,7 +1046,9 @@
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
                                     <iframe
-                                        src="https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        src="about:blank"
+                                        data-src="https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                        class="lazy-iframe"
                                         loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1020,7 +1068,7 @@
 
         <!-- Section 03: Walkthrough Gallery -->
         <div id="walkthrough-sec"
-            class="w-full bg-white shadow-architectural z-10 reveal-section-left p-12 lg:p-20 relative flow-section">
+            class="w-full bg-white shadow-architectural z-10 reveal-section-left p-6 md:p-12 lg:p-20 relative flow-section">
             <div class="absolute top-0 left-0 w-2 h-full bg-[#1a1a1a]"></div>
             <div>
                 <!-- Header Info -->
@@ -1048,8 +1096,9 @@
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
                             <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="https://player.mediadelivery.net/embed/625906/10b021e4-dbc0-4e46-996e-2d626ee0cead?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    src="about:blank"
+                                    data-src="https://player.mediadelivery.net/embed/625906/10b021e4-dbc0-4e46-996e-2d626ee0cead?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe></div>
                         </div>
@@ -1079,8 +1128,9 @@
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
                             <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    src="about:blank"
+                                    data-src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe></div>
                         </div>
@@ -1109,7 +1159,7 @@
 
         <!-- Section 04: Interactive Systems -->
         <div id="interactive-systems-sec"
-            class="w-full bg-white shadow-architectural z-10 reveal-section-right p-12 lg:p-20 relative flow-section">
+            class="w-full bg-white shadow-architectural z-10 reveal-section-right p-6 md:p-12 lg:p-20 relative flow-section">
             <div class="absolute top-0 left-0 w-2 h-full bg-[#1a1a1a]"></div>
             <div>
                 <!-- Header Info -->
@@ -1129,15 +1179,16 @@
 
                 <!-- Interactive Accordion Gallery Wrapper -->
                 <div class="w-full reveal-up">
-                    <div class="flex flex-col md:flex-row w-full gap-6 h-[600px] overflow-hidden accordion-gallery"
+                    <div class="flex flex-col md:flex-row w-full gap-6 h-[440px] md:h-[600px] overflow-hidden accordion-gallery"
                         id="panorama-accordion">
                         <!-- Card 1: House -->
                         <div class="accordion-card group relative w-full md:w-auto h-full flex-none md:flex-1 overflow-hidden bg-black border border-black/10 cursor-pointer active"
                             data-project="house">
                             <!-- Interactive Experience Iframe -->
                             <iframe
-                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none"
-                                src="section_02.html?project=house"
+                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
+                                src="about:blank"
+                                data-src="section_02.html?project=house"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="House Interactive Experience"></iframe>
 
@@ -1183,8 +1234,9 @@
                             data-project="tent">
                             <!-- Interactive Experience Iframe -->
                             <iframe
-                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none"
-                                src="section_02.html?project=tent"
+                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
+                                src="about:blank"
+                                data-src="section_02.html?project=tent"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="Tent Interactive Experience"></iframe>
 
@@ -1230,8 +1282,9 @@
                             data-project="bridge_garden">
                             <!-- Interactive Experience Iframe -->
                             <iframe
-                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none"
-                                src="section_02.html?project=bridge_garden"
+                                class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
+                                src="about:blank"
+                                data-src="section_02.html?project=bridge_garden"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="Bridge Garden Interactive Experience"></iframe>
 
@@ -1334,7 +1387,7 @@
         <div id="pipeline-sec" class="w-full relative flow-section reveal-section-left">
             <div class="w-full hover-track-wrap">
                 <div
-                    class="bg-[#5f5e5e] text-white p-12 lg:p-16 shadow-floating hover-track-inner flex flex-col md:flex-row gap-12 items-center">
+                    class="bg-[#5f5e5e] text-white p-6 md:p-12 lg:p-16 shadow-floating hover-track-inner flex flex-col md:flex-row gap-12 items-center">
                     <!-- Pipeline Info (3/5 width) -->
                     <div class="w-full md:w-3/5">
                         <h2 data-t="pipeline_tag"
@@ -1411,7 +1464,9 @@
                             <!-- Background Video -->
                             <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
                                 <iframe
-                                    src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    src="about:blank"
+                                    data-src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe"
                                     loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1430,7 +1485,9 @@
                             <!-- Background Video -->
                             <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
                                 <iframe
-                                    src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    src="about:blank"
+                                    data-src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe"
                                     loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1652,8 +1709,9 @@
                             <span class="loading-text-3d" data-t="loading_3d_scan">Loading 3D Scan</span>
                         </div>
                         <!-- WebGL Splat Iframe -->
-                        <iframe id="splat-iframe" src="https://conventosplat01.b-cdn.net/convento.html"
-                            class="w-full h-full border-0" allow="fullscreen; camera; autoplay; encrypted-media;"
+                        <iframe id="splat-iframe" src="about:blank"
+                            data-src="https://conventosplat01.b-cdn.net/convento.html"
+                            class="w-full h-full border-0 lazy-iframe" allow="fullscreen; camera; autoplay; encrypted-media;"
                             allowfullscreen title="Convento Gaussian Splatting Viewer">
                         </iframe>
 
@@ -1679,7 +1737,9 @@
                         <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
                             style="position:relative;padding-top:56.25%;">
                             <iframe
-                                src="https://player.mediadelivery.net/embed/625906/85232b4e-9df5-47de-8a27-3b4aa1d19348?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                src="about:blank"
+                                data-src="https://player.mediadelivery.net/embed/625906/85232b4e-9df5-47de-8a27-3b4aa1d19348?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                class="lazy-iframe"
                                 loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                 allowfullscreen="true"></iframe>
@@ -1694,7 +1754,9 @@
                         <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
                             style="position:relative;padding-top:56.25%;">
                             <iframe
-                                src="https://player.mediadelivery.net/embed/625906/2faee777-3c96-4354-a9e6-50aa234c11ba?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                src="about:blank"
+                                data-src="https://player.mediadelivery.net/embed/625906/2faee777-3c96-4354-a9e6-50aa234c11ba?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                class="lazy-iframe"
                                 loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                 allowfullscreen="true"></iframe>
@@ -1714,14 +1776,15 @@
                 <div class="w-full md:w-7/12 relative reveal-left">
                     <!-- Decorative offset box -->
                     <div
-                        class="absolute inset-0 bg-[#e2e2e2] transform translate-x-6 -translate-y-6 lg:translate-x-12 lg:-translate-y-12 z-0">
+                        class="absolute inset-0 bg-[#e2e2e2] transform translate-x-2 -translate-y-2 md:translate-x-6 md:-translate-y-6 lg:translate-x-12 lg:-translate-y-12 z-0">
                     </div>
                     <div
                         class="relative z-10 w-full aspect-video shadow-architectural hover-track-wrap overflow-hidden group">
                         <div class="hover-track-inner h-full w-full">
                             <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="https://player.mediadelivery.net/embed/625906/d9499d77-34d3-43b0-8052-fb4cb37a787c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    src="about:blank"
+                                    data-src="https://player.mediadelivery.net/embed/625906/d9499d77-34d3-43b0-8052-fb4cb37a787c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe></div>
                         </div>
@@ -1730,7 +1793,7 @@
                 <!-- Text Content (1/3 width) -->
                 <div class="w-full md:w-5/12 flex flex-col justify-center reveal-right">
                     <div
-                        class="bg-white p-12 lg:p-16 shadow-floating -mr-0 md:-mr-32 relative z-20 max-w-xl border-l-4 border-primary">
+                        class="bg-white p-6 md:p-12 lg:p-16 shadow-floating -mr-0 md:-mr-32 relative z-20 max-w-xl border-l-4 border-primary">
                         <h4 data-t="proto_tag"
                             class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-2">
                             05 / Precision Prototyping
@@ -1831,11 +1894,12 @@
                     <div
                         class="w-full min-h-[200px] h-48 rounded-none overflow-hidden border border-black/5 bg-white relative group flex flex-col">
                         <iframe title="Alcobaça, Portugal Map"
-                            src="https://maps.google.com/maps?q=39.5487,-8.9774&t=&z=7&ie=UTF8&iwloc=&output=embed"
+                            src="about:blank"
+                            data-src="https://maps.google.com/maps?q=39.5487,-8.9774&t=&z=7&ie=UTF8&iwloc=&output=embed"
                             width="100%" height="100%"
                             style="border: 0; filter: grayscale(100%) contrast(110%) brightness(95%);"
                             allowfullscreen="false" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                            class="opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex-grow"></iframe>
+                            class="opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex-grow lazy-iframe"></iframe>
                         <div class="absolute inset-0 pointer-events-none border border-black/5"></div>
                     </div>
                 </div>
@@ -1843,7 +1907,7 @@
 
             <!-- Right Column: Contact Form -->
             <div
-                class="lg:col-span-7 w-full p-8 md:p-12 bg-white border-l-4 border-primary relative overflow-hidden flex flex-col justify-end rounded-none">
+                class="lg:col-span-7 w-full p-6 md:p-12 bg-white border-l-4 border-primary relative overflow-hidden flex flex-col justify-end rounded-none">
                 <form id="contact-form" class="flex flex-col gap-8 relative z-10 w-full">
                     <!-- Input Name -->
                     <div class="flex flex-col gap-2 relative group">
@@ -2589,14 +2653,82 @@
                 observer.observe(statusLabel, { childList: true, characterData: true, subtree: true });
             }
 
-            // Initialize Accordion interactions
-            const cards = document.querySelectorAll('.accordion-card');
-            cards.forEach(card => {
-                const vid = card.querySelector('video');
+            // Initialize Intersection Observer for lazy loading iframes
+            const lazyIframeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        if (target.classList.contains('lazy-iframe') && !target.closest('.accordion-card')) {
+                            // Standalone iframe (not in an accordion card)
+                            const dSrc = target.getAttribute('data-src');
+                            if (dSrc && (target.src === 'about:blank' || !target.src)) {
+                                target.src = dSrc;
+                            }
+                            observer.unobserve(target);
+                        } else if (target.classList.contains('accordion-gallery')) {
+                            // Accordion gallery container
+                            const activeCard = target.querySelector('.accordion-card.active');
+                            if (activeCard) {
+                                const iframe = activeCard.querySelector('iframe');
+                                if (iframe) {
+                                    const dSrc = iframe.getAttribute('data-src');
+                                    if (dSrc && (iframe.src === 'about:blank' || !iframe.src)) {
+                                        iframe.src = dSrc;
+                                    }
+                                }
+                            }
+                            observer.unobserve(target);
+                        }
+                    }
+                });
+            }, { rootMargin: '200px' });
 
-                // If the card is active by default, play video (if any)
-                if (card.classList.contains('active') && vid) {
-                    vid.play().catch(e => console.log("Autoplay blocked: ", e));
+            // Observe standalone lazy-iframes (that are not inside accordion cards)
+            document.querySelectorAll('.lazy-iframe:not(.accordion-card iframe)').forEach(iframe => {
+                lazyIframeObserver.observe(iframe);
+            });
+
+            // Observe accordion gallery containers
+            document.querySelectorAll('.accordion-gallery').forEach(gallery => {
+                lazyIframeObserver.observe(gallery);
+            });
+
+            // Initialize Accordion interactions (supporting both HTML5 video and lazy iframes)
+            const cards = document.querySelectorAll('.accordion-card');
+            const hasHover = window.matchMedia('(hover: hover)').matches;
+
+            const loadMedia = (c) => {
+                const cVid = c.querySelector('video');
+                const cIframe = c.querySelector('iframe');
+                if (cVid) {
+                    cVid.play().catch(e => console.log("Play blocked: ", e));
+                }
+                if (cIframe) {
+                    const dSrc = cIframe.getAttribute('data-src');
+                    if (dSrc && (cIframe.src === 'about:blank' || !cIframe.src)) {
+                        cIframe.src = dSrc;
+                    }
+                }
+            };
+
+            const unloadMedia = (c) => {
+                const cVid = c.querySelector('video');
+                const cIframe = c.querySelector('iframe');
+                if (cVid) {
+                    cVid.pause();
+                }
+                if (cIframe) {
+                    // Unload the iframe to reclaim system resources (unless it's the active card)
+                    if (!c.classList.contains('active')) {
+                        cIframe.src = 'about:blank';
+                    }
+                }
+            };
+
+            cards.forEach(card => {
+                // If the card is active by default, play/load media
+                if (card.classList.contains('active')) {
+                    loadMedia(card);
                 }
 
                 card.addEventListener('click', (e) => {
@@ -2605,7 +2737,9 @@
 
                     if (isBtnClick || isAlreadyActive) {
                         const index = parseInt(card.getAttribute('data-index') || '0', 10);
-                        window.openLightboxByIndex(index);
+                        if (index) {
+                            window.openLightboxByIndex(index);
+                        }
                         e.stopPropagation();
                         return;
                     }
@@ -2615,49 +2749,55 @@
                     if (parentGallery) {
                         const siblingCards = parentGallery.querySelectorAll('.accordion-card');
                         siblingCards.forEach(c => {
-                            c.classList.remove('active');
-                            const cVid = c.querySelector('video');
-                            if (cVid) {
-                                cVid.pause();
+                            if (c !== card) {
+                                c.classList.remove('active');
+                                unloadMedia(c);
                             }
                         });
                     }
 
                     card.classList.add('active');
-                    if (vid) {
-                        vid.play().catch(e => console.log("Click play blocked: ", e));
-                    }
+                    loadMedia(card);
                     e.stopPropagation();
                 });
 
-                // Desktop hover play/pause
-                card.addEventListener('mouseenter', () => {
-                    if (vid) {
-                        vid.play().catch(e => console.log("Hover play blocked: ", e));
-                    }
-                });
+                if (hasHover) {
+                    // Desktop hover expand and play/pause
+                    card.addEventListener('mouseenter', () => {
+                        loadMedia(card);
+                    });
 
-                card.addEventListener('mouseleave', () => {
-                    // Only pause on leave if it is not the active card
-                    if (!card.classList.contains('active') && vid) {
-                        vid.pause();
-                    }
-                });
+                    card.addEventListener('mouseleave', () => {
+                        // Only pause/unload on leave if it is not the active card
+                        if (!card.classList.contains('active')) {
+                            unloadMedia(card);
+                        }
+                    });
+                }
             });
 
             // Resume active card video when mouse leaves any gallery container
-            const galleries = document.querySelectorAll('.accordion-gallery');
-            galleries.forEach(gallery => {
-                gallery.addEventListener('mouseleave', () => {
-                    const activeCard = gallery.querySelector('.accordion-card.active');
-                    if (activeCard) {
-                        const activeVid = activeCard.querySelector('video');
-                        if (activeVid) {
-                            activeVid.play().catch(e => console.log("Gallery leave play blocked: ", e));
+            if (hasHover) {
+                const galleries = document.querySelectorAll('.accordion-gallery');
+                galleries.forEach(gallery => {
+                    gallery.addEventListener('mouseleave', () => {
+                        const activeCard = gallery.querySelector('.accordion-card.active');
+                        if (activeCard) {
+                            const activeVid = activeCard.querySelector('video');
+                            if (activeVid) {
+                                activeVid.play().catch(e => console.log("Gallery leave play blocked: ", e));
+                            }
+                            const activeIframe = activeCard.querySelector('iframe');
+                            if (activeIframe) {
+                                const dSrc = activeIframe.getAttribute('data-src');
+                                if (dSrc && (activeIframe.src === 'about:blank' || !activeIframe.src)) {
+                                    activeIframe.src = dSrc;
+                                }
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            }
 
             // Walkthrough Gallery Setup (Restructured as direct grid layout; JS controller code is removed)
 
@@ -2731,47 +2871,51 @@
             const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
             revealElements.forEach(el => observer.observe(el));
 
-            // 2. Simple Parallax Effect
-            const parallaxLayers = document.querySelectorAll('.parallax-layer');
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                parallaxLayers.forEach(layer => {
-                    const speed = layer.getAttribute('data-speed') || 0.1;
-                    const yPos = -(scrolled * speed);
-                    layer.style.transform = `translateY(${yPos}px)`;
+            // 2. Simple Parallax Effect (pointer only)
+            if (hasHover) {
+                const parallaxLayers = document.querySelectorAll('.parallax-layer');
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    parallaxLayers.forEach(layer => {
+                        const speed = layer.getAttribute('data-speed') || 0.1;
+                        const yPos = -(scrolled * speed);
+                        layer.style.transform = `translateY(${yPos}px)`;
+                    });
+                }, { passive: true });
+            }
+
+            // 3. 3D Mouse Tracking Hover Effect (pointer only)
+            if (hasHover) {
+                const trackWraps = document.querySelectorAll('.hover-track-wrap');
+
+                trackWraps.forEach(wrap => {
+                    const inner = wrap.querySelector('.hover-track-inner');
+                    if (!inner) return;
+
+                    wrap.addEventListener('mousemove', (e) => {
+                        const rect = wrap.getBoundingClientRect();
+                        const x = e.clientX - rect.left; // x position within the element.
+                        const y = e.clientY - rect.top;  // y position within the element.
+
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        const rotateX = ((y - centerY) / centerY) * -5; // max rotation degrees
+                        const rotateY = ((x - centerX) / centerX) * 5;
+
+                        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    });
+
+                    wrap.addEventListener('mouseleave', () => {
+                        inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                        inner.style.transition = 'transform 0.5s ease-out';
+                    });
+
+                    wrap.addEventListener('mouseenter', () => {
+                        inner.style.transition = 'transform 0.1s ease-out';
+                    });
                 });
-            });
-
-            // 3. 3D Mouse Tracking Hover Effect
-            const trackWraps = document.querySelectorAll('.hover-track-wrap');
-
-            trackWraps.forEach(wrap => {
-                const inner = wrap.querySelector('.hover-track-inner');
-                if (!inner) return;
-
-                wrap.addEventListener('mousemove', (e) => {
-                    const rect = wrap.getBoundingClientRect();
-                    const x = e.clientX - rect.left; // x position within the element.
-                    const y = e.clientY - rect.top;  // y position within the element.
-
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-
-                    const rotateX = ((y - centerY) / centerY) * -5; // max rotation degrees
-                    const rotateY = ((x - centerX) / centerX) * 5;
-
-                    inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-
-                wrap.addEventListener('mouseleave', () => {
-                    inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                    inner.style.transition = 'transform 0.5s ease-out';
-                });
-
-                wrap.addEventListener('mouseenter', () => {
-                    inner.style.transition = 'transform 0.1s ease-out';
-                });
-            });
+            }
 
             // Flow Navigation Scroll Spy
             const flowNavItems = document.querySelectorAll('.flow-nav-item');
@@ -3171,6 +3315,10 @@
     <!-- Showcase Sections Scroll-Driven Animations -->
     <script>
         (function () {
+            const isMobile = window.innerWidth < 768;
+            const maxTranslate = isMobile ? 40 : 150;
+            const lerpFactor = isMobile ? 0.18 : 0.08;
+
             const showcaseSections = [
                 { id: 'image-renders-sec', dir: -1 },
                 { id: 'video-renders-sec', dir: 1 },
@@ -3185,46 +3333,86 @@
                 return {
                     el: el,
                     dir: sec.dir,
-                    currentX: sec.dir * 150,
-                    targetX: sec.dir * 150,
+                    currentX: sec.dir * maxTranslate,
+                    targetX: sec.dir * maxTranslate,
                     currentOpacity: 0,
                     targetOpacity: 0,
                     currentScale: 0.98,
-                    targetScale: 0.98
+                    targetScale: 0.98,
+                    revealed: false
                 };
             }).filter(state => state.el !== null);
 
+            let isAnimating = false;
+
             function updateScrollDrivenSections() {
                 const vh = window.innerHeight;
+                const scrolledToBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50;
+
                 sectionStates.forEach(state => {
                     const rect = state.el.getBoundingClientRect();
-                    // Animation starts when the top of the element enters the bottom of the viewport (rect.top = vh)
-                    // Animation ends when the top of the element is 30% from the top of the viewport (rect.top = vh * 0.3)
+                    // On mobile, use a more generous exit point so sections reveal sooner
                     const entryPoint = vh;
-                    const exitPoint = vh * 0.3;
+                    const exitPoint = isMobile ? vh * 0.55 : vh * 0.3;
 
                     const progress = (entryPoint - rect.top) / (entryPoint - exitPoint);
                     const clampedProgress = Math.max(0, Math.min(1, progress));
 
+                    // Once a section has fully revealed, keep it visible
+                    // Also reveal immediately if scrolled to the bottom of the page
+                    if (clampedProgress >= 1 || scrolledToBottom) state.revealed = true;
+                    const effectiveProgress = state.revealed ? 1 : clampedProgress;
+
                     // Calculate target translation, opacity, and scale
-                    state.targetX = state.dir * 150 * (1 - clampedProgress);
-                    state.targetOpacity = clampedProgress;
-                    state.targetScale = 0.98 + 0.02 * clampedProgress;
+                    state.targetX = state.dir * maxTranslate * (1 - effectiveProgress);
+                    state.targetOpacity = effectiveProgress;
+                    state.targetScale = 0.98 + 0.02 * effectiveProgress;
                 });
+
+                // Start the animation loop if not already running
+                if (!isAnimating) {
+                    isAnimating = true;
+                    requestAnimationFrame(animateSections);
+                }
             }
 
             function animateSections() {
+                let hasChanges = false;
+                const threshold = 0.01;
+
                 sectionStates.forEach(state => {
-                    // Smooth interpolation (lerp)
-                    state.currentX += (state.targetX - state.currentX) * 0.08;
-                    state.currentOpacity += (state.targetOpacity - state.currentOpacity) * 0.08;
-                    state.currentScale += (state.targetScale - state.currentScale) * 0.08;
+                    // Calculate differences
+                    const diffX = state.targetX - state.currentX;
+                    const diffOpacity = state.targetOpacity - state.currentOpacity;
+                    const diffScale = state.targetScale - state.currentScale;
+
+                    // If any of the values have not yet settled, keep animating
+                    if (Math.abs(diffX) > threshold || Math.abs(diffOpacity) > threshold || Math.abs(diffScale) > threshold) {
+                        hasChanges = true;
+                    }
+
+                    // Smooth interpolation (lerp) — faster on mobile
+                    state.currentX += diffX * lerpFactor;
+                    state.currentOpacity += diffOpacity * lerpFactor;
+                    state.currentScale += diffScale * lerpFactor;
 
                     state.el.style.transform = `translateX(${state.currentX}px) scale(${state.currentScale})`;
                     state.el.style.opacity = state.currentOpacity;
                 });
 
-                requestAnimationFrame(animateSections);
+                if (hasChanges) {
+                    requestAnimationFrame(animateSections);
+                } else {
+                    // Clamp values to targets precisely and stop the rAF loop
+                    sectionStates.forEach(state => {
+                        state.currentX = state.targetX;
+                        state.currentOpacity = state.targetOpacity;
+                        state.currentScale = state.targetScale;
+                        state.el.style.transform = `translateX(${state.currentX}px) scale(${state.currentScale})`;
+                        state.el.style.opacity = state.currentOpacity;
+                    });
+                    isAnimating = false;
+                }
             }
 
             window.addEventListener('scroll', updateScrollDrivenSections, { passive: true });
@@ -3232,96 +3420,97 @@
 
             // Trigger initially to capture correct starting positions
             updateScrollDrivenSections();
-            animateSections();
         })();
     </script>
 
     <!-- Hero Title Entry & Float Animation -->
     <script>
-        (function () {
-            // Load Lottie animation if container exists
-            const lottieContainer = document.getElementById('lottie-hero-text');
-            if (lottieContainer && typeof lottie !== 'undefined') {
-                if (typeof window.loadHeroLottie === 'function') {
-                    window.loadHeroLottie(currentLang);
-                }
+        document.addEventListener("DOMContentLoaded", () => {
+            (function () {
+                // Load Lottie animation if container exists
+                const lottieContainer = document.getElementById('lottie-hero-text');
+                if (lottieContainer && typeof lottie !== 'undefined') {
+                    if (typeof window.loadHeroLottie === 'function') {
+                        window.loadHeroLottie(currentLang);
+                    }
 
-                if (typeof gsap !== 'undefined') {
-                    const maskWrapper = document.getElementById('hero-mask-wrapper');
-                    if (maskWrapper) {
-                        gsap.fromTo(maskWrapper,
-                            { opacity: 0 },
-                            { opacity: 1, duration: 1.5, ease: 'power2.out' }
+                    if (typeof gsap !== 'undefined') {
+                        const maskWrapper = document.getElementById('hero-mask-wrapper');
+                        if (maskWrapper) {
+                            gsap.fromTo(maskWrapper,
+                                { opacity: 0 },
+                                { opacity: 1, duration: 1.5, ease: 'power2.out' }
+                            );
+                        }
+                        gsap.fromTo(lottieContainer,
+                            { scale: 0.95 },
+                            { scale: 1, duration: 1.5, ease: 'power2.out' }
                         );
                     }
-                    gsap.fromTo(lottieContainer,
-                        { scale: 0.95 },
-                        { scale: 1, duration: 1.5, ease: 'power2.out' }
-                    );
                 }
-            }
 
-            const heroTitle = document.getElementById('hero-title');
-            const letterSpans = heroTitle ? heroTitle.querySelectorAll('span > span') : [];
-            if (typeof gsap === 'undefined') return;
+                const heroTitle = document.getElementById('hero-title');
+                const letterSpans = heroTitle ? heroTitle.querySelectorAll('span > span') : [];
+                if (typeof gsap === 'undefined') return;
 
-            if (!heroTitle || !letterSpans.length) {
-                const subtitle = document.getElementById('hero-subtitle');
-                if (subtitle) {
-                    gsap.to(subtitle, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        ease: 'power2.out',
-                        delay: 0.5
-                    });
-                }
-                return;
-            }
-
-            // Set initial state
-            gsap.set(letterSpans, {
-                rotateX: -90,
-                opacity: 0,
-                transformOrigin: 'center bottom'
-            });
-
-            // Build timeline to run automatically on load
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    // Start floating loop
-                    gsap.to(letterSpans, {
-                        y: -8,
-                        duration: 1.5,
-                        stagger: {
-                            each: 0.06,
-                            repeat: -1,
-                            yoyo: true
-                        },
-                        ease: 'sine.inOut'
-                    });
-
-                    // Reveal subtitle
+                if (!heroTitle || !letterSpans.length) {
                     const subtitle = document.getElementById('hero-subtitle');
                     if (subtitle) {
                         gsap.to(subtitle, {
                             opacity: 1,
                             y: 0,
                             duration: 1,
-                            ease: 'power2.out'
+                            ease: 'power2.out',
+                            delay: 0.5
                         });
                     }
+                    return;
                 }
-            });
 
-            tl.to(letterSpans, {
-                rotateX: 0,
-                opacity: 1,
-                duration: 1,
-                stagger: 0.04,
-                ease: 'back.out(2)'
-            });
-        })();
+                // Set initial state
+                gsap.set(letterSpans, {
+                    rotateX: -90,
+                    opacity: 0,
+                    transformOrigin: 'center bottom'
+                });
+
+                // Build timeline to run automatically on load
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        // Start floating loop
+                        gsap.to(letterSpans, {
+                            y: -8,
+                            duration: 1.5,
+                            stagger: {
+                                each: 0.06,
+                                repeat: -1,
+                                yoyo: true
+                            },
+                            ease: 'sine.inOut'
+                        });
+
+                        // Reveal subtitle
+                        const subtitle = document.getElementById('hero-subtitle');
+                        if (subtitle) {
+                            gsap.to(subtitle, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                ease: 'power2.out'
+                            });
+                        }
+                    }
+                });
+
+                tl.to(letterSpans, {
+                    rotateX: 0,
+                    opacity: 1,
+                    duration: 1,
+                    stagger: 0.04,
+                    ease: 'back.out(2)'
+                });
+            })();
+        });
     </script>
 
     <!-- ScrollTrigger Text & Title Animations -->
@@ -3359,7 +3548,7 @@
                     scrollTrigger: {
                         trigger: heading,
                         start: "top 85%",
-                        toggleActions: "play reset play reset"
+                        toggleActions: "play none none none"
                     },
                     opacity: 0,
                     y: 40,
@@ -3377,7 +3566,7 @@
                     scrollTrigger: {
                         trigger: p,
                         start: "top 90%",
-                        toggleActions: "play reset play reset"
+                        toggleActions: "play none none none"
                     },
                     opacity: 0,
                     y: 20,
@@ -3393,7 +3582,7 @@
                 scrollTrigger: {
                     trigger: "#image-renders-sec",
                     start: "top 75%",
-                    toggleActions: "play reset play reset"
+                    toggleActions: "play none none none"
                 },
                 opacity: 0,
                 x: -30,
@@ -3407,7 +3596,7 @@
                 scrollTrigger: {
                     trigger: "#video-renders-sec",
                     start: "top 75%",
-                    toggleActions: "play reset play reset"
+                    toggleActions: "play none none none"
                 },
                 opacity: 0,
                 y: 50,
@@ -3421,7 +3610,7 @@
                 scrollTrigger: {
                     trigger: "#walkthrough-sec",
                     start: "top 75%",
-                    toggleActions: "play reset play reset"
+                    toggleActions: "play none none none"
                 },
                 opacity: 0,
                 y: 50,
@@ -3435,7 +3624,7 @@
                 scrollTrigger: {
                     trigger: "#bridge-video-gallery",
                     start: "top 75%",
-                    toggleActions: "play reset play reset"
+                    toggleActions: "play none none none"
                 },
                 opacity: 0,
                 y: 50,
