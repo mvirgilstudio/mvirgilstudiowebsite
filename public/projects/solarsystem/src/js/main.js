@@ -57,18 +57,34 @@ const loadingBar = document.getElementById('loading-bar');
 
 let scene, camera, renderer, controls, gltfModel, starField;
 let isInitialized = false;
+let isAnimatingLoop = false;
+let animationFrameId = null;
 
 // Draggable Logic
 let isDragging = false;
 let offset = { x: 0, y: 0 };
 
-modalHeader.addEventListener('mousedown', (e) => {
+const dragStart = (clientX, clientY) => {
     isDragging = true;
     const rect = modal.getBoundingClientRect();
-    offset.x = e.clientX - rect.left;
-    offset.y = e.clientY - rect.top;
+    offset.x = clientX - rect.left;
+    offset.y = clientY - rect.top;
     modal.style.transition = 'none'; // Disable transition while dragging
-});
+};
+
+const dragMove = (clientX, clientY) => {
+    if (!isDragging) return;
+    modal.style.left = `${clientX - offset.x + (modal.offsetWidth / 2)}px`;
+    modal.style.top = `${clientY - offset.y + (modal.offsetHeight / 2)}px`;
+};
+
+const dragEnd = () => {
+    isDragging = false;
+    modal.style.transition = 'opacity 0.5s ease';
+};
+
+modalHeader.addEventListener('mousedown', (e) => dragStart(e.clientX, e.clientY));
+modalHeader.addEventListener('touchstart', (e) => dragStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
 
 let lastMouseX = null;
 let lastMouseY = null;
@@ -94,19 +110,18 @@ document.addEventListener('mousemove', (e) => {
     lastMouseTime = currentTime;
     const sectorCoords = document.getElementById('sector-coordinates-value');
     if (sectorCoords) {
-        // optionally format the values, e.g. padding to mimic the original look
         sectorCoords.textContent = `${e.clientX} / ${e.clientY}`;
     }
 
-    if (!isDragging) return;
-    modal.style.left = `${e.clientX - offset.x + (modal.offsetWidth / 2)}px`;
-    modal.style.top = `${e.clientY - offset.y + (modal.offsetHeight / 2)}px`;
+    dragMove(e.clientX, e.clientY);
 });
 
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-    modal.style.transition = 'opacity 0.5s ease';
-});
+document.addEventListener('touchmove', (e) => {
+    dragMove(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive: true });
+
+document.addEventListener('mouseup', dragEnd);
+document.addEventListener('touchend', dragEnd);
 
 function initThree() {
     if (isInitialized) return;
@@ -262,12 +277,20 @@ function initThree() {
     );
 
     isInitialized = true;
+    isAnimatingLoop = true;
     animate();
 }
 
 let time = 0;
 function animate() {
-    requestAnimationFrame(animate);
+    if (!isAnimatingLoop) {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+        return;
+    }
+    animationFrameId = requestAnimationFrame(animate);
     time += 0.01;
 
     if (gltfModel) {
@@ -317,10 +340,15 @@ function openModal() {
         }
     }
 
+    isAnimatingLoop = true;
     initThree();
+    if (isInitialized) {
+        animate();
+    }
 }
 
 function closeModal() {
+    isAnimatingLoop = false;
     gsap.to(modal, {
         opacity: 0, scale: 0.95, duration: 0.5, ease: "power3.in", onComplete: () => {
             modal.classList.add('hidden');
@@ -372,24 +400,24 @@ const demoLoader = document.getElementById('demo-loader');
 let isDemoDrawing = false;
 let demoOffset = { x: 0, y: 0 };
 
-demoModalHeader.addEventListener('mousedown', (e) => {
+const demoDragStart = (clientX, clientY) => {
     isDemoDrawing = true;
     const rect = demoModal.getBoundingClientRect();
-    demoOffset.x = e.clientX - rect.left;
-    demoOffset.y = e.clientY - rect.top;
+    demoOffset.x = clientX - rect.left;
+    demoOffset.y = clientY - rect.top;
     demoModal.style.transition = 'none';
     if (demoIframe) {
         demoIframe.style.pointerEvents = 'none';
     }
-});
+};
 
-document.addEventListener('mousemove', (e) => {
+const demoDragMove = (clientX, clientY) => {
     if (!isDemoDrawing) return;
-    demoModal.style.left = `${e.clientX - demoOffset.x + (demoModal.offsetWidth / 2)}px`;
-    demoModal.style.top = `${e.clientY - demoOffset.y + (demoModal.offsetHeight / 2)}px`;
-});
+    demoModal.style.left = `${clientX - demoOffset.x + (demoModal.offsetWidth / 2)}px`;
+    demoModal.style.top = `${clientY - demoOffset.y + (demoModal.offsetHeight / 2)}px`;
+};
 
-document.addEventListener('mouseup', () => {
+const demoDragEnd = () => {
     if (isDemoDrawing) {
         isDemoDrawing = false;
         demoModal.style.transition = 'opacity 0.5s ease';
@@ -397,11 +425,21 @@ document.addEventListener('mouseup', () => {
             demoIframe.style.pointerEvents = 'auto';
         }
     }
-});
+};
+
+demoModalHeader.addEventListener('mousedown', (e) => demoDragStart(e.clientX, e.clientY));
+demoModalHeader.addEventListener('touchstart', (e) => demoDragStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+
+document.addEventListener('mousemove', (e) => demoDragMove(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => demoDragMove(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+
+document.addEventListener('mouseup', demoDragEnd);
+document.addEventListener('touchend', demoDragEnd);
 
 function openDemoModal() {
     // Load the encyclopedia page
-    demoIframe.src = 'assets/planetary/solar_system_encyclopedia/code.html'; // UPDATED PATH
+    const srcPath = demoIframe.dataset.src || 'assets/planetary/solar_system_encyclopedia/code.html';
+    demoIframe.src = srcPath;
     demoLoader.style.opacity = '1';
     demoLoader.style.pointerEvents = 'all';
 

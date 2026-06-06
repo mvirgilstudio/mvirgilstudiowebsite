@@ -5,6 +5,10 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>ARC.TECH | Interactive Virtual Showcase</title>
+    <!-- Fonts Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
     <!-- PP Neue Montreal Font -->
     <style>
         @font-face {
@@ -71,6 +75,11 @@
             animation: orbit-sim 8s ease-in-out infinite;
         }
 
+        /* Reset default webkit mobile blue tap highlight */
+        body, button, a, .accordion-card {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         /* Responsive Flex Accordion Gallery */
         .accordion-gallery {
             display: flex;
@@ -81,9 +90,13 @@
 
         .accordion-card {
             flex: 1;
-            height: 180px; /* Uniform height on mobile */
-            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
-            will-change: flex;
+            height: 90px; /* Inactive height on mobile */
+            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+            will-change: flex, height;
+        }
+
+        .accordion-card.active {
+            height: 240px; /* Active height on mobile to show expanded preview */
         }
 
         @media (min-width: 640px) {
@@ -207,6 +220,7 @@
                          class="accordion-card active group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
                         <!-- Image Render layer -->
                         <img src="/projects/archsync_model/images/img_01.png" 
+                             loading="lazy"
                              class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700 orbit-simulation" 
                              alt="ArchSync Model">
                         <!-- Dark Overlay -->
@@ -233,6 +247,7 @@
                     <div id="acc-card-3" onclick="toggleAccordionSim('acc-card-3', 'tour')"
                          class="accordion-card group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
                         <img src="/projects/livespace/public/img_01.jpg" 
+                             loading="lazy"
                              class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700" 
                              alt="Concrete Facade">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
@@ -246,6 +261,7 @@
                     <div id="acc-card-4" onclick="toggleAccordionSim('acc-card-4', 'orbit')"
                          class="accordion-card group relative border border-border-color bg-neutral-900 cursor-pointer overflow-hidden flex flex-col justify-end p-4">
                         <img src="/projects/livespace/public/img_02.jpg" 
+                             loading="lazy"
                              class="sim-image absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-all duration-700" 
                              alt="Lounge interior">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
@@ -265,11 +281,12 @@
                 </h2>
                 <div id="video-player-frame" class="relative w-full aspect-video bg-neutral-900 border border-border-color overflow-hidden group">
                     <img id="video-poster-img" src="/projects/archsync_model/images/img_05.png" 
+                         loading="lazy"
                          class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:scale-102 transition-transform duration-700" 
                          alt="Model Walkthrough Teaser">
                     <div class="absolute inset-0 bg-black/25"></div>
                     
-                    <video id="player-active-video" class="hidden w-full h-full object-cover" controls loop playsinline>
+                    <video id="player-active-video" class="hidden w-full h-full object-cover" controls loop playsinline preload="none">
                         <source src="https://assets.mixkit.co/videos/preview/mixkit-architectural-shot-of-a-building-with-arched-windows-40280-large.mp4" type="video/mp4">
                     </video>
 

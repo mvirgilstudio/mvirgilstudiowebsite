@@ -22,8 +22,8 @@
     <!-- Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
 
 
@@ -56,6 +56,11 @@
             font-family: 'Hanken Grotesk', sans-serif;
             -webkit-font-smoothing: antialiased;
             background-color: #F5F5F7;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button, a, .floor-btn, .material-swatch {
+            -webkit-tap-highlight-color: transparent;
         }
 
         .text-balance {
@@ -835,12 +840,12 @@
                 <div id="pane-left-blur" class="w-1/2 h-full relative overflow-hidden bg-black">
                     <!-- Ambience Fill (Blurred & Scaled) -->
                     <iframe
-                        src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        data-src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                         class="absolute inset-0 w-full h-full border-0 pointer-events-none blur-3xl opacity-60 scale-[2.5]"
                         allow="autoplay;encrypted-media;" loading="lazy"></iframe>
                     <!-- Main Video (Fitted) -->
                     <iframe
-                        src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        data-src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                         class="absolute top-1/2 left-1/2 h-full -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none z-10"
                         style="aspect-ratio: 16/9; max-width: none; width: auto;" allow="autoplay;encrypted-media;"
                         loading="lazy"></iframe>
@@ -848,12 +853,12 @@
                 <div id="pane-right-blur" class="w-1/2 h-full relative overflow-hidden bg-black">
                     <!-- Ambience Fill (Blurred & Scaled) -->
                     <iframe
-                        src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        data-src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                         class="absolute inset-0 w-full h-full border-0 pointer-events-none blur-3xl opacity-60 scale-[2.5]"
                         allow="autoplay;encrypted-media;" loading="lazy"></iframe>
                     <!-- Main Video (Fitted) -->
                     <iframe
-                        src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        data-src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                         class="absolute top-1/2 left-1/2 h-full -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none z-10"
                         style="aspect-ratio: 16/9; max-width: none; width: auto;" allow="autoplay;encrypted-media;"
                         loading="lazy"></iframe>
@@ -869,12 +874,12 @@
                     <div id="pane-left-sharp" class="w-1/2 h-full relative overflow-hidden bg-black">
                         <!-- Ambience Fill (Blurred & Scaled) -->
                         <iframe
-                            src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            data-src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                             class="absolute inset-0 w-full h-full border-0 pointer-events-none blur-3xl opacity-60 scale-[2.5]"
                             allow="autoplay;encrypted-media;" loading="lazy"></iframe>
                         <!-- Main Video (Fitted) -->
                         <iframe
-                            src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            data-src="https://player.mediadelivery.net/embed/625906/231991de-5935-4ff7-b058-fb0dda4eea66?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                             class="absolute top-1/2 left-1/2 h-full -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none z-10"
                             style="aspect-ratio: 16/9; max-width: none; width: auto;" allow="autoplay;encrypted-media;"
                             loading="lazy"></iframe>
@@ -882,12 +887,12 @@
                     <div id="pane-right-sharp" class="w-1/2 h-full relative overflow-hidden bg-black">
                         <!-- Ambience Fill (Blurred & Scaled) -->
                         <iframe
-                            src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            data-src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                             class="absolute inset-0 w-full h-full border-0 pointer-events-none blur-3xl opacity-60 scale-[2.5]"
                             allow="autoplay;encrypted-media;" loading="lazy"></iframe>
                         <!-- Main Video (Fitted) -->
                         <iframe
-                            src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            data-src="https://player.mediadelivery.net/embed/625906/a37d2c54-a974-48c7-a0bf-38eada4b66ac?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                             class="absolute top-1/2 left-1/2 h-full -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none z-10"
                             style="aspect-ratio: 16/9; max-width: none; width: auto;" allow="autoplay;encrypted-media;"
                             loading="lazy"></iframe>
@@ -923,13 +928,16 @@
                 <h2 class="text-4xl font-bold tracking-tight mb-2 section-title gsap-viewer-headline" data-t-en='Digital Twin <span class="text-brandCyan">Interactive</span> Viewer' data-t-pt='Visualizador <span class="text-brandCyan">Interativo</span> do Gémeo Digital'>Digital Twin <span class="text-brandCyan">Interactive</span> Viewer</h2>
                 <p class="text-softGrey/60 text-lg tracking-wide" data-t-en="Live ArchSync Model Visualization" data-t-pt="Visualização em Tempo Real do Modelo ArchSync">Live ArchSync Model Visualization</p>
             </header>
-            <div class="relative rounded-2xl overflow-hidden border-4 border-electricCyan/20 h-[700px] group shadow-2xl anim-scale-in delay-200"
+            <div class="relative rounded-2xl border-4 border-electricCyan/20 flex flex-col lg:block h-auto lg:h-[700px] group shadow-2xl anim-scale-in delay-200"
                 id="interactive-viewer-container">
-                <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
-                    id="sequence-canvas"></canvas>
+                <!-- Canvas Wrapper -->
+                <div class="relative w-full h-[300px] sm:h-[450px] lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
+                    <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
+                        id="sequence-canvas"></canvas>
+                </div>
 
                 <aside
-                    class="glass-panel absolute right-6 top-6 bottom-6 w-80 rounded-xl p-6 flex flex-col space-y-8 text-sm"
+                    class="glass-panel lg:absolute lg:right-6 lg:top-6 lg:bottom-6 lg:w-80 w-full rounded-b-xl lg:rounded-xl p-6 flex flex-col space-y-6 lg:space-y-8 text-sm relative z-20"
                     data-purpose="controls-panel">
                     <div class="text-center">
                         <h3 class="text-white/90 font-semibold text-base uppercase tracking-widest" data-t-en="Sync Controls" data-t-pt="Controlos de Sincronização">Sync Controls</h3>
@@ -977,10 +985,11 @@
                                 shadow-intensity="1" shadow-softness="1"
                                 style="width: 100%; height: 100%; background-color: transparent;"
                                 interaction-prompt="none" camera-orbit="-100deg 85deg auto"
-                                min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto">
+                                min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto"
+                                loading="lazy">
                             </model-viewer>
                         </div>
-
+ 
                         <!-- Interaction Legend (Below) -->
                         <div class="mt-3 px-3 py-2 bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 flex flex-wrap justify-center gap-x-4 gap-y-1 flex-shrink-0">
                             <span class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
@@ -1021,8 +1030,8 @@
                 <div
                     class="video-container max-w-[1400px] max-h-[90vh] shadow-[0_0_50px_rgba(0,229,255,0.15)] border border-white/10 group relative z-10 mx-auto">
                     <iframe
-                        src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                        loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                        data-src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        style="border:0;position:absolute;top:0;height:100%;width:100%;"
                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                         allowfullscreen="true"></iframe>
                 </div>
@@ -1099,9 +1108,9 @@
                 <div class="space-y-12">
                     <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up" data-t-en="Hardware Components" data-t-pt="Componentes de Hardware">Hardware Components</h3>
                     <div
-                        class="blueprint-border tilt-card p-8 flex items-center gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
+                        class="blueprint-border tilt-card p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
                         <div
-                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-r border-gray-100 pr-4">
+                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-gray-100 pb-4 sm:pb-0 pr-0 sm:pr-4">
                             <img alt="Microcontroller"
                                 class="blueprint-illustration w-full group-hover:filter-none transition-all"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4JGIuszX1PJHahcgfbFmGhfWslckVpdrrXW3FB63bGEfZ1BuRkpzGykz3dopw0nOZK1JXqyKfFnDGV4UH_Cp-pD6klbs5TWFpU5u7kogRPbJ-DYs4GcgyJTqEfBqsv9yefEnueCjoHu1d7KXhJGHM6tR8Nw120oKhUGphWw84-qIUVFfQjSmpy5C04kOAFASI4qPjtZgovRgKSH3uEatvMKll68H_W1Vi-_kXoJ8G2ePwtITSjjG85IIYuERP28c4eFG0AxQGu_A" />
@@ -1112,9 +1121,9 @@
                         </div>
                     </div>
                     <div
-                        class="blueprint-border p-8 flex items-center gap-8 bg-white hover:shadow-xl transition-all duration-300 group">
+                        class="blueprint-border p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group">
                         <div
-                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-r border-gray-100 pr-4">
+                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-gray-100 pb-4 sm:pb-0 pr-0 sm:pr-4">
                             <img alt="3D Print"
                                 class="blueprint-illustration w-full group-hover:filter-none transition-all"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfCbo8gxhNr-5ARPjKa3IvBahG3fglcpaUWlD_qE9Sowv-RXMHFo5a1qm_BK4XnXl_mi-OvhS0kBuMIt7YJqM2EO_dEX8k-Er_AqxODByqpz-CQzPrlM25li_TVGV2eWgmsfyIfJHL1ZF2ofHcALBANXwzlqc9G0dIo2EuwOuy0nPBUkjD9sx_nXcpup7dUR4MHfEq9H89GyaTWpIrnXmMAt1sQRrAL7LXrQXIaws3ROsDUnCOvZhqZh5h7fsVsba-H1hknMDnP-4" />
@@ -1132,9 +1141,9 @@
                     <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up" data-t-en="Software Engine" data-t-pt="Motor de Software">Software Engine
                     </h3>
                     <div
-                        class="blueprint-border tilt-card p-8 flex items-center gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
+                        class="blueprint-border tilt-card p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
                         <div
-                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-r border-gray-100 pr-4">
+                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-gray-100 pb-4 sm:pb-0 pr-0 sm:pr-4">
                             <img alt="Real-time Rendering"
                                 class="blueprint-illustration w-full group-hover:filter-none transition-all"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA6vqyWAtMCFwxXoZ7N9gosbjJb4GCzVfYVDqphNBTlHT-FJpT7r4EEqChOL65hXiy2xWy2VwUzusCvwkHTRT_HOzJIxL2TLqzZq9VIdald9Dv9oP2YRs3Z87xSWd7nR71Ne7uBzyQzWaMeoSGy8kiH3xhicLF7d2jsU0qa4lO7AAnrg6wDKdTK0I4K42GC9n39PuhY5HbAx9WyQ7P_L3vTlh2djXxcdnpojM6PlVnOzDg34T2KpXOiYC_ZYVpB8jpeFuFzYMCGzE" />
@@ -1146,9 +1155,9 @@
                         </div>
                     </div>
                     <div
-                        class="blueprint-border tilt-card p-8 flex items-center gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-300">
+                        class="blueprint-border tilt-card p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-300">
                         <div
-                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-r border-gray-100 pr-4">
+                            class="w-24 h-24 flex-shrink-0 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-gray-100 pb-4 sm:pb-0 pr-0 sm:pr-4">
                             <img alt="Sensor Mapping"
                                 class="blueprint-illustration w-full group-hover:filter-none transition-all"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmA6bscYlwwBeCJKLpAJEkOZ4e9CIVDNG1ayHG2Er-_Qlp6teD7bN59U5hN1QdbdwYeL867zu7l6Sa5IrAZt5l9TIPJ2OudPW6RNk1hfwHuyMMz0qfItq3iog3faqHlmam20hOEcTutwFnV5k3q_6VBZKtmdblZdw0Nk7knx3beCzV6h-5uSmOMx_akFy1LLkqzrNUcb1iwv-OAalHRBDpuNijdNtA--mmEYi3e8qr9Ju8JKqzSIvup2geKPPsQ5KqtJ9tEIZp9yo" />
@@ -1531,8 +1540,8 @@
         };
 
         const resizeCanvas = () => {
-            canvas.width = container.offsetWidth;
-            canvas.height = container.offsetHeight;
+            canvas.width = canvas.parentElement.offsetWidth || container.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight || container.offsetHeight;
             render();
         };
 
@@ -1637,33 +1646,36 @@
             }, { passive: true });
         }
 
-        // 4. Magnetic button hover effect
-        document.querySelectorAll('.magnetic-btn').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.02)`;
+        // Only register mouse/hover-based effects on devices that support hover
+        if (window.matchMedia('(hover: hover)').matches) {
+            // 4. Magnetic button hover effect
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.02)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0) scale(1)';
+                });
             });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0) scale(1)';
-            });
-        });
 
-        // 5. Tilt card 3D hover effect
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width;
-                const y = (e.clientY - rect.top) / rect.height;
-                const tiltX = (y - 0.5) * 6;
-                const tiltY = (x - 0.5) * -6;
-                card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+            // 5. Tilt card 3D hover effect
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width;
+                    const y = (e.clientY - rect.top) / rect.height;
+                    const tiltX = (y - 0.5) * 6;
+                    const tiltY = (x - 0.5) * -6;
+                    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+                });
             });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
-            });
-        });
+        }
 
         // 6. Smooth scroll progress indicator (optional visual)
         const scrollProgress = document.createElement('div');
@@ -1678,6 +1690,48 @@
         // 7. Hero Text Reveal Animation (GSAP)
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
+
+            // Dynamic Iframe and Lazy Video Loader
+            const isMobile = window.innerWidth < 1024;
+            const heroIframes = document.querySelectorAll('#hero iframe[data-src]');
+            heroIframes.forEach(iframe => {
+                if (isMobile && (iframe.classList.contains('blur-3xl') || iframe.closest('#hero-bg-blurred'))) {
+                    return; // Avoid heavy duplicate/blurred background videos on mobile
+                }
+                iframe.setAttribute('src', iframe.getAttribute('data-src'));
+            });
+
+            // Lazy load below-fold process video
+            const processIframe = document.querySelector('#process iframe[data-src]');
+            if (processIframe) {
+                if ('IntersectionObserver' in window) {
+                    const videoObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const target = entry.target;
+                                target.setAttribute('src', target.getAttribute('data-src'));
+                                observer.unobserve(target);
+                            }
+                        });
+                    }, { rootMargin: '200px' });
+                    videoObserver.observe(processIframe);
+                } else {
+                    processIframe.setAttribute('src', processIframe.getAttribute('data-src'));
+                }
+            }
+
+            // Pause model-viewer when it is scrolled out of viewport
+            const viewerEl = document.getElementById('building-viewer');
+            if (viewerEl && 'IntersectionObserver' in window) {
+                const viewerObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            viewerEl.removeAttribute('loading'); // load if lazy
+                        }
+                    });
+                }, { threshold: 0.1 });
+                viewerObserver.observe(viewerEl);
+            }
 
             // Initialize default language as PT
             window.setLanguage('PT');

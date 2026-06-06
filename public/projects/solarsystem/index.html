@@ -91,6 +91,19 @@
         #mobile-menu {
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
         }
+
+        /* Mobile optimizations */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (hover: none) {
+            .btn-primary:hover,
+            .btn-secondary:hover,
+            .bento-card:hover {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -167,7 +180,7 @@
                 </span>
             </nav>
 
-            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn"
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto py-2 px-1 min-h-[44px]" id="mobile-menu-btn"
                 onclick="toggleMenu()">
                 <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text"
                     data-t="nav.menu">Menu</span>
@@ -220,8 +233,8 @@
             <div class="absolute inset-0 z-0 scale-110" id="hero-img-container">
                 <!-- Using the generated high-impact Saturn image -->
                 <div style="position:relative;padding-top:56.25%;"><iframe
-                        src="https://player.mediadelivery.net/embed/625906/526466f4-03ff-496e-9dc1-a38a60fc2091?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                        loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                        data-src="https://player.mediadelivery.net/embed/625906/526466f4-03ff-496e-9dc1-a38a60fc2091?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                         allowfullscreen="true"></iframe></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-deep-space via-transparent to-deep-space/20"></div>
@@ -323,8 +336,8 @@
                         class="md:col-span-8 p-10 bg-[rgba(25,28,31,0.6)] backdrop-blur-md overflow-hidden flex flex-col justify-end aspect-video">
                         <div class="absolute inset-0 z-0">
                             <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="https://player.mediadelivery.net/embed/625906/a17c1648-d277-4aac-8917-d3c4231436e7?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    data-src="https://player.mediadelivery.net/embed/625906/a17c1648-d277-4aac-8917-d3c4231436e7?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                    class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                                     allowfullscreen="true"></iframe></div>
                         </div>
@@ -369,8 +382,8 @@
                     </div>
                     <div class="relative glass rounded-none overflow-hidden ambient-glow border-none">
                         <div style="position:relative;padding-top:56.25%;"><iframe
-                                src="https://player.mediadelivery.net/embed/625906/f8d6aaf3-4a0d-4132-a492-8a66f89d44ae?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                data-src="https://player.mediadelivery.net/embed/625906/f8d6aaf3-4a0d-4132-a492-8a66f89d44ae?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                                class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                                 allowfullscreen="true"></iframe></div>
 
@@ -521,7 +534,7 @@
 
             <!-- Iframe Container -->
             <div class="flex-1 relative overflow-hidden bg-[#0c0e12]">
-                <iframe id="demo-iframe" src="assets/planetary/solar_system_encyclopedia/code.html" class="w-full h-full border-none" style="background: #0c0e12;"></iframe>
+                <iframe id="demo-iframe" src="" data-src="assets/planetary/solar_system_encyclopedia/code.html" class="w-full h-full border-none" style="background: #0c0e12;"></iframe>
                 <!-- Loading State -->
                 <div id="demo-loader"
                     class="absolute inset-0 flex items-center justify-center bg-[#0c0e12] pointer-events-none transition-opacity duration-500 opacity-0">
@@ -719,6 +732,31 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             updateLanguage();
+
+            // Lazy load iframes
+            const lazyIframes = document.querySelectorAll('iframe.lazy-iframe');
+            if ('IntersectionObserver' in window) {
+                const iframeObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const iframe = entry.target;
+                            if (iframe.dataset.src) {
+                                iframe.src = iframe.dataset.src;
+                                iframe.removeAttribute('data-src');
+                            }
+                            observer.unobserve(iframe);
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                lazyIframes.forEach(iframe => iframeObserver.observe(iframe));
+            } else {
+                lazyIframes.forEach(iframe => {
+                    if (iframe.dataset.src) {
+                        iframe.src = iframe.dataset.src;
+                        iframe.removeAttribute('data-src');
+                    }
+                });
+            }
         });
     </script>
     <script type="module" src="src/js/main.js"></script>

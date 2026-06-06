@@ -11,6 +11,8 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
     <link rel="icon" type="image/svg+xml" href="/assets/images/mvfx_logo.svg">
     <title>MVs SketchMagic AI | Level Up Your Art!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=DotGothic16&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
@@ -50,6 +52,11 @@
         button[title="Previous image"]:hover,
         button[title="Next image"]:hover {
             background-color: #0000CD !important;
+        }
+
+        /* Mobile optimizations */
+        body {
+            -webkit-tap-highlight-color: transparent;
         }
     </style>
   <script type="module" crossorigin src="/projects/sketchmagic/assets/index-0iEpCXyL.js"></script>
@@ -380,12 +387,43 @@
         });
     </script>
 
-    <!-- MediaPipe dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-    <script src="/projects/sketchmagic/optical.js"></script>
+    <!-- MediaPipe dependencies and optical script loaded conditionally for desktop only -->
+    <script>
+        // Define placeholders to avoid errors before scripts are loaded
+        window.toggleHandTracking = () => {
+            if (window.toggleHandTrackingReal) window.toggleHandTrackingReal();
+            else console.log("MediaPipe/Optical Control loading...");
+        };
+        window.disableHandTracking = () => {
+            if (window.disableHandTrackingReal) window.disableHandTrackingReal();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Only load MediaPipe on larger screens (non-mobile)
+            if (window.innerWidth >= 640) {
+                const scripts = [
+                    "https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js",
+                    "https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js",
+                    "https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js",
+                    "/projects/sketchmagic/optical.js"
+                ];
+
+                let loadedCount = 0;
+                const loadNextScript = () => {
+                    if (loadedCount >= scripts.length) return;
+                    const scriptEl = document.createElement('script');
+                    scriptEl.src = scripts[loadedCount];
+                    scriptEl.crossOrigin = "anonymous";
+                    scriptEl.onload = () => {
+                        loadedCount++;
+                        loadNextScript();
+                    };
+                    document.body.appendChild(scriptEl);
+                };
+                loadNextScript();
+            }
+        });
+    </script>
 </body>
 
 </html>

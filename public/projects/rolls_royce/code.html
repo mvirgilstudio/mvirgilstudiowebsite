@@ -11,6 +11,8 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
     <link rel="icon" type="image/svg+xml" href="/assets/images/mvfx_logo.svg">
     <title>MVs GhostView | Interactive Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@200;300;400;500;600;700;800&family=Sora:wght@300;400;600;700&family=Oswald:wght@300;400;700&family=Orbitron:wght@400;500;700&display=swap"
@@ -19,9 +21,9 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet" />
     <!-- GSAP & Lenis -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -188,6 +190,24 @@
         header {
             transform: translateY(-100%);
         }
+
+        /* Mobile touch and hover optimization */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (hover: none) {
+            .swatch-btn:hover img,
+            button:hover img,
+            .gallery-item:hover img,
+            #paint-selectors button img,
+            #interior-selectors button img {
+                transform: none !important;
+            }
+            .view-toggle-btn:not(.active):hover {
+                color: rgba(255, 255, 255, 0.4) !important;
+            }
+        }
     </style>
 </head>
 
@@ -245,7 +265,7 @@
                 </span>
             </nav>
 
-            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto" id="mobile-menu-btn"
+            <button class="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto py-2 px-1 min-h-[44px]" id="mobile-menu-btn"
                 onclick="toggleMenu()">
                 <span class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase"
                     id="menu-text">Menu</span>
@@ -401,10 +421,10 @@
                                 class="text-[10px] uppercase tracking-widest text-[#c6c6c6] mb-4 block font-bold text-center font-['Manrope'] drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">Perspetiva</span>
                             <div class="flex bg-white/5 p-1 rounded-full border border-white/10" id="view-toggle">
                                 <button id="btn-exterior"
-                                    class="px-6 py-2 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] bg-white text-black active"
+                                    class="px-6 py-3 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] bg-white text-black active"
                                     data-view="exterior">EXTERIOR</button>
                                 <button id="btn-interior"
-                                    class="px-6 py-2 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] text-white/40 hover:text-white"
+                                    class="px-6 py-3 rounded-full text-[10px] font-bold tracking-widest transition-all font-['Manrope'] text-white/40 hover:text-white"
                                     data-view="interior">INTERIOR</button>
                             </div>
                         </div>
@@ -432,9 +452,9 @@
             <div class="w-full max-w-7xl px-6 gsap-scrub-scale">
                 <div
                     class="rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] ring-1 ring-white/10 bg-black">
-                    <div style="position:relative;padding-top:56.25%;"><iframe
-                            src="https://player.mediadelivery.net/embed/625906/5e01c0f1-f170-4c44-85e8-a6dcabadf5de?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                            loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                    <div style="position:relative;padding-top:56.25%;"><iframe id="rolls-royce-video"
+                            data-src="https://player.mediadelivery.net/embed/625906/5e01c0f1-f170-4c44-85e8-a6dcabadf5de?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                             allowfullscreen="true"></iframe></div>
                 </div>
@@ -627,7 +647,8 @@
     </footer>
 
     <script>
-        const GHOST_TRANSLATIONS = {
+        window.addEventListener('DOMContentLoaded', () => {
+            const GHOST_TRANSLATIONS = {
             EN: {
                 nav_expertise: 'Expertise',
                 nav_about: 'About',
@@ -1085,14 +1106,15 @@
             };
 
             // 1. Start loading LOW resolution progressively
+            const isMobile = window.innerWidth < 768 || navigator.maxTouchPoints > 1;
             loadSequence('low', frameCount, sequences.low.start, true).then(async () => {
-                // 2. Load MID and HIGH in background if exterior, sequentially to save bandwidth
-                if (isExt && !controller.aborted) {
+                // 2. Load MID and HIGH in background if exterior and not mobile, sequentially to save bandwidth
+                if (isExt && !controller.aborted && !isMobile) {
                     await loadSequence('mid', 60, 1);
                     if (!controller.aborted) {
                         await loadSequence('high', 60, 1);
                     }
-                } else if (!isExt && !controller.aborted) {
+                } else {
                     sequences.mid.images = [...sequences.low.images];
                     sequences.high.images = [...sequences.low.images];
                 }
@@ -1199,8 +1221,6 @@
         window.addEventListener('mousemove', e => {
             if (!isDragging || isAnimating) return;
 
-            // Removed permanent hide on mousemove
-
             const dx = e.pageX - startX;
             const dy = e.pageY - startY;
 
@@ -1218,6 +1238,39 @@
             isDragging = false;
             
             // Show hint again when mouse is released
+            const hint = document.getElementById('interaction-hint');
+            if (hint) hint.style.opacity = '0.6';
+        });
+
+        // Touch Interaction
+        canvas.addEventListener('touchstart', e => {
+            if (viewMode === 'interior' || isAnimating) return;
+            isDragging = true;
+            startX = e.touches[0].pageX; startY = e.touches[0].pageY;
+            startFrame = currentFrame;
+
+            const hint = document.getElementById('interaction-hint');
+            if (hint) hint.style.opacity = '0';
+        }, { passive: true });
+
+        window.addEventListener('touchmove', e => {
+            if (!isDragging || isAnimating) return;
+
+            const dx = e.touches[0].pageX - startX;
+            const dy = e.touches[0].pageY - startY;
+
+            const frameDiff = Math.round(dx / (800 / 60));
+            currentFrame = ((startFrame + frameDiff - 1) % 60 + 60) % 60 + 1;
+
+            if (dy > 200) activeSeqKey = 'high';
+            else if (dy > 100) activeSeqKey = 'mid';
+            else activeSeqKey = 'low';
+
+            requestAnimationFrame(draw);
+        }, { passive: true });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
             const hint = document.getElementById('interaction-hint');
             if (hint) hint.style.opacity = '0.6';
         });
@@ -1363,7 +1416,11 @@
         nextBtn.onclick = moveToEnd;
         prevBtn.onclick = moveToStart;
 
-        // Close modal when mouse leaves the magnified container or moves in the background
+        // Close modal on click/tap
+        modal.onclick = () => {
+            modal.classList.remove('opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        };
         const modalContainer = document.getElementById('magnified-image-container');
         modalContainer.onmouseleave = () => {
             modal.classList.remove('opacity-100');
@@ -1376,12 +1433,32 @@
             }
         };
 
+        // Swipe & Tap support for gallery cards
         let swipeStartY = 0;
         stackContainer.onmousedown = (e) => { swipeStartY = e.pageY; };
         stackContainer.onmouseup = (e) => {
             const diffY = e.pageY - swipeStartY;
             if (Math.abs(diffY) > 50) moveToEnd();
         };
+
+        let touchSwipeStartY = 0;
+        stackContainer.addEventListener('touchstart', (e) => {
+            touchSwipeStartY = e.touches[0].pageY;
+        }, { passive: true });
+        stackContainer.addEventListener('touchend', (e) => {
+            const diffY = e.changedTouches[0].pageY - touchSwipeStartY;
+            if (Math.abs(diffY) > 50) {
+                moveToEnd();
+            } else {
+                // Tap to zoom the top card
+                const topCard = stackCards[0];
+                if (topCard) {
+                    modalImg.src = topCard.src;
+                    modal.classList.remove('hidden');
+                    setTimeout(() => modal.classList.add('opacity-100', 'flex'), 10);
+                }
+            }
+        }, { passive: true });
 
         renderStack();
 
@@ -1419,13 +1496,32 @@
         gsap.utils.toArray('.gsap-scrub-fade').forEach((el) => {
             gsap.fromTo(el, { opacity: 1 }, { opacity: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true } });
         });
+
+        // Add intersection observer to load Rolls Royce video iframe
+        const rrVideo = document.getElementById('rolls-royce-video');
+        if (rrVideo) {
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const iframe = entry.target;
+                            if (iframe.dataset.src) {
+                                iframe.src = iframe.dataset.src;
+                                iframe.removeAttribute('data-src');
+                            }
+                            videoObserver.unobserve(iframe);
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                videoObserver.observe(rrVideo);
+            } else {
+                if (rrVideo.dataset.src) {
+                    rrVideo.src = rrVideo.dataset.src;
+                    rrVideo.removeAttribute('data-src');
+                }
+            }
+        }
+        }); // end of DOMContentLoaded wrapper
     </script>
 </body>
-
-</html> gsap.fromTo(el, { opacity: 1 }, { opacity: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end:
-'bottom top', scrub: true } });
-});
-</script>
-</body>
-
 </html>

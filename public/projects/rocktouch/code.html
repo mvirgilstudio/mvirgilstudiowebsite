@@ -12,6 +12,8 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
     <link rel="icon" type="image/svg+xml" href="/assets/images/mvfx_logo.svg">
     <title>MVs RockTouch Poster | Digital Precision</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@400;700&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;700&family=Sora:wght@300;400;600;700&display=swap"
         rel="stylesheet">
@@ -19,7 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js"></script>
+    <script src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js" defer></script>
 
     <script id="tailwind-config">
         tailwind.config = {
@@ -154,6 +156,25 @@
         .delay-500 {
             animation-delay: 500ms;
         }
+
+        /* Mobile touch and hover optimization */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (hover: none) {
+            .hover\:scale-\[1\.02\]:hover,
+            .group:hover .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            .hover\:tracking-\[0\.6em\]:hover {
+                letter-spacing: inherit !important;
+            }
+            .hover\:border-primary\/50:hover,
+            .hover\:border-secondary\/50:hover {
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+        }
     </style>
 </head>
 
@@ -221,11 +242,11 @@
             <!-- Mobile Menu Toggle -->
             <div class="lg:hidden flex items-center gap-4 sm:gap-6 pointer-events-auto">
                 <!-- Sound Toggle (Mobile) -->
-                <div class="cursor-pointer group flex items-center" onclick="toggleSound()">
+                <div class="cursor-pointer group flex items-center justify-center w-11 h-11" onclick="toggleSound()">
                     <span id="mobile-sound-icon" class="material-symbols-outlined text-concrete group-hover:text-white text-[20px]">volume_off</span>
                 </div>
 
-                <div class="flex items-center gap-2 sm:gap-4 cursor-pointer" onclick="toggleMenu()">
+                <div class="flex items-center gap-2 sm:gap-4 cursor-pointer min-h-[44px] px-1" onclick="toggleMenu()">
                     <div class="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase" id="menu-text">
                         MENU
                     </div>
@@ -373,13 +394,13 @@
                     <!-- Placeholder for video -->
                     <!-- Video Container -->
                     <div style="position:relative;padding-top:56.25%;"><iframe id="show-video"
-                            src="https://player.mediadelivery.net/embed/625906/f4e923ab-dd29-469c-85b9-5b07d295823c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                            loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                            data-src="https://player.mediadelivery.net/embed/625906/f4e923ab-dd29-469c-85b9-5b07d295823c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                            class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                             allowfullscreen="true"></iframe></div>
                     <!-- Volume Toggle -->
                     <button
-                        class="absolute bottom-8 left-8 z-30 p-3 bg-black/50 hover:bg-black/80 rounded-full transition-all duration-300 group"
+                        class="absolute bottom-8 left-8 z-30 w-11 h-11 flex items-center justify-center bg-black/50 hover:bg-black/80 rounded-full transition-all duration-300 group"
                         id="mute-toggle">
                         <span id="mute-icon"
                             class="material-symbols-outlined text-white group-hover:text-primary transition-colors">volume_off</span>
@@ -551,31 +572,36 @@
             return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         };
 
-        const player = new playerjs.Player(showVideoIframe);
+        let player = null;
 
-        player.on('ready', () => {
-            // Initial mute state check
-            player.getMuted((muted) => {
-                updateSoundIcons(muted);
+        const initPlayer = () => {
+            if (player) return;
+            player = new playerjs.Player(showVideoIframe);
+
+            player.on('ready', () => {
+                // Initial mute state check
+                player.getMuted((muted) => {
+                    updateSoundIcons(muted);
+                });
+
+                player.on('timeupdate', (data) => {
+                    const currentTime = data.seconds;
+                    const duration = data.duration;
+
+                    // Camera Label Switching Logic
+                    if (currentTime >= 16) {
+                        camLabelTop.textContent = 'CAM_01: PLANO GERAL';
+                        camLabelBottom.textContent = 'CAM_02: PLANO CLOSE-UP';
+                    } else {
+                        camLabelTop.textContent = 'CAM_02: PLANO CLOSE-UP';
+                        camLabelBottom.textContent = 'CAM_01: PLANO GERAL';
+                    }
+
+                    // Timer Update Logic
+                    videoTimer.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                });
             });
-
-            player.on('timeupdate', (data) => {
-                const currentTime = data.seconds;
-                const duration = data.duration;
-
-                // Camera Label Switching Logic
-                if (currentTime >= 16) {
-                    camLabelTop.textContent = 'CAM_01: PLANO GERAL';
-                    camLabelBottom.textContent = 'CAM_02: PLANO CLOSE-UP';
-                } else {
-                    camLabelTop.textContent = 'CAM_02: PLANO CLOSE-UP';
-                    camLabelBottom.textContent = 'CAM_01: PLANO GERAL';
-                }
-
-                // Timer Update Logic
-                videoTimer.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
-            });
-        });
+        };
 
         const updateSoundIcons = (muted) => {
             const iconName = muted ? 'volume_off' : 'volume_up';
@@ -587,6 +613,7 @@
         };
 
         window.toggleSound = () => {
+            if (!player) return;
             player.getMuted((muted) => {
                 if (muted) {
                     player.unmute();
@@ -599,6 +626,32 @@
         };
 
         muteToggle.addEventListener('click', window.toggleSound);
+
+        // IntersectionObserver for lazy loading the showcase video
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const iframe = entry.target;
+                        if (iframe.dataset.src) {
+                            iframe.src = iframe.dataset.src;
+                            iframe.removeAttribute('data-src');
+                            iframe.addEventListener('load', () => {
+                                initPlayer();
+                            });
+                        }
+                        videoObserver.unobserve(iframe);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            videoObserver.observe(showVideoIframe);
+        } else {
+            if (showVideoIframe.dataset.src) {
+                showVideoIframe.src = showVideoIframe.dataset.src;
+                showVideoIframe.removeAttribute('data-src');
+                initPlayer();
+            }
+        }
 
         const heroSection = document.getElementById('hero');
         const heroAnims = document.querySelectorAll('.hero-anim-target');
