@@ -1724,6 +1724,19 @@
 
                     <div
                         class="relative w-full h-[400px] md:h-[600px] border border-black/10 bg-[#eeeeee] shadow-architectural overflow-hidden group">
+                        <!-- Mobile Tap to Load Trigger -->
+                        <div id="splat-mobile-trigger" class="absolute inset-0 z-20 flex md:hidden flex-col items-center justify-center bg-cover bg-center cursor-pointer p-6"
+                            style="background-image: linear-gradient(to bottom, rgba(26,26,26,0.6), rgba(26,26,26,0.85)), url('/projects/architectural_landing_page/assets/convento/convento_bkg.jpg');">
+                            <div class="flex flex-col items-center gap-4 text-center">
+                                <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black">
+                                    <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <h5 class="text-white font-headline-md text-sm uppercase tracking-widest" data-t="splat_mobile_load_title">Interactive 3D Scan</h5>
+                                    <p class="text-white/60 font-body-md text-[10px] uppercase tracking-wider max-w-[280px]" data-t="splat_mobile_load_desc">Tap to load interactive 3D Gaussian Splatting. Loads approx. 30MB of 3D data.</p>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Loading Overlay -->
                         <div id="splat-loading" class="loading-overlay-3d" style="background: #1a1a1a;">
                             <div class="loading-spinner-3d"></div>
@@ -2206,7 +2219,9 @@
                 "walkthrough_title": "03 / Walkthrough Gallery",
                 "contact_telemetry_sending": "SENDING TRANSMISSION...",
                 "contact_telemetry_error": "TRANSMISSION FAILED. PLEASE TRY AGAIN.",
-                "interactive_webcam_exit": "Exit Experience"
+                "interactive_webcam_exit": "Exit Experience",
+                "splat_mobile_load_title": "Interactive 3D Scan",
+                "splat_mobile_load_desc": "Tap to load interactive 3D Gaussian Splatting. Loads approx. 30MB of 3D data."
             },
             'PT': {
                 "contact_badge_email": "EMAIL",
@@ -2338,7 +2353,9 @@
                 "walkthrough_title": "03 / Galeria de Visitas Virtuais",
                 "contact_telemetry_sending": "A ENVIAR TRANSMISSÃO...",
                 "contact_telemetry_error": "FALHA NA TRANSMISSÃO. POR FAVOR, TENTE NOVAMENTE.",
-                "interactive_webcam_exit": "Sair da Experiência"
+                "interactive_webcam_exit": "Sair da Experiência",
+                "splat_mobile_load_title": "Scan 3D Interativo",
+                "splat_mobile_load_desc": "Toque para carregar Gaussian Splatting 3D interativo. Carrega cerca de 30MB de dados 3D."
             }
         };
 
@@ -2690,6 +2707,11 @@
                         const target = entry.target;
                         if (target.classList.contains('lazy-iframe') && !target.closest('.accordion-card')) {
                             // Standalone iframe (not in an accordion card)
+                            if (target.id === 'splat-iframe' && window.innerWidth < 768) {
+                                // On mobile, do not auto-load the splat iframe. Show the tap-to-load trigger instead.
+                                observer.unobserve(target);
+                                return;
+                            }
                             const dSrc = target.getAttribute('data-src');
                             if (dSrc && (target.src === 'about:blank' || !target.src)) {
                                 target.src = dSrc;
@@ -3833,6 +3855,23 @@
                                 activeSessionBadge.className = 'text-[10px] font-mono text-primary tracking-wider uppercase border border-black/25 px-2 py-0.5 bg-black/5';
                             }
                         }, 600);
+                    });
+                }
+
+                // 4. Mobile Tap-to-Load Interaction
+                const mobileTrigger = document.getElementById('splat-mobile-trigger');
+                if (mobileTrigger) {
+                    mobileTrigger.addEventListener('click', () => {
+                        mobileTrigger.classList.add('hidden');
+                        mobileTrigger.style.setProperty('display', 'none', 'important');
+                        
+                        const splatOverlay = document.getElementById('splat-loading');
+                        if (splatOverlay) splatOverlay.classList.remove('hidden');
+
+                        if (splatIframe) {
+                            // Load lighter point cloud mode on mobile to prevent crash/freeze
+                            splatIframe.src = 'https://conventosplat01.b-cdn.net/convento.html?mode=pointcloud';
+                        }
                     });
                 }
             })();
