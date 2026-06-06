@@ -636,10 +636,10 @@
 
             <!-- Hero Content -->
             <div
-                class="absolute inset-0 flex flex-col justify-end px-margin-mobile md:px-margin-desktop max-w-[1920px] mx-auto pb-24 z-30 pointer-events-none">
+                class="absolute inset-0 flex flex-col justify-end px-[5%] max-w-[1920px] mx-auto pb-24 z-30 pointer-events-none">
                 <div class="w-full max-w-none reveal-up text-on-primary parallax-layer" data-speed="0.2">
                     <p id="hero-subtitle" data-t="hero_subtitle"
-                        class="w-full mb-10 text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-nowrap pointer-events-auto"
+                        class="w-full mb-10 text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-nowrap pointer-events-auto text-center font-bold md:text-left md:font-normal pr-0 md:pr-[15%]"
                         style="font-size: clamp(0.75rem, 2vw, 2.5rem); letter-spacing: 0.3em; opacity: 0; transform: translateY(20px);">
                         High-end architectural
                         techniques for visionary designs</p>
@@ -1725,15 +1725,20 @@
                     <div
                         class="relative w-full h-[400px] md:h-[600px] border border-black/10 bg-[#eeeeee] shadow-architectural overflow-hidden group">
                         <!-- Mobile Tap to Load Trigger -->
-                        <div id="splat-mobile-trigger" class="absolute inset-0 z-20 flex md:hidden flex-col items-center justify-center bg-cover bg-center cursor-pointer p-6"
+                        <div id="splat-mobile-trigger"
+                            class="absolute inset-0 z-20 flex md:hidden flex-col items-center justify-center bg-cover bg-center cursor-pointer p-6"
                             style="background-image: linear-gradient(to bottom, rgba(26,26,26,0.6), rgba(26,26,26,0.85)), url('/projects/architectural_landing_page/assets/convento/convento_bkg.jpg');">
                             <div class="flex flex-col items-center gap-4 text-center">
-                                <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black">
                                     <span class="material-symbols-outlined text-3xl">play_arrow</span>
                                 </div>
                                 <div class="flex flex-col gap-1.5">
-                                    <h5 class="text-white font-headline-md text-sm uppercase tracking-widest" data-t="splat_mobile_load_title">Interactive 3D Scan</h5>
-                                    <p class="text-white/60 font-body-md text-[10px] uppercase tracking-wider max-w-[280px]" data-t="splat_mobile_load_desc">Tap to load interactive 3D Gaussian Splatting. Loads approx. 30MB of 3D data.</p>
+                                    <h5 class="text-white font-headline-md text-sm uppercase tracking-widest"
+                                        data-t="splat_mobile_load_title">Interactive 3D Scan</h5>
+                                    <p class="text-white/60 font-body-md text-[10px] uppercase tracking-wider max-w-[280px]"
+                                        data-t="splat_mobile_load_desc">Tap to load interactive 3D Gaussian Splatting.
+                                        Loads approx. 30MB of 3D data.</p>
                                 </div>
                             </div>
                         </div>
@@ -3864,7 +3869,7 @@
                     mobileTrigger.addEventListener('click', () => {
                         mobileTrigger.classList.add('hidden');
                         mobileTrigger.style.setProperty('display', 'none', 'important');
-                        
+
                         const splatOverlay = document.getElementById('splat-loading');
                         if (splatOverlay) splatOverlay.classList.remove('hidden');
 
