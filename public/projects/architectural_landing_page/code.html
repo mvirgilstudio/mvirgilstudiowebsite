@@ -449,12 +449,16 @@
         }
 
         /* Accordion active state for iframe and cover */
-        #panorama-accordion .accordion-card.active iframe {
+        #panorama-accordion .accordion-card.active iframe,
+        #video-gallery .accordion-card.active iframe,
+        #bridge-video-gallery .accordion-card.active iframe {
             opacity: 1 !important;
             pointer-events: auto !important;
         }
 
-        #panorama-accordion .accordion-card.active .absolute.z-20 {
+        #panorama-accordion .accordion-card.active .absolute.z-20,
+        #video-gallery .accordion-card.active .absolute.z-20,
+        #bridge-video-gallery .accordion-card.active .absolute.z-20 {
             opacity: 0 !important;
             pointer-events: none !important;
         }
@@ -984,9 +988,13 @@
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
                                 </div>
+                                <!-- Cover Overlay -->
+                                <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/greenhaven/assets/img_01.jpg');">
+                                </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-20 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
                                     GreenHaven
                                 </div>
                             </div>
@@ -1007,9 +1015,13 @@
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
                                 </div>
+                                <!-- Cover Overlay -->
+                                <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/livespace/public/img_01.jpg');">
+                                </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-20 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
                                     LiveSpace
                                 </div>
                             </div>
@@ -1030,9 +1042,13 @@
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
                                 </div>
+                                <!-- Cover Overlay -->
+                                <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg');">
+                                </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-20 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
                                     Bridge Garden
                                 </div>
                             </div>
@@ -1054,9 +1070,13 @@
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
                                 </div>
+                                <!-- Cover Overlay -->
+                                <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/architectural_landing_page/assets/bungalow/bung_01.jpg');">
+                                </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-20 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
                                     Modern Bungalow
                                 </div>
                             </div>
@@ -1207,13 +1227,13 @@
                             </button>
 
                             <!-- Cover Overlay -->
-                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-end p-8 transition-opacity duration-500 bg-cover bg-center"
+                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
                                 style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/house/house_thumbnail.jpg');">
                                 <span data-t="interactive_proj1_tag"
-                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1">PROJECT
+                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     01</span>
                                 <h4 data-t="interactive_proj1_title"
-                                    class="font-headline-md text-2xl md:text-3xl text-white uppercase mb-2">House
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">House
                                     Project</h4>
                                 <p data-t="interactive_proj1_desc"
                                     class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
@@ -1221,7 +1241,7 @@
                                     smart spaces and high-fidelity rendering.
                                 </p>
                                 <div
-                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300">
+                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj1_btn">Enter 360 Panorama</span>
                                     <span
                                         class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
@@ -1255,13 +1275,13 @@
                             </button>
 
                             <!-- Cover Overlay -->
-                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-end p-8 transition-opacity duration-500 bg-cover bg-center"
+                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
                                 style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/tent/06.jpg');">
                                 <span data-t="interactive_proj2_tag"
-                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1">PROJECT
+                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     02</span>
                                 <h4 data-t="interactive_proj2_title"
-                                    class="font-headline-md text-2xl md:text-3xl text-white uppercase mb-2">Tent
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">Tent
                                     Project</h4>
                                 <p data-t="interactive_proj2_desc"
                                     class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
@@ -1269,7 +1289,7 @@
                                     structural canvas layouts and forest views.
                                 </p>
                                 <div
-                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300">
+                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj2_btn">Enter 360 Panorama</span>
                                     <span
                                         class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
@@ -1303,13 +1323,13 @@
                             </button>
 
                             <!-- Cover Overlay -->
-                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-end p-8 transition-opacity duration-500 bg-cover bg-center"
+                            <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
                                 style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg');">
                                 <span data-t="interactive_proj3_tag"
-                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1">PROJECT
+                                    class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     03</span>
                                 <h4 data-t="interactive_proj3_title"
-                                    class="font-headline-md text-2xl md:text-3xl text-white uppercase mb-2">Bridge
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">Bridge
                                     Garden
                                     Project</h4>
                                 <p data-t="interactive_proj3_desc"
@@ -1318,7 +1338,7 @@
                                     transition and raw materials.
                                 </p>
                                 <div
-                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300">
+                                    class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj3_btn">Enter 360 Panorama</span>
                                     <span
                                         class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
@@ -1472,9 +1492,13 @@
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
                             </div>
+                            <!-- Cover Overlay -->
+                            <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/archsync_model/images/img_01.png');">
+                            </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync1"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-20 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                 NFC Material Sync
                             </div>
                         </div>
@@ -1493,9 +1517,13 @@
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
                             </div>
+                            <!-- Cover Overlay -->
+                            <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/archsync_model/images/img_03.png');">
+                            </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync2"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-20 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                 Synchronized Viewports
                             </div>
                         </div>
@@ -2010,40 +2038,44 @@
     </footer>
     <!-- Gallery Lightbox Modal -->
     <div id="gallery-lightbox"
-        class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-lg flex items-center justify-center p-4 transition-all duration-300">
+        class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center p-4 transition-all duration-300">
         <!-- Close Button -->
         <button onclick="closeLightbox()"
             class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors duration-300 bg-white/10 hover:bg-white/20 rounded-full p-3 flex items-center justify-center z-50 cursor-pointer">
             <span class="material-symbols-outlined text-3xl">close</span>
         </button>
-        <!-- Left Navigation Arrow -->
-        <button onclick="prevLightbox()"
-            class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-all bg-black/40 hover:bg-black/70 rounded-full p-2 md:p-3 flex items-center justify-center z-50 cursor-pointer">
-            <span class="material-symbols-outlined text-3xl">chevron_left</span>
-        </button>
-        <!-- Right Navigation Arrow -->
-        <button onclick="nextLightbox()"
-            class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-all bg-black/40 hover:bg-black/70 rounded-full p-2 md:p-3 flex items-center justify-center z-50 cursor-pointer">
-            <span class="material-symbols-outlined text-3xl">chevron_right</span>
-        </button>
         <!-- Modal Backdrop (click to close) -->
         <div onclick="closeLightbox()" class="absolute inset-0"></div>
         <!-- Lightbox Content Container -->
-        <div class="relative max-w-5xl max-h-[85vh] w-full flex items-center justify-center z-10"
+        <div class="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center justify-center z-10"
             onclick="event.stopPropagation()">
             <!-- Image Content -->
             <img id="lightbox-image" src="" alt="Lightbox View"
-                class="hidden max-w-full max-h-[80vh] object-contain shadow-2xl">
+                class="hidden max-w-full max-h-[70vh] object-contain shadow-2xl mb-4">
             <!-- Video Content -->
             <video id="lightbox-video" src="" controls autoplay loop
-                class="hidden max-w-full max-h-[80vh] object-contain shadow-2xl"></video>
+                class="hidden max-w-full max-h-[70vh] object-contain shadow-2xl mb-4"></video>
             <!-- Iframe Content -->
-            <iframe id="lightbox-iframe" src="" class="hidden w-full h-[80vh] max-w-4xl border-0 shadow-2xl"
+            <iframe id="lightbox-iframe" src="" class="hidden w-full h-[70vh] max-w-4xl border-0 shadow-2xl mb-4"
                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                 allowfullscreen="true"></iframe>
             <!-- Title/Caption -->
             <div id="lightbox-caption"
-                class="absolute -bottom-12 left-0 right-0 text-center text-white/80 font-body-md text-label-md uppercase tracking-wider">
+                class="text-center text-white/80 font-body-md text-label-md uppercase tracking-wider mb-6">
+            </div>
+            
+            <!-- Navigation Controls (Back & Forward) centered below the content -->
+            <div class="flex items-center justify-center gap-6 z-50">
+                <!-- Left Navigation Arrow -->
+                <button onclick="prevLightbox()"
+                    class="text-white/70 hover:text-white transition-all bg-white/10 hover:bg-white/20 rounded-full p-3 flex items-center justify-center cursor-pointer">
+                    <span class="material-symbols-outlined text-2xl">chevron_left</span>
+                </button>
+                <!-- Right Navigation Arrow -->
+                <button onclick="nextLightbox()"
+                    class="text-white/70 hover:text-white transition-all bg-white/10 hover:bg-white/20 rounded-full p-3 flex items-center justify-center cursor-pointer">
+                    <span class="material-symbols-outlined text-2xl">chevron_right</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2378,13 +2410,20 @@
                 autoplay: false,
                 path: path,
                 rendererSettings: {
-                    preserveAspectRatio: 'xMidYMid slice',
+                    preserveAspectRatio: 'none',
                     clearCanvas: true
                 }
             });
 
-            // Play the animation immediately
-            heroAnim.play();
+            // Play the animation or show the last frame immediately based on screen format
+            const isMobile = window.innerWidth < 768;
+            if (isMobile) {
+                heroAnim.addEventListener('DOMLoaded', () => {
+                    heroAnim.goToAndStop(heroAnim.totalFrames - 1, true);
+                });
+            } else {
+                heroAnim.play();
+            }
 
             // Re-bind ScrollTrigger to use the new animation instance
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -2401,10 +2440,10 @@
                         start: "top top",
                         end: "bottom top",
                         onEnterBack: () => {
-                            if (heroAnim) heroAnim.goToAndPlay(0, true);
+                            if (heroAnim && !isMobile) heroAnim.goToAndPlay(0, true);
                         },
                         onLeave: () => {
-                            if (heroAnim) heroAnim.goToAndStop(0, true);
+                            if (heroAnim && !isMobile) heroAnim.goToAndStop(0, true);
                         }
                     });
                 }
