@@ -13,7 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
     <!-- Preload primary font weight -->
-    <link rel="preload" href="https://db.onlinewebfonts.com/t/4366ceae6f7564999a0f0c3e8698a4ad.woff2?v=2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://db.onlinewebfonts.com/t/4366ceae6f7564999a0f0c3e8698a4ad.woff2?v=2" as="font"
+        type="font/woff2" crossorigin />
     <!-- PP Neue Montreal Font -->
     <style>
         @font-face {
@@ -62,7 +63,8 @@
     <!-- Lottie Player -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
     <!-- Model Viewer -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js" defer></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
+        defer></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Tailwind Config -->
@@ -288,6 +290,7 @@
             .reveal-section-left {
                 transform: translateX(-40px) scale(0.98);
             }
+
             .reveal-section-right {
                 transform: translateX(40px) scale(0.98);
             }
@@ -295,6 +298,7 @@
 
         /* Reduced motion: show content immediately */
         @media (prefers-reduced-motion: reduce) {
+
             .reveal-section-left,
             .reveal-section-right {
                 opacity: 1;
@@ -524,7 +528,9 @@
         }
 
         @keyframes spin3d {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text-3d {
@@ -537,8 +543,15 @@
         }
 
         @keyframes pulse3d {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -910,32 +923,27 @@
                                     <div class="absolute inset-0 image-display-layer active" data-idx="0">
                                         <img src="/projects/greenhaven/assets/img_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
-                                            loading="lazy"
-                                            alt="GreenHaven Atrium Deck">
+                                            loading="lazy" alt="GreenHaven Atrium Deck">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="1">
                                         <img src="/projects/livespace/public/img_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
-                                            loading="lazy"
-                                            alt="LiveSpace Concrete Exterior">
+                                            loading="lazy" alt="LiveSpace Concrete Exterior">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="2">
                                         <img src="/projects/architectural_landing_page/assets/tent/06.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
-                                            loading="lazy"
-                                            alt="Echologic Tents Canvas Structure">
+                                            loading="lazy" alt="Echologic Tents Canvas Structure">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="3">
                                         <img src="/projects/architectural_landing_page/assets/bungalow/bung_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
-                                            loading="lazy"
-                                            alt="Riverstone Meadows Modern Bungalow">
+                                            loading="lazy" alt="Riverstone Meadows Modern Bungalow">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="4">
                                         <img src="/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
-                                            loading="lazy"
-                                            alt="House Bridge Garden Modern Architecture">
+                                            loading="lazy" alt="House Bridge Garden Modern Architecture">
                                     </div>
 
                                     <!-- Tonal Overlay -->
@@ -979,11 +987,9 @@
                                 data-caption="GreenHaven — Lobby Walkthrough & Biophilic Elements">
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
-                                    <iframe
-                                        src="about:blank"
+                                    <iframe src="about:blank"
                                         data-src="https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                        class="lazy-iframe"
-                                        loading="lazy"
+                                        class="lazy-iframe" loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
@@ -1006,11 +1012,9 @@
                                 data-media-type="iframe" data-caption="LiveSpace — Courtyard Daylight Simulation">
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
-                                    <iframe
-                                        src="about:blank"
+                                    <iframe src="about:blank"
                                         data-src="https://player.mediadelivery.net/embed/625906/9dee079e-24f0-47c7-a0f1-74932c2cb0a4?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                        class="lazy-iframe"
-                                        loading="lazy"
+                                        class="lazy-iframe" loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
@@ -1033,11 +1037,9 @@
                                 data-media-type="iframe" data-caption="Bridge Garden — Cinematic Animation Walkthrough">
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
-                                    <iframe
-                                        src="about:blank"
+                                    <iframe src="about:blank"
                                         data-src="https://player.mediadelivery.net/embed/625906/fefdd3a4-e87f-4373-9b05-5aa52b9d2d05?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                        class="lazy-iframe"
-                                        loading="lazy"
+                                        class="lazy-iframe" loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
@@ -1057,15 +1059,12 @@
                             <div class="accordion-card group relative w-full md:w-auto h-24 md:h-full flex-none md:flex-1 overflow-hidden bg-neutral-900 border border-white/5 cursor-pointer"
                                 data-index="70"
                                 data-media-src="https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                data-media-type="iframe"
-                                data-caption="Modern Bungalow — Cinematic Animation">
+                                data-media-type="iframe" data-caption="Modern Bungalow — Cinematic Animation">
                                 <!-- Background Video -->
                                 <div class="w-full h-full absolute inset-0 overflow-hidden">
-                                    <iframe
-                                        src="about:blank"
+                                    <iframe src="about:blank"
                                         data-src="https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                        class="lazy-iframe"
-                                        loading="lazy"
+                                        class="lazy-iframe" loading="lazy"
                                         style="border:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100vw;height:56.25vw;min-height:100%;min-width:100%;pointer-events:none;"
                                         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                         allowfullscreen="true"></iframe>
@@ -1115,8 +1114,7 @@
                     <div class="walkthrough-grid-card flex flex-col gap-4">
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
-                            <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="about:blank"
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/10b021e4-dbc0-4e46-996e-2d626ee0cead?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                                     class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1147,8 +1145,7 @@
                     <div class="walkthrough-grid-card flex flex-col gap-4">
                         <div
                             class="relative w-full aspect-video bg-neutral-900 shadow-architectural border border-black/5 overflow-hidden">
-                            <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="about:blank"
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                                     class="lazy-iframe" style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
@@ -1207,8 +1204,7 @@
                             <!-- Interactive Experience Iframe -->
                             <iframe
                                 class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
-                                src="about:blank"
-                                data-src="section_02.html?project=house"
+                                src="about:blank" data-src="section_02.html?project=house"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="House Interactive Experience"></iframe>
 
@@ -1233,7 +1229,8 @@
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     01</span>
                                 <h4 data-t="interactive_proj1_title"
-                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">House
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">
+                                    House
                                     Project</h4>
                                 <p data-t="interactive_proj1_desc"
                                     class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
@@ -1255,8 +1252,7 @@
                             <!-- Interactive Experience Iframe -->
                             <iframe
                                 class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
-                                src="about:blank"
-                                data-src="section_02.html?project=tent"
+                                src="about:blank" data-src="section_02.html?project=tent"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="Tent Interactive Experience"></iframe>
 
@@ -1281,7 +1277,8 @@
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     02</span>
                                 <h4 data-t="interactive_proj2_title"
-                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">Tent
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">
+                                    Tent
                                     Project</h4>
                                 <p data-t="interactive_proj2_desc"
                                     class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
@@ -1303,8 +1300,7 @@
                             <!-- Interactive Experience Iframe -->
                             <iframe
                                 class="w-full h-full border-0 absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none lazy-iframe"
-                                src="about:blank"
-                                data-src="section_02.html?project=bridge_garden"
+                                src="about:blank" data-src="section_02.html?project=bridge_garden"
                                 allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
                                 title="Bridge Garden Interactive Experience"></iframe>
 
@@ -1329,7 +1325,8 @@
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     03</span>
                                 <h4 data-t="interactive_proj3_title"
-                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">Bridge
+                                    class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">
+                                    Bridge
                                     Garden
                                     Project</h4>
                                 <p data-t="interactive_proj3_desc"
@@ -1483,11 +1480,9 @@
                             data-index="5">
                             <!-- Background Video -->
                             <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
-                                <iframe
-                                    src="about:blank"
+                                <iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    class="lazy-iframe"
-                                    loading="lazy"
+                                    class="lazy-iframe" loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
@@ -1508,18 +1503,16 @@
                             data-index="4">
                             <!-- Background Video -->
                             <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
-                                <iframe
-                                    src="about:blank"
+                                <iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    class="lazy-iframe"
-                                    loading="lazy"
+                                    class="lazy-iframe" loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
                             </div>
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
-                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/archsync_model/images/img_03.png');">
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/touchstone/images/stone_img_05.jpg');">
                             </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync2"
@@ -1739,8 +1732,9 @@
                         <!-- WebGL Splat Iframe -->
                         <iframe id="splat-iframe" src="about:blank"
                             data-src="https://conventosplat01.b-cdn.net/convento.html"
-                            class="w-full h-full border-0 lazy-iframe" allow="fullscreen; camera; autoplay; encrypted-media;"
-                            allowfullscreen title="Convento Gaussian Splatting Viewer">
+                            class="w-full h-full border-0 lazy-iframe"
+                            allow="fullscreen; camera; autoplay; encrypted-media;" allowfullscreen
+                            title="Convento Gaussian Splatting Viewer">
                         </iframe>
 
                         <!-- Interaction Helper Overlay (Top-Left) -->
@@ -1764,11 +1758,10 @@
                             Path</span>
                         <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
                             style="position:relative;padding-top:56.25%;">
-                            <iframe
-                                src="about:blank"
+                            <iframe src="about:blank"
                                 data-src="https://player.mediadelivery.net/embed/625906/85232b4e-9df5-47de-8a27-3b4aa1d19348?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                class="lazy-iframe"
-                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                class="lazy-iframe" loading="lazy"
+                                style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                 allowfullscreen="true"></iframe>
                         </div>
@@ -1781,11 +1774,10 @@
                             Prototype</span>
                         <div class="border border-black/10 bg-neutral-100 shadow-architectural overflow-hidden"
                             style="position:relative;padding-top:56.25%;">
-                            <iframe
-                                src="about:blank"
+                            <iframe src="about:blank"
                                 data-src="https://player.mediadelivery.net/embed/625906/2faee777-3c96-4354-a9e6-50aa234c11ba?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                class="lazy-iframe"
-                                loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                class="lazy-iframe" loading="lazy"
+                                style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                 allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                 allowfullscreen="true"></iframe>
                         </div>
@@ -1809,10 +1801,10 @@
                     <div
                         class="relative z-10 w-full aspect-video shadow-architectural hover-track-wrap overflow-hidden group">
                         <div class="hover-track-inner h-full w-full">
-                            <div style="position:relative;padding-top:56.25%;"><iframe
-                                    src="about:blank"
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/d9499d77-34d3-43b0-8052-fb4cb37a787c?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                                    class="lazy-iframe" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;"
+                                    class="lazy-iframe" loading="lazy"
+                                    style="border:0;position:absolute;top:0;height:100%;width:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe></div>
                         </div>
@@ -1921,8 +1913,7 @@
                     <!-- Google Map -->
                     <div
                         class="w-full min-h-[200px] h-48 rounded-none overflow-hidden border border-black/5 bg-white relative group flex flex-col">
-                        <iframe title="Alcobaça, Portugal Map"
-                            src="about:blank"
+                        <iframe title="Alcobaça, Portugal Map" src="about:blank"
                             data-src="https://maps.google.com/maps?q=39.5487,-8.9774&t=&z=7&ie=UTF8&iwloc=&output=embed"
                             width="100%" height="100%"
                             style="border: 0; filter: grayscale(100%) contrast(110%) brightness(95%);"
@@ -2063,7 +2054,7 @@
             <div id="lightbox-caption"
                 class="text-center text-white/80 font-body-md text-label-md uppercase tracking-wider mb-6">
             </div>
-            
+
             <!-- Navigation Controls (Back & Forward) centered below the content -->
             <div class="flex items-center justify-center gap-6 z-50">
                 <!-- Left Navigation Arrow -->
