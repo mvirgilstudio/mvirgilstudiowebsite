@@ -3844,7 +3844,27 @@
                 const modelOverlay = document.getElementById('model-viewer-loading');
                 if (modelViewer && modelOverlay) {
                     const hideModelOverlay = () => modelOverlay.classList.add('hidden');
+                    const showModelOverlay = () => modelOverlay.classList.remove('hidden');
+
                     modelViewer.addEventListener('load', hideModelOverlay);
+
+                    // Show loading overlay when a new model starts downloading
+                    modelViewer.addEventListener('progress', (e) => {
+                        if (e.detail.totalProgress < 1) {
+                            showModelOverlay();
+                        }
+                    });
+
+                    // Show loading overlay immediately when the src changes (e.g. floor buttons click)
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                                showModelOverlay();
+                            }
+                        });
+                    });
+                    observer.observe(modelViewer, { attributes: true });
+
                     // Fallback: hide after 15s even if event doesn't fire
                     setTimeout(hideModelOverlay, 15000);
                 }
