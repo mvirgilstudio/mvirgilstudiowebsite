@@ -748,6 +748,34 @@
             #pane-right-sharp > iframe:first-child { display: none !important; }
             /* Hide fixed grid overlay that forces GPU compositing */
             .grid-overlay { display: none !important; }
+
+            /* === Fix: Disable knockout text blend effect on mobile === */
+            /* The knockout effect requires active video; without it, everything is black */
+            /* Instead, show text directly on a dark gradient background with active video splits */
+            .hero-container {
+                background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f172a 100%) !important;
+            }
+            /* Remove mix-blend-screen from the overlay layer */
+            .hero-container > div.mix-blend-screen {
+                mix-blend-mode: normal !important;
+            }
+
+            /* Remove mix-blend-multiply from the text mask; show text directly on top of a dark overlay */
+            .hero-container .mix-blend-multiply {
+                mix-blend-mode: normal !important;
+                background: rgba(0, 0, 0, 0.45) !important;
+                z-index: 20 !important;
+            }
+
+            /* === Fix: Ensure all animated elements start visible on mobile === */
+            /* IntersectionObserver/ScrollTrigger may not fire reliably on mobile */
+            .anim-fade-up,
+            .anim-fade-left,
+            .anim-fade-right,
+            .anim-scale-in {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
     </style>
 </head>
@@ -1725,7 +1753,9 @@
         // Initial render after a small delay to ensure images load
 
         setTimeout(render, 500);
-        images[0].onload = render;
+        if (images && images.length > 0) {
+            images[0].onload = render;
+        }
 
         // ===== ANIMATION ENGINE =====
 
@@ -1835,7 +1865,9 @@
             // On mobile, only load iframes that are not hidden by CSS (display:none)
             const heroIframes = document.querySelectorAll('#hero iframe[data-src]');
             heroIframes.forEach(iframe => {
-                if (getComputedStyle(iframe).display !== 'none') {
+                const isHidden = getComputedStyle(iframe).display === 'none' || 
+                                 iframe.closest('#hero-bg-blurred') !== null;
+                if (!isHidden) {
                     iframe.setAttribute('src', iframe.getAttribute('data-src'));
                 }
             });
@@ -1918,16 +1950,12 @@
                     // Keep text as-is, no character splitting
                 });
                 gsap.from(".hero-title-line", {
-                    scrollTrigger: {
-                        trigger: "#hero",
-                        start: "top center",
-                        toggleActions: "restart none restart none"
-                    },
                     duration: 0.8,
                     opacity: 0,
                     y: 30,
                     stagger: 0.1,
-                    ease: "power3.out"
+                    ease: "power3.out",
+                    delay: 0.5
                 });
             } else {
                 // Desktop: full per-character 3D animation
