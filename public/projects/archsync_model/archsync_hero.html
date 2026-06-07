@@ -738,6 +738,17 @@
         nav a:hover::after {
             width: 100%;
         }
+
+        /* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
+        @media (max-width: 1023px) {
+            /* Hide entire blurred background layer (4 iframes) */
+            #hero-bg-blurred { display: none !important; }
+            /* Hide ambience-fill iframes in sharp layer (2 more iframes) */
+            #pane-left-sharp > iframe:first-child,
+            #pane-right-sharp > iframe:first-child { display: none !important; }
+            /* Hide fixed grid overlay that forces GPU compositing */
+            .grid-overlay { display: none !important; }
+        }
     </style>
 </head>
 
@@ -1653,7 +1664,26 @@
 
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
-        preloadImages();
+
+        // On mobile, defer image sequence preloading until the viewer section is visible
+        if (window.innerWidth < 1024) {
+            const viewerSection = document.getElementById('viewer');
+            if (viewerSection && 'IntersectionObserver' in window) {
+                const seqObserver = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            preloadImages();
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '300px' });
+                seqObserver.observe(viewerSection);
+            } else {
+                preloadImages();
+            }
+        } else {
+            preloadImages();
+        }
         // Sync Image Sequence to 3D Model Rotation
         buildingViewer.addEventListener('camera-change', () => {
             const orbit = buildingViewer.getCameraOrbit();
@@ -1732,24 +1762,28 @@
                 container.appendChild(particle);
             }
         }
-        createParticles('viewer-particles', 25);
-        createParticles('process-particles', 20);
-        createParticles('apps-particles', 25);
+        // Reduce particle count on mobile to save GPU/CPU
+        const mobileCheck = window.innerWidth < 1024;
+        createParticles('viewer-particles', mobileCheck ? 8 : 25);
+        createParticles('process-particles', mobileCheck ? 6 : 20);
+        createParticles('apps-particles', mobileCheck ? 8 : 25);
 
-        // 3. Parallax on hero images
-        const heroSection = document.getElementById('hero');
-        if (heroSection) {
-            const heroImages = heroSection.querySelectorAll('img');
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                const heroHeight = heroSection.offsetHeight;
-                if (scrolled < heroHeight) {
-                    const parallax = scrolled * 0.15;
-                    heroImages.forEach(img => {
-                        img.style.transform = `translateY(${parallax}px)`;
-                    });
-                }
-            }, { passive: true });
+        // 3. Parallax on hero images (desktop only — scroll listeners are expensive on mobile)
+        if (window.innerWidth >= 1024) {
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                const heroImages = heroSection.querySelectorAll('img');
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    const heroHeight = heroSection.offsetHeight;
+                    if (scrolled < heroHeight) {
+                        const parallax = scrolled * 0.15;
+                        heroImages.forEach(img => {
+                            img.style.transform = `translateY(${parallax}px)`;
+                        });
+                    }
+                }, { passive: true });
+            }
         }
 
         // Only register mouse/hover-based effects on devices that support hover
@@ -1798,9 +1832,12 @@
             gsap.registerPlugin(ScrollTrigger);
 
             // Dynamic Iframe and Lazy Video Loader
+            // On mobile, only load iframes that are not hidden by CSS (display:none)
             const heroIframes = document.querySelectorAll('#hero iframe[data-src]');
             heroIframes.forEach(iframe => {
-                iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                if (getComputedStyle(iframe).display !== 'none') {
+                    iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                }
             });
 
             // Lazy load below-fold process video
@@ -1872,78 +1909,100 @@
             // Initialize default language as PT
             window.setLanguage('PT');
 
+            const isMobile = window.innerWidth < 1024;
+
             const heroLines = document.querySelectorAll('.hero-title-line');
-            heroLines.forEach(line => {
-                const text = line.textContent;
-                line.innerHTML = text.split('').map(char =>
-                    `<span class="hero-char" style="display: inline-block; transform-origin: center center;">${char === ' ' ? '&nbsp;' : char}</span>`
-                ).join('');
-            });
+            if (isMobile) {
+                // Mobile: simple word-level animation (fewer DOM nodes, no per-char GPU layers)
+                heroLines.forEach(line => {
+                    // Keep text as-is, no character splitting
+                });
+                gsap.from(".hero-title-line", {
+                    scrollTrigger: {
+                        trigger: "#hero",
+                        start: "top center",
+                        toggleActions: "restart none restart none"
+                    },
+                    duration: 0.8,
+                    opacity: 0,
+                    y: 30,
+                    stagger: 0.1,
+                    ease: "power3.out"
+                });
+            } else {
+                // Desktop: full per-character 3D animation
+                heroLines.forEach(line => {
+                    const text = line.textContent;
+                    line.innerHTML = text.split('').map(char =>
+                        `<span class="hero-char" style="display: inline-block; transform-origin: center center;">${char === ' ' ? '&nbsp;' : char}</span>`
+                    ).join('');
+                });
 
-            gsap.from("#hero-bg-blurred", {
-                filter: "blur(40px)",
-                duration: 3,
-                ease: "power2.out"
-            });
+                gsap.from("#hero-bg-blurred", {
+                    filter: "blur(40px)",
+                    duration: 3,
+                    ease: "power2.out"
+                });
 
-            gsap.from("#hero-bg-sharp", {
-                filter: "blur(20px)",
-                duration: 2,
-                delay: 0.5,
-                ease: "power2.out"
-            });
+                gsap.from("#hero-bg-sharp", {
+                    filter: "blur(20px)",
+                    duration: 2,
+                    delay: 0.5,
+                    ease: "power2.out"
+                });
 
-            // Initial states for panes
-            gsap.set(["#pane-left-blur", "#pane-left-sharp"], { filter: "blur(0px)" });
-            gsap.set(["#pane-right-blur", "#pane-right-sharp"], { filter: "blur(1px)" });
+                // Initial states for panes
+                gsap.set(["#pane-left-blur", "#pane-left-sharp"], { filter: "blur(0px)" });
+                gsap.set(["#pane-right-blur", "#pane-right-sharp"], { filter: "blur(1px)" });
 
-            gsap.from(".hero-char", {
-                scrollTrigger: {
-                    trigger: "#hero",
-                    start: "top center",
-                    toggleActions: "restart none restart none"
-                },
-                duration: 1.5,
-                delay: 0.5,
-                opacity: 0,
-                scale: 3,
-                y: 50,
-                rotateX: -45,
-                stagger: 0.05,
-                ease: "back.out(2)",
-                force3D: true,
-                onComplete: () => {
-                    document.querySelectorAll('.hero-char').forEach(char => {
-                        char.addEventListener('mouseenter', () => {
-                            gsap.to(char, { scale: 1.4, color: "#00E5FF", textShadow: "0 0 20px #00E5FF", duration: 0.3 });
+                gsap.from(".hero-char", {
+                    scrollTrigger: {
+                        trigger: "#hero",
+                        start: "top center",
+                        toggleActions: "restart none restart none"
+                    },
+                    duration: 1.5,
+                    delay: 0.5,
+                    opacity: 0,
+                    scale: 3,
+                    y: 50,
+                    rotateX: -45,
+                    stagger: 0.05,
+                    ease: "back.out(2)",
+                    force3D: true,
+                    onComplete: () => {
+                        document.querySelectorAll('.hero-char').forEach(char => {
+                            char.addEventListener('mouseenter', () => {
+                                gsap.to(char, { scale: 1.4, color: "#00E5FF", textShadow: "0 0 20px #00E5FF", duration: 0.3 });
+                            });
+                            char.addEventListener('mouseleave', () => {
+                                gsap.to(char, { scale: 1, color: "white", textShadow: "none", duration: 0.5 });
+                            });
                         });
-                        char.addEventListener('mouseleave', () => {
-                            gsap.to(char, { scale: 1, color: "white", textShadow: "none", duration: 0.5 });
+                    }
+                });
+
+                const heroSection = document.querySelector('#hero');
+                if (heroSection) {
+                    heroSection.addEventListener('mousemove', (e) => {
+                        const { clientX } = e;
+                        const isLeft = clientX < window.innerWidth / 2;
+
+                        // Left focus
+                        gsap.to(["#pane-left-blur", "#pane-left-sharp"], {
+                            filter: isLeft ? "blur(0px)" : "blur(1px)",
+                            duration: 0.6,
+                            ease: "power1.out"
+                        });
+
+                        // Right focus
+                        gsap.to(["#pane-right-blur", "#pane-right-sharp"], {
+                            filter: isLeft ? "blur(1px)" : "blur(0px)",
+                            duration: 0.6,
+                            ease: "power1.out"
                         });
                     });
                 }
-            });
-
-            const heroSection = document.querySelector('#hero');
-            if (heroSection) {
-                heroSection.addEventListener('mousemove', (e) => {
-                    const { clientX } = e;
-                    const isLeft = clientX < window.innerWidth / 2;
-
-                    // Left focus
-                    gsap.to(["#pane-left-blur", "#pane-left-sharp"], {
-                        filter: isLeft ? "blur(0px)" : "blur(1px)",
-                        duration: 0.6,
-                        ease: "power1.out"
-                    });
-
-                    // Right focus
-                    gsap.to(["#pane-right-blur", "#pane-right-sharp"], {
-                        filter: isLeft ? "blur(1px)" : "blur(0px)",
-                        duration: 0.6,
-                        ease: "power1.out"
-                    });
-                });
             }
 
 
