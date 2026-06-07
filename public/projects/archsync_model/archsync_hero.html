@@ -59,7 +59,10 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        button, a, .floor-btn, .material-swatch {
+        button,
+        a,
+        .floor-btn,
+        .material-swatch {
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -392,12 +395,14 @@
         }
 
         /* ===== STICKY SECTION OVERLAP EFFECT ===== */
-        .sticky-section {
-            position: sticky !important;
-            top: 0 !important;
-            box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.8), 0 -15px 30px rgba(0, 0, 0, 0.6);
-            /* Ensure height is at least 100vh so it covers previous sections fully if shorter */
-            min-height: 100vh;
+        @media (min-width: 1024px) {
+            .sticky-section {
+                position: sticky !important;
+                top: 0 !important;
+                box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.8), 0 -15px 30px rgba(0, 0, 0, 0.6);
+                /* Ensure height is at least 100vh so it covers previous sections fully if shorter */
+                min-height: 100vh;
+            }
         }
 
         /* ===== SECTION TITLE STYLES ===== */
@@ -903,12 +908,13 @@
                 <div
                     class="absolute inset-0 bg-black mix-blend-multiply flex flex-col items-center justify-center text-center px-6">
                     <div class="w-full px-4" data-purpose="hero-text-block">
-                        <h2 class="text-[18vw] md:text-[15vw] font-black text-white uppercase tracking-tighter leading-[0.8] text-balance"
+                        <h2 class="text-[14vw] md:text-[10vw] font-black text-white uppercase tracking-tighter leading-[0.8] text-balance"
                             style="perspective: 1000px;">
-                            <span class="hero-title-line block" data-t-en="3D PRINT" data-t-pt="MODELO">3D PRINT</span>
-                            <span class="hero-title-line block" data-t-en="MODEL" data-t-pt="IMPRESSO 3D">MODEL</span>
-                            <span class="hero-title-line block" data-t-en="PHYSICAL" data-t-pt="PRECISÃO">PHYSICAL</span>
-                            <span class="hero-title-line block whitespace-nowrap" data-t-en="PRECISION" data-t-pt="FÍSICA">PRECISION</span>
+                            <span class="hero-title-line block" data-t-en="MODEL" data-t-pt="MODELO">MODEL</span>
+                            <span class="hero-title-line block" data-t-en="PRINT" data-t-pt="IMPRESSO">PRINT</span>
+                            <span class="hero-title-line block" data-t-en="3D" data-t-pt="3D">3D</span>
+                            <span class="hero-title-line block" data-t-en="PRECISION" data-t-pt="PRECISÃO">PRECISION</span>
+                            <span class="hero-title-line block whitespace-nowrap" data-t-en="PHYSICAL" data-t-pt="FÍSICA">PHYSICAL</span>
                         </h2>
 
                     </div>
@@ -925,13 +931,18 @@
         <div class="particles-container" id="viewer-particles"></div>
         <div class="max-w-7xl mx-auto relative z-10">
             <header class="mb-12 anim-fade-up">
-                <h2 class="text-4xl font-bold tracking-tight mb-2 section-title gsap-viewer-headline" data-t-en='Digital Twin <span class="text-brandCyan">Interactive</span> Viewer' data-t-pt='Visualizador <span class="text-brandCyan">Interativo</span> do Gémeo Digital'>Digital Twin <span class="text-brandCyan">Interactive</span> Viewer</h2>
-                <p class="text-softGrey/60 text-lg tracking-wide" data-t-en="Live ArchSync Model Visualization" data-t-pt="Visualização em Tempo Real do Modelo ArchSync">Live ArchSync Model Visualization</p>
+                <h2 class="text-4xl font-bold tracking-tight mb-2 section-title gsap-viewer-headline"
+                    data-t-en='Digital Twin <span class="text-brandCyan">Interactive</span> Viewer'
+                    data-t-pt='Visualizador <span class="text-brandCyan">Interativo</span> do Gémeo Digital'>Digital
+                    Twin <span class="text-brandCyan">Interactive</span> Viewer</h2>
+                <p class="text-softGrey/60 text-lg tracking-wide" data-t-en="Live ArchSync Model Visualization"
+                    data-t-pt="Visualização em Tempo Real do Modelo ArchSync">Live ArchSync Model Visualization</p>
             </header>
             <div class="relative rounded-2xl border-4 border-electricCyan/20 flex flex-col lg:block h-auto lg:h-[700px] group shadow-2xl anim-scale-in delay-200"
                 id="interactive-viewer-container">
                 <!-- Canvas Wrapper -->
-                <div class="relative w-full h-[300px] sm:h-[450px] lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
+                <div
+                    class="relative w-full h-[300px] sm:h-[450px] lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
                     <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
                         id="sequence-canvas"></canvas>
                 </div>
@@ -940,69 +951,106 @@
                     class="glass-panel lg:absolute lg:right-6 lg:top-6 lg:bottom-6 lg:w-80 w-full rounded-b-xl lg:rounded-xl p-6 flex flex-col space-y-6 lg:space-y-8 text-sm relative z-20"
                     data-purpose="controls-panel">
                     <div class="text-center">
-                        <h3 class="text-white/90 font-semibold text-base uppercase tracking-widest" data-t-en="Sync Controls" data-t-pt="Controlos de Sincronização">Sync Controls</h3>
+                        <h3 class="text-white/90 font-semibold text-base uppercase tracking-widest"
+                            data-t-en="Sync Controls" data-t-pt="Controlos de Sincronização">Sync Controls</h3>
                     </div>
                     <section>
-                        <label class="block text-softGrey mb-4 font-medium uppercase tracking-wider text-[10px]" data-t-en="Building Floor Select" data-t-pt="Seleção de Piso">Building Floor Select</label>
+                        <label class="block text-softGrey mb-4 font-medium uppercase tracking-wider text-[10px]"
+                            data-t-en="Building Floor Select" data-t-pt="Seleção de Piso">Building Floor Select</label>
                         <div class="grid grid-cols-3 gap-2">
                             <button
                                 class="floor-btn active flex flex-col items-center justify-center p-2 bg-black/40 border border-brandCyan/50 rounded-lg text-white transition-all duration-300 group"
                                 data-floor="all">
-                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Full" data-t-pt="Completo">Full</span>
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Full"
+                                    data-t-pt="Completo">Full</span>
                                 <div class="w-1 h-1 rounded-full bg-brandCyan shadow-[0_0_8px_#00E5FF]"></div>
                             </button>
                             <button
                                 class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-brandCyan/30 transition-all duration-300 group"
                                 data-floor="1">
-                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 1" data-t-pt="Piso 1">Floor 1</span>
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 1"
+                                    data-t-pt="Piso 1">Floor 1</span>
                                 <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
                             </button>
                             <button
                                 class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-brandCyan/30 transition-all duration-300 group"
                                 data-floor="2">
-                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 2" data-t-pt="Piso 2">Floor 2</span>
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 2"
+                                    data-t-pt="Piso 2">Floor 2</span>
                                 <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
                             </button>
                             <button
                                 class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-brandCyan/30 transition-all duration-300 group"
                                 data-floor="3">
-                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 3" data-t-pt="Piso 3">Floor 3</span>
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 3"
+                                    data-t-pt="Piso 3">Floor 3</span>
                                 <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
                             </button>
                             <button
                                 class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-brandCyan/30 transition-all duration-300 group"
                                 data-floor="4">
-                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 4" data-t-pt="Piso 4">Floor 4</span>
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t-en="Floor 4"
+                                    data-t-pt="Piso 4">Floor 4</span>
                                 <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
                             </button>
                         </div>
                     </section>
                     <section class="flex-grow flex flex-col min-h-0">
-                        <label class="block text-softGrey mb-2 font-medium text-[10px] uppercase tracking-widest flex-shrink-0" data-t-en="3D Asset Sync" data-t-pt="Sincronização 3D">3D Asset Sync</label>
-                        <div class="relative rounded-lg overflow-hidden flex-grow min-h-[150px] border border-white/10 bg-black/60 shadow-inner group/viewer">
+                        <label
+                            class="block text-softGrey mb-2 font-medium text-[10px] uppercase tracking-widest flex-shrink-0"
+                            data-t-en="3D Asset Sync" data-t-pt="Sincronização 3D">3D Asset Sync</label>
+                        <div
+                            class="relative rounded-lg overflow-hidden h-[250px] lg:h-auto lg:flex-grow lg:min-h-[150px] border border-white/10 bg-black/60 shadow-inner group/viewer">
+                            <!-- Premium Loading Overlay -->
+                            <div id="viewer-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-black/85 z-30 transition-opacity duration-500 pointer-events-none">
+                                <div class="flex items-center gap-3">
+                                    <svg class="animate-spin h-5 w-5 text-brandCyan" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    <span class="text-xs uppercase font-mono tracking-widest text-white" data-t-en="Loading 3D Model..." data-t-pt="A carregar modelo 3D...">Loading 3D Model...</span>
+                                </div>
+                                <div class="w-32 h-1 bg-white/10 rounded-full mt-3 overflow-hidden">
+                                    <div id="viewer-progress-bar" class="h-full bg-brandCyan w-0 transition-all duration-300"></div>
+                                </div>
+                            </div>
                             <model-viewer id="building-viewer" src="3d_assets/3d_building.gltf" alt="3D Building Model"
                                 camera-controls environment-image="images/urban_courtyard_02_1k.hdr" exposure="1.2"
                                 shadow-intensity="1" shadow-softness="1"
                                 style="width: 100%; height: 100%; background-color: transparent;"
                                 interaction-prompt="none" camera-orbit="-100deg 85deg auto"
-                                min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto"
-                                loading="lazy">
+                                min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto" loading="lazy">
                             </model-viewer>
                         </div>
- 
+
                         <!-- Interaction Legend (Below) -->
-                        <div class="mt-3 px-3 py-2 bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 flex flex-wrap justify-center gap-x-4 gap-y-1 flex-shrink-0">
-                            <span class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse" style="animation-duration: 2s;"></span>
-                                <span data-t-en='Left Click + Drag: <span class="text-brandCyan font-normal">Rotate</span>' data-t-pt='Clique Esq + Arrastar: <span class="text-brandCyan font-normal">Rodar</span>'>Left Click + Drag: <span class="text-brandCyan font-normal">Rotate</span></span>
+                        <div
+                            class="mt-3 px-3 py-2 bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 flex flex-wrap justify-center gap-x-4 gap-y-1 flex-shrink-0">
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse"
+                                    style="animation-duration: 2s;"></span>
+                                <span
+                                    data-t-en='Left Click + Drag: <span class="text-brandCyan font-normal">Rotate</span>'
+                                    data-t-pt='Clique Esq + Arrastar: <span class="text-brandCyan font-normal">Rodar</span>'>Left
+                                    Click + Drag: <span class="text-brandCyan font-normal">Rotate</span></span>
                             </span>
-                            <span class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse" style="animation-duration: 2s; animation-delay: 0.5s;"></span>
-                                <span data-t-en='Scroll Wheel: <span class="text-brandCyan font-normal">Zoom</span>' data-t-pt='Roda do Rato: <span class="text-brandCyan font-normal">Aproximar</span>'>Scroll Wheel: <span class="text-brandCyan font-normal">Zoom</span></span>
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse"
+                                    style="animation-duration: 2s; animation-delay: 0.5s;"></span>
+                                <span data-t-en='Scroll Wheel: <span class="text-brandCyan font-normal">Zoom</span>'
+                                    data-t-pt='Roda do Rato: <span class="text-brandCyan font-normal">Aproximar</span>'>Scroll
+                                    Wheel: <span class="text-brandCyan font-normal">Zoom</span></span>
                             </span>
-                            <span class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse" style="animation-duration: 2s; animation-delay: 1s;"></span>
-                                <span data-t-en='Right Click + Drag: <span class="text-brandCyan font-normal">Pan</span>' data-t-pt='Clique Dir + Arrastar: <span class="text-brandCyan font-normal">Mover</span>'>Right Click + Drag: <span class="text-brandCyan font-normal">Pan</span></span>
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse"
+                                    style="animation-duration: 2s; animation-delay: 1s;"></span>
+                                <span
+                                    data-t-en='Right Click + Drag: <span class="text-brandCyan font-normal">Pan</span>'
+                                    data-t-pt='Clique Dir + Arrastar: <span class="text-brandCyan font-normal">Mover</span>'>Right
+                                    Click + Drag: <span class="text-brandCyan font-normal">Pan</span></span>
                             </span>
                         </div>
                     </section>
@@ -1018,8 +1066,15 @@
         <div class="max-w-7xl mx-auto relative z-10 text-center">
             <div class="mb-10 anim-fade-up">
 
-                <h2 class="text-5xl md:text-6xl font-black mb-8 leading-tight section-title window-reveal" data-t-en='Witness the <span class="text-brandCyan">Convergence</span> in Real-time.' data-t-pt='Testemunhe a <span class="text-brandCyan">Convergência</span> em Tempo Real.'>Witness the <span class="text-brandCyan">Convergence</span> in Real-time.</h2>
-                <p class="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto mb-6 window-reveal" data-t-en="See how ArchSync transforms physical movements into digital actions. Our proprietary live-sync engine handles complex spatial data with zero latency." data-t-pt="Veja como o ArchSync transforma movimentos físicos em ações digitais. O nosso motor de sincronização lida com dados espaciais complexos com latência zero.">See how ArchSync transforms physical movements into digital actions. Our proprietary live-sync engine handles complex spatial data with zero latency.</p>
+                <h2 class="text-5xl md:text-6xl font-black mb-8 leading-tight section-title window-reveal"
+                    data-t-en='Witness the <span class="text-brandCyan">Convergence</span> in Real-time.'
+                    data-t-pt='Testemunhe a <span class="text-brandCyan">Convergência</span> em Tempo Real.'>Witness the
+                    <span class="text-brandCyan">Convergence</span> in Real-time.</h2>
+                <p class="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto mb-6 window-reveal"
+                    data-t-en="See how ArchSync transforms physical movements into digital actions. Our proprietary live-sync engine handles complex spatial data with zero latency."
+                    data-t-pt="Veja como o ArchSync transforma movimentos físicos em ações digitais. O nosso motor de sincronização lida com dados espaciais complexos com latência zero.">
+                    See how ArchSync transforms physical movements into digital actions. Our proprietary live-sync
+                    engine handles complex spatial data with zero latency.</p>
             </div>
 
             <!-- Massive Video Container -->
@@ -1054,8 +1109,13 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2 window-reveal" data-t-en="High-Fidelity Tracking" data-t-pt="Rastreamento de Alta Fidelidade">High-Fidelity Tracking</h4>
-                            <p class="text-white/50 leading-relaxed window-reveal" data-t-en="Optical sensors capture every nuance of the physical model's state with sub-millimeter precision." data-t-pt="Sensores óticos capturam cada detalhe do estado do modelo físico com precisão sub-milimétrica.">Optical sensors capture every nuance of the physical model's state with sub-millimeter precision.</p>
+                            <h4 class="font-bold text-xl mb-2 window-reveal" data-t-en="High-Fidelity Tracking"
+                                data-t-pt="Rastreamento de Alta Fidelidade">High-Fidelity Tracking</h4>
+                            <p class="text-white/50 leading-relaxed window-reveal"
+                                data-t-en="Optical sensors capture every nuance of the physical model's state with sub-millimeter precision."
+                                data-t-pt="Sensores óticos capturam cada detalhe do estado do modelo físico com precisão sub-milimétrica.">
+                                Optical sensors capture every nuance of the physical model's state with sub-millimeter
+                                precision.</p>
                         </div>
                     </div>
                 </div>
@@ -1071,8 +1131,13 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2 window-reveal" data-t-en="Instant Feedback" data-t-pt="Feedback Instantâneo">Instant Feedback</h4>
-                            <p class="text-white/50 leading-relaxed window-reveal" data-t-en="Digital twins react within milliseconds to any physical modification, creating a truly phygital loop." data-t-pt="Os gémeos digitais reagem em milissegundos a qualquer modificação física, criando um verdadeiro ciclo phygital.">Digital twins react within milliseconds to any physical modification, creating a truly phygital loop.</p>
+                            <h4 class="font-bold text-xl mb-2 window-reveal" data-t-en="Instant Feedback"
+                                data-t-pt="Feedback Instantâneo">Instant Feedback</h4>
+                            <p class="text-white/50 leading-relaxed window-reveal"
+                                data-t-en="Digital twins react within milliseconds to any physical modification, creating a truly phygital loop."
+                                data-t-pt="Os gémeos digitais reagem em milissegundos a qualquer modificação física, criando um verdadeiro ciclo phygital.">
+                                Digital twins react within milliseconds to any physical modification, creating a truly
+                                phygital loop.</p>
                         </div>
                     </div>
                 </div>
@@ -1085,11 +1150,17 @@
         <main
             class="max-w-7xl mx-auto border border-gray-200 rounded-[2rem] p-8 md:p-16 shadow-sm relative overflow-hidden anim-scale-in">
             <header class="text-center mb-20 anim-fade-up">
-                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight section-title gsap-headline" data-t-en='Technical Specs &amp; <span class="text-brandCyan">Blueprint</span> Details' data-t-pt='Especificações Técnicas &amp; Detalhes do <span class="text-brandCyan">Blueprint</span>'>Technical
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight section-title gsap-headline"
+                    data-t-en='Technical Specs &amp; <span class="text-brandCyan">Blueprint</span> Details'
+                    data-t-pt='Especificações Técnicas &amp; Detalhes do <span class="text-brandCyan">Blueprint</span>'>
+                    Technical
                     Specs &amp;
                     <span class="text-brandCyan">Blueprint</span> Details
                 </h2>
-                <p class="text-gray-400 text-xl font-light" data-t-en="Precision engineering meets digital intelligence." data-t-pt="A engenharia de precisão encontra a inteligência digital.">Precision engineering meets digital intelligence.</p>
+                <p class="text-gray-400 text-xl font-light"
+                    data-t-en="Precision engineering meets digital intelligence."
+                    data-t-pt="A engenharia de precisão encontra a inteligência digital.">Precision engineering meets
+                    digital intelligence.</p>
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16 relative">
@@ -1106,7 +1177,8 @@
 
                 <!-- HARDWARE -->
                 <div class="space-y-12">
-                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up" data-t-en="Hardware Components" data-t-pt="Componentes de Hardware">Hardware Components</h3>
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up"
+                        data-t-en="Hardware Components" data-t-pt="Componentes de Hardware">Hardware Components</h3>
                     <div
                         class="blueprint-border tilt-card p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
                         <div
@@ -1116,8 +1188,12 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4JGIuszX1PJHahcgfbFmGhfWslckVpdrrXW3FB63bGEfZ1BuRkpzGykz3dopw0nOZK1JXqyKfFnDGV4UH_Cp-pD6klbs5TWFpU5u7kogRPbJ-DYs4GcgyJTqEfBqsv9yefEnueCjoHu1d7KXhJGHM6tR8Nw120oKhUGphWw84-qIUVFfQjSmpy5C04kOAFASI4qPjtZgovRgKSH3uEatvMKll68H_W1Vi-_kXoJ8G2ePwtITSjjG85IIYuERP28c4eFG0AxQGu_A" />
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2" data-t-en="Microcontrollers" data-t-pt="Microcontroladores">Microcontrollers</h4>
-                            <p class="text-sm text-gray-500" data-t-en="wireless communication and real-time processing." data-t-pt="Comunicação sem fios e processamento em tempo real.">wireless communication and real-time processing.</p>
+                            <h4 class="font-bold text-xl mb-2" data-t-en="Microcontrollers"
+                                data-t-pt="Microcontroladores">Microcontrollers</h4>
+                            <p class="text-sm text-gray-500"
+                                data-t-en="wireless communication and real-time processing."
+                                data-t-pt="Comunicação sem fios e processamento em tempo real.">wireless communication
+                                and real-time processing.</p>
                         </div>
                     </div>
                     <div
@@ -1129,8 +1205,12 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfCbo8gxhNr-5ARPjKa3IvBahG3fglcpaUWlD_qE9Sowv-RXMHFo5a1qm_BK4XnXl_mi-OvhS0kBuMIt7YJqM2EO_dEX8k-Er_AqxODByqpz-CQzPrlM25li_TVGV2eWgmsfyIfJHL1ZF2ofHcALBANXwzlqc9G0dIo2EuwOuy0nPBUkjD9sx_nXcpup7dUR4MHfEq9H89GyaTWpIrnXmMAt1sQRrAL7LXrQXIaws3ROsDUnCOvZhqZh5h7fsVsba-H1hknMDnP-4" />
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2" data-t-en="3D Print" data-t-pt="Impressão 3D">3D Print</h4>
-                            <p class="text-sm text-gray-500" data-t-en="Eco-friendly precision components with high structural durability." data-t-pt="Componentes de precisão ecológicos com elevada durabilidade estrutural.">Eco-friendly precision components with high structural
+                            <h4 class="font-bold text-xl mb-2" data-t-en="3D Print" data-t-pt="Impressão 3D">3D Print
+                            </h4>
+                            <p class="text-sm text-gray-500"
+                                data-t-en="Eco-friendly precision components with high structural durability."
+                                data-t-pt="Componentes de precisão ecológicos com elevada durabilidade estrutural.">
+                                Eco-friendly precision components with high structural
                                 durability.</p>
                         </div>
                     </div>
@@ -1138,7 +1218,8 @@
 
                 <!-- SOFTWARE -->
                 <div class="space-y-12">
-                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up" data-t-en="Software Engine" data-t-pt="Motor de Software">Software Engine
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 anim-fade-up"
+                        data-t-en="Software Engine" data-t-pt="Motor de Software">Software Engine
                     </h3>
                     <div
                         class="blueprint-border tilt-card p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:gap-8 bg-white hover:shadow-xl transition-all duration-300 group anim-fade-up delay-100">
@@ -1149,8 +1230,12 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA6vqyWAtMCFwxXoZ7N9gosbjJb4GCzVfYVDqphNBTlHT-FJpT7r4EEqChOL65hXiy2xWy2VwUzusCvwkHTRT_HOzJIxL2TLqzZq9VIdald9Dv9oP2YRs3Z87xSWd7nR71Ne7uBzyQzWaMeoSGy8kiH3xhicLF7d2jsU0qa4lO7AAnrg6wDKdTK0I4K42GC9n39PuhY5HbAx9WyQ7P_L3vTlh2djXxcdnpojM6PlVnOzDg34T2KpXOiYC_ZYVpB8jpeFuFzYMCGzE" />
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2" data-t-en="Real-time Rendering" data-t-pt="Renderização em Tempo Real">Real-time Rendering</h4>
-                            <p class="text-sm text-gray-500" data-t-en="WebGL-powered visualization for instant digital twin synchronization." data-t-pt="Visualização baseada em WebGL para sincronização instantânea do gémeo digital.">WebGL-powered visualization for instant digital twin
+                            <h4 class="font-bold text-xl mb-2" data-t-en="Real-time Rendering"
+                                data-t-pt="Renderização em Tempo Real">Real-time Rendering</h4>
+                            <p class="text-sm text-gray-500"
+                                data-t-en="WebGL-powered visualization for instant digital twin synchronization."
+                                data-t-pt="Visualização baseada em WebGL para sincronização instantânea do gémeo digital.">
+                                WebGL-powered visualization for instant digital twin
                                 synchronization.</p>
                         </div>
                     </div>
@@ -1163,8 +1248,12 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmA6bscYlwwBeCJKLpAJEkOZ4e9CIVDNG1ayHG2Er-_Qlp6teD7bN59U5hN1QdbdwYeL867zu7l6Sa5IrAZt5l9TIPJ2OudPW6RNk1hfwHuyMMz0qfItq3iog3faqHlmam20hOEcTutwFnV5k3q_6VBZKtmdblZdw0Nk7knx3beCzV6h-5uSmOMx_akFy1LLkqzrNUcb1iwv-OAalHRBDpuNijdNtA--mmEYi3e8qr9Ju8JKqzSIvup2geKPPsQ5KqtJ9tEIZp9yo" />
                         </div>
                         <div>
-                            <h4 class="font-bold text-xl mb-2" data-t-en="Sensor Mapping" data-t-pt="Mapeamento de Sensores">Sensor Mapping</h4>
-                            <p class="text-sm text-gray-500" data-t-en="Advanced gesture recognition and spatial tracking for natural interaction." data-t-pt="Reconhecimento avançado de gestos e rastreamento espacial para interação natural.">Advanced gesture recognition and spatial tracking for
+                            <h4 class="font-bold text-xl mb-2" data-t-en="Sensor Mapping"
+                                data-t-pt="Mapeamento de Sensores">Sensor Mapping</h4>
+                            <p class="text-sm text-gray-500"
+                                data-t-en="Advanced gesture recognition and spatial tracking for natural interaction."
+                                data-t-pt="Reconhecimento avançado de gestos e rastreamento espacial para interação natural.">
+                                Advanced gesture recognition and spatial tracking for
                                 natural interaction.</p>
                         </div>
                     </div>
@@ -1179,10 +1268,14 @@
         <div class="particles-container" id="apps-particles"></div>
         <div class="max-w-7xl mx-auto relative z-10">
             <header class="text-center mb-16 anim-fade-up">
-                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight section-title gsap-headline" data-t-en='Limitless <span class="text-brandCyan">Applications</span>' data-t-pt='<span class="text-brandCyan">Aplicações</span> Ilimitadas'>Limitless
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight section-title gsap-headline"
+                    data-t-en='Limitless <span class="text-brandCyan">Applications</span>'
+                    data-t-pt='<span class="text-brandCyan">Aplicações</span> Ilimitadas'>Limitless
                     <span class="text-brandCyan">Applications</span>
                 </h2>
-                <p class="text-white/50 text-xl font-light" data-t-en="Transforming how we communicate spatial ideas." data-t-pt="Transformando a forma como comunicamos ideias espaciais.">Transforming how we communicate spatial ideas.</p>
+                <p class="text-white/50 text-xl font-light" data-t-en="Transforming how we communicate spatial ideas."
+                    data-t-pt="Transformando a forma como comunicamos ideias espaciais.">Transforming how we communicate
+                    spatial ideas.</p>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1197,8 +1290,12 @@
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4" data-t-en="Architecture Studios" data-t-pt="Estúdios de Arquitetura">Architecture Studios</h3>
-                    <p class="text-white/40 leading-relaxed" data-t-en="Present complex projects to clients with an interactive physical-digital interface that simplifies spatial understanding." data-t-pt="Apresente projetos complexos a clientes com uma interface físico-digital interativa que simplifica a compreensão espacial.">Present complex projects to clients with an interactive
+                    <h3 class="text-2xl font-bold mb-4" data-t-en="Architecture Studios"
+                        data-t-pt="Estúdios de Arquitetura">Architecture Studios</h3>
+                    <p class="text-white/40 leading-relaxed"
+                        data-t-en="Present complex projects to clients with an interactive physical-digital interface that simplifies spatial understanding."
+                        data-t-pt="Apresente projetos complexos a clientes com uma interface físico-digital interativa que simplifica a compreensão espacial.">
+                        Present complex projects to clients with an interactive
                         physical-digital interface that simplifies spatial understanding.</p>
                 </div>
 
@@ -1213,8 +1310,12 @@
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4" data-t-en="Urban Planning" data-t-pt="Planeamento Urbano">Urban Planning</h3>
-                    <p class="text-white/40 leading-relaxed" data-t-en="Visualize city districts, circulation patterns, and environmental impacts across entire neighborhoods in real-time." data-t-pt="Visualize bairros, padrões de circulação e impactos ambientais em vizinhanças inteiras em tempo real.">Visualize city districts, circulation patterns, and
+                    <h3 class="text-2xl font-bold mb-4" data-t-en="Urban Planning" data-t-pt="Planeamento Urbano">Urban
+                        Planning</h3>
+                    <p class="text-white/40 leading-relaxed"
+                        data-t-en="Visualize city districts, circulation patterns, and environmental impacts across entire neighborhoods in real-time."
+                        data-t-pt="Visualize bairros, padrões de circulação e impactos ambientais em vizinhanças inteiras em tempo real.">
+                        Visualize city districts, circulation patterns, and
                         environmental impacts across entire neighborhoods in real-time.</p>
                 </div>
 
@@ -1229,8 +1330,13 @@
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4" data-t-en="Museums & Retail" data-t-pt="Museus & Retalho">Museums & Retail</h3>
-                    <p class="text-white/40 leading-relaxed" data-t-en="Create immersive, educational installations that engage visitors through tactile interaction and stunning visual feedback." data-t-pt="Crie instalações imersivas e educativas que envolvem os visitantes através de interação tátil e feedback visual impressionante.">Create immersive, educational installations that engage visitors through tactile interaction and stunning visual feedback.</p>
+                    <h3 class="text-2xl font-bold mb-4" data-t-en="Museums & Retail" data-t-pt="Museus & Retalho">
+                        Museums & Retail</h3>
+                    <p class="text-white/40 leading-relaxed"
+                        data-t-en="Create immersive, educational installations that engage visitors through tactile interaction and stunning visual feedback."
+                        data-t-pt="Crie instalações imersivas e educativas que envolvem os visitantes através de interação tátil e feedback visual impressionante.">
+                        Create immersive, educational installations that engage visitors through tactile interaction and
+                        stunning visual feedback.</p>
                 </div>
             </div>
         </div>
@@ -1692,12 +1798,8 @@
             gsap.registerPlugin(ScrollTrigger);
 
             // Dynamic Iframe and Lazy Video Loader
-            const isMobile = window.innerWidth < 1024;
             const heroIframes = document.querySelectorAll('#hero iframe[data-src]');
             heroIframes.forEach(iframe => {
-                if (isMobile && (iframe.classList.contains('blur-3xl') || iframe.closest('#hero-bg-blurred'))) {
-                    return; // Avoid heavy duplicate/blurred background videos on mobile
-                }
                 iframe.setAttribute('src', iframe.getAttribute('data-src'));
             });
 
@@ -1722,15 +1824,49 @@
 
             // Pause model-viewer when it is scrolled out of viewport
             const viewerEl = document.getElementById('building-viewer');
-            if (viewerEl && 'IntersectionObserver' in window) {
-                const viewerObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            viewerEl.removeAttribute('loading'); // load if lazy
-                        }
-                    });
-                }, { threshold: 0.1 });
-                viewerObserver.observe(viewerEl);
+            const loaderEl = document.getElementById('viewer-loading');
+            const progressBar = document.getElementById('viewer-progress-bar');
+
+            if (viewerEl) {
+                // Force load model on mobile immediately since lazy loading is unreliable with mobile layouts
+                if (window.innerWidth < 1024) {
+                    viewerEl.setAttribute('loading', 'eager');
+                }
+
+                if ('IntersectionObserver' in window) {
+                    const viewerObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                viewerEl.removeAttribute('loading'); // load if lazy
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    viewerObserver.observe(viewerEl);
+                }
+
+                // Update loader progress & fade out on completion
+                viewerEl.addEventListener('progress', (event) => {
+                    const progress = event.detail.totalProgress;
+                    if (progressBar) {
+                        progressBar.style.width = `${progress * 100}%`;
+                    }
+                    if (progress === 1 && loaderEl) {
+                        setTimeout(() => {
+                            loaderEl.classList.add('opacity-0');
+                        }, 500);
+                    }
+                });
+
+                viewerEl.addEventListener('load', () => {
+                    if (progressBar) {
+                        progressBar.style.width = '100%';
+                    }
+                    if (loaderEl) {
+                        setTimeout(() => {
+                            loaderEl.classList.add('opacity-0');
+                        }, 500);
+                    }
+                });
             }
 
             // Initialize default language as PT
@@ -1900,21 +2036,24 @@
                     ease: "power4.out"
                 });
             });
-            // 11. Custom Pinning for Process Section (Stick when bottom hits bottom)
-            ScrollTrigger.create({
-                trigger: "#process",
-                start: "bottom bottom",
-                pin: true,
-                pinSpacing: false
-            });
+            // Apply pinning only on desktop viewports to prevent content cutoff and scroll issues on mobile
+            if (window.innerWidth >= 1024) {
+                // 11. Custom Pinning for Process Section (Stick when bottom hits bottom)
+                ScrollTrigger.create({
+                    trigger: "#process",
+                    start: "bottom bottom",
+                    pin: true,
+                    pinSpacing: false
+                });
 
-            // 12. Custom Pinning for Viewer Section (Stick when bottom hits bottom)
-            ScrollTrigger.create({
-                trigger: "#viewer",
-                start: "bottom bottom",
-                pin: true,
-                pinSpacing: false
-            });
+                // 12. Custom Pinning for Viewer Section (Stick when bottom hits bottom)
+                ScrollTrigger.create({
+                    trigger: "#viewer",
+                    start: "bottom bottom",
+                    pin: true,
+                    pinSpacing: false
+                });
+            }
         });
 
 
