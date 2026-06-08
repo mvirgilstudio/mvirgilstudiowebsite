@@ -1004,7 +1004,7 @@
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                     GreenHaven
                                 </div>
                             </div>
@@ -1029,7 +1029,7 @@
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                     LiveSpace
                                 </div>
                             </div>
@@ -1054,7 +1054,7 @@
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                     Bridge Garden
                                 </div>
                             </div>
@@ -1079,7 +1079,7 @@
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
-                                    class="absolute top-6 left-6 z-30 font-headline-md text-sm md:text-base uppercase tracking-wider text-white bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 pointer-events-none">
+                                    class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                     Modern Bungalow
                                 </div>
                             </div>
@@ -2833,8 +2833,9 @@
                 card.addEventListener('click', (e) => {
                     const isBtnClick = e.target.closest('.lightbox-btn');
                     const isAlreadyActive = card.classList.contains('active');
+                    const isVideoGallery = card.closest('#video-gallery');
 
-                    if (isBtnClick || isAlreadyActive) {
+                    if (isBtnClick || isAlreadyActive || isVideoGallery) {
                         const index = parseInt(card.getAttribute('data-index') || '0', 10);
                         if (index) {
                             window.openLightboxByIndex(index);
