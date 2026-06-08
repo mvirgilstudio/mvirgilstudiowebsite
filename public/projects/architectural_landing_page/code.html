@@ -603,15 +603,39 @@
                     class="text-xs font-mono uppercase tracking-[0.2em] text-[#b0b0b0] hover:text-white transition-colors relative focus:outline-none mr-2 cursor-pointer">
                     EN
                 </button>
-                <div class="text-[10px] font-mono tracking-widest text-[#b0b0b0] uppercase" data-t="nav_menu">MENU</div>
-                <div class="w-6 h-4 relative flex flex-col justify-between">
-                    <span class="w-full h-[1px] bg-white"></span>
-                    <span class="w-full h-[1px] bg-white"></span>
-                    <span class="w-full h-[1px] bg-white"></span>
-                </div>
+                <button class="flex items-center gap-2 sm:gap-4 pointer-events-auto py-2 px-1 focus:outline-none cursor-pointer" id="mobile-menu-btn"
+                    onclick="toggleMenu()">
+                    <span class="text-[10px] font-mono tracking-widest text-[#b0b0b0] uppercase"
+                        id="menu-text" data-t="nav_menu">MENU</span>
+                    <div class="relative w-6 h-4 group cursor-pointer">
+                        <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-0"
+                            id="hamburger-top"></span>
+                        <span class="absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2"
+                            id="hamburger-mid"></span>
+                        <span class="absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out top-4"
+                            id="hamburger-bottom"></span>
+                    </div>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 min-h-screen bg-neutral-900/95 backdrop-blur-md z-[45] flex flex-col justify-center p-8 lg:hidden pointer-events-none opacity-0 transition-all duration-500 translate-x-full">
+        <div class="flex flex-col gap-8 sm:gap-12 max-w-sm mx-auto w-full pointer-events-auto text-center">
+            <a href="/#about" onclick="toggleMenu()"
+                class="text-2xl sm:text-4xl font-orbitron font-bold text-white uppercase tracking-widest hover:opacity-50 transition-opacity cursor-pointer flex justify-center items-center gap-4 group no-underline">
+                <span class="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">01</span>
+                <span data-t="nav_about">ABOUT</span>
+            </a>
+            <a href="#contact-sec" onclick="toggleMenu()"
+                class="text-2xl sm:text-4xl font-orbitron font-bold text-white uppercase tracking-widest hover:opacity-50 transition-opacity cursor-pointer flex justify-center items-center gap-4 group no-underline">
+                <span class="text-xs font-mono text-[#b0b0b0] group-hover:text-white transition-colors">02</span>
+                <span data-t="nav_contact">CONTACT</span>
+            </a>
+        </div>
+    </div>
     <!-- Section 1: Hero & Overlapping Content -->
     <section class="relative w-full">
         <!-- Hero Background Canvas with Masking -->
@@ -2378,6 +2402,14 @@
             if (desktopBtn) desktopBtn.textContent = currentLang;
             if (mobileBtn) mobileBtn.textContent = currentLang;
 
+            // Sync menu text if toggle language changes it
+            const menuText = document.getElementById('menu-text');
+            const menu = document.getElementById('mobile-menu');
+            if (menuText && menu) {
+                const isOpen = !menu.classList.contains('translate-x-full');
+                menuText.textContent = isOpen ? (currentLang === 'PT' ? 'FECHAR' : 'CLOSE') : 'MENU';
+            }
+
             // Set HTML lang attribute
             document.documentElement.lang = currentLang.toLowerCase();
 
@@ -2398,6 +2430,46 @@
         window.toggleLang = function () {
             currentLang = currentLang === 'PT' ? 'EN' : 'PT';
             updateLanguage();
+        }
+
+        window.toggleMenu = function () {
+            const menu = document.getElementById('mobile-menu');
+            const menuText = document.getElementById('menu-text');
+            const hamburgerTop = document.getElementById('hamburger-top');
+            const hamburgerMid = document.getElementById('hamburger-mid');
+            const hamburgerBottom = document.getElementById('hamburger-bottom');
+
+            if (!menu) return;
+
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (!isOpen) {
+                menu.classList.remove('pointer-events-none', 'translate-x-full');
+                menu.classList.add('translate-x-0', 'opacity-100');
+                if (menuText) menuText.textContent = currentLang === 'PT' ? 'FECHAR' : 'CLOSE';
+                if (hamburgerTop) {
+                    hamburgerTop.style.top = '8px';
+                    hamburgerTop.style.transform = 'rotate(45deg)';
+                }
+                if (hamburgerMid) hamburgerMid.style.opacity = '0';
+                if (hamburgerBottom) {
+                    hamburgerBottom.style.top = '8px';
+                    hamburgerBottom.style.transform = 'rotate(-45deg)';
+                }
+            } else {
+                menu.classList.remove('translate-x-0', 'opacity-100');
+                menu.classList.add('translate-x-full', 'pointer-events-none');
+                if (menuText) menuText.textContent = currentLang === 'PT' ? 'MENU' : 'MENU';
+                if (hamburgerTop) {
+                    hamburgerTop.style.top = '0';
+                    hamburgerTop.style.transform = 'none';
+                }
+                if (hamburgerMid) hamburgerMid.style.opacity = '1';
+                if (hamburgerBottom) {
+                    hamburgerBottom.style.top = '16px';
+                    hamburgerBottom.style.transform = 'none';
+                }
+            }
         }
 
         let heroAnim = null;
