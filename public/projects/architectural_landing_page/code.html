@@ -553,6 +553,11 @@
                 opacity: 1;
             }
         }
+
+        .video-container:fullscreen .exit-fullscreen-btn,
+        .video-container:-webkit-full-screen .exit-fullscreen-btn {
+            display: flex !important;
+        }
     </style>
 </head>
 
@@ -703,7 +708,7 @@
                     <div class="flex flex-col gap-1">
                         <h4 data-t="nav_s02_title"
                             class="font-headline-md text-lg uppercase text-[#1a1a1a] tracking-wider transition-transform duration-500 group-hover:translate-x-1">
-                            Digital Twin Experience</h4>
+                            immersive experience<br>real objects interaction</h4>
                         <p data-t="nav_s02_desc"
                             class="text-[11px] text-secondary font-body-md leading-normal opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-12 transition-all duration-500">
                             Physical-to-digital real-time sync systems.</p>
@@ -1236,11 +1241,6 @@
                                     class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">
                                     House
                                     Project</h4>
-                                <p data-t="interactive_proj1_desc"
-                                    class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
-                                    Explore the virtual interactive system for House, featuring multi-room setup,
-                                    smart spaces and high-fidelity rendering.
-                                </p>
                                 <div
                                     class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj1_btn">Enter 360 Panorama</span>
@@ -1284,11 +1284,6 @@
                                     class="font-headline-md text-base md:text-3xl text-white uppercase mb-0 md:mb-2 font-medium">
                                     Tent
                                     Project</h4>
-                                <p data-t="interactive_proj2_desc"
-                                    class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
-                                    Immerse yourself in nature with our high-end glamping structures, showing
-                                    structural canvas layouts and forest views.
-                                </p>
                                 <div
                                     class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj2_btn">Enter 360 Panorama</span>
@@ -1333,11 +1328,6 @@
                                     Bridge
                                     Garden
                                     Project</h4>
-                                <p data-t="interactive_proj3_desc"
-                                    class="text-xs text-white/70 font-body-md max-w-sm mb-4 md:block hidden">
-                                    Experience the modern, forest-integrated Bridge Garden residence with seamless
-                                    transition and raw materials.
-                                </p>
                                 <div
                                     class="flex items-center gap-2 text-white font-body-md text-xs uppercase tracking-wider font-normal border-b border-white/30 pb-0.5 w-fit group/btn hover:border-white transition-colors duration-300 hidden md:flex">
                                     <span data-t="interactive_proj3_btn">Enter 360 Panorama</span>
@@ -1454,7 +1444,7 @@
                     02 /
                 </h4>
                 <h2 data-t="twin_title"
-                    class="font-headline-lg text-3xl md:text-5xl uppercase text-white leading-tight">Immersive Experience</h2>
+                    class="font-headline-lg text-3xl md:text-5xl uppercase text-white leading-tight">immersive experience<br>real objects interaction</h2>
             </div>
 
             <!-- Grid Layout -->
@@ -1482,13 +1472,19 @@
                         <div class="accordion-card group relative w-full md:w-auto h-24 md:h-full flex-none md:flex-1 overflow-hidden bg-neutral-900 border border-white/10 cursor-pointer active"
                             data-index="5">
                             <!-- Background Video -->
-                            <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
+                            <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none video-container bg-black">
                                 <iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/e3f399cd-2616-42a0-a2ff-04810597567d?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                                     class="lazy-iframe" loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
+                                <!-- Exit Fullscreen Button -->
+                                <button onclick="exitCardFullscreen(event)"
+                                    class="exit-fullscreen-btn absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full p-2 md:p-2.5 items-center justify-center pointer-events-auto cursor-pointer focus:outline-none hidden"
+                                    title="Exit Fullscreen">
+                                    <span class="material-symbols-outlined text-base md:text-lg">fullscreen_exit</span>
+                                </button>
                             </div>
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
@@ -1496,22 +1492,34 @@
                             </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync1"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
-                                NFC Material Sync
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                3D Print Sync<br>and Hand Tracking
                             </div>
+                            <!-- Fullscreen Option -->
+                            <button onclick="toggleCardFullscreen(event, this)"
+                                class="absolute top-4 right-4 md:top-6 md:right-6 z-40 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full p-2 md:p-2.5 flex items-center justify-center transition-all duration-300 opacity-0 group-[.active]:opacity-100 md:group-[.active]:opacity-0 md:group-[.active]:group-hover:opacity-100 cursor-pointer focus:outline-none pointer-events-auto"
+                                title="Fullscreen Video">
+                                <span class="material-symbols-outlined text-base md:text-lg">fullscreen</span>
+                            </button>
                         </div>
 
                         <!-- Card 2: Synchronized Viewports -->
                         <div class="accordion-card group relative w-full md:w-auto h-24 md:h-full flex-none md:flex-1 overflow-hidden bg-neutral-900 border border-white/10 cursor-pointer"
                             data-index="4">
                             <!-- Background Video -->
-                            <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none">
+                            <div class="w-full h-full absolute inset-0 overflow-hidden pointer-events-none video-container bg-black">
                                 <iframe src="about:blank"
                                     data-src="https://player.mediadelivery.net/embed/625906/0d505448-8937-4d87-950d-03893207ac65?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
                                     class="lazy-iframe" loading="lazy"
                                     style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
                                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                                     allowfullscreen="true"></iframe>
+                                <!-- Exit Fullscreen Button -->
+                                <button onclick="exitCardFullscreen(event)"
+                                    class="exit-fullscreen-btn absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full p-2 md:p-2.5 items-center justify-center pointer-events-auto cursor-pointer focus:outline-none hidden"
+                                    title="Exit Fullscreen">
+                                    <span class="material-symbols-outlined text-base md:text-lg">fullscreen_exit</span>
+                                </button>
                             </div>
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
@@ -1519,17 +1527,18 @@
                             </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync2"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-12 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
-                                Synchronized Viewports
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                Stone Catalog Sync
                             </div>
+                            <!-- Fullscreen Option -->
+                            <button onclick="toggleCardFullscreen(event, this)"
+                                class="absolute top-4 right-4 md:top-6 md:right-6 z-40 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full p-2 md:p-2.5 flex items-center justify-center transition-all duration-300 opacity-0 group-[.active]:opacity-100 md:group-[.active]:opacity-0 md:group-[.active]:group-hover:opacity-100 cursor-pointer focus:outline-none pointer-events-auto"
+                                title="Fullscreen Video">
+                                <span class="material-symbols-outlined text-base md:text-lg">fullscreen</span>
+                            </button>
                         </div>
                     </div>
-                    <!-- Text Below the Video -->
-                    <p data-t="twin_note"
-                        class="text-[10px] md:text-xs uppercase tracking-widest text-[#c4c7c7] opacity-60 font-body-md">
-                        * Live-sync latency under 15ms. NFC-triggered material swaps prompt instant digital viewport
-                        changes.
-                    </p>
+
                 </div>
             </div>
         </div>
@@ -1707,10 +1716,9 @@
                         3D Viewer
                     </h3>
                     <p data-t="splat_desc" class="font-body-md text-body-md text-secondary max-w-3xl">
-                        Explore a dense, high-fidelity spatial capture of the historic Convento. By utilizing 3D
-                        Gaussian
-                        Splatting, we preserve light fields, volumetric depth, and raw textures as a navigable real-time
-                        digital twin.
+                        Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By
+                        utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures as a
+                        navigable real-time interactivity.
                     </p>
                 </div>
             </div>
@@ -1844,12 +1852,12 @@
                             Architectural 3D Printing Prototyping
                         </h3>
                         <p data-t="proto_desc1" class="font-body-lg text-body-lg text-secondary leading-relaxed mb-6">
-                            We transition from digital twins to high-fidelity physical models with surgical precision.
-                            Our process bridges the gap between vision and reality.
+                            We transition from digital interactions to high-fidelity physical models with surgical
+                            precision. Our process bridges the gap between vision and reality.
                         </p>
                         <p data-t="proto_desc2" class="font-body-md text-body-md text-secondary leading-relaxed">
-                            Highlighting the use of industrial-grade resin printing and 5-axis CNC milling, we create
-                            tactile representations of complex architectural forms that invite touch and scrutiny.
+                            Highlighting the use of 3D printing, we create tactile representations of complex
+                            architectural forms that invite touch and scrutiny.
                         </p>
                     </div>
                 </div>
@@ -2094,6 +2102,34 @@
 
     <!-- JavaScript for Interactions -->
     <script>
+        function toggleCardFullscreen(event, button) {
+            event.preventDefault();
+            event.stopPropagation();
+            const card = button.closest('.accordion-card');
+            if (!card) return;
+            const container = card.querySelector('.video-container');
+            if (!container) return;
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            } else if (container.msRequestFullscreen) {
+                container.msRequestFullscreen();
+            }
+        }
+
+        function exitCardFullscreen(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+
         // Language switcher variables and functions
         let currentLang = 'EN';
         const dictionary = {
@@ -2121,15 +2157,12 @@
                 "image_renders_title": "01 / Image Renders",
                 "interactive_desc": "Experience real-time interactive panoramas directly within the design presentation. Engage with smart, biophilic, and material-focused spaces in Section 02, using intuitive drag or media controls.",
                 "interactive_proj1_btn": "Enter 360 Panorama",
-                "interactive_proj1_desc": "Explore the virtual interactive system for House, featuring multi-room setup, smart spaces and high-fidelity rendering.",
                 "interactive_proj1_tag": "PROJECT 01",
                 "interactive_proj1_title": "House Project",
                 "interactive_proj2_btn": "Enter 360 Panorama",
-                "interactive_proj2_desc": "Immerse yourself in nature with our high-end glamping structures, showing structural canvas layouts and forest views.",
                 "interactive_proj2_tag": "PROJECT 02",
                 "interactive_proj2_title": "Tent Project",
                 "interactive_proj3_btn": "Enter 360 Panorama",
-                "interactive_proj3_desc": "Experience the modern, forest-integrated Bridge Garden residence with seamless transition and raw materials.",
                 "interactive_proj3_tag": "PROJECT 03",
                 "interactive_proj3_title": "Bridge Garden Project",
                 "interactive_title": "04 / Interactive Systems",
@@ -2146,7 +2179,7 @@
                 "nav_s01_title": "Visual Showcase",
                 "nav_s02_desc": "Physical-to-digital real-time sync systems.",
                 "nav_s02_tag": "SECTION 02",
-                "nav_s02_title": "Immersive Experience",
+                "nav_s02_title": "immersive experience<br>real objects interaction",
                 "nav_s03_desc": "3D floor models and rendering sequence controls.",
                 "nav_s03_tag": "SECTION 03",
                 "nav_s03_title": "Interactive Viewer",
@@ -2160,8 +2193,8 @@
                 "pipeline_desc": "We merge classical 3D modeling, rendering craftsmanship and interactive applications with state-of-the-art AI synthesis. This hybrid approach accelerates design iterations and achieves cinematic quality.",
                 "pipeline_quote": "Their combination of interactive and immersive 3D driven by AI delivered visualization of unmatched realism. A complete game-changer.",
                 "pipeline_tag": "05 / Our Hybrid Pipeline",
-                "proto_desc1": "We transition from digital twins to high-fidelity physical models with surgical precision. Our process bridges the gap between vision and reality.",
-                "proto_desc2": "Highlighting the use of industrial-grade resin printing and 5-axis CNC milling, we create tactile representations of complex architectural forms that invite touch and scrutiny.",
+                "proto_desc1": "We transition from digital interactions to high-fidelity physical models with surgical precision. Our process bridges the gap between vision and reality.",
+                "proto_desc2": "Highlighting the use of 3D printing, we create tactile representations of complex architectural forms that invite touch and scrutiny.",
                 "proto_tag": "05 /",
                 "proto_title": "Architectural 3D Printing Prototyping",
                 "proto_watermark": "PROTOTYPE",
@@ -2178,7 +2211,7 @@
                 "showcase_tag": "01 /",
                 "showcase_title": "Visual Showcase",
                 "showcase_view_render": "View Render",
-                "splat_desc": "Explore a dense, high-fidelity spatial capture of the historic Convento. By utilizing 3D Gaussian Splatting, we preserve light fields, volumetric depth, and raw textures as a navigable real-time digital twin.",
+                "splat_desc": "Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures as a navigable real-time interactivity.",
                 "splat_helper": "DRAG TO ROTATE / SCROLL TO ZOOM",
                 "loading_3d_model": "Loading 3D Model",
                 "loading_3d_scan": "Loading 3D Scan",
@@ -2187,13 +2220,12 @@
                 "splat_title_canvas": "Interactive WebGL Splat Canvas",
                 "splat_title_prototype": "3D Print Prototype",
                 "splat_title_scan": "Cinematic Scan Path",
-                "twin_desc1": "Step into the future of architectural presentation. We bridge the tactile and the virtual through innovative 'digital twin' integrations.",
-                "twin_desc2": "Experience true tactile-to-digital immersion with NFC-triggered material swaps and real-time lighting adjustments, instantly linking the physical maquette in your hands to high-fidelity 3D transformations on screen.",
-                "twin_note": "* Live-sync latency under 15ms. NFC-triggered material swaps prompt instant digital viewport changes.",
-                "twin_sync1": "NFC Material Sync",
-                "twin_sync2": "Synchronized Viewports",
+                "twin_desc1": "Step into the future of architectural presentation. We bridge the tactile and the virtual through innovative interactive and immersive integrations.",
+                "twin_desc2": "Experience true tactile-to-digital immersion with material swaps and real-time lighting adjustments, instantly linking the physical maquette in your hands to high-fidelity 3D transformations on screen.",
+                "twin_sync1": "3D Print Sync<br>and Hand Tracking",
+                "twin_sync2": "Stone Catalog Sync",
                 "twin_tag": "02 /",
-                "twin_title": "Immersive Experience",
+                "twin_title": "immersive experience<br>real objects interaction",
                 "video_title": "02 / Cinematic Animations",
                 "viewer_btn_all": "Full Building",
                 "viewer_btn_f1": "Floor 01",
@@ -2250,15 +2282,12 @@
                 "image_renders_title": "01 / Renders de Imagem",
                 "interactive_desc": "Experimente panoramas interativos em tempo real diretamente na apresentação de design. Interaja com espaços inteligentes, naturais e focados nos materiais, utilizando controlos intuitivos e imersivos.",
                 "interactive_proj1_btn": "Entrar no Panorama 360",
-                "interactive_proj1_desc": "",
                 "interactive_proj1_tag": "PROJETO 01",
                 "interactive_proj1_title": "Projecto Casa Interior",
                 "interactive_proj2_btn": "Entrar no Panorama 360",
-                "interactive_proj2_desc": "",
                 "interactive_proj2_tag": "PROJETO 02",
                 "interactive_proj2_title": "Projeto Tendas",
                 "interactive_proj3_btn": "Entrar no Panorama 360",
-                "interactive_proj3_desc": "",
                 "interactive_proj3_tag": "PROJETO 03",
                 "interactive_proj3_title": "Projeto Casa Ponte Jardim",
                 "interactive_title": "04 / Sistemas Interativos",
@@ -2275,7 +2304,7 @@
                 "nav_s01_title": "Portfólio Visual",
                 "nav_s02_desc": "Sistemas de sincronização físico-digital em tempo real.",
                 "nav_s02_tag": "SECÇÃO 02",
-                "nav_s02_title": "Experiência Imersiva",
+                "nav_s02_title": "experiência imersiva<br>interação com objetos reais",
                 "nav_s03_desc": "Modelos 3D de pisos e controlos de sequência de renderização.",
                 "nav_s03_tag": "SECÇÃO 03",
                 "nav_s03_title": "Visualizador Interativo",
@@ -2289,8 +2318,8 @@
                 "pipeline_desc": "Fundimos a modelação 3D clássica, a mestria de renderização e aplicações interativas com a síntese de IA de última geração. Esta abordagem híbrida acelera as iterações de design e atinge uma qualidade cinemática.",
                 "pipeline_quote": "A combinação de 3d interativo e imersivo orientado por IA proporcionou uma visualização de um realismo inigualável. Uma mudança de paradigma completa.",
                 "pipeline_tag": "05 / O Nosso Pipeline Híbrido",
-                "proto_desc1": "Transitamos de gémeos digitais para modelos físicos de alta fidelidade com precisão cirúrgica. O nosso processo faz a ponte entre a visão e a realidade.",
-                "proto_desc2": "Destacando o uso de impressão de resina de nível industrial e fresagem CNC de 5 eixos, criamos representações táteis de formas arquitetónicas complexas que convidam ao toque e ao escrutínio.",
+                "proto_desc1": "Transitamos de interações digitais para modelos físicos de alta fidelidade com precisão cirúrgica. O nosso processo faz a ponte entre a visão e a realidade.",
+                "proto_desc2": "Destacando o uso de impressão 3D, criamos representações táteis de formas arquitetónicas complexas que convidam ao toque e ao escrutínio.",
                 "proto_tag": "05 /",
                 "proto_title": "Prototipagem de Impressão 3D Arquitetónica",
                 "proto_watermark": "PROTÓTIPO",
@@ -2307,7 +2336,7 @@
                 "showcase_tag": "01 /",
                 "showcase_title": "Portfólio Visual",
                 "showcase_view_render": "Ver Render",
-                "splat_desc": "Explore uma captura espacial densa e de alta fidelidade do histórico Convento. Ao utilizar 3D Gaussian Splatting, preservamos campos de luz, profundidade volumétrica e texturas brutas como um gémeo digital navegável em tempo real.",
+                "splat_desc": "Explore uma captura espacial densa e de alta fidelidade do histórico Convento de Monsaraz. Ao utilizar o scan 3D real, preservamos campos de luz, profundidade volumétrica e texturas brutas como uma interatividade navegável em tempo real.",
                 "splat_helper": "ARRASTAR PARA RODAR / SCROLL PARA ZOOM",
                 "loading_3d_model": "A carregar Modelo 3D",
                 "loading_3d_scan": "A carregar Scan 3D",
@@ -2316,13 +2345,12 @@
                 "splat_title_canvas": "Tela Splat WebGL Interativa",
                 "splat_title_prototype": "Protótipo de Impressão 3D",
                 "splat_title_scan": "Caminho de Rastreio Cinemático",
-                "twin_desc1": "Entre no futuro da apresentação arquitetónica. Fazemos a ponte entre o tátil e o virtual através de integrações inovadoras de 'gémeo digital'.",
-                "twin_desc2": "Experimente uma verdadeira imersão tátil-digital com trocas de materiais ativadas por NFC e ajustes de iluminação em tempo real, ligando instantaneamente a maquete física nas suas mãos a transformações 3D de alta fidelidade no ecrã.",
-                "twin_note": "* Latência de sincronização ao vivo inferior a 15ms. As trocas de materiais ativadas por NFC desencadeiam alterações instantâneas no viewport digital.",
-                "twin_sync1": "Sincronização de Material NFC",
-                "twin_sync2": "Viewports Sincronizados",
+                "twin_desc1": "Entre no futuro da apresentação arquitetónica. Fazemos a ponte entre o tátil e o virtual através de integrações inovadoras interativas e imersivas .",
+                "twin_desc2": "Experimente uma verdadeira imersão tátil-digital com trocas de materiais e ajustes de iluminação em tempo real, ligando instantaneamente a maquete física nas suas mãos a transformações 3D de alta fidelidade no ecrã.",
+                "twin_sync1": "sincronização de impressão 3D<br>e rastreio de mãos",
+                "twin_sync2": "Sincronização de Catálogo de Pedras",
                 "twin_tag": "02 /",
-                "twin_title": "Experiência Imersiva",
+                "twin_title": "experiência imersiva<br>interação com objetos reais",
                 "video_title": "02 / Animações Cinemáticas",
                 "viewer_btn_all": "Edifício Completo",
                 "viewer_btn_f1": "Piso 01",
