@@ -2251,17 +2251,17 @@
                 "image_renders_title": "01 / Renders de Imagem",
                 "interactive_desc": "Experimente panoramas interativos em tempo real diretamente na apresentação de design. Interaja com espaços inteligentes, naturais e focados nos materiais, utilizando controlos intuitivos e imersivos.",
                 "interactive_proj1_btn": "Entrar no Panorama 360",
-                "interactive_proj1_desc": "Explore o sistema interativo virtual para a House, com configuração multi-divisões, espaços inteligentes e renderização de alta fidelidade.",
+                "interactive_proj1_desc": "",
                 "interactive_proj1_tag": "PROJETO 01",
-                "interactive_proj1_title": "Projeto House",
+                "interactive_proj1_title": "Projecto Casa Interior",
                 "interactive_proj2_btn": "Entrar no Panorama 360",
-                "interactive_proj2_desc": "Mergulhe na natureza com as nossas estruturas de glamping topo de gama, mostrando layouts estruturais em lona e vistas de floresta.",
+                "interactive_proj2_desc": "",
                 "interactive_proj2_tag": "PROJETO 02",
-                "interactive_proj2_title": "Projeto Tent",
+                "interactive_proj2_title": "Projeto Tendas",
                 "interactive_proj3_btn": "Entrar no Panorama 360",
-                "interactive_proj3_desc": "Experimente a moderna residência Bridge Garden, integrada na floresta, com transição fluida e materiais em bruto.",
+                "interactive_proj3_desc": "",
                 "interactive_proj3_tag": "PROJETO 03",
-                "interactive_proj3_title": "Projeto Bridge Garden",
+                "interactive_proj3_title": "Projeto Casa Ponte Jardim",
                 "interactive_title": "04 / Sistemas Interativos",
                 "interactive_webcam_btn": "USAR CONTROLOS DE MÃO POR CÂMARA",
                 "interactive_webcam_downloading": "A Descarregar Modelo...",
@@ -2361,7 +2361,7 @@
         function updateLanguage() {
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
-                if (dictionary[currentLang][key]) {
+                if (dictionary[currentLang][key] !== undefined) {
                     el.innerHTML = dictionary[currentLang][key];
                 }
             });
