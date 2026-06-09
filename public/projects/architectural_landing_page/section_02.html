@@ -31,7 +31,8 @@
         };
     </script>
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -44,6 +45,7 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -62,67 +64,92 @@
         <div id="canvas-container" class="absolute inset-0 z-10"></div>
 
         <!-- Virtual Cursor -->
-        <div id="virtual-cursor" class="fixed w-8 h-8 pointer-events-none z-[9999] flex items-center justify-center hidden">
-            <div id="cursor-ring" class="w-full h-full rounded-full border-2 border-white/50 transition-colors duration-300"></div>
-            <div id="cursor-progress" class="absolute inset-[-4px] rounded-full border-2 border-[#5282be] border-t-transparent animate-spin hidden"></div>
+        <div id="virtual-cursor"
+            class="fixed w-8 h-8 pointer-events-none z-[9999] flex items-center justify-center hidden">
+            <div id="cursor-ring"
+                class="w-full h-full rounded-full border-2 border-white/50 transition-colors duration-300"></div>
+            <div id="cursor-progress"
+                class="absolute inset-[-4px] rounded-full border-2 border-[#5282be] border-t-transparent animate-spin hidden">
+            </div>
         </div>
 
         <!-- Webcam Feed Overlay Panel (Bottom Right) -->
-        <div id="webcam-panel" class="fixed bottom-4 md:bottom-8 right-4 md:right-8 w-40 md:w-64 h-32 md:h-48 overflow-hidden rounded-none border border-white/10 bg-black/80 backdrop-blur-md opacity-0 scale-90 pointer-events-none transition-all duration-500 shadow-2xl z-[50] hidden">
+        <div id="webcam-panel"
+            class="fixed bottom-4 md:bottom-8 right-4 md:right-8 w-40 md:w-64 h-32 md:h-48 overflow-hidden rounded-none border border-white/10 bg-black/80 backdrop-blur-md opacity-0 scale-90 pointer-events-none transition-all duration-500 shadow-2xl z-[50] hidden">
             <video id="webcam-video" class="w-full h-full object-cover opacity-80" playsinline muted></video>
             <div class="absolute top-0 left-0 right-0 flex items-center gap-2 px-3 py-2 bg-black/50 backdrop-blur-sm">
                 <div id="status-indicator" class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
-                <span id="status-label" class="text-[10px] font-mono tracking-widest uppercase text-white/40">Tracking...</span>
+                <span id="status-label"
+                    class="text-[10px] font-mono tracking-widest uppercase text-white/40">Tracking...</span>
             </div>
             <!-- Loading circle indicator -->
-            <div id="webcam-loader" class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/85 backdrop-blur-md hidden">
+            <div id="webcam-loader"
+                class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/85 backdrop-blur-md hidden">
                 <div class="relative w-12 h-12 flex items-center justify-center">
                     <svg class="w-full h-full -rotate-90">
-                        <circle cx="24" cy="24" r="22" fill="none" stroke="white" stroke-width="1.5" class="opacity-10" />
+                        <circle cx="24" cy="24" r="22" fill="none" stroke="white" stroke-width="1.5"
+                            class="opacity-10" />
                         <circle id="loader-circle" cx="24" cy="24" r="22" fill="none" stroke="white" stroke-width="2.5"
                             stroke-dasharray="138" stroke-dashoffset="138" class="transition-all duration-150" />
                     </svg>
                     <span id="loader-percentage" class="absolute text-[9px] font-mono font-bold text-white">0%</span>
                 </div>
-                <span class="text-[9px] font-mono text-white/60 uppercase tracking-widest animate-pulse">Downloading Model</span>
+                <span class="text-[9px] font-mono text-white/60 uppercase tracking-widest animate-pulse">Downloading
+                    Model</span>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 flex justify-between items-center px-3 py-1.5 bg-black/50 backdrop-blur-sm">
+            <div
+                class="absolute bottom-0 left-0 right-0 flex justify-between items-center px-3 py-1.5 bg-black/50 backdrop-blur-sm">
                 <span class="text-[9px] font-mono text-white/20 uppercase tracking-widest">AI VISION ENGINE</span>
                 <span class="text-[9px] font-mono text-white/20 uppercase tracking-widest">Palm Tracking</span>
             </div>
         </div>
 
         <!-- Hand-Tracking Control Bar (Bottom Center) -->
-        <div id="hand-tracking-controls" class="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-[40] pointer-events-auto flex flex-col items-center gap-3 md:gap-6 w-full max-w-2xl px-4">
+        <div id="hand-tracking-controls"
+            class="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-[40] pointer-events-auto flex flex-col items-center gap-3 md:gap-6 w-full max-w-2xl px-4">
             <!-- Instruction Toast -->
             <div id="instruction-toast" class="flex justify-center w-full transition-all duration-500">
-                <div class="bg-black/90 backdrop-blur-md border border-white/10 px-4 md:px-8 py-2 md:py-4 rounded-none flex items-center justify-center gap-2 md:gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                <div
+                    class="bg-black/90 backdrop-blur-md border border-white/10 px-4 md:px-8 py-2 md:py-4 rounded-none flex items-center justify-center gap-2 md:gap-5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                     <div class="w-1.5 h-1.5 rounded-none bg-white/40 animate-pulse flex-shrink-0"></div>
-                    <span id="instruction-text" class="text-[10px] md:text-xs font-sans tracking-[0.2em] md:tracking-[0.3em] uppercase text-white font-bold text-center">
+                    <span id="instruction-text"
+                        class="text-[10px] md:text-xs font-sans tracking-[0.2em] md:tracking-[0.3em] uppercase text-white font-bold text-center">
                         DRAG TO ROTATE SCENE
                     </span>
                 </div>
             </div>
 
             <!-- webcam toggle button -->
-            <button id="webcam-toggle-btn" class="group relative flex items-center gap-2 md:gap-3 px-6 py-3 rounded-none border border-white/20 bg-black/80 hover:border-white hover:bg-white/5 backdrop-blur-md transition-all duration-500 cursor-pointer hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 text-white group-hover:text-white transition-colors duration-300">
-                    <path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+            <button id="webcam-toggle-btn"
+                class="group relative flex items-center gap-2 md:gap-3 px-6 py-3 rounded-none border border-white/20 bg-black/80 hover:border-white hover:bg-white/5 backdrop-blur-md transition-all duration-500 cursor-pointer hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 text-white group-hover:text-white transition-colors duration-300">
+                    <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+                    <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+                    <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                    <path
+                        d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
                 </svg>
-                <span id="webcam-btn-text" class="text-[9px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] text-white transition-colors duration-300">
+                <span id="webcam-btn-text"
+                    class="text-[9px] md:text-xs uppercase font-mono tracking-[0.1em] md:tracking-[0.2em] text-white transition-colors duration-300">
                     use your webcam and play with hands
                 </span>
-                <span id="ping-ring" class="absolute inset-0 rounded-none border border-white/40 animate-ping hidden"></span>
+                <span id="ping-ring"
+                    class="absolute inset-0 rounded-none border border-white/40 animate-ping hidden"></span>
             </button>
         </div>
 
         <!-- Collapsible Control Panel (Left Side) -->
-        <div id="control-panel" class="fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-[40] transition-all duration-500 ease-out flex items-center pointer-events-auto -translate-x-[calc(100%+8px)]">
+        <div id="control-panel"
+            class="fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-[40] transition-all duration-500 ease-out flex items-center pointer-events-auto -translate-x-[calc(100%+8px)]">
             <!-- Main Content Box -->
-            <div id="panel-content" class="bg-[#1a1c1c]/90 backdrop-blur-md border border-white/10 rounded-none p-4 shadow-2xl flex flex-row gap-4 max-h-[90vh] w-64 md:w-72 transition-all duration-500">
+            <div id="panel-content"
+                class="bg-[#1a1c1c]/90 backdrop-blur-md border border-white/10 rounded-none p-4 shadow-2xl flex flex-row gap-4 max-h-[90vh] w-64 md:w-72 transition-all duration-500">
                 <!-- Left Column: Categories -->
                 <div class="flex flex-col gap-2.5 flex-1">
-                    <span class="text-[9px] md:text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase font-semibold text-center">Category</span>
+                    <span
+                        class="text-[9px] md:text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase font-semibold text-center">Category</span>
                     <div class="flex flex-col gap-2" id="categories-container">
                         <!-- Dynamic categories render here -->
                     </div>
@@ -133,7 +160,8 @@
 
                 <!-- Right Column: Variants -->
                 <div class="flex flex-col gap-2.5 w-24 md:w-28 shrink-0">
-                    <span class="text-[9px] md:text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase font-semibold text-center">Variant</span>
+                    <span
+                        class="text-[9px] md:text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase font-semibold text-center">Variant</span>
                     <div id="env-thumbnails-container" class="flex flex-col gap-3 items-center justify-center w-full">
                         <!-- Dynamic items will render vertically -->
                     </div>
@@ -141,7 +169,8 @@
             </div>
 
             <!-- Collapse Toggle Handle Tab -->
-            <button id="panel-collapse-btn" class="absolute left-full ml-2 w-7 h-20 bg-[#1a1c1c]/90 border border-white/10 border-l-0 backdrop-blur-md flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black transition-all duration-300 shadow-lg rounded-none">
+            <button id="panel-collapse-btn"
+                class="absolute left-full ml-2 w-7 h-20 bg-[#1a1c1c]/90 border border-white/10 border-l-0 backdrop-blur-md flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black transition-all duration-300 shadow-lg rounded-none">
                 <span class="material-symbols-outlined text-lg" id="collapse-icon">chevron_right</span>
             </button>
         </div>
@@ -539,11 +568,10 @@
             projectConfig.categories.forEach(cat => {
                 const btn = document.createElement('button');
                 const isActive = cat === currentCategory;
-                btn.className = `cat-btn w-full py-3 text-[10px] md:text-[11px] font-mono tracking-widest border rounded-none text-center cursor-pointer transition-all duration-300 ${
-                    isActive 
-                        ? 'border-white bg-white text-black font-bold' 
+                btn.className = `cat-btn w-full py-3 text-[10px] md:text-[11px] font-mono tracking-widest border rounded-none text-center cursor-pointer transition-all duration-300 ${isActive
+                        ? 'border-white bg-white text-black font-bold'
                         : 'border-white/15 bg-white/5 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/10'
-                }`;
+                    }`;
                 btn.setAttribute('data-cat', cat);
                 btn.innerText = translate(cat).toUpperCase();
 
@@ -575,7 +603,7 @@
                 const button = document.createElement('button');
                 button.className = `group relative cursor-pointer flex-shrink-0 bg-transparent border-0 p-0`;
 
-                const activeClass = currentTextureUrl === item.sphere 
+                const activeClass = currentTextureUrl === item.sphere
                     ? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.25)]'
                     : 'border-white/15 grayscale hover:grayscale-0 hover:border-white/20 bg-white/5';
 
@@ -605,11 +633,11 @@
             webcamToggleBtn.classList.remove('bg-black/80', 'text-white', 'border-white/20');
             webcamBtnText.innerText = translate('exit_experience');
             pingRing.classList.remove('hidden');
-            
+
             // Show webcam loader/panel
             webcamPanel.classList.remove('hidden', 'opacity-0', 'scale-90', 'pointer-events-none');
             // Force reflow
-            if (webcamPanel.offsetHeight) {}
+            if (webcamPanel.offsetHeight) { }
             webcamPanel.classList.add('opacity-100', 'scale-100');
             webcamLoader.classList.remove('hidden');
 
@@ -631,8 +659,8 @@
 
                 let receivedLength = 0;
                 const chunks = [];
-                while(true) {
-                    const {done, value} = await reader.read();
+                while (true) {
+                    const { done, value } = await reader.read();
                     if (done) break;
                     chunks.push(value);
                     receivedLength += value.length;
@@ -644,7 +672,7 @@
 
                 const modelBuffer = new Uint8Array(receivedLength);
                 let position = 0;
-                for(let chunk of chunks) {
+                for (let chunk of chunks) {
                     modelBuffer.set(chunk, position);
                     position += chunk.length;
                 }
@@ -679,7 +707,7 @@
                     statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-white/70';
                     statusLabel.innerText = 'Tracking...';
                     instructionText.innerText = translate('setup_complete');
-                    
+
                     // Show custom cursor
                     virtualCursor.classList.remove('hidden');
 
@@ -756,7 +784,7 @@
                     const range = 1 - 2 * MARGIN;
                     const rawX = Math.max(0, Math.min(1, ((1 - lm.x) - MARGIN) / range));
                     const rawY = Math.max(0, Math.min(1, (lm.y - MARGIN) / range));
-                    
+
                     const x = rawX * 2 - 1;
                     const y = -(rawY * 2 - 1);
 
@@ -770,7 +798,7 @@
 
                     // Update cursor rendering
                     updateCursor(x, y, isPinching);
-                    
+
                     // Handle dwell click if not pinching
                     if (!isPinching) {
                         handleDwellClick(x, y);
@@ -785,7 +813,7 @@
                     statusLabel.className = 'text-[10px] font-mono tracking-widest uppercase text-white/40';
                     statusLabel.innerText = 'Tracking...';
                     instructionText.innerText = translate('show_hand');
-                    
+
                     cursorRing.className = 'w-full h-full rounded-full border-2 border-white/20';
                     cursorProgress.classList.add('hidden');
                     hoverElement = null;
@@ -816,7 +844,7 @@
             const screenY = (1 - (y + 1) / 2) * window.innerHeight;
 
             let element = document.elementFromPoint(screenX, screenY);
-            
+
             // Check if the hand cursor overlaps parent's fullscreen/exit-fullscreen buttons
             try {
                 if (window.parent && window.parent !== window && window.frameElement) {
@@ -824,11 +852,11 @@
                     const parentX = iframeRect.left + screenX;
                     const parentY = iframeRect.top + screenY;
                     const parentElement = window.parent.document.elementFromPoint(parentX, parentY);
-                    
+
                     if (parentElement && (
-                        parentElement.classList.contains('fullscreen-btn') || 
+                        parentElement.classList.contains('fullscreen-btn') ||
                         parentElement.closest('.fullscreen-btn') ||
-                        parentElement.classList.contains('exit-fullscreen-btn') || 
+                        parentElement.classList.contains('exit-fullscreen-btn') ||
                         parentElement.closest('.exit-fullscreen-btn')
                     )) {
                         element = parentElement.closest('.fullscreen-btn') || parentElement.closest('.exit-fullscreen-btn');
@@ -840,14 +868,14 @@
 
             if (element && (element.tagName === 'BUTTON' || element.closest('button') || element.closest('.group'))) {
                 const target = (element.closest('button') || element.closest('.group'));
-                
+
                 if (target !== hoverElement) {
                     hoverElement = target;
                     hoverStartTime = Date.now();
                     cursorProgress.classList.remove('hidden');
                 } else {
                     const elapsed = Date.now() - hoverStartTime;
-                    
+
                     if (elapsed > 600) {
                         if (Date.now() - lastClickTime > 1000) {
                             target.click();
