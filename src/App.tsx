@@ -183,32 +183,64 @@ const App: React.FC = () => {
             ))}
 
             {/* Language Toggle (Desktop) */}
-            <motion.span
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5 }}
-              onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
-              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center"
+              className="relative flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 font-mono text-xs cursor-pointer select-none"
             >
-              {lang === 'EN' ? 'EN' : 'PT'}
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-            </motion.span>
+              {/* Sliding background pill */}
+              <motion.div
+                className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-white shadow-md"
+                initial={false}
+                animate={{
+                  x: lang === 'EN' ? '100%' : '0%',
+                }}
+                style={{
+                  width: 'calc(50% - 2px)'
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              />
+              <button
+                onClick={() => setLang('PT')}
+                className={`relative z-10 w-9 py-1 text-center transition-colors duration-200 cursor-pointer ${lang === 'PT' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
+              >
+                PT
+              </button>
+              <button
+                onClick={() => setLang('EN')}
+                className={`relative z-10 w-9 py-1 text-center transition-colors duration-200 cursor-pointer ${lang === 'EN' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
+              >
+                EN
+              </button>
+            </motion.div>
           </div>
 
           {/* Mobile Navigation controls */}
           <div className="lg:hidden flex items-center gap-3 sm:gap-5 pointer-events-auto">
             {/* Mobile Language Toggle */}
-            <div className="flex items-center gap-1.5 font-mono text-[10px] sm:text-xs tracking-wider">
+            <div className="relative flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 font-mono text-[9px] sm:text-[10px] select-none">
+              {/* Sliding background pill */}
+              <motion.div
+                className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-white shadow-md"
+                initial={false}
+                animate={{
+                  x: lang === 'EN' ? '100%' : '0%',
+                }}
+                style={{
+                  width: 'calc(50% - 2px)'
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              />
               <button
                 onClick={() => setLang('PT')}
-                className={`transition-colors duration-200 cursor-pointer px-1 py-0.5 ${lang === 'PT' ? 'text-white font-medium border-b border-white' : 'text-concrete hover:text-white/80'}`}
+                className={`relative z-10 w-8 py-0.5 text-center transition-colors duration-200 cursor-pointer ${lang === 'PT' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
               >
                 PT
               </button>
-              <span className="opacity-20 text-white select-none">/</span>
               <button
                 onClick={() => setLang('EN')}
-                className={`transition-colors duration-200 cursor-pointer px-1 py-0.5 ${lang === 'EN' ? 'text-white font-medium border-b border-white' : 'text-concrete hover:text-white/80'}`}
+                className={`relative z-10 w-8 py-0.5 text-center transition-colors duration-200 cursor-pointer ${lang === 'EN' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
               >
                 EN
               </button>
