@@ -329,7 +329,7 @@ body {
     }
 
     /* Adjust background text for mobile visibility */
-    section h2 {
+    section h2.pointer-events-none {
         font-size: 20vw !important;
         opacity: 0.05 !important;
         white-space: nowrap;

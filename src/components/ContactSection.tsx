@@ -166,6 +166,17 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="opacity-75 group-hover:opacity-90 transition-opacity duration-300 flex-grow"
               ></iframe>
+              {/* Clickable overlay to open maps in a new tab */}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=39.5487,-8.9774"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 bg-black/10 hover:bg-black/35 transition-colors flex items-center justify-center group/map-link cursor-pointer"
+              >
+                <div className="opacity-100 md:opacity-0 md:group-hover/map-link:opacity-100 transition-opacity duration-300 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10 text-xs font-mono tracking-widest text-white uppercase text-center">
+                  {lang === 'EN' ? 'Open in Google Maps' : 'Abrir no Google Maps'}
+                </div>
+              </a>
               <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-xl group-hover:border-white/15 transition-all"></div>
             </div>
           </div>
