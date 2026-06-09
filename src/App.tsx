@@ -183,68 +183,28 @@ const App: React.FC = () => {
             ))}
 
             {/* Language Toggle (Desktop) */}
-            <motion.div
+            <motion.button
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5 }}
-              className="relative flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 font-mono text-xs cursor-pointer select-none"
+              onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
+              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center select-none"
             >
-              {/* Sliding background pill */}
-              <motion.div
-                className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-white shadow-md"
-                initial={false}
-                animate={{
-                  x: lang === 'EN' ? '100%' : '0%',
-                }}
-                style={{
-                  width: 'calc(50% - 2px)'
-                }}
-                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-              />
-              <button
-                onClick={() => setLang('PT')}
-                className={`relative z-10 w-9 py-1 text-center transition-colors duration-200 cursor-pointer ${lang === 'PT' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
-              >
-                PT
-              </button>
-              <button
-                onClick={() => setLang('EN')}
-                className={`relative z-10 w-9 py-1 text-center transition-colors duration-200 cursor-pointer ${lang === 'EN' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
-              >
-                EN
-              </button>
-            </motion.div>
+              {lang}
+              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+            </motion.button>
           </div>
 
           {/* Mobile Navigation controls */}
           <div className="lg:hidden flex items-center gap-3 sm:gap-5 pointer-events-auto">
             {/* Mobile Language Toggle */}
-            <div className="relative flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 font-mono text-[9px] sm:text-[10px] select-none">
-              {/* Sliding background pill */}
-              <motion.div
-                className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-white shadow-md"
-                initial={false}
-                animate={{
-                  x: lang === 'EN' ? '100%' : '0%',
-                }}
-                style={{
-                  width: 'calc(50% - 2px)'
-                }}
-                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-              />
-              <button
-                onClick={() => setLang('PT')}
-                className={`relative z-10 w-8 py-0.5 text-center transition-colors duration-200 cursor-pointer ${lang === 'PT' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
-              >
-                PT
-              </button>
-              <button
-                onClick={() => setLang('EN')}
-                className={`relative z-10 w-8 py-0.5 text-center transition-colors duration-200 cursor-pointer ${lang === 'EN' ? 'text-black font-semibold' : 'text-concrete hover:text-white'}`}
-              >
-                EN
-              </button>
-            </div>
+            <button
+              onClick={() => setLang(prev => prev === 'EN' ? 'PT' : 'EN')}
+              className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group w-6 text-center select-none"
+            >
+              {lang}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+            </button>
 
             {/* Separator */}
             <span className="h-4 w-[1px] bg-white/10" />
