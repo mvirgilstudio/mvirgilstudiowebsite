@@ -52,12 +52,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         {data.id === 'section_01' ? (
           <motion.h3
             className={`${isSmall ? 'text-xl' : 'text-2xl md:text-3xl lg:text-3xl'} font-display font-semibold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[1.2] tracking-tight uppercase cursor-pointer flex flex-col items-start gap-1`}
-            style={!isSmall ? { fontSize: 'clamp(1rem, min(6.5vw, 8.5vh), 2.5rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1rem, 4.8vw, 1.6rem)' : 'clamp(1rem, min(6.5vw, 8.5vh), 2.5rem)' } : undefined}
           >
             {sectionT.titleLines.map((word, wordIndex) => (
               <motion.div
                 key={wordIndex}
-                className="block whitespace-nowrap"
+                className="block whitespace-normal md:whitespace-nowrap"
                 initial={isSmall ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false }}
@@ -70,12 +70,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         ) : data.id === 'section_02' ? (
           <motion.h3
             className={`${isSmall ? 'text-xl' : 'text-2xl md:text-3xl lg:text-3xl'} font-display font-semibold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[1.2] tracking-tight uppercase cursor-pointer flex flex-col items-end gap-2`}
-            style={!isSmall ? { fontSize: 'clamp(1rem, min(6.5vw, 8.5vh), 3rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1rem, 4.8vw, 1.6rem)' : 'clamp(1rem, min(6.5vw, 8.5vh), 3rem)' } : undefined}
           >
             {sectionT.titleLines.map((line, lineIndex) => (
               <motion.div
                 key={lineIndex}
-                className="block whitespace-nowrap"
+                className="block whitespace-normal md:whitespace-nowrap text-right"
                 initial={isSmall ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false }}
@@ -88,7 +88,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         ) : data.id === 'section_03' ? (
           <motion.h3
             className={`${isSmall ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-display font-semibold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[1.1] tracking-tighter uppercase cursor-pointer flex flex-col items-start gap-0`}
-            style={!isSmall ? { fontSize: 'clamp(1.1rem, min(7vw, 9vh), 3.5rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1rem, 4.8vw, 1.6rem)' : 'clamp(1.1rem, min(7vw, 9vh), 3.5rem)' } : undefined}
           >
             {sectionT.titleLines.map((word, wordIndex) => (
               <div key={wordIndex} className="block relative group/word py-2">
@@ -132,7 +132,7 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         ) : data.id === 'section_05' ? (
           <motion.h3
             className={`${isSmall ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-5xl'} font-display font-bold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[0.85] tracking-tighter uppercase cursor-pointer group flex flex-wrap items-start`}
-            style={!isSmall ? { fontSize: 'clamp(1.1rem, min(6.5vw, 8.5vh), 3.75rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1.1rem, 4.8vw, 1.6rem)' : 'clamp(1.1rem, min(6.5vw, 8.5vh), 3.75rem)' } : undefined}
           >
             {sectionT.titleLines.map((word, wordIndex) => (
               <div key={wordIndex} className="inline-flex mr-[0.3em] py-2">
@@ -170,10 +170,10 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         ) : data.id === 'section_06' ? (
           <motion.h3
             className={`${isSmall ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-display font-bold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[1.2] tracking-tight uppercase cursor-pointer flex flex-col items-end gap-2`}
-            style={!isSmall ? { fontSize: 'clamp(1rem, min(6.5vw, 8.5vh), 3.5rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1rem, 4.8vw, 1.6rem)' : 'clamp(1rem, min(6.5vw, 8.5vh), 3.5rem)' } : undefined}
           >
             {sectionT.titleLines.map((line, lineIndex) => (
-              <div key={lineIndex} className="block whitespace-nowrap overflow-visible relative">
+              <div key={lineIndex} className="block whitespace-normal md:whitespace-nowrap overflow-visible relative text-right">
                 <div className="inline-flex relative">
                   {line.split('').map((char, charIndex) => (
                     <motion.span
@@ -212,12 +212,12 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
         ) : data.id === 'section_04' ? (
           <motion.h3
             className={`${isSmall ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-display font-semibold ${isSmall ? 'text-gray-300' : 'text-gray-200'} leading-[1.1] tracking-tight uppercase cursor-pointer flex flex-col items-end gap-2`}
-            style={!isSmall ? { fontSize: 'clamp(1rem, min(6vw, 8vh), 3rem)' } : undefined}
+            style={!isSmall ? { fontSize: isMobile ? 'clamp(1rem, 4.8vw, 1.6rem)' : 'clamp(1rem, min(6vw, 8vh), 3rem)' } : undefined}
           >
             {sectionT.titleLines.map((line, lineIndex) => (
               <motion.div
                 key={lineIndex}
-                className="block whitespace-nowrap"
+                className="block whitespace-normal md:whitespace-nowrap text-right"
                 initial={isSmall ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: false }}
