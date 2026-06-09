@@ -580,7 +580,7 @@
                     </g>
                 </svg>
                 <span
-                    class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block uppercase whitespace-nowrap flex-shrink-0">MIGUEL
+                    class="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity block uppercase whitespace-nowrap flex-shrink-0">MIGUEL
                     VIRGÍLIO <span class="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
             </a>
 
@@ -643,9 +643,9 @@
         </div>
     </div>
     <!-- Section 1: Hero & Overlapping Content -->
-    <section class="relative w-full">
+    <section class="relative w-full flex flex-col md:block">
         <!-- Hero Background Canvas with Masking -->
-        <div class="relative w-full h-screen bg-[#f0f1f1] overflow-hidden"
+        <div class="relative w-full h-[60vh] md:h-screen bg-[#f0f1f1] overflow-hidden"
             data-alt="A cinematic, 8k resolution photograph of a monumental, brutalist concrete architectural structure extending over a serene, perfectly still reflective pool.">
 
             <!-- Masked Container (Isolates the destination-in blend mode) -->
@@ -666,13 +666,12 @@
 
             <!-- Hero Content -->
             <div
-                class="absolute inset-0 flex flex-col justify-end px-[5%] max-w-[1920px] mx-auto pb-24 z-30 pointer-events-none">
+                class="relative w-full bg-[#f0f1f1] flex flex-col justify-center px-[5%] max-w-[1920px] mx-auto py-10 md:absolute md:inset-0 md:justify-end md:pb-24 md:bg-transparent z-30 pointer-events-none">
                 <div class="w-full max-w-none reveal-up text-on-primary parallax-layer" data-speed="0.2">
                     <p id="hero-subtitle" data-t="hero_subtitle"
-                        class="w-full mb-10 text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-normal pointer-events-auto text-center font-bold pr-0"
-                        style="font-size: clamp(1.2rem, 2.5vw, 3.5rem); letter-spacing: 0.3em; opacity: 0; transform: translateY(20px);">
-                        High-end architectural
-                        techniques for visionary designs</p>
+                        class="w-full text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-normal pointer-events-auto text-center font-bold pr-0"
+                        style="font-size: clamp(1.0rem, 2.5vw, 3.5rem); letter-spacing: 0.3em; opacity: 0; transform: translateY(20px);">
+                        High-end architectural techniques for visionary designs</p>
                 </div>
             </div>
         </div>
@@ -1499,7 +1498,7 @@
                             </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync1"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 md:whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                 3D Print Sync<br>and Hand Tracking
                             </div>
                             <!-- Fullscreen Option -->
@@ -1535,7 +1534,7 @@
                             </div>
                             <!-- Title Overlay -->
                             <div data-t="twin_sync2"
-                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
+                                class="absolute top-6 left-6 md:top-auto md:bottom-12 md:left-20 z-30 origin-bottom-left md:-rotate-90 md:whitespace-nowrap font-headline-md text-xs md:text-sm uppercase tracking-[0.2em] text-white bg-black/50 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 border border-white/10 pointer-events-none">
                                 Stone Catalog Sync
                             </div>
                             <!-- Fullscreen Option -->
