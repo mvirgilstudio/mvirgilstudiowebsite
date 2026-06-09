@@ -264,6 +264,29 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
   const [s02Category, setS02Category] = useState<keyof typeof SECTION_02_VARIANTS>('bedroom');
   const [s02ActiveTexture, setS02ActiveTexture] = useState('/assets/images/bedroom_01.jpg');
   const [isBtnHovered, setIsBtnHovered] = useState(false);
+  const [showPerformanceWarning, setShowPerformanceWarning] = useState(false);
+  const [dontShowWarningAgain, setDontShowWarningAgain] = useState(false);
+
+  const handleEnterExperience = () => {
+    if (isMobile) {
+      const isBypass = localStorage.getItem('mobile_3d_enabled') === 'true';
+      if (isBypass) {
+        setIsExpanded(true);
+      } else {
+        setShowPerformanceWarning(true);
+      }
+    } else {
+      setIsExpanded(true);
+    }
+  };
+
+  const handleConfirmExperience = () => {
+    if (dontShowWarningAgain) {
+      localStorage.setItem('mobile_3d_enabled', 'true');
+    }
+    setShowPerformanceWarning(false);
+    setIsExpanded(true);
+  };
 
   // Listen for query params to force expand this section's experience
   useEffect(() => {
@@ -1008,47 +1031,44 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
               opacity: btnOpacity,
               y: isMobile ? 0 : btnY,
             }}
-            onClick={isMobile ? undefined : () => setIsExpanded(true)}
-            onHoverStart={isMobile ? undefined : () => setIsBtnHovered(true)}
-            onHoverEnd={isMobile ? undefined : () => setIsBtnHovered(false)}
-            className={`${isMobile ? 'relative mt-12 mb-8 mx-auto pointer-events-none' : 'absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer'} z-[40] flex flex-col items-center gap-4 group w-fit`}
+            onClick={handleEnterExperience}
+            onHoverStart={() => setIsBtnHovered(true)}
+            onHoverEnd={() => setIsBtnHovered(false)}
+            className={`${isMobile ? 'relative mt-12 mb-8 mx-auto' : 'absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2'} pointer-events-auto cursor-pointer z-[40] flex flex-col items-center gap-4 group w-fit`}
           >
             {/* Icon Wrapper with enhanced Glow */}
             <motion.div
               className="w-16 h-16 md:w-18 md:h-18 rounded-full border-2 flex items-center justify-center opacity-100 backdrop-blur-md transition-all duration-300 relative z-10"
               style={{
-                borderColor: isMobile ? `rgba(${accent.rgb}, 0.2)` : `rgba(${accent.rgb}, 0.55)`,
-                backgroundColor: isMobile ? 'transparent' : `rgba(${accent.rgb}, 0.1)`,
-                boxShadow: isMobile ? 'none' : `0 0 35px rgba(${accent.rgb}, 0.2)`
+                borderColor: `rgba(${accent.rgb}, 0.55)`,
+                backgroundColor: `rgba(${accent.rgb}, 0.1)`,
+                boxShadow: `0 0 35px rgba(${accent.rgb}, 0.2)`
               }}
-              whileHover={isMobile ? {} : {
+              whileHover={{
                 scale: 1.1,
                 rotate: 90,
                 borderColor: accent.hoverHex,
                 boxShadow: `0 0 60px rgba(${accent.rgb}, 0.4)`
               }}
-              whileTap={isMobile ? {} : { scale: 0.9 }}
+              whileTap={{ scale: 0.9 }}
             >
               <motion.div
                 className={`rounded-full ${theme === 'glitch' ? 'w-full h-[1px]' : 'w-2 h-2'} relative z-20`}
-                style={{ backgroundColor: isMobile ? `rgba(${accent.rgb}, 0.4)` : accent.hoverHex }}
-                animate={isMobile ? { opacity: 0.5 } : (theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] })}
-                transition={isMobile ? {} : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ backgroundColor: accent.hoverHex }}
+                animate={theme === 'glitch' ? { opacity: [0, 1, 0] } : { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
 
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              whileHover={!isMobile ? { scale: 1.05, letterSpacing: '0.6em' } : {}}
+              whileHover={{ scale: 1.05, letterSpacing: '0.6em' }}
               transition={{ duration: 0.8 }}
-              className={`text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 ${isMobile ? 'whitespace-pre-line leading-relaxed' : 'whitespace-nowrap'} text-center`}
-              style={{ color: isMobile ? 'rgba(255, 255, 255, 0.5)' : accent.hoverHex }}
+              className={`text-[10px] md:text-sm font-mono tracking-[0.4em] uppercase pointer-events-none font-bold drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)] relative z-10 ${isMobile ? 'whitespace-normal px-4 leading-relaxed' : 'whitespace-nowrap'} text-center`}
+              style={{ color: accent.hoverHex }}
             >
-              {isMobile 
-                ? (t.ui?.desktopReminder || "View on desktop\nto enter experience") 
-                : ((sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE")
-              }
+              {((sectionT as any).enterExperience || t.ui?.enterExperience || "ENTER EXPERIENCE")}
             </motion.span>
           </motion.div>
         )}
@@ -1126,6 +1146,97 @@ const Section: React.FC<SectionProps> = ({ data, index, lang, onExpandChange }) 
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Performance Warning Modal */}
+      <AnimatePresence>
+        {showPerformanceWarning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[5000] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md pointer-events-auto"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="w-full max-w-md bg-black/95 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden text-left"
+              style={{
+                boxShadow: `0 0 50px rgba(${accent.rgb}, 0.15)`
+              }}
+            >
+              {/* Background ambient accent glow */}
+              <div 
+                className="absolute -top-20 -right-20 w-40 h-40 rounded-full pointer-events-none animate-pulse"
+                style={{
+                  background: `radial-gradient(circle, rgba(${accent.rgb}, 0.2) 0%, transparent 70%)`
+                }}
+              />
+
+              <div className="flex flex-col gap-2 relative z-10">
+                <span className="text-[9px] font-mono tracking-[0.25em]" style={{ color: accent.hoverHex }}>
+                  // SYSTEM DIAGNOSTIC
+                </span>
+                <h3 className="text-xl font-display font-bold text-white tracking-tight uppercase">
+                  {t.ui?.perfWarningTitle || "PERFORMANCE WARNING"}
+                </h3>
+              </div>
+
+              <p className="text-xs text-concrete leading-relaxed relative z-10 font-mono text-white/70">
+                {t.ui?.perfWarningMsg}
+              </p>
+
+              {/* Checkbox wrapper */}
+              <label className="flex items-center gap-3 cursor-pointer select-none text-[10px] text-white/50 hover:text-white/80 transition-colors py-1 relative z-10">
+                <input 
+                  type="checkbox" 
+                  checked={dontShowWarningAgain} 
+                  onChange={(e) => setDontShowWarningAgain(e.target.checked)}
+                  className="sr-only peer"
+                />
+                <div className="w-4 h-4 border border-white/20 rounded flex items-center justify-center transition-colors peer-checked:border-white peer-checked:bg-white/10 shrink-0">
+                  {dontShowWarningAgain && (
+                    <motion.svg 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="3" 
+                      className="w-2.5 h-2.5 text-white"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </motion.svg>
+                  )}
+                </div>
+                <span className="font-mono tracking-wider">
+                  {t.ui?.perfWarningRemember}
+                </span>
+              </label>
+
+              {/* Buttons container */}
+              <div className="flex gap-3 mt-2 relative z-10 font-mono text-[10px] tracking-widest">
+                <button
+                  onClick={() => setShowPerformanceWarning(false)}
+                  className="flex-1 py-3 px-4 border border-white/10 rounded-lg text-concrete hover:text-white hover:bg-white/5 cursor-pointer text-center transition-all uppercase font-medium"
+                >
+                  {t.ui?.perfWarningCancel || "CANCEL"}
+                </button>
+                <button
+                  onClick={handleConfirmExperience}
+                  className="flex-1 py-3 px-4 rounded-lg text-black font-bold cursor-pointer text-center transition-all uppercase hover:opacity-90"
+                  style={{
+                    backgroundColor: accent.hoverHex,
+                    boxShadow: `0 0 20px rgba(${accent.rgb}, 0.3)`
+                  }}
+                >
+                  {t.ui?.perfWarningProceed || "PROCEED"}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

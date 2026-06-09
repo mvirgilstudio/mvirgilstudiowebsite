@@ -80,6 +80,11 @@ export const TRANSLATIONS = {
             visitProject: 'VISIT PROJECT',
             inspectExperience: 'Click & Drag to Inspect',
             desktopReminder: 'View on desktop\nto enter experience',
+            perfWarningTitle: 'PERFORMANCE WARNING',
+            perfWarningMsg: 'This immersive 3D experience is highly demanding and designed for high-end mobile devices. It may run slowly or crash on older hardware.',
+            perfWarningRemember: "Don't show this warning again",
+            perfWarningCancel: 'CANCEL',
+            perfWarningProceed: 'PROCEED ANYWAY',
         },
         intel: {
             'TOUCH-SENSITIVE SURFACES': {
@@ -276,7 +281,7 @@ export const TRANSLATIONS = {
     },
     PT: {
         nav: {
-            expertise: 'Especialidade',
+            expertise: 'Expertise',
             about: 'Sobre',
             contact: 'Contacto',
             convento: 'ArchViz',
@@ -355,6 +360,11 @@ export const TRANSLATIONS = {
             visitProject: 'VISITAR PROJETO',
             inspectExperience: 'Clique e Arraste para Inspecionar',
             desktopReminder: 'Visualizar no computador\npara entrar na experiência',
+            perfWarningTitle: 'AVISO DE PERFORMANCE',
+            perfWarningMsg: 'Esta experiência 3D interativa é altamente exigente e projetada para dispositivos móveis de gama alta. Pode apresentar lentidão ou falhas em hardware mais antigo.',
+            perfWarningRemember: 'Não mostrar este aviso novamente',
+            perfWarningCancel: 'CANCELAR',
+            perfWarningProceed: 'PROSSEGUIR',
         },
         intel: {
             'TOUCH-SENSITIVE SURFACES': {

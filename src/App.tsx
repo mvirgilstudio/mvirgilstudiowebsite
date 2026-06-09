@@ -195,18 +195,41 @@ const App: React.FC = () => {
             </motion.span>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div
-            className="lg:hidden flex items-center gap-2 sm:gap-4 pointer-events-auto"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <div className="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase">
-              {isMenuOpen ? (lang === 'EN' ? 'Close' : 'Fechar') : (lang === 'EN' ? 'Menu' : 'Menu')}
+          {/* Mobile Navigation controls */}
+          <div className="lg:hidden flex items-center gap-3 sm:gap-5 pointer-events-auto">
+            {/* Mobile Language Toggle */}
+            <div className="flex items-center gap-1.5 font-mono text-[10px] sm:text-xs tracking-wider">
+              <button
+                onClick={() => setLang('PT')}
+                className={`transition-colors duration-200 cursor-pointer px-1 py-0.5 ${lang === 'PT' ? 'text-white font-medium border-b border-white' : 'text-concrete hover:text-white/80'}`}
+              >
+                PT
+              </button>
+              <span className="opacity-20 text-white select-none">/</span>
+              <button
+                onClick={() => setLang('EN')}
+                className={`transition-colors duration-200 cursor-pointer px-1 py-0.5 ${lang === 'EN' ? 'text-white font-medium border-b border-white' : 'text-concrete hover:text-white/80'}`}
+              >
+                EN
+              </button>
             </div>
-            <div className="relative w-6 h-4 group cursor-pointer transition-transform duration-300 active:scale-90">
-              <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 rotate-45' : 'top-0'}`}></span>
-              <span className={`absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-              <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 -rotate-45' : 'top-4'}`}></span>
+
+            {/* Separator */}
+            <span className="h-4 w-[1px] bg-white/10" />
+
+            {/* Mobile Menu Toggle */}
+            <div
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <div className="text-[10px] sm:text-xs font-mono tracking-widest text-concrete uppercase select-none">
+                {isMenuOpen ? (lang === 'EN' ? 'Close' : 'Fechar') : (lang === 'EN' ? 'Menu' : 'Menu')}
+              </div>
+              <div className="relative w-6 h-4 group cursor-pointer transition-transform duration-300 active:scale-90">
+                <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 rotate-45' : 'top-0'}`}></span>
+                <span className={`absolute left-0 w-full h-[1px] bg-white transition-opacity duration-300 top-2 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+                <span className={`absolute left-0 w-full h-[1px] bg-white transition-all duration-300 ease-out ${isMenuOpen ? 'top-2 -rotate-45' : 'top-4'}`}></span>
+              </div>
             </div>
           </div>
         </div>
@@ -277,22 +300,7 @@ const App: React.FC = () => {
                 </motion.div>
               ))}
 
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-12 pt-12 border-t border-white/10 flex justify-between items-center"
-              >
-                <div
-                  className="text-concrete hover:text-white font-mono text-[10px] min-[400px]:text-xs md:text-sm tracking-widest cursor-pointer flex items-center gap-2 sm:gap-3 transition-colors uppercase"
-                  onClick={() => {
-                    setLang(prev => prev === 'EN' ? 'PT' : 'EN');
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  {lang === 'EN' ? 'PORTUGUÊS' : 'ENGLISH'}
-                </div>
-              </motion.div>
+              {/* Language selection moved to main navbar */}
             </div>
           </motion.div>
         )}
