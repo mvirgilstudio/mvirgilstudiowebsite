@@ -151,7 +151,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
             </div>
 
             {/* Interactive Map */}
-            <div className="w-full lg:flex-grow min-h-[220px] h-60 sm:h-72 rounded-xl overflow-hidden border border-white/5 bg-white/[0.02] relative group flex flex-col">
+            <div className="hidden lg:flex w-full lg:flex-grow min-h-[220px] h-60 sm:h-72 rounded-xl overflow-hidden border border-white/5 bg-white/[0.02] relative group flex-col">
               <iframe
                 title="Alcobaça, Portugal Map"
                 src="https://maps.google.com/maps?q=39.5487,-8.9774&t=&z=7&ie=UTF8&iwloc=&output=embed"
