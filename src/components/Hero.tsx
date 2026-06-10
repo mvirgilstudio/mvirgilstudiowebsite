@@ -90,9 +90,12 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
         {/* Main Title Staggered */}
         <h1
           className="w-[14.4vw] max-w-[288px] mx-auto flex justify-center overflow-visible"
-          aria-label="MVFX"
+          aria-label="Miguel Virgílio Studio — Interactive Systems, 3D Animation & VFX"
           style={{ transform: "translateZ(140px) scale(0.75)" }}
         >
+          <span className="sr-only absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0" style={{ clip: 'rect(0, 0, 0, 0)' }}>
+            Miguel Virgílio Studio — Interactive Systems, 3D Modeling, Animation, 3D Tracking & VFX, Web & Creative Coding
+          </span>
           <svg viewBox="200 100 1500 880" className="w-full h-auto overflow-visible drop-shadow-2xl">
             <defs>
               <linearGradient id="hero-logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">

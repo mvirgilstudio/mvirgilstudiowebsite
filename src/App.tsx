@@ -134,7 +134,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+          <nav aria-label="Main navigation" className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
             {/* Archviz Button */}
             <motion.span
               initial={{ opacity: 0, y: -20 }}
@@ -193,7 +193,7 @@ const App: React.FC = () => {
               {lang}
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </motion.button>
-          </div>
+          </nav>
 
           {/* Mobile Navigation controls */}
           <div className="lg:hidden flex items-center gap-3 sm:gap-5 pointer-events-auto">
@@ -238,7 +238,7 @@ const App: React.FC = () => {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden"
           >
-            <div className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
               {/* Archviz Mobile Button */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -293,7 +293,7 @@ const App: React.FC = () => {
               ))}
 
               {/* Language selection moved to main navbar */}
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
@@ -315,7 +315,7 @@ const App: React.FC = () => {
 
         {/* Footer */}
         {!isEmbeddedExperience && (
-          <footer className="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
+          <footer aria-label="Site footer" className="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
 
             {/* Social Media Links */}
