@@ -318,10 +318,22 @@
 
         /* Parallax helper */
         .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% auto;
+        }
+
+        @media (min-width: 768px) {
+            .parallax-bg {
+                background-attachment: fixed;
+                background-position: center 33%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .parallax-bg {
+                background-attachment: scroll;
+                background-position: top center;
+            }
         }
 
         .parallax-layer {
@@ -648,15 +660,12 @@
         <div class="relative w-full h-[60vh] md:h-screen bg-[#f0f1f1] overflow-hidden"
             data-alt="A cinematic, 8k resolution photograph of a monumental, brutalist concrete architectural structure extending over a serene, perfectly still reflective pool.">
 
-            <!-- Masked Container (Isolates the destination-in blend mode) -->
-            <div id="hero-mask-wrapper" class="absolute inset-0 w-full h-full" style="isolation: isolate; opacity: 0;">
+            <!-- Hero Background Canvas -->
+            <div id="hero-mask-wrapper" class="absolute inset-0 w-full h-full" style="opacity: 0;">
                 <!-- 1. Background Image -->
-                <div
-                    class="absolute inset-0 w-full h-full parallax-bg bg-[url('/projects/architectural_landing_page/assets/hero_background.jpg')]">
+                <div id="hero-bg-image"
+                    class="absolute inset-0 w-full h-full parallax-bg">
                 </div>
-                <!-- 2. Lottie Player as the Mask -->
-                <div id="lottie-hero-text" class="absolute inset-0 w-full h-full pointer-events-none"
-                    style="mix-blend-mode: destination-in; opacity: 0.8;"></div>
             </div>
 
             <!-- Tonal Gradient Overlay -->
@@ -666,12 +675,14 @@
 
             <!-- Hero Content -->
             <div
-                class="relative w-full bg-[#f0f1f1] flex flex-col justify-center px-[5%] max-w-[1920px] mx-auto py-10 md:absolute md:inset-0 md:justify-end md:pb-24 md:bg-transparent z-30 pointer-events-none">
-                <div class="w-full max-w-none reveal-up text-on-primary parallax-layer" data-speed="0.2">
-                    <p id="hero-subtitle" data-t="hero_subtitle"
-                        class="w-full text-gray-700 drop-shadow-md uppercase tracking-widest md:whitespace-normal pointer-events-auto text-center font-bold pr-0"
-                        style="font-size: clamp(1.0rem, 2.5vw, 3.5rem); letter-spacing: 0.3em; opacity: 0; transform: translateY(20px);">
-                        High-end architectural techniques for visionary designs</p>
+                class="absolute inset-0 w-full h-full flex flex-col justify-end z-30 pointer-events-none">
+                <div class="w-full px-[5%] max-w-[1920px] mx-auto pb-8 md:pb-24">
+                    <div class="w-full max-w-none reveal-up text-on-primary parallax-layer" data-speed="0.2">
+                        <p id="hero-subtitle" data-t="hero_subtitle"
+                            class="w-full text-gray-700 drop-shadow-md uppercase tracking-widest whitespace-normal md:whitespace-nowrap pointer-events-auto text-center font-bold pr-0"
+                            style="font-size: clamp(0.75rem, 0.95vw, 1.2rem); letter-spacing: 0.25em; opacity: 0; transform: translateY(20px);">
+                            High-end architectural techniques for visionary designs</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -780,7 +791,7 @@
 
         <!-- Full-width Showcase Background Wrapper -->
         <div id="showcase-sec"
-            class="relative w-full bg-[url('/projects/architectural_landing_page/assets/section_bck_01.jpg')] bg-cover bg-center bg-no-repeat py-16 md:py-24 border-t border-black/5 mt-12 md:mt-20">
+            class="relative w-full bg-[url('/projects/archviz/assets/section_bck_01.jpg')] bg-cover bg-center bg-no-repeat py-16 md:py-24 border-t border-black/5 mt-12 md:mt-20">
             <!-- Subtle Overlay for Readability -->
             <div class="absolute inset-0 bg-[#f0f1f1]/65 pointer-events-none"></div>
 
@@ -945,17 +956,17 @@
                                             loading="lazy" alt="LiveSpace Concrete Exterior">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="2">
-                                        <img src="/projects/architectural_landing_page/assets/tent/06.jpg"
+                                        <img src="/projects/archviz/assets/tent/06.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
                                             loading="lazy" alt="Echologic Tents Canvas Structure">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="3">
-                                        <img src="/projects/architectural_landing_page/assets/bungalow/bung_01.jpg"
+                                        <img src="/projects/archviz/assets/bungalow/bung_01.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
                                             loading="lazy" alt="Riverstone Meadows Modern Bungalow">
                                     </div>
                                     <div class="absolute inset-0 image-display-layer" data-idx="4">
-                                        <img src="/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg"
+                                        <img src="/projects/archviz/assets/house ponte jardim/casa_11.jpg"
                                             class="w-full h-full object-cover transition-transform duration-1000 group-hover/display:scale-105"
                                             loading="lazy" alt="House Bridge Garden Modern Architecture">
                                     </div>
@@ -1060,7 +1071,7 @@
                                 </div>
                                 <!-- Cover Overlay -->
                                 <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
-                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg');">
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/archviz/assets/house ponte jardim/casa_11.jpg');">
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
@@ -1085,7 +1096,7 @@
                                 </div>
                                 <!-- Cover Overlay -->
                                 <div class="absolute inset-0 bg-neutral-900 z-20 transition-opacity duration-500 bg-cover bg-center"
-                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/architectural_landing_page/assets/bungalow/bung_01.jpg');">
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('/projects/archviz/assets/bungalow/bung_01.jpg');">
                                 </div>
                                 <!-- Project Title Overlay -->
                                 <div
@@ -1238,7 +1249,7 @@
 
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
-                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/house/house_thumbnail.jpg');">
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/archviz/assets/house/house_thumbnail.jpg');">
                                 <span data-t="interactive_proj1_tag"
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     01</span>
@@ -1281,7 +1292,7 @@
 
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
-                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/tent/06.jpg');">
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/archviz/assets/tent/06.jpg');">
                                 <span data-t="interactive_proj2_tag"
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     02</span>
@@ -1324,7 +1335,7 @@
 
                             <!-- Cover Overlay -->
                             <div class="absolute inset-0 bg-neutral-900 z-20 flex flex-col justify-center md:justify-end p-4 md:p-8 transition-opacity duration-500 bg-cover bg-center"
-                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg');">
+                                style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), url('/projects/archviz/assets/house ponte jardim/casa_11.jpg');">
                                 <span data-t="interactive_proj3_tag"
                                     class="text-xs font-normal text-white/50 tracking-[0.25em] uppercase mb-1 hidden md:block">PROJECT
                                     03</span>
@@ -1438,7 +1449,7 @@
     <section id="digital-twin-experience-sec"
         class="w-full relative bg-[#1a1c1c] text-white py-24 md:py-32 overflow-hidden">
         <div
-            class="absolute inset-0 opacity-45 bg-[url('/projects/architectural_landing_page/assets/section_bck_02.jpg')] bg-cover bg-center bg-no-repeat grayscale">
+            class="absolute inset-0 opacity-45 bg-[url('/projects/archviz/assets/section_bck_02.jpg')] bg-cover bg-center bg-no-repeat grayscale">
         </div>
         <div class="max-w-[1920px] mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
             <!-- Header Info (Above the Video/Grid) -->
@@ -1691,7 +1702,7 @@
 
         <!-- Background Image watermark -->
         <div
-            class="absolute inset-0 opacity-40 bg-[url('/projects/architectural_landing_page/assets/convento/convento_bkg.jpg')] bg-cover bg-center bg-no-repeat pointer-events-none">
+            class="absolute inset-0 opacity-40 bg-[url('/projects/archviz/assets/convento/convento_bkg.jpg')] bg-cover bg-center bg-no-repeat pointer-events-none">
         </div>
 
         <!-- Background Grid Lines -->
@@ -1704,7 +1715,7 @@
             <div
                 class="flex flex-col md:flex-row justify-start items-start md:items-center mb-12 reveal-up gap-6 md:gap-10">
                 <div class="flex-shrink-0">
-                    <img src="/projects/architectural_landing_page/assets/convento/fundacao_orada.png"
+                    <img src="/projects/archviz/assets/convento/fundacao_orada.png"
                         alt="Fundação Orada Logo"
                         class="h-16 md:h-20 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-300">
                 </div>
@@ -1745,7 +1756,7 @@
                         <!-- Mobile Tap to Load Trigger -->
                         <div id="splat-mobile-trigger"
                             class="absolute inset-0 z-20 flex md:hidden flex-col items-center justify-center bg-cover bg-center cursor-pointer p-6"
-                            style="background-image: linear-gradient(to bottom, rgba(26,26,26,0.6), rgba(26,26,26,0.85)), url('/projects/architectural_landing_page/assets/convento/convento_bkg.jpg');">
+                            style="background-image: linear-gradient(to bottom, rgba(26,26,26,0.6), rgba(26,26,26,0.85)), url('/projects/archviz/assets/convento/convento_bkg.jpg');">
                             <div class="flex flex-col items-center gap-4 text-center">
                                 <div
                                     class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black">
@@ -2428,9 +2439,13 @@
             // Set HTML lang attribute
             document.documentElement.lang = currentLang.toLowerCase();
 
-            // Load the correct Lottie animation path
-            if (window.loadHeroLottie) {
-                window.loadHeroLottie(currentLang);
+            // Update hero background image based on active language
+            const heroBg = document.getElementById('hero-bg-image');
+            if (heroBg) {
+                const bgUrl = currentLang === 'PT'
+                    ? '/projects/archviz/assets/hero_pt_bck.jpg'
+                    : '/projects/archviz/assets/hero_en_bck.jpg';
+                heroBg.style.backgroundImage = `url('${bgUrl}')`;
             }
 
             // Post message to active panorama iframes to sync language
@@ -2487,69 +2502,6 @@
             }
         }
 
-        let heroAnim = null;
-        window.loadHeroLottie = function (lang) {
-            const lottieContainer = document.getElementById('lottie-hero-text');
-            if (!lottieContainer || typeof lottie === 'undefined') return;
-
-            // Destroy previous animation if it exists
-            if (heroAnim) {
-                heroAnim.destroy();
-                heroAnim = null;
-            }
-
-            // Determine path based on language
-            const path = lang === 'PT'
-                ? '/projects/architectural_landing_page/assets/hero_text_pt_transp.json'
-                : '/projects/architectural_landing_page/assets/hero_text_transp.json';
-
-            heroAnim = lottie.loadAnimation({
-                container: lottieContainer,
-                renderer: 'svg',
-                loop: false,
-                autoplay: false,
-                path: path,
-                rendererSettings: {
-                    preserveAspectRatio: 'none',
-                    clearCanvas: true
-                }
-            });
-
-            // Play the animation or show the last frame immediately based on screen format
-            const isMobile = window.innerWidth < 768;
-            if (isMobile) {
-                heroAnim.addEventListener('DOMLoaded', () => {
-                    heroAnim.goToAndStop(heroAnim.totalFrames - 1, true);
-                });
-            } else {
-                heroAnim.play();
-            }
-
-            // Re-bind ScrollTrigger to use the new animation instance
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                const maskWrapper = document.getElementById('hero-mask-wrapper');
-                if (maskWrapper) {
-                    const existingTrigger = ScrollTrigger.getById('hero-trigger');
-                    if (existingTrigger) {
-                        existingTrigger.kill();
-                    }
-                    ScrollTrigger.create({
-                        id: 'hero-trigger',
-                        trigger: maskWrapper,
-                        start: "top top",
-                        end: "bottom top",
-                        onEnterBack: () => {
-                            if (heroAnim && !isMobile) heroAnim.goToAndPlay(0, true);
-                        },
-                        onLeave: () => {
-                            if (heroAnim && !isMobile) heroAnim.goToAndStop(0, true);
-                        }
-                    });
-                }
-            }
-        }
-
         // Global Gallery Data (All 40 items)
         const GALLERY_ITEMS = [
             // ArchSync (0-5)
@@ -2596,46 +2548,46 @@
             { src: 'https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-building-interior-31846-large.mp4', type: 'video', caption: 'LiveSpace — Concrete Cantilever Detail' },
 
             // Eco-Tents (33-39)
-            { src: '/projects/architectural_landing_page/assets/tent/06.jpg', type: 'image', caption: 'Eco-Tents — Forest Canvas Structure' },
-            { src: '/projects/architectural_landing_page/assets/tent/08.jpg', type: 'image', caption: 'Eco-Tents — Canopy Shadow Detail' },
-            { src: '/projects/architectural_landing_page/assets/tent/09.jpg', type: 'image', caption: 'Eco-Tents — Evening Ambient Glow' },
-            { src: '/projects/architectural_landing_page/assets/tent/10.jpg', type: 'image', caption: 'Eco-Tents — Minimalist Structure Overview' },
-            { src: '/projects/architectural_landing_page/assets/tent/int_01.jpg', type: 'image', caption: 'Eco-Tents — Interior Living Area' },
-            { src: '/projects/architectural_landing_page/assets/tent/int_02.jpg', type: 'image', caption: 'Eco-Tents — Cozy Reading Nook' },
-            { src: '/projects/architectural_landing_page/assets/tent/int_03.jpg', type: 'image', caption: 'Eco-Tents — Panoramic Forest View' },
+            { src: '/projects/archviz/assets/tent/06.jpg', type: 'image', caption: 'Eco-Tents — Forest Canvas Structure' },
+            { src: '/projects/archviz/assets/tent/08.jpg', type: 'image', caption: 'Eco-Tents — Canopy Shadow Detail' },
+            { src: '/projects/archviz/assets/tent/09.jpg', type: 'image', caption: 'Eco-Tents — Evening Ambient Glow' },
+            { src: '/projects/archviz/assets/tent/10.jpg', type: 'image', caption: 'Eco-Tents — Minimalist Structure Overview' },
+            { src: '/projects/archviz/assets/tent/int_01.jpg', type: 'image', caption: 'Eco-Tents — Interior Living Area' },
+            { src: '/projects/archviz/assets/tent/int_02.jpg', type: 'image', caption: 'Eco-Tents — Cozy Reading Nook' },
+            { src: '/projects/archviz/assets/tent/int_03.jpg', type: 'image', caption: 'Eco-Tents — Panoramic Forest View' },
 
             // Riverstone Meadows (40-54)
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_01.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 01' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_02.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 02' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_03.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 03' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_04.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 04' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_05.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 05' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_07.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 07' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_08.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 08' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_09.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 09' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_10.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 10' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_11.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 11' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_12.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 12' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_13.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 13' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_14.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 14' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_15.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 15' },
-            { src: '/projects/architectural_landing_page/assets/bungalow/bung_16.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 16' },
+            { src: '/projects/archviz/assets/bungalow/bung_01.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 01' },
+            { src: '/projects/archviz/assets/bungalow/bung_02.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 02' },
+            { src: '/projects/archviz/assets/bungalow/bung_03.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 03' },
+            { src: '/projects/archviz/assets/bungalow/bung_04.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 04' },
+            { src: '/projects/archviz/assets/bungalow/bung_05.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 05' },
+            { src: '/projects/archviz/assets/bungalow/bung_07.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 07' },
+            { src: '/projects/archviz/assets/bungalow/bung_08.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 08' },
+            { src: '/projects/archviz/assets/bungalow/bung_09.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 09' },
+            { src: '/projects/archviz/assets/bungalow/bung_10.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 10' },
+            { src: '/projects/archviz/assets/bungalow/bung_11.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 11' },
+            { src: '/projects/archviz/assets/bungalow/bung_12.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 12' },
+            { src: '/projects/archviz/assets/bungalow/bung_13.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 13' },
+            { src: '/projects/archviz/assets/bungalow/bung_14.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 14' },
+            { src: '/projects/archviz/assets/bungalow/bung_15.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 15' },
+            { src: '/projects/archviz/assets/bungalow/bung_16.jpg', type: 'image', caption: 'Riverstone Meadows — Modern Bungalow 16' },
 
             // House Bridge Garden (55-68)
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg', type: 'image', caption: 'House Bridge Garden — Cinematic Exterior View' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_02.jpg', type: 'image', caption: 'House Bridge Garden — Close-up Bridge Deck Detail' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_03.jpg', type: 'image', caption: 'House Bridge Garden — Main Entrance Path' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_04.jpg', type: 'image', caption: 'House Bridge Garden — Reflected Pool Shadow Play' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_05.jpg', type: 'image', caption: 'House Bridge Garden — Contemporary Courtyard Layout' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_06.jpg', type: 'image', caption: 'House Bridge Garden — Concrete Column Cantilevers' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_07.jpg', type: 'image', caption: 'House Bridge Garden — Side Entrance Pathway' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_09.jpg', type: 'image', caption: 'House Bridge Garden — Living Room Glazing & Forest Views' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_11.jpg', type: 'image', caption: 'House Bridge Garden — Garden Terrace Area' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_12.jpg', type: 'image', caption: 'House Bridge Garden — Sunset Amber Glow Facade' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_13.jpg', type: 'image', caption: 'House Bridge Garden — Timber Ceiling Structure Detail' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_14.jpg', type: 'image', caption: 'House Bridge Garden — Minimalist Entrance Lobby' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_15.jpg', type: 'image', caption: 'House Bridge Garden — Natural Stone Retaining Walls' },
-            { src: '/projects/architectural_landing_page/assets/house ponte jardim/casa_16.jpg', type: 'image', caption: 'House Bridge Garden — Elevated Panoramic Deck View' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_11.jpg', type: 'image', caption: 'House Bridge Garden — Cinematic Exterior View' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_02.jpg', type: 'image', caption: 'House Bridge Garden — Close-up Bridge Deck Detail' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_03.jpg', type: 'image', caption: 'House Bridge Garden — Main Entrance Path' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_04.jpg', type: 'image', caption: 'House Bridge Garden — Reflected Pool Shadow Play' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_05.jpg', type: 'image', caption: 'House Bridge Garden — Contemporary Courtyard Layout' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_06.jpg', type: 'image', caption: 'House Bridge Garden — Concrete Column Cantilevers' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_07.jpg', type: 'image', caption: 'House Bridge Garden — Side Entrance Pathway' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_09.jpg', type: 'image', caption: 'House Bridge Garden — Living Room Glazing & Forest Views' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_11.jpg', type: 'image', caption: 'House Bridge Garden — Garden Terrace Area' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_12.jpg', type: 'image', caption: 'House Bridge Garden — Sunset Amber Glow Facade' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_13.jpg', type: 'image', caption: 'House Bridge Garden — Timber Ceiling Structure Detail' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_14.jpg', type: 'image', caption: 'House Bridge Garden — Minimalist Entrance Lobby' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_15.jpg', type: 'image', caption: 'House Bridge Garden — Natural Stone Retaining Walls' },
+            { src: '/projects/archviz/assets/house ponte jardim/casa_16.jpg', type: 'image', caption: 'House Bridge Garden — Elevated Panoramic Deck View' },
             { src: 'https://player.mediadelivery.net/embed/625906/fefdd3a4-e87f-4373-9b05-5aa52b9d2d05?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'Bridge Garden — Cinematic Animation Walkthrough' },
             { src: 'https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true', type: 'iframe', caption: 'Modern Bungalow — Cinematic Animation' }
         ];
@@ -3572,24 +3524,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             (function () {
-                // Load Lottie animation if container exists
-                const lottieContainer = document.getElementById('lottie-hero-text');
-                if (lottieContainer && typeof lottie !== 'undefined') {
-                    if (typeof window.loadHeroLottie === 'function') {
-                        window.loadHeroLottie(currentLang);
-                    }
-
-                    if (typeof gsap !== 'undefined') {
-                        const maskWrapper = document.getElementById('hero-mask-wrapper');
-                        if (maskWrapper) {
-                            gsap.fromTo(maskWrapper,
-                                { opacity: 0 },
-                                { opacity: 1, duration: 1.5, ease: 'power2.out' }
-                            );
-                        }
-                        gsap.fromTo(lottieContainer,
-                            { scale: 0.95 },
-                            { scale: 1, duration: 1.5, ease: 'power2.out' }
+                // Fade in background image
+                if (typeof gsap !== 'undefined') {
+                    const maskWrapper = document.getElementById('hero-mask-wrapper');
+                    if (maskWrapper) {
+                        gsap.fromTo(maskWrapper,
+                            { opacity: 0 },
+                            { opacity: 1, duration: 1.5, ease: 'power2.out' }
                         );
                     }
                 }
