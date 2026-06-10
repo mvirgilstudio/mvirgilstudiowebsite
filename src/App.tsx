@@ -141,7 +141,7 @@ const App: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0 }}
               onClick={() => {
-                window.location.href = '/projects/architectural_landing_page/code.html';
+                window.location.href = '/projects/archviz/code.html';
               }}
               className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group"
             >
@@ -248,7 +248,7 @@ const App: React.FC = () => {
                 onClick={() => {
                   setIsMenuOpen(false);
                   setTimeout(() => {
-                    window.location.href = '/projects/architectural_landing_page/code.html';
+                    window.location.href = '/projects/archviz/code.html';
                   }, 300);
                 }}
               >
