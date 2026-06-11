@@ -27,3 +27,5 @@ dist-ssr
 *interactive.mp4
 
 .vercel
+
+.env
