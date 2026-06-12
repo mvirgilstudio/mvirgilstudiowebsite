@@ -684,185 +684,190 @@
     <!-- Local Developer Helper (Only executed in local browser previews, automatically removed when copying for email clients) -->
     <script type="text/javascript">
         (function() {
-            var isLocal = window.location.hostname === 'localhost' || 
-                          window.location.hostname === '127.0.0.1' || 
-                          window.location.protocol === 'file:';
-            
-            if (isLocal) {
-                var prodBase = 'https://mvirgilstudio.com/projects/archviz_email2/';
-                var currentLang = 'EN';
+            var prodBase = 'https://mvirgilstudio.com/projects/archviz_email2/';
+            var currentLang = 'EN';
 
-                var dictionary = {
-                    'EN': {
-                        'hero_subtitle': 'Architectural Visualization',
-                        'hero_title': 'High-end architectural techniques for visionary designs',
-                        'nav_sec01_lbl': 'SEC 01',
-                        'nav_sec01_val': 'SHOWCASE',
-                        'nav_sec02_lbl': 'SEC 02',
-                        'nav_sec02_val': 'DIGITAL TWIN',
-                        'nav_sec03_lbl': 'SEC 03',
-                        'nav_sec03_val': '3D SIMULATOR',
-                        'nav_sec04_lbl': 'SEC 04',
-                        'nav_sec04_val': 'PROTOTYPING',
-                        'sec01_tag': '01 /',
-                        'sec01_title': 'Visual Showcase',
-                        'showcase01_title': '01.1 / Image Renders',
-                        'showcase01_desc': '5 Projects · 63 Images (GreenHaven, LiveSpace, Riverstone...)',
-                        'showcase01_cta': 'Open Interactive Gallery &rarr;',
-                        'showcase02_title': '01.2 / Cinematic Animations',
-                        'showcase02_desc': '4 Cinematic Architectural Sequences',
-                        'showcase02_cta': 'Play Cinematic Videos &rarr;',
-                        'showcase03_title': '01.3 / Immersive Walkthroughs',
-                        'showcase03_desc': '2 Interactive Simulated Walkthroughs',
-                        'showcase03_cta': 'Explore Spatial Walkthroughs &rarr;',
-                        'showcase04_title': '01.4 / Interactive Systems',
-                        'showcase04_desc': '3 Dynamic Panoramas (House, Tent, Bridge Garden)',
-                        'showcase04_cta': 'Engage 360&deg; Panorama Views &rarr;',
-                        'sec02_tag': '02 /',
-                        'sec02_title': 'Immersive Experience & Real Objects Interaction',
-                        'sec02_desc': 'Experience true tactile-to-digital immersion. We bridge physical scale maquettes and virtual layouts through innovative real-time NFC-triggered integrations, instantly syncing real material swaps to high-fidelity 3D configurations on screen.',
-                        'sec02_card_desc': 'Physical Maquette NFC & Stone Catalog Sync System',
-                        'sec02_cta': 'Launch Standalone App',
-                        'sec03_tag': '03 /',
-                        'sec03_title': '3D & Interactive Viewer',
-                        'sec03_desc': 'Experience dynamic 3D model synchronization in real-time alongside dense, high-fidelity spatial captures of historic spaces. Use floor selectors, daylight simulation controls, or rotate the WebGL Splat scan to bridge physical details and digital presentation.',
-                        'sec03_col1_title': 'Dynamic Image Sequence',
-                        'sec03_col1_desc': 'Rendering Sequence',
-                        'sec03_col2_title': '3D Real-time Synced Model',
-                        'sec03_col2_desc': 'Splat Model Synced',
-                        'sec03_box_title': 'Launch Full 3D Digital Twin Simulator',
-                        'sec03_box_desc': 'Open the standalone application to switch floor layers, daylight simulation, and synchronized sequences.',
-                        'sec03_box_cta': 'Open 3D Simulator',
-                        'sec03_partb_lbl': 'Monsaraz Historic Preservations',
-                        'sec03_partb_title': 'Interactive 3D WebGL Splat Viewer',
-                        'sec03_partb_desc': 'Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures as a navigable real-time interactivity.',
-                        'sec03_partb_card_title': 'WebGL Gaussian Splatting Scan',
-                        'sec03_partb_cta': 'Explore 3D Splat Space &rarr;',
-                        'sec04_tag': '04 /',
-                        'sec04_title': 'Precision Prototyping',
-                        'sec04_desc': 'High-fidelity scale physical models produced with premium white resin 3D printing and precise CNC milling workflows. Bridging computational design models and physical architectural tangibility.',
-                        'sec04_card_desc': 'Premium 3D Printed Maquette scale model',
-                        'sec04_cta': 'Watch Fabrication Video &rarr;',
-                        'footer_sub': 'Architectural Visualization · Web & Creative Coding · 3D VFX',
-                        'footer_desc': 'You received this email because you subscribed to our architectural design presentation portfolio.',
-                        'footer_copy': '&copy; 2026 Miguel Virg&iacute;lio Studio. All rights reserved.',
-                        'footer_link': 'Visit Studio Portfolio'
-                    },
-                    'PT': {
-                        'hero_subtitle': 'Visualização Arquitetónica',
-                        'hero_title': 'Técnicas arquitetónicas premium para projetos visionários',
-                        'nav_sec01_lbl': 'SEC 01',
-                        'nav_sec01_val': 'PORTFÓLIO',
-                        'nav_sec02_lbl': 'SEC 02',
-                        'nav_sec02_val': 'GÉMEO DIGITAL',
-                        'nav_sec03_lbl': 'SEC 03',
-                        'nav_sec03_val': 'SIMULADOR 3D',
-                        'nav_sec04_lbl': 'SEC 04',
-                        'nav_sec04_val': 'PROTOTIPAGEM',
-                        'sec01_tag': '01 /',
-                        'sec01_title': 'Portfólio Visual',
-                        'showcase01_title': '01.1 / Renders de Imagem',
-                        'showcase01_desc': '5 Projetos · 63 Imagens (GreenHaven, LiveSpace, Riverstone...)',
-                        'showcase01_cta': 'Abrir Galeria Interativa &rarr;',
-                        'showcase02_title': '01.2 / Animações Cinemáticas',
-                        'showcase02_desc': '4 Sequências Arquitetónicas Cinemáticas',
-                        'showcase02_cta': 'Reproduzir Vídeos Cinemáticos &rarr;',
-                        'showcase03_title': '01.3 / Visitas Virtuais Imersivas',
-                        'showcase03_desc': '2 Visitas Virtuais Interativas Simuladas',
-                        'showcase03_cta': 'Explorar Visitas Virtuais &rarr;',
-                        'showcase04_title': '01.4 / Sistemas Interativos',
-                        'showcase04_desc': '3 Panoramas Dinâmicos (Casa, Tenda, Jardim da Ponte)',
-                        'showcase04_cta': 'Ver Panoramas 360&deg; &rarr;',
-                        'sec02_tag': '02 /',
-                        'sec02_title': 'Experiência Imersiva &amp; Interação com Objetos Reais',
-                        'sec02_desc': 'Experimente uma verdadeira imersão tátil-digital. Fazemos a ponte entre maquetes físicas e layouts virtuais através de integrações inovadoras ativadas por NFC em tempo real, sincronizando instantaneamente amostras de materiais reais com configurações 3D de alta fidelidade no ecrã.',
-                        'sec02_card_desc': 'Sistema de Sincronização de Maquete Física NFC &amp; Catálogo de Pedras',
-                        'sec02_cta': 'Lançar Aplicação Independente',
-                        'sec03_tag': '03 /',
-                        'sec03_title': 'Visualizador 3D &amp; Interativo',
-                        'sec03_desc': 'Experimente a sincronização dinâmica do modelo 3D em tempo real em simultâneo com capturas espaciais densas e de alta fidelidade de espaços históricos. Use seletores de piso, controlos de simulação solar ou rode a digitalização WebGL Splat para unir detalhes físicos e interatividade digital.',
-                        'sec03_col1_title': 'Sequência de Imagens Dinâmicas',
-                        'sec03_col1_desc': 'Sequência de Renderização',
-                        'sec03_col2_title': 'Modelo 3D Sincronizado em Tempo Real',
-                        'sec03_col2_desc': 'Modelo Splat Sincronizado',
-                        'sec03_box_title': 'Lançar Simulador Digital Twin 3D Completo',
-                        'sec03_box_desc': 'Abra a aplicação independente para alternar pisos, simular a luz do dia e ver sequências sincronizadas.',
-                        'sec03_box_cta': 'Abrir Simulador 3D',
-                        'sec03_partb_lbl': 'Preservação Histórica de Monsaraz',
-                        'sec03_partb_title': 'Visualizador Interativo WebGL Splat 3D',
-                        'sec03_partb_desc': 'Explore uma captura espacial densa e de alta fidelidade do histórico Convento de Monsaraz. Ao utilizar o scan 3D real, preservamos campos de luz, profundidade volumétrica e texturas brutas como uma interatividade navegável em tempo real.',
-                        'sec03_partb_card_title': 'Scan WebGL de Gaussian Splatting',
-                        'sec03_partb_cta': 'Explorar Espaço 3D Splat &rarr;',
-                        'sec04_tag': '04 /',
-                        'sec04_title': 'Prototipagem de Precisão',
-                        'sec04_desc': 'Modelos físicos à escala de alta fidelidade produzidos com impressão 3D em resina branca premium e fluxos de trabalho precisos de fresagem CNC. Unindo modelos de design computacional e a tangibilidade arquitetónica física.',
-                        'sec04_card_desc': 'Maquete física premium impressa em 3D',
-                        'sec04_cta': 'Ver Vídeo de Fabrico &rarr;',
-                        'footer_sub': 'Visualização Arquitetónica · Web &amp; Creative Coding · 3D VFX',
-                        'footer_desc': 'Recebeu este email porque subscreveu o nosso portfólio de apresentação de design arquitetónico.',
-                        'footer_copy': '&copy; 2026 Miguel Virgílio Studio. Todos os direitos reservados.',
-                        'footer_link': 'Visitar Portfólio do Estúdio'
+            var dictionary = {
+                'EN': {
+                    'hero_subtitle': 'Architectural Visualization',
+                    'hero_title': 'High-end architectural techniques for visionary designs',
+                    'nav_sec01_lbl': 'SEC 01',
+                    'nav_sec01_val': 'SHOWCASE',
+                    'nav_sec02_lbl': 'SEC 02',
+                    'nav_sec02_val': 'DIGITAL TWIN',
+                    'nav_sec03_lbl': 'SEC 03',
+                    'nav_sec03_val': '3D SIMULATOR',
+                    'nav_sec04_lbl': 'SEC 04',
+                    'nav_sec04_val': 'PROTOTYPING',
+                    'sec01_tag': '01 /',
+                    'sec01_title': 'Visual Showcase',
+                    'showcase01_title': '01.1 / Image Renders',
+                    'showcase01_desc': '5 Projects · 63 Images (GreenHaven, LiveSpace, Riverstone...)',
+                    'showcase01_cta': 'Open Interactive Gallery &rarr;',
+                    'showcase02_title': '01.2 / Cinematic Animations',
+                    'showcase02_desc': '4 Cinematic Architectural Sequences',
+                    'showcase02_cta': 'Play Cinematic Videos &rarr;',
+                    'showcase03_title': '01.3 / Immersive Walkthroughs',
+                    'showcase03_desc': '2 Interactive Simulated Walkthroughs',
+                    'showcase03_cta': 'Explore Spatial Walkthroughs &rarr;',
+                    'showcase04_title': '01.4 / Interactive Systems',
+                    'showcase04_desc': '3 Dynamic Panoramas (House, Tent, Bridge Garden)',
+                    'showcase04_cta': 'Engage 360&deg; Panorama Views &rarr;',
+                    'sec02_tag': '02 /',
+                    'sec02_title': 'Immersive Experience & Real Objects Interaction',
+                    'sec02_desc': 'Experience true tactile-to-digital immersion. We bridge physical scale maquettes and virtual layouts through innovative real-time NFC-triggered integrations, instantly syncing real material swaps to high-fidelity 3D configurations on screen.',
+                    'sec02_card_desc': 'Physical Maquette NFC & Stone Catalog Sync System',
+                    'sec02_cta': 'Launch Standalone App',
+                    'sec03_tag': '03 /',
+                    'sec03_title': '3D & Interactive Viewer',
+                    'sec03_desc': 'Experience dynamic 3D model synchronization in real-time alongside dense, high-fidelity spatial captures of historic spaces. Use floor selectors, daylight simulation controls, or rotate the WebGL Splat scan to bridge physical details and digital presentation.',
+                    'sec03_col1_title': 'Dynamic Image Sequence',
+                    'sec03_col1_desc': 'Rendering Sequence',
+                    'sec03_col2_title': '3D Real-time Synced Model',
+                    'sec03_col2_desc': 'Splat Model Synced',
+                    'sec03_box_title': 'Launch Full 3D Digital Twin Simulator',
+                    'sec03_box_desc': 'Open the standalone application to switch floor layers, daylight simulation, and synchronized sequences.',
+                    'sec03_box_cta': 'Open 3D Simulator',
+                    'sec03_partb_lbl': 'Monsaraz Historic Preservations',
+                    'sec03_partb_title': 'Interactive 3D WebGL Splat Viewer',
+                    'sec03_partb_desc': 'Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures as a navigable real-time interactivity.',
+                    'sec03_partb_card_title': 'WebGL Gaussian Splatting Scan',
+                    'sec03_partb_cta': 'Explore 3D Splat Space &rarr;',
+                    'sec04_tag': '04 /',
+                    'sec04_title': 'Precision Prototyping',
+                    'sec04_desc': 'High-fidelity scale physical models produced with premium white resin 3D printing and precise CNC milling workflows. Bridging computational design models and physical architectural tangibility.',
+                    'sec04_card_desc': 'Premium 3D Printed Maquette scale model',
+                    'sec04_cta': 'Watch Fabrication Video &rarr;',
+                    'footer_sub': 'Architectural Visualization · Web & Creative Coding · 3D VFX',
+                    'footer_desc': 'You received this email because you subscribed to our architectural design presentation portfolio.',
+                    'footer_copy': '&copy; 2026 Miguel Virg&iacute;lio Studio. All rights reserved.',
+                    'footer_link': 'Visit Studio Portfolio'
+                },
+                'PT': {
+                    'hero_subtitle': 'Visualização Arquitetónica',
+                    'hero_title': 'Técnicas arquitetónicas premium para projetos visionários',
+                    'nav_sec01_lbl': 'SEC 01',
+                    'nav_sec01_val': 'PORTFÓLIO',
+                    'nav_sec02_lbl': 'SEC 02',
+                    'nav_sec02_val': 'GÉMEO DIGITAL',
+                    'nav_sec03_lbl': 'SEC 03',
+                    'nav_sec03_val': 'SIMULADOR 3D',
+                    'nav_sec04_lbl': 'SEC 04',
+                    'nav_sec04_val': 'PROTOTIPAGEM',
+                    'sec01_tag': '01 /',
+                    'sec01_title': 'Portfólio Visual',
+                    'showcase01_title': '01.1 / Renders de Imagem',
+                    'showcase01_desc': '5 Projetos · 63 Imagens (GreenHaven, LiveSpace, Riverstone...)',
+                    'showcase01_cta': 'Abrir Galeria Interativa &rarr;',
+                    'showcase02_title': '01.2 / Animações Cinemáticas',
+                    'showcase02_desc': '4 Sequências Arquitetónicas Cinemáticas',
+                    'showcase02_cta': 'Reproduzir Vídeos Cinemáticos &rarr;',
+                    'showcase03_title': '01.3 / Visitas Virtuais Imersivas',
+                    'showcase03_desc': '2 Visitas Virtuais Interativas Simuladas',
+                    'showcase03_cta': 'Explorar Visitas Virtuais &rarr;',
+                    'showcase04_title': '01.4 / Sistemas Interativos',
+                    'showcase04_desc': '3 Panoramas Dinâmicos (Casa, Tenda, Jardim da Ponte)',
+                    'showcase04_cta': 'Ver Panoramas 360&deg; &rarr;',
+                    'sec02_tag': '02 /',
+                    'sec02_title': 'Experiência Imersiva &amp; Interação com Objetos Reais',
+                    'sec02_desc': 'Experimente uma verdadeira imersão tátil-digital. Fazemos a ponte entre maquetes físicas e layouts virtuais através de integrações inovadoras ativadas por NFC em tempo real, sincronizando instantaneamente amostras de materiais reais com configurações 3D de alta fidelidade no ecrã.',
+                    'sec02_card_desc': 'Sistema de Sincronização de Maquete Física NFC &amp; Catálogo de Pedras',
+                    'sec02_cta': 'Lançar Aplicação Independente',
+                    'sec03_tag': '03 /',
+                    'sec03_title': 'Visualizador 3D &amp; Interativo',
+                    'sec03_desc': 'Experimente a sincronização dinâmica do modelo 3D em tempo real em simultâneo com capturas espaciais densas e de alta fidelidade de espaços históricos. Use seletores de piso, controlos de simulação solar ou rode a digitalização WebGL Splat para unir detalhes físicos e interatividade digital.',
+                    'sec03_col1_title': 'Sequência de Imagens Dinâmicas',
+                    'sec03_col1_desc': 'Sequência de Renderização',
+                    'sec03_col2_title': 'Modelo 3D Sincronizado em Tempo Real',
+                    'sec03_col2_desc': 'Modelo Splat Sincronizado',
+                    'sec03_box_title': 'Lançar Simulador Digital Twin 3D Completo',
+                    'sec03_box_desc': 'Abra a aplicação independente para alternar pisos, simular a luz do dia e ver sequências sincronizadas.',
+                    'sec03_box_cta': 'Abrir Simulador 3D',
+                    'sec03_partb_lbl': 'Preservação Histórica de Monsaraz',
+                    'sec03_partb_title': 'Visualizador Interativo WebGL Splat 3D',
+                    'sec03_partb_desc': 'Explore uma captura espacial densa e de alta fidelidade do histórico Convento de Monsaraz. Ao utilizar o scan 3D real, preservamos campos de luz, profundidade volumétrica e texturas brutas como uma interatividade navegável em tempo real.',
+                    'sec03_partb_card_title': 'Scan WebGL de Gaussian Splatting',
+                    'sec03_partb_cta': 'Explorar Espaço 3D Splat &rarr;',
+                    'sec04_tag': '04 /',
+                    'sec04_title': 'Prototipagem de Precisão',
+                    'sec04_desc': 'Modelos físicos à escala de alta fidelidade produzidos com impressão 3D em resina branca premium e fluxos de trabalho precisos de fresagem CNC. Unindo modelos de design computacional e a tangibilidade arquitetónica física.',
+                    'sec04_card_desc': 'Maquete física premium impressa em 3D',
+                    'sec04_cta': 'Ver Vídeo de Fabrico &rarr;',
+                    'footer_sub': 'Visualização Arquitetónica · Web &amp; Creative Coding · 3D VFX',
+                    'footer_desc': 'Recebeu este email porque subscreveu o nosso portfólio de apresentação de design arquitetónico.',
+                    'footer_copy': '&copy; 2026 Miguel Virgílio Studio. Todos os direitos reservados.',
+                    'footer_link': 'Visitar Portfólio do Estúdio'
+                }
+            };
+
+            function updateLanguage(lang) {
+                currentLang = lang;
+                
+                // Update translatable HTML contents
+                document.querySelectorAll('[data-t]').forEach(function(el) {
+                    var key = el.getAttribute('data-t');
+                    if (dictionary[currentLang][key] !== undefined) {
+                        el.innerHTML = dictionary[currentLang][key];
                     }
-                };
+                });
 
-                function updateLanguage(lang) {
-                    currentLang = lang;
-                    
-                    // Update translatable HTML contents
-                    document.querySelectorAll('[data-t]').forEach(function(el) {
-                        var key = el.getAttribute('data-t');
-                        if (dictionary[currentLang][key] !== undefined) {
-                            el.innerHTML = dictionary[currentLang][key];
-                        }
-                    });
-
-                    // Update translatable Alt attributes
-                    document.querySelectorAll('[data-t-alt]').forEach(function(el) {
-                        var key = el.getAttribute('data-t-alt');
-                        if (dictionary[currentLang][key] !== undefined) {
-                            el.setAttribute('alt', dictionary[currentLang][key]);
-                        }
-                    });
-
-                    // Sync Page Header language toggle styles
-                    var btnEn = document.getElementById('lang-btn-en');
-                    var btnPt = document.getElementById('lang-btn-pt');
-                    if (btnEn && btnPt) {
-                        if (currentLang === 'EN') {
-                            btnEn.style.color = '#ffffff';
-                            btnEn.style.fontWeight = '700';
-                            btnPt.style.color = '#858383';
-                            btnPt.style.fontWeight = '500';
-                        } else {
-                            btnEn.style.color = '#858383';
-                            btnEn.style.fontWeight = '500';
-                            btnPt.style.color = '#ffffff';
-                            btnPt.style.fontWeight = '700';
-                        }
+                // Update translatable Alt attributes
+                document.querySelectorAll('[data-t-alt]').forEach(function(el) {
+                    var key = el.getAttribute('data-t-alt');
+                    if (dictionary[currentLang][key] !== undefined) {
+                        el.setAttribute('alt', dictionary[currentLang][key]);
                     }
+                });
 
-                    // Sync Dev Toolbar language toggle styles
-                    var tbEn = document.getElementById('tb-lang-en');
-                    var tbPt = document.getElementById('tb-lang-pt');
-                    if (tbEn && tbPt) {
-                        if (currentLang === 'EN') {
-                            tbEn.style.backgroundColor = '#00ff88';
-                            tbEn.style.color = '#1a1a1a';
-                            tbPt.style.backgroundColor = '#2a2a2a';
-                            tbPt.style.color = '#ffffff';
-                        } else {
-                            tbEn.style.backgroundColor = '#2a2a2a';
-                            tbEn.style.color = '#ffffff';
-                            tbPt.style.backgroundColor = '#00ff88';
-                            tbPt.style.color = '#1a1a1a';
-                        }
+                // Sync Page Header language toggle styles
+                var btnEn = document.getElementById('lang-btn-en');
+                var btnPt = document.getElementById('lang-btn-pt');
+                if (btnEn && btnPt) {
+                    if (currentLang === 'EN') {
+                        btnEn.style.color = '#ffffff';
+                        btnEn.style.fontWeight = '700';
+                        btnPt.style.color = '#858383';
+                        btnPt.style.fontWeight = '500';
+                    } else {
+                        btnEn.style.color = '#858383';
+                        btnEn.style.fontWeight = '500';
+                        btnPt.style.color = '#ffffff';
+                        btnPt.style.fontWeight = '700';
                     }
                 }
 
-                // Add Page Header click listeners
-                document.getElementById('lang-btn-en').addEventListener('click', function() { updateLanguage('EN'); });
-                document.getElementById('lang-btn-pt').addEventListener('click', function() { updateLanguage('PT'); });
+                // Sync Dev Toolbar language toggle styles
+                var tbEn = document.getElementById('tb-lang-en');
+                var tbPt = document.getElementById('tb-lang-pt');
+                if (tbEn && tbPt) {
+                    if (currentLang === 'EN') {
+                        tbEn.style.backgroundColor = '#00ff88';
+                        tbEn.style.color = '#1a1a1a';
+                        tbPt.style.backgroundColor = '#2a2a2a';
+                        tbPt.style.color = '#ffffff';
+                    } else {
+                        tbEn.style.backgroundColor = '#2a2a2a';
+                        tbEn.style.color = '#ffffff';
+                        tbPt.style.backgroundColor = '#00ff88';
+                        tbPt.style.color = '#1a1a1a';
+                    }
+                }
+            }
 
+            // Add Page Header click listeners
+            var btnEn = document.getElementById('lang-btn-en');
+            var btnPt = document.getElementById('lang-btn-pt');
+            if (btnEn) btnEn.addEventListener('click', function() { updateLanguage('EN'); });
+            if (btnPt) btnPt.addEventListener('click', function() { updateLanguage('PT'); });
+
+            // Initialize default language
+            updateLanguage('EN');
+
+            var isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' || 
+                          window.location.protocol === 'file:';
+
+            if (isLocal) {
                 // Rewrite all image srcs to local paths for preview
                 var imgs = document.getElementsByTagName('img');
                 for (var i = 0; i < imgs.length; i++) {
@@ -991,9 +996,6 @@
                 toolbar.appendChild(langRow);
                 toolbar.appendChild(btnContainer);
                 document.body.appendChild(toolbar);
-
-                // Initial language selection styling setup
-                updateLanguage('EN');
 
                 // Helper to get production HTML (cleans helper elements and makes all srcs absolute again)
                 function getProductionHTML(callback) {
