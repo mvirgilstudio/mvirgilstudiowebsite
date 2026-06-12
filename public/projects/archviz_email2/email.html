@@ -666,6 +666,175 @@
             </td>
         </tr>
     </table>
-</body>
 
+    <!-- Local Developer Helper (Only executed in local browser previews, automatically removed when copying for email clients) -->
+    <script type="text/javascript">
+        (function() {
+            var isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' || 
+                          window.location.protocol === 'file:';
+            
+            if (isLocal) {
+                var prodBase = 'https://mvirgilstudio.com/projects/archviz_email2/';
+                
+                // Rewrite all image srcs to local paths for preview
+                var imgs = document.getElementsByTagName('img');
+                for (var i = 0; i < imgs.length; i++) {
+                    var src = imgs[i].getAttribute('src');
+                    if (src && src.indexOf(prodBase) === 0) {
+                        imgs[i].src = src.replace(prodBase, '');
+                    }
+                }
+                
+                // Create a floating developer toolbar
+                var toolbar = document.createElement('div');
+                toolbar.id = 'dev-toolbar';
+                toolbar.style.position = 'fixed';
+                toolbar.style.bottom = '24px';
+                toolbar.style.right = '24px';
+                toolbar.style.backgroundColor = '#1a1a1a';
+                toolbar.style.color = '#ffffff';
+                toolbar.style.padding = '14px 20px';
+                toolbar.style.borderRadius = '8px';
+                toolbar.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+                toolbar.style.fontFamily = "'Orbitron', sans-serif";
+                toolbar.style.fontSize = '12px';
+                toolbar.style.zIndex = '999999';
+                toolbar.style.border = '1px solid #333333';
+                toolbar.style.display = 'flex';
+                toolbar.style.flexDirection = 'column';
+                toolbar.style.gap = '10px';
+                toolbar.style.minWidth = '240px';
+
+                var title = document.createElement('div');
+                title.style.display = 'flex';
+                title.style.justifyContent = 'space-between';
+                title.style.alignItems = 'center';
+                title.style.fontWeight = '700';
+                title.style.borderBottom = '1px solid #2a2a2a';
+                title.style.paddingBottom = '8px';
+                title.innerHTML = '<span>LOCAL PREVIEW HELPER</span><span style="color:#00ff88; font-size:10px;">ACTIVE</span>';
+
+                var desc = document.createElement('div');
+                desc.style.fontSize = '10px';
+                desc.style.color = '#858383';
+                desc.style.fontFamily = "sans-serif";
+                desc.style.lineHeight = '1.4';
+                desc.innerText = 'Images rewritten to local paths. Use the buttons below to copy the code for email campaigns.';
+
+                var btnContainer = document.createElement('div');
+                btnContainer.style.display = 'flex';
+                btnContainer.style.gap = '8px';
+
+                // Button 1: Copy Rich Text (for direct pasting into Gmail compose)
+                var btnRich = document.createElement('button');
+                btnRich.innerText = 'Copy Rich Text';
+                btnRich.style.flex = '1';
+                btnRich.style.backgroundColor = '#ffffff';
+                btnRich.style.color = '#1a1a1a';
+                btnRich.style.border = 'none';
+                btnRich.style.padding = '8px 12px';
+                btnRich.style.borderRadius = '4px';
+                btnRich.style.cursor = 'pointer';
+                btnRich.style.fontWeight = '700';
+                btnRich.style.fontSize = '10px';
+                btnRich.style.fontFamily = "'Orbitron', sans-serif";
+
+                // Button 2: Copy Raw HTML (for Mailchimp, SendGrid, etc.)
+                var btnRaw = document.createElement('button');
+                btnRaw.innerText = 'Copy Raw HTML';
+                btnRaw.style.flex = '1';
+                btnRaw.style.backgroundColor = '#2a2a2a';
+                btnRaw.style.color = '#ffffff';
+                btnRaw.style.border = '1px solid #444444';
+                btnRaw.style.padding = '8px 12px';
+                btnRaw.style.borderRadius = '4px';
+                btnRaw.style.cursor = 'pointer';
+                btnRaw.style.fontWeight = '700';
+                btnRaw.style.fontSize = '10px';
+                btnRaw.style.fontFamily = "'Orbitron', sans-serif";
+
+                btnContainer.appendChild(btnRich);
+                btnContainer.appendChild(btnRaw);
+                toolbar.appendChild(title);
+                toolbar.appendChild(desc);
+                toolbar.appendChild(btnContainer);
+                document.body.appendChild(toolbar);
+
+                // Helper to get production HTML (cleans helper elements and makes all srcs absolute again)
+                function getProductionHTML(callback) {
+                    // Try to fetch original source to ensure perfect code structure
+                    fetch(window.location.href)
+                        .then(function(r) {
+                            if (!r.ok) throw new Error();
+                            return r.text();
+                        })
+                        .then(function(html) {
+                            callback(html);
+                        })
+                        .catch(function() {
+                            // Fallback if fetch is blocked: reconstruct from active DOM
+                            var docHtml = document.documentElement.outerHTML;
+                            // Prepend XHTML DOCTYPE
+                            var html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en">\n' + docHtml + '\n</html>';
+                            
+                            // Remove helper script and toolbar
+                            var scriptRegex = /<!-- Local Developer Helper[\s\S]*?<\/script>/gi;
+                            html = html.replace(scriptRegex, '');
+                            var toolbarRegex = /<div id="dev-toolbar"[\s\S]*?<\/div>/gi;
+                            html = html.replace(toolbarRegex, '');
+                            
+                            // Restore production URLs
+                            var localImgRegex = /src="assets\//gi;
+                            html = html.replace(localImgRegex, 'src="' + prodBase + 'assets/');
+                            
+                            callback(html);
+                        });
+                }
+
+                // Copy Raw HTML function
+                btnRaw.addEventListener('click', function() {
+                    getProductionHTML(function(html) {
+                        navigator.clipboard.writeText(html).then(function() {
+                            var originalText = btnRaw.innerText;
+                            btnRaw.innerText = 'Copied!';
+                            btnRaw.style.backgroundColor = '#00ff88';
+                            btnRaw.style.color = '#1a1a1a';
+                            setTimeout(function() {
+                                btnRaw.innerText = originalText;
+                                btnRaw.style.backgroundColor = '#2a2a2a';
+                                btnRaw.style.color = '#ffffff';
+                            }, 2000);
+                        });
+                    });
+                });
+
+                // Copy Rich Text function (writes directly as text/html ClipboardItem)
+                btnRich.addEventListener('click', function() {
+                    getProductionHTML(function(html) {
+                        try {
+                            var blob = new Blob([html], { type: 'text/html' });
+                            var item = new ClipboardItem({ 'text/html': blob });
+                            navigator.clipboard.write([item]).then(function() {
+                                var originalText = btnRich.innerText;
+                                btnRich.innerText = 'Copied!';
+                                btnRich.style.backgroundColor = '#00ff88';
+                                setTimeout(function() {
+                                    btnRich.innerText = originalText;
+                                    btnRich.style.backgroundColor = '#ffffff';
+                                }, 2000);
+                            }).catch(function(e) {
+                                console.error(e);
+                                alert('Direct rich text copy failed. Please use "Copy Raw HTML" instead.');
+                            });
+                        } catch (err) {
+                            console.error(err);
+                            alert('ClipboardItem is not fully supported on your browser. Please use "Copy Raw HTML" instead.');
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
+</body>
 </html>
