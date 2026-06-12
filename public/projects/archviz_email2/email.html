@@ -98,7 +98,7 @@
                     <!-- Header -->
                     <tr>
                         <td align="center"
-                            style="background-color: #1a1a1a; padding: 24px; border-bottom: 1px solid #2a2a2a;">
+                            style="background-color: #1a1a1a; padding: 24px 24px 16px 24px; border-bottom: 1px solid #2a2a2a;">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center">
@@ -106,6 +106,13 @@
                                             style="font-family: 'Orbitron', 'Century Gothic', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.25em; color: #b0b0b0; text-transform: uppercase; display: inline-block; vertical-align: middle;">
                                             <img src="https://mvirgilstudio.com/projects/archviz_email2/assets/mvfx_logo.png" alt="MVS Logo" width="32" style="display: inline-block; vertical-align: middle; margin-right: 12px; border: 0; width: 32px; height: auto;" />
                                             MIGUEL VIRGÍLIO <span style="font-weight: 300; opacity: 0.6;">STUDIO</span>
+                                        </div>
+                                        
+                                        <!-- Language Toggle Buttons -->
+                                        <div style="margin-top: 10px; font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.1em; color: #858383;">
+                                            <span id="lang-btn-en" style="color: #ffffff; font-weight: 700; cursor: pointer; padding: 2px 6px;">EN</span>
+                                            <span style="opacity: 0.3; padding: 0 4px;">|</span>
+                                            <span id="lang-btn-pt" style="color: #858383; font-weight: 500; cursor: pointer; padding: 2px 6px;">PT</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -127,10 +134,12 @@
                                 <tr>
                                     <td class="mobile-padding" style="padding: 24px 32px; text-align: center;">
                                         <p
+                                            data-t="hero_subtitle"
                                             style="margin: 0 0 10px 0; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; color: #858383; text-transform: uppercase;">
                                             Architectural Visualization
                                         </p>
                                         <h1
+                                            data-t="hero_title"
                                             style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.4; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase;">
                                             High-end architectural techniques for visionary designs
                                         </h1>
@@ -149,9 +158,9 @@
                                     <td width="25%" class="stacked-col" align="center"
                                         style="padding: 10px 5px; font-family: 'Orbitron', sans-serif;">
                                         <a href="#showcase" style="text-decoration: none; color: #1a1a1a;">
-                                            <div style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 01
+                                            <div data-t="nav_sec01_lbl" style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 01
                                             </div>
-                                            <div
+                                            <div data-t="nav_sec01_val"
                                                 style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                                                 SHOWCASE</div>
                                         </a>
@@ -160,9 +169,9 @@
                                     <td width="25%" class="stacked-col" align="center"
                                         style="padding: 10px 5px; font-family: 'Orbitron', sans-serif; border-left: 1px solid #eeeeee;">
                                         <a href="#digital-twin" style="text-decoration: none; color: #1a1a1a;">
-                                            <div style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 02
+                                            <div data-t="nav_sec02_lbl" style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 02
                                             </div>
-                                            <div
+                                            <div data-t="nav_sec02_val"
                                                 style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                                                 DIGITAL TWIN</div>
                                         </a>
@@ -171,9 +180,9 @@
                                     <td width="25%" class="stacked-col" align="center"
                                         style="padding: 10px 5px; font-family: 'Orbitron', sans-serif; border-left: 1px solid #eeeeee;">
                                         <a href="#viewer" style="text-decoration: none; color: #1a1a1a;">
-                                            <div style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 03
+                                            <div data-t="nav_sec03_lbl" style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 03
                                             </div>
-                                            <div
+                                            <div data-t="nav_sec03_val"
                                                 style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                                                 3D SIMULATOR</div>
                                         </a>
@@ -182,9 +191,9 @@
                                     <td width="25%" class="stacked-col" align="center"
                                         style="padding: 10px 5px; font-family: 'Orbitron', sans-serif; border-left: 1px solid #eeeeee;">
                                         <a href="#prototyping" style="text-decoration: none; color: #1a1a1a;">
-                                            <div style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 04
+                                            <div data-t="nav_sec04_lbl" style="font-size: 9px; color: #858383; margin-bottom: 4px;">SEC 04
                                             </div>
-                                            <div
+                                            <div data-t="nav_sec04_val"
                                                 style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                                                 PROTOTYPING</div>
                                         </a>
@@ -199,9 +208,11 @@
                         <td class="mobile-padding"
                             style="padding: 32px 32px 16px 32px; background-color: #f9f9f9; border-left: 4px solid #1a1a1a;">
                             <div
+                                data-t="sec01_tag"
                                 style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 500; color: #858383; margin-bottom: 4px; letter-spacing: 0.1em;">
                                 01 /</div>
                             <h2
+                                data-t="sec01_title"
                                 style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 Visual Showcase</h2>
                         </td>
@@ -211,6 +222,7 @@
                     <tr>
                         <td class="mobile-padding" style="padding: 16px 32px; background-color: #f9f9f9;">
                             <h3
+                                data-t="showcase01_title"
                                 style="margin: 0 0 12px 0; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 01.1 / Image Renders</h3>
 
@@ -226,6 +238,7 @@
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
                                                 <span
+                                                    data-t="showcase01_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     5 Projects · 63 Images (GreenHaven, LiveSpace, Riverstone...)
                                                 </span>
@@ -237,6 +250,7 @@
                                     <td align="right" style="padding: 12px 0 24px 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#image-renders-sec"
                                             target="_blank"
+                                            data-t="showcase01_cta"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Open Interactive Gallery &rarr;
                                         </a>
@@ -250,6 +264,7 @@
                     <tr>
                         <td class="mobile-padding" style="padding: 16px 32px; background-color: #f9f9f9;">
                             <h3
+                                data-t="showcase02_title"
                                 style="margin: 0 0 12px 0; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 01.2 / Cinematic Animations</h3>
 
@@ -264,6 +279,7 @@
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
                                                 <span
+                                                    data-t="showcase02_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     4 Cinematic Architectural Sequences
                                                 </span>
@@ -275,6 +291,7 @@
                                     <td align="right" style="padding: 12px 0 24px 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#video-renders-sec"
                                             target="_blank"
+                                            data-t="showcase02_cta"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Play Cinematic Videos &rarr;
                                         </a>
@@ -288,6 +305,7 @@
                     <tr>
                         <td class="mobile-padding" style="padding: 16px 32px; background-color: #f9f9f9;">
                             <h3
+                                data-t="showcase03_title"
                                 style="margin: 0 0 12px 0; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 01.3 / Immersive Walkthroughs</h3>
 
@@ -302,6 +320,7 @@
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
                                                 <span
+                                                    data-t="showcase03_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     2 Interactive Simulated Walkthroughs
                                                 </span>
@@ -313,6 +332,7 @@
                                     <td align="right" style="padding: 12px 0 24px 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#walkthrough-sec"
                                             target="_blank"
+                                            data-t="showcase03_cta"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Explore Spatial Walkthroughs &rarr;
                                         </a>
@@ -327,6 +347,7 @@
                         <td class="mobile-padding"
                             style="padding: 16px 32px; background-color: #f9f9f9; border-bottom: 1px solid #eeeeee;">
                             <h3
+                                data-t="showcase04_title"
                                 style="margin: 0 0 12px 0; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 01.4 / Interactive Systems</h3>
 
@@ -341,6 +362,7 @@
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
                                                 <span
+                                                    data-t="showcase04_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     3 Dynamic Panoramas (House, Tent, Bridge Garden)
                                                 </span>
@@ -352,6 +374,7 @@
                                     <td align="right" style="padding: 12px 0 24px 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#interactive-systems-sec"
                                             target="_blank"
+                                            data-t="showcase04_cta"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Engage 360° Panorama Views &rarr;
                                         </a>
@@ -366,9 +389,11 @@
                         <td class="mobile-padding"
                             style="padding: 32px 32px 16px 32px; background-color: #1a1c1c; border-left: 4px solid #ffffff;">
                             <div
+                                data-t="sec02_tag"
                                 style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 500; color: #858383; margin-bottom: 4px; letter-spacing: 0.1em;">
                                 02 /</div>
                             <h2
+                                data-t="sec02_title"
                                 style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.3;">
                                 Immersive Experience & Real Objects Interaction</h2>
                         </td>
@@ -377,7 +402,7 @@
                     <tr>
                         <td class="mobile-padding"
                             style="padding: 16px 32px 32px 32px; background-color: #1a1c1c; color: #dadada;">
-                            <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #c4c7c7;">
+                            <p data-t="sec02_desc" style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #c4c7c7;">
                                 Experience true tactile-to-digital immersion. We bridge physical scale maquettes and
                                 virtual layouts through innovative real-time NFC-triggered integrations, instantly
                                 syncing real material swaps to high-fidelity 3D configurations on screen.
@@ -394,6 +419,7 @@
                                             <div
                                                 style="background-color: #2a2a2a; padding: 12px 16px; text-align: left;">
                                                 <span
+                                                    data-t="sec02_card_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #b0b0b0; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     Physical Maquette NFC & Stone Catalog Sync System
                                                 </span>
@@ -405,6 +431,7 @@
                                     <td align="center" style="padding: 24px 0 10px 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#digital-twin-experience-sec"
                                             target="_blank"
+                                            data-t="sec02_cta"
                                             style="display: inline-block; background-color: #ffffff; color: #1a1a1a; padding: 14px 28px; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em; border-radius: 2px;">
                                             Launch Standalone App
                                         </a>
@@ -419,9 +446,11 @@
                         <td class="mobile-padding"
                             style="padding: 32px 32px 16px 32px; background-color: #ffffff; border-left: 4px solid #1a1a1a; border-top: 1px solid #eeeeee;">
                             <div
+                                data-t="sec03_tag"
                                 style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 500; color: #858383; margin-bottom: 4px; letter-spacing: 0.1em;">
                                 03 /</div>
                             <h2
+                                data-t="sec03_title"
                                 style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 3D & Interactive Viewer</h2>
                         </td>
@@ -429,7 +458,7 @@
 
                     <tr>
                         <td class="mobile-padding" style="padding: 16px 32px; background-color: #ffffff;">
-                            <p style="margin: 0 0 24px 0; font-size: 14px; line-height: 1.6; color: #5c5f60;">
+                            <p data-t="sec03_desc" style="margin: 0 0 24px 0; font-size: 14px; line-height: 1.6; color: #5c5f60;">
                                 Experience dynamic 3D model synchronization in real-time alongside dense, high-fidelity
                                 spatial captures of historic spaces. Use floor selectors, daylight simulation controls,
                                 or rotate the WebGL Splat scan to bridge physical details and digital presentation.
@@ -441,12 +470,13 @@
                                     <!-- Sequence rendering col -->
                                     <td width="48%" class="stacked-col" valign="top">
                                         <div
+                                            data-t="sec03_col1_title"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; color: #858383; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;">
                                             Dynamic Image Sequence</div>
                                         <div
                                             style="border-radius: 4px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
                                             <img src="https://mvirgilstudio.com/projects/archviz_email2/assets/viewer_sequence_thumbnail.png"
-                                                width="257" class="fluid-img" alt="Rendering Sequence"
+                                                width="257" class="fluid-img" alt="Rendering Sequence" data-t-alt="sec03_col1_desc"
                                                 style="display: block; width: 100%; max-width: 257px; height: 100px; max-height: 100px; object-fit: cover;" />
                                         </div>
                                     </td>
@@ -454,12 +484,13 @@
                                     <!-- Synced model col -->
                                     <td width="48%" class="stacked-col" valign="top">
                                         <div
+                                            data-t="sec03_col2_title"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; color: #858383; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;">
                                             3D Real-time Synced Model</div>
                                         <div
                                             style="border-radius: 4px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
                                             <img src="https://mvirgilstudio.com/projects/archviz_email2/assets/viewer_model_thumbnail.png"
-                                                width="257" class="fluid-img" alt="Splat Model Synced"
+                                                width="257" class="fluid-img" alt="Splat Model Synced" data-t-alt="sec03_col2_desc"
                                                 style="display: block; width: 100%; max-width: 257px; height: 100px; max-height: 100px; object-fit: cover;" />
                                         </div>
                                     </td>
@@ -472,14 +503,17 @@
                                     <td
                                         style="background-color: #f9f9f9; border: 1px solid #eeeeee; padding: 16px; border-radius: 4px; text-align: center;">
                                         <div
+                                            data-t="sec03_box_title"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;">
                                             Launch Full 3D Digital Twin Simulator</div>
                                         <p
+                                            data-t="sec03_box_desc"
                                             style="margin: 0 0 12px 0; font-size: 11px; line-height: 1.4; color: #858383;">
                                             Open the standalone application to switch floor layers, daylight simulation,
                                             and synchronized sequences.</p>
                                         <a href="https://mvirgilstudio.com/projects/archsync_model/section_03/code.html"
                                             target="_blank"
+                                            data-t="sec03_box_cta"
                                             style="display: inline-block; background-color: #1a1a1a; color: #ffffff; padding: 10px 20px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px;">
                                             Open 3D Simulator
                                         </a>
@@ -504,16 +538,18 @@
                                     </td>
                                     <td class="stacked-col" valign="middle">
                                         <div
+                                            data-t="sec03_partb_lbl"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; color: #858383; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Monsaraz Historic Preservations</div>
                                         <h3
+                                            data-t="sec03_partb_title"
                                             style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                             Interactive 3D WebGL Splat Viewer</h3>
                                     </td>
                                 </tr>
                             </table>
 
-                            <p style="margin: 0 0 20px 0; font-size: 13px; line-height: 1.5; color: #5c5f60;">
+                            <p data-t="sec03_partb_desc" style="margin: 0 0 20px 0; font-size: 13px; line-height: 1.5; color: #5c5f60;">
                                 Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By
                                 utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures
                                 as a navigable real-time interactivity.
@@ -532,10 +568,12 @@
                                             <!-- Launch Overlay Info -->
                                             <div style="background-color: #1a1a1a; padding: 14px; text-align: center;">
                                                 <div
+                                                    data-t="sec03_partb_card_title"
                                                     style="font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">
                                                     WebGL Gaussian Splatting Scan</div>
                                                 <a href="https://conventosplat01.b-cdn.net/convento.html"
                                                     target="_blank"
+                                                    data-t="sec03_partb_cta"
                                                     style="display: inline-block; margin-top: 6px; background-color: #ffffff; color: #1a1a1a; padding: 8px 16px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px;">
                                                     Explore 3D Splat Space &rarr;
                                                 </a>
@@ -552,9 +590,11 @@
                         <td class="mobile-padding"
                             style="padding: 32px 32px 16px 32px; background-color: #f9f9f9; border-left: 4px solid #1a1a1a;">
                             <div
+                                data-t="sec04_tag"
                                 style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 500; color: #858383; margin-bottom: 4px; letter-spacing: 0.1em;">
                                 04 /</div>
                             <h2
+                                data-t="sec04_title"
                                 style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.05em;">
                                 Precision Prototyping</h2>
                         </td>
@@ -563,7 +603,7 @@
                     <tr>
                         <td class="mobile-padding"
                             style="padding: 16px 32px 32px 32px; background-color: #f9f9f9; border-bottom: 1px solid #eeeeee;">
-                            <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #5c5f60;">
+                            <p data-t="sec04_desc" style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #5c5f60;">
                                 High-fidelity scale physical models produced with premium white resin 3D printing and
                                 precise CNC milling workflows. Bridging computational design models and physical
                                 architectural tangibility.
@@ -580,6 +620,7 @@
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
                                                 <span
+                                                    data-t="sec04_card_desc"
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">
                                                     Premium 3D Printed Maquette scale model
                                                 </span>
@@ -591,6 +632,7 @@
                                     <td align="right" style="padding: 12px 0 0 0;">
                                         <a href="https://mvirgilstudio.com/projects/archviz_email2/code.html#precision-prototyping-sec"
                                             target="_blank"
+                                            data-t="sec04_cta"
                                             style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;">
                                             Watch Fabrication Video &rarr;
                                         </a>
@@ -611,6 +653,7 @@
                                             MIGUEL VIRGÍLIO STUDIO
                                         </div>
                                         <div
+                                            data-t="footer_sub"
                                             style="font-size: 11px; color: #858383; margin-top: 6px; font-family: monospace; letter-spacing: 0.05em;">
                                             Architectural Visualization · Web & Creative Coding · 3D VFX
                                         </div>
@@ -619,13 +662,13 @@
                                 <tr>
                                     <td align="center"
                                         style="border-top: 1px solid #2a2a2a; padding-top: 20px; font-size: 11px; line-height: 1.6; color: #626566;">
-                                        <p style="margin: 0 0 12px 0;">
+                                        <p data-t="footer_desc" style="margin: 0 0 12px 0;">
                                             You received this email because you subscribed to our architectural design
                                             presentation portfolio.
                                         </p>
                                         <p style="margin: 0;">
-                                            &copy; 2026 Miguel Virgílio Studio. All rights reserved. <br />
-                                            <a href="https://mvirgilstudio.com" target="_blank"
+                                            <span data-t="footer_copy">&copy; 2026 Miguel Virgílio Studio. All rights reserved.</span> <br />
+                                            <a data-t="footer_link" href="https://mvirgilstudio.com" target="_blank"
                                                 style="color: #b0b0b0; text-decoration: underline;">Visit Studio
                                                 Portfolio</a>
                                         </p>
@@ -638,7 +681,6 @@
             </td>
         </tr>
     </table>
-
     <!-- Local Developer Helper (Only executed in local browser previews, automatically removed when copying for email clients) -->
     <script type="text/javascript">
         (function() {
@@ -648,7 +690,179 @@
             
             if (isLocal) {
                 var prodBase = 'https://mvirgilstudio.com/projects/archviz_email2/';
-                
+                var currentLang = 'EN';
+
+                var dictionary = {
+                    'EN': {
+                        'hero_subtitle': 'Architectural Visualization',
+                        'hero_title': 'High-end architectural techniques for visionary designs',
+                        'nav_sec01_lbl': 'SEC 01',
+                        'nav_sec01_val': 'SHOWCASE',
+                        'nav_sec02_lbl': 'SEC 02',
+                        'nav_sec02_val': 'DIGITAL TWIN',
+                        'nav_sec03_lbl': 'SEC 03',
+                        'nav_sec03_val': '3D SIMULATOR',
+                        'nav_sec04_lbl': 'SEC 04',
+                        'nav_sec04_val': 'PROTOTYPING',
+                        'sec01_tag': '01 /',
+                        'sec01_title': 'Visual Showcase',
+                        'showcase01_title': '01.1 / Image Renders',
+                        'showcase01_desc': '5 Projects · 63 Images (GreenHaven, LiveSpace, Riverstone...)',
+                        'showcase01_cta': 'Open Interactive Gallery &rarr;',
+                        'showcase02_title': '01.2 / Cinematic Animations',
+                        'showcase02_desc': '4 Cinematic Architectural Sequences',
+                        'showcase02_cta': 'Play Cinematic Videos &rarr;',
+                        'showcase03_title': '01.3 / Immersive Walkthroughs',
+                        'showcase03_desc': '2 Interactive Simulated Walkthroughs',
+                        'showcase03_cta': 'Explore Spatial Walkthroughs &rarr;',
+                        'showcase04_title': '01.4 / Interactive Systems',
+                        'showcase04_desc': '3 Dynamic Panoramas (House, Tent, Bridge Garden)',
+                        'showcase04_cta': 'Engage 360&deg; Panorama Views &rarr;',
+                        'sec02_tag': '02 /',
+                        'sec02_title': 'Immersive Experience & Real Objects Interaction',
+                        'sec02_desc': 'Experience true tactile-to-digital immersion. We bridge physical scale maquettes and virtual layouts through innovative real-time NFC-triggered integrations, instantly syncing real material swaps to high-fidelity 3D configurations on screen.',
+                        'sec02_card_desc': 'Physical Maquette NFC & Stone Catalog Sync System',
+                        'sec02_cta': 'Launch Standalone App',
+                        'sec03_tag': '03 /',
+                        'sec03_title': '3D & Interactive Viewer',
+                        'sec03_desc': 'Experience dynamic 3D model synchronization in real-time alongside dense, high-fidelity spatial captures of historic spaces. Use floor selectors, daylight simulation controls, or rotate the WebGL Splat scan to bridge physical details and digital presentation.',
+                        'sec03_col1_title': 'Dynamic Image Sequence',
+                        'sec03_col1_desc': 'Rendering Sequence',
+                        'sec03_col2_title': '3D Real-time Synced Model',
+                        'sec03_col2_desc': 'Splat Model Synced',
+                        'sec03_box_title': 'Launch Full 3D Digital Twin Simulator',
+                        'sec03_box_desc': 'Open the standalone application to switch floor layers, daylight simulation, and synchronized sequences.',
+                        'sec03_box_cta': 'Open 3D Simulator',
+                        'sec03_partb_lbl': 'Monsaraz Historic Preservations',
+                        'sec03_partb_title': 'Interactive 3D WebGL Splat Viewer',
+                        'sec03_partb_desc': 'Explore a dense, high-fidelity spatial capture of the historic Convento de Monsaraz. By utilizing the real 3D scan, we preserve light fields, volumetric depth, and raw textures as a navigable real-time interactivity.',
+                        'sec03_partb_card_title': 'WebGL Gaussian Splatting Scan',
+                        'sec03_partb_cta': 'Explore 3D Splat Space &rarr;',
+                        'sec04_tag': '04 /',
+                        'sec04_title': 'Precision Prototyping',
+                        'sec04_desc': 'High-fidelity scale physical models produced with premium white resin 3D printing and precise CNC milling workflows. Bridging computational design models and physical architectural tangibility.',
+                        'sec04_card_desc': 'Premium 3D Printed Maquette scale model',
+                        'sec04_cta': 'Watch Fabrication Video &rarr;',
+                        'footer_sub': 'Architectural Visualization · Web & Creative Coding · 3D VFX',
+                        'footer_desc': 'You received this email because you subscribed to our architectural design presentation portfolio.',
+                        'footer_copy': '&copy; 2026 Miguel Virg&iacute;lio Studio. All rights reserved.',
+                        'footer_link': 'Visit Studio Portfolio'
+                    },
+                    'PT': {
+                        'hero_subtitle': 'Visualização Arquitetónica',
+                        'hero_title': 'Técnicas arquitetónicas premium para projetos visionários',
+                        'nav_sec01_lbl': 'SEC 01',
+                        'nav_sec01_val': 'PORTFÓLIO',
+                        'nav_sec02_lbl': 'SEC 02',
+                        'nav_sec02_val': 'GÉMEO DIGITAL',
+                        'nav_sec03_lbl': 'SEC 03',
+                        'nav_sec03_val': 'SIMULADOR 3D',
+                        'nav_sec04_lbl': 'SEC 04',
+                        'nav_sec04_val': 'PROTOTIPAGEM',
+                        'sec01_tag': '01 /',
+                        'sec01_title': 'Portfólio Visual',
+                        'showcase01_title': '01.1 / Renders de Imagem',
+                        'showcase01_desc': '5 Projetos · 63 Imagens (GreenHaven, LiveSpace, Riverstone...)',
+                        'showcase01_cta': 'Abrir Galeria Interativa &rarr;',
+                        'showcase02_title': '01.2 / Animações Cinemáticas',
+                        'showcase02_desc': '4 Sequências Arquitetónicas Cinemáticas',
+                        'showcase02_cta': 'Reproduzir Vídeos Cinemáticos &rarr;',
+                        'showcase03_title': '01.3 / Visitas Virtuais Imersivas',
+                        'showcase03_desc': '2 Visitas Virtuais Interativas Simuladas',
+                        'showcase03_cta': 'Explorar Visitas Virtuais &rarr;',
+                        'showcase04_title': '01.4 / Sistemas Interativos',
+                        'showcase04_desc': '3 Panoramas Dinâmicos (Casa, Tenda, Jardim da Ponte)',
+                        'showcase04_cta': 'Ver Panoramas 360&deg; &rarr;',
+                        'sec02_tag': '02 /',
+                        'sec02_title': 'Experiência Imersiva &amp; Interação com Objetos Reais',
+                        'sec02_desc': 'Experimente uma verdadeira imersão tátil-digital. Fazemos a ponte entre maquetes físicas e layouts virtuais através de integrações inovadoras ativadas por NFC em tempo real, sincronizando instantaneamente amostras de materiais reais com configurações 3D de alta fidelidade no ecrã.',
+                        'sec02_card_desc': 'Sistema de Sincronização de Maquete Física NFC &amp; Catálogo de Pedras',
+                        'sec02_cta': 'Lançar Aplicação Independente',
+                        'sec03_tag': '03 /',
+                        'sec03_title': 'Visualizador 3D &amp; Interativo',
+                        'sec03_desc': 'Experimente a sincronização dinâmica do modelo 3D em tempo real em simultâneo com capturas espaciais densas e de alta fidelidade de espaços históricos. Use seletores de piso, controlos de simulação solar ou rode a digitalização WebGL Splat para unir detalhes físicos e interatividade digital.',
+                        'sec03_col1_title': 'Sequência de Imagens Dinâmicas',
+                        'sec03_col1_desc': 'Sequência de Renderização',
+                        'sec03_col2_title': 'Modelo 3D Sincronizado em Tempo Real',
+                        'sec03_col2_desc': 'Modelo Splat Sincronizado',
+                        'sec03_box_title': 'Lançar Simulador Digital Twin 3D Completo',
+                        'sec03_box_desc': 'Abra a aplicação independente para alternar pisos, simular a luz do dia e ver sequências sincronizadas.',
+                        'sec03_box_cta': 'Abrir Simulador 3D',
+                        'sec03_partb_lbl': 'Preservação Histórica de Monsaraz',
+                        'sec03_partb_title': 'Visualizador Interativo WebGL Splat 3D',
+                        'sec03_partb_desc': 'Explore uma captura espacial densa e de alta fidelidade do histórico Convento de Monsaraz. Ao utilizar o scan 3D real, preservamos campos de luz, profundidade volumétrica e texturas brutas como uma interatividade navegável em tempo real.',
+                        'sec03_partb_card_title': 'Scan WebGL de Gaussian Splatting',
+                        'sec03_partb_cta': 'Explorar Espaço 3D Splat &rarr;',
+                        'sec04_tag': '04 /',
+                        'sec04_title': 'Prototipagem de Precisão',
+                        'sec04_desc': 'Modelos físicos à escala de alta fidelidade produzidos com impressão 3D em resina branca premium e fluxos de trabalho precisos de fresagem CNC. Unindo modelos de design computacional e a tangibilidade arquitetónica física.',
+                        'sec04_card_desc': 'Maquete física premium impressa em 3D',
+                        'sec04_cta': 'Ver Vídeo de Fabrico &rarr;',
+                        'footer_sub': 'Visualização Arquitetónica · Web &amp; Creative Coding · 3D VFX',
+                        'footer_desc': 'Recebeu este email porque subscreveu o nosso portfólio de apresentação de design arquitetónico.',
+                        'footer_copy': '&copy; 2026 Miguel Virgílio Studio. Todos os direitos reservados.',
+                        'footer_link': 'Visitar Portfólio do Estúdio'
+                    }
+                };
+
+                function updateLanguage(lang) {
+                    currentLang = lang;
+                    
+                    // Update translatable HTML contents
+                    document.querySelectorAll('[data-t]').forEach(function(el) {
+                        var key = el.getAttribute('data-t');
+                        if (dictionary[currentLang][key] !== undefined) {
+                            el.innerHTML = dictionary[currentLang][key];
+                        }
+                    });
+
+                    // Update translatable Alt attributes
+                    document.querySelectorAll('[data-t-alt]').forEach(function(el) {
+                        var key = el.getAttribute('data-t-alt');
+                        if (dictionary[currentLang][key] !== undefined) {
+                            el.setAttribute('alt', dictionary[currentLang][key]);
+                        }
+                    });
+
+                    // Sync Page Header language toggle styles
+                    var btnEn = document.getElementById('lang-btn-en');
+                    var btnPt = document.getElementById('lang-btn-pt');
+                    if (btnEn && btnPt) {
+                        if (currentLang === 'EN') {
+                            btnEn.style.color = '#ffffff';
+                            btnEn.style.fontWeight = '700';
+                            btnPt.style.color = '#858383';
+                            btnPt.style.fontWeight = '500';
+                        } else {
+                            btnEn.style.color = '#858383';
+                            btnEn.style.fontWeight = '500';
+                            btnPt.style.color = '#ffffff';
+                            btnPt.style.fontWeight = '700';
+                        }
+                    }
+
+                    // Sync Dev Toolbar language toggle styles
+                    var tbEn = document.getElementById('tb-lang-en');
+                    var tbPt = document.getElementById('tb-lang-pt');
+                    if (tbEn && tbPt) {
+                        if (currentLang === 'EN') {
+                            tbEn.style.backgroundColor = '#00ff88';
+                            tbEn.style.color = '#1a1a1a';
+                            tbPt.style.backgroundColor = '#2a2a2a';
+                            tbPt.style.color = '#ffffff';
+                        } else {
+                            tbEn.style.backgroundColor = '#2a2a2a';
+                            tbEn.style.color = '#ffffff';
+                            tbPt.style.backgroundColor = '#00ff88';
+                            tbPt.style.color = '#1a1a1a';
+                        }
+                    }
+                }
+
+                // Add Page Header click listeners
+                document.getElementById('lang-btn-en').addEventListener('click', function() { updateLanguage('EN'); });
+                document.getElementById('lang-btn-pt').addEventListener('click', function() { updateLanguage('PT'); });
+
                 // Rewrite all image srcs to local paths for preview
                 var imgs = document.getElementsByTagName('img');
                 for (var i = 0; i < imgs.length; i++) {
@@ -676,7 +890,7 @@
                 toolbar.style.display = 'flex';
                 toolbar.style.flexDirection = 'column';
                 toolbar.style.gap = '10px';
-                toolbar.style.minWidth = '240px';
+                toolbar.style.minWidth = '260px';
 
                 var title = document.createElement('div');
                 title.style.display = 'flex';
@@ -692,7 +906,51 @@
                 desc.style.color = '#858383';
                 desc.style.fontFamily = "sans-serif";
                 desc.style.lineHeight = '1.4';
-                desc.innerText = 'Images rewritten to local paths. Use the buttons below to copy the code for email campaigns.';
+                desc.innerText = 'Images rewritten to local. Toggle language to copy either version.';
+
+                // Toolbar Language selector row
+                var langRow = document.createElement('div');
+                langRow.style.display = 'flex';
+                langRow.style.alignItems = 'center';
+                langRow.style.justifyContent = 'space-between';
+                langRow.style.fontSize = '11px';
+
+                var langLabel = document.createElement('span');
+                langLabel.innerText = 'Active Language:';
+
+                var langBtns = document.createElement('div');
+                langBtns.style.display = 'flex';
+                langBtns.style.gap = '6px';
+
+                var tbEn = document.createElement('button');
+                tbEn.id = 'tb-lang-en';
+                tbEn.innerText = 'EN';
+                tbEn.style.border = 'none';
+                tbEn.style.padding = '4px 8px';
+                tbEn.style.borderRadius = '3px';
+                tbEn.style.cursor = 'pointer';
+                tbEn.style.fontWeight = '700';
+                tbEn.style.fontSize = '10px';
+                tbEn.style.fontFamily = "'Orbitron', sans-serif";
+
+                var tbPt = document.createElement('button');
+                tbPt.id = 'tb-lang-pt';
+                tbPt.innerText = 'PT';
+                tbPt.style.border = 'none';
+                tbPt.style.padding = '4px 8px';
+                tbPt.style.borderRadius = '3px';
+                tbPt.style.cursor = 'pointer';
+                tbPt.style.fontWeight = '700';
+                tbPt.style.fontSize = '10px';
+                tbPt.style.fontFamily = "'Orbitron', sans-serif";
+
+                tbEn.addEventListener('click', function() { updateLanguage('EN'); });
+                tbPt.addEventListener('click', function() { updateLanguage('PT'); });
+
+                langBtns.appendChild(tbEn);
+                langBtns.appendChild(tbPt);
+                langRow.appendChild(langLabel);
+                langRow.appendChild(langBtns);
 
                 var btnContainer = document.createElement('div');
                 btnContainer.style.display = 'flex';
@@ -730,37 +988,81 @@
                 btnContainer.appendChild(btnRaw);
                 toolbar.appendChild(title);
                 toolbar.appendChild(desc);
+                toolbar.appendChild(langRow);
                 toolbar.appendChild(btnContainer);
                 document.body.appendChild(toolbar);
 
+                // Initial language selection styling setup
+                updateLanguage('EN');
+
                 // Helper to get production HTML (cleans helper elements and makes all srcs absolute again)
                 function getProductionHTML(callback) {
-                    // Try to fetch original source to ensure perfect code structure
+                    var targetLang = currentLang;
+                    
+                    function processHTML(rawHtml) {
+                        var parser = new DOMParser();
+                        var doc = parser.parseFromString(rawHtml, 'text/html');
+                        
+                        // Rewrite images back to production URLs
+                        var imgs = doc.getElementsByTagName('img');
+                        for (var i = 0; i < imgs.length; i++) {
+                            var src = imgs[i].getAttribute('src');
+                            if (src && src.indexOf('assets/') === 0) {
+                                imgs[i].setAttribute('src', prodBase + src);
+                            }
+                        }
+                        
+                        // Translate the parsed document in memory to targetLang
+                        doc.querySelectorAll('[data-t]').forEach(function(el) {
+                            var key = el.getAttribute('data-t');
+                            if (dictionary[targetLang][key] !== undefined) {
+                                el.innerHTML = dictionary[targetLang][key];
+                            }
+                        });
+                        doc.querySelectorAll('[data-t-alt]').forEach(function(el) {
+                            var key = el.getAttribute('data-t-alt');
+                            if (dictionary[targetLang][key] !== undefined) {
+                                el.setAttribute('alt', dictionary[targetLang][key]);
+                            }
+                        });
+
+                        // Sync header language buttons styling in copied HTML
+                        var btnEn = doc.getElementById('lang-btn-en');
+                        var btnPt = doc.getElementById('lang-btn-pt');
+                        if (btnEn && btnPt) {
+                            if (targetLang === 'EN') {
+                                btnEn.style.color = '#ffffff';
+                                btnEn.style.fontWeight = '700';
+                                btnPt.style.color = '#858383';
+                                btnPt.style.fontWeight = '500';
+                            } else {
+                                btnEn.style.color = '#858383';
+                                btnEn.style.fontWeight = '500';
+                                btnPt.style.color = '#ffffff';
+                                btnPt.style.fontWeight = '700';
+                            }
+                        }
+
+                        // Remove helper script and toolbar
+                        var scriptHelper = doc.querySelector('script[type="text/javascript"]:last-of-type');
+                        if (scriptHelper) scriptHelper.remove();
+                        var toolbarEl = doc.getElementById('dev-toolbar');
+                        if (toolbarEl) toolbarEl.remove();
+
+                        var cleanHtml = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" lang="' + targetLang.toLowerCase() + '">\n' + doc.body.parentNode.innerHTML + '\n</html>';
+                        callback(cleanHtml);
+                    }
+
                     fetch(window.location.href)
                         .then(function(r) {
                             if (!r.ok) throw new Error();
                             return r.text();
                         })
-                        .then(function(html) {
-                            callback(html);
-                        })
+                        .then(processHTML)
                         .catch(function() {
                             // Fallback if fetch is blocked: reconstruct from active DOM
                             var docHtml = document.documentElement.outerHTML;
-                            // Prepend XHTML DOCTYPE
-                            var html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en">\n' + docHtml + '\n</html>';
-                            
-                            // Remove helper script and toolbar
-                            var scriptRegex = /<!-- Local Developer Helper[\s\S]*?<\/script>/gi;
-                            html = html.replace(scriptRegex, '');
-                            var toolbarRegex = /<div id="dev-toolbar"[\s\S]*?<\/div>/gi;
-                            html = html.replace(toolbarRegex, '');
-                            
-                            // Restore production URLs
-                            var localImgRegex = /src="assets\//gi;
-                            html = html.replace(localImgRegex, 'src="' + prodBase + 'assets/');
-                            
-                            callback(html);
+                            processHTML(docHtml);
                         });
                 }
 
@@ -791,6 +1093,7 @@
                                 var originalText = btnRich.innerText;
                                 btnRich.innerText = 'Copied!';
                                 btnRich.style.backgroundColor = '#00ff88';
+                                btnRich.style.color = '#1a1a1a';
                                 setTimeout(function() {
                                     btnRich.innerText = originalText;
                                     btnRich.style.backgroundColor = '#ffffff';
