@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="miguel, virgilio, virgílio, miguel virgilio, miguel virgílio, miguel vfx, miguel virgilio studio, miguel virgílio studio, miguel studio, virgílio studio, virgilio studio, immersive, interactive, archviz, 3d animation, web creative coding, ai, 3D Modeling, Animation, 3D Tracking &amp; VFX, Video/Image Composition, Web &amp; Creative Coding, m virgil, mvirgil, virgil, virgil studio, studio, m virgil studio, mvirgil studio, alcobaça, alcobaca" />
-    <meta name="description" content="MVs SketchMagic AI | Level Up Your Art! - Wave your hands to draw magical sketches and watch them transform with AI by MIGUEL VIRGÍLIO Studio." />
+    <meta name="keywords"
+        content="miguel, virgilio, virgílio, miguel virgilio, miguel virgílio, miguel vfx, miguel virgilio studio, miguel virgílio studio, miguel studio, virgílio studio, virgilio studio, immersive, interactive, archviz, 3d animation, web creative coding, ai, 3D Modeling, Animation, 3D Tracking &amp; VFX, Video/Image Composition, Web &amp; Creative Coding, m virgil, mvirgil, virgil, virgil studio, studio, m virgil studio, mvirgil studio, alcobaça, alcobaca" />
+    <meta name="description"
+        content="MVs SketchMagic AI | Level Up Your Art! - Wave your hands to draw magical sketches and watch them transform with AI by MIGUEL VIRGÍLIO Studio." />
     <meta name="author" content="Miguel Virgílio" />
     <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -37,7 +39,8 @@
         }
     </script>
     <style>
-        #root header {
+        #root header,
+        #root footer {
             display: none !important;
         }
 
@@ -51,7 +54,7 @@
         button[title="Next image"] {
             background-color: #00008B !important;
         }
-        
+
         button[title="Previous image"]:hover,
         button[title="Next image"]:hover {
             background-color: #0000CD !important;
@@ -62,8 +65,8 @@
             -webkit-tap-highlight-color: transparent;
         }
     </style>
-  <script type="module" crossorigin src="/projects/sketchmagic/assets/index-0iEpCXyL.js"></script>
-  <link rel="stylesheet" crossorigin href="/projects/sketchmagic/assets/index-D0GYCPuB.css">
+    <script type="module" crossorigin src="/projects/sketchmagic/assets/index-0iEpCXyL.js"></script>
+    <link rel="stylesheet" crossorigin href="/projects/sketchmagic/assets/index-D0GYCPuB.css">
 </head>
 
 <body>
@@ -72,8 +75,7 @@
         class="fixed top-0 left-0 w-full px-6 sm:px-12 md:px-16 py-3 md:py-5 z-[100] pointer-events-none mix-blend-difference bg-neutral-800/80 backdrop-blur-md grayscale-[10%]"
         id="main-header">
         <div class="flex justify-between items-center w-full">
-            <div class="cursor-pointer pointer-events-auto group"
-                onclick="window.location.href='/'">
+            <div class="cursor-pointer pointer-events-auto group" onclick="window.location.href='/'">
                 <div class="flex items-center gap-2 sm:gap-3">
                     <svg viewBox="0 0 1920 1080" class="h-8 md:h-[38.4px] w-auto">
                         <g fill="#b0b0b0" class="transition-opacity group-hover:opacity-80">
@@ -160,6 +162,48 @@
     </div>
 
     <div id="root"></div>
+
+    <!-- Footer -->
+    <footer
+        class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden z-20">
+        <div class="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
+
+        <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10 flex-row">
+            <a href="https://www.linkedin.com/in/miguel-virg%C3%ADlio-b901ba102/" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/linkedin.svg" alt="LinkedIn" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://www.instagram.com/vfxmiguel/?hl=en" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/instagram.svg" alt="Instagram" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://x.com/miguelvfx" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/X.svg" alt="X" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://www.facebook.com/people/Miguel-Virg%C3%ADlio/pfbid09js7CsAkcMYDbvRmVMBC4KxGc5s36iGhv2GRVQqWS87DwrwM4UrBeDQUjAM7Wavbl/" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/facebook.svg" alt="Facebook" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://www.youtube.com/@miguelvirgiliostudio" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/youtube.svg" alt="YouTube" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+            <a href="https://vimeo.com/miguelvfx" target="_blank" rel="noopener noreferrer"
+                class="opacity-60 hover:opacity-100 transition-all hover:scale-110">
+                <img src="/assets/images/social/vimeo.svg" alt="Vimeo" class="w-8 h-8 md:w-10 md:h-10">
+            </a>
+        </div>
+
+        <p class="font-sans text-[10px] md:text-xs tracking-[0.2em] text-[#b0b0b0] uppercase mb-2 relative z-10 px-4"
+            data-t="DIREITOS RESERVADOS">
+            © 2026 MV Interactive Systems
+        </p>
+        <p class="font-mono text-[8.5px] md:text-[10px] text-[#b0b0b0]/40 relative z-10 max-w-[90%] md:max-w-full mx-auto uppercase"
+            data-t="SOLUÇÕES EM TECNOLOGIA DE MISTURA DE REALIDADES">
+            SOLUÇÕES EM TECNOLOGIA DE MISTURA DE REALIDADES
+        </p>
+    </footer>
 
     <!-- Optical Control UI -->
     <div id="optical-ui-wrapper" style="visibility: hidden; opacity: 0; pointer-events: none;"
@@ -277,12 +321,12 @@
 
         function translateNode(node) {
             if (node.nodeType === Node.TEXT_NODE) {
-                if (node.textContent.includes("DIREITOS RESERVADOS") || 
-                    node.textContent.includes("TODOS OS DIREITOS RESERVADOS") || 
+                if (node.textContent.includes("DIREITOS RESERVADOS") ||
+                    node.textContent.includes("TODOS OS DIREITOS RESERVADOS") ||
                     node.textContent.includes("ALL RIGHTS RESERVED")) {
                     node.textContent = node.textContent.replace("DIREITOS RESERVADOS", "MV Interactive Systems")
-                                                        .replace("TODOS OS DIREITOS RESERVADOS", "MV Interactive Systems")
-                                                        .replace("ALL RIGHTS RESERVED", "MV Interactive Systems");
+                        .replace("TODOS OS DIREITOS RESERVADOS", "MV Interactive Systems")
+                        .replace("ALL RIGHTS RESERVED", "MV Interactive Systems");
                     return;
                 }
                 const text = node.textContent.trim();

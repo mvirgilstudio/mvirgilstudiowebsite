@@ -321,12 +321,12 @@ const App: React.FC = () => {
             {/* Social Media Links */}
             <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 relative z-10">
               {[
-                { icon: '/assets/images/social/linkedin.svg', url: 'https://linkedin.com/in/miguelvirgilio', label: 'LinkedIn' },
-                { icon: '/assets/images/social/instagram.svg', url: 'https://instagram.com/miguelvirgilio', label: 'Instagram' },
-                { icon: '/assets/images/social/X.svg', url: 'https://x.com/miguelvirgilio', label: 'X' },
-                { icon: '/assets/images/social/facebook.svg', url: 'https://facebook.com/miguelvirgilio', label: 'Facebook' },
-                { icon: '/assets/images/social/youtube.svg', url: 'https://youtube.com/@miguelvirgilio', label: 'YouTube' },
-                { icon: '/assets/images/social/vimeo.svg', url: 'https://vimeo.com/miguelvirgilio', label: 'Vimeo' },
+                { icon: '/assets/images/social/linkedin.svg', url: 'https://www.linkedin.com/in/miguel-virg%C3%ADlio-b901ba102/', label: 'LinkedIn' },
+                { icon: '/assets/images/social/instagram.svg', url: 'https://www.instagram.com/vfxmiguel/?hl=en', label: 'Instagram' },
+                { icon: '/assets/images/social/X.svg', url: 'https://x.com/miguelvfx', label: 'X' },
+                { icon: '/assets/images/social/facebook.svg', url: 'https://www.facebook.com/profile.php?id=100009122059507', label: 'Facebook' },
+                { icon: '/assets/images/social/youtube.svg', url: 'https://www.youtube.com/@miguelvirgiliostudio', label: 'YouTube' },
+                { icon: '/assets/images/social/vimeo.svg', url: 'https://vimeo.com/miguelvfx', label: 'Vimeo' },
               ].map((social, i) => (
                 <motion.a
                   key={social.label}

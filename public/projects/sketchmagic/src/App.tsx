@@ -5,8 +5,8 @@ import { ImageComparisonSlider } from './components/ui/image-comparison-slider-v
 import { ColoringPopup } from './components/ColoringPopup';
 import { MemoryGamePopup } from './components/MemoryGamePopup';
 
-const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: { 
-  lang: 'EN' | 'PT', 
+const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: {
+  lang: 'EN' | 'PT',
   setLang: (l: 'EN' | 'PT') => void,
   isMenuOpen: boolean,
   setIsMenuOpen: (o: boolean) => void
@@ -34,7 +34,7 @@ const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: {
           <span className="text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-[#b0b0b0] group-hover:opacity-80 transition-opacity hidden min-[400px]:block whitespace-nowrap flex-shrink-0 uppercase">MIGUEL VIRGÍLIO <span className="opacity-60 font-light text-[0.85em]">STUDIO</span></span>
         </div>
       </a>
-      
+
       {/* Desktop Navigation */}
       <div className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
         {[
@@ -51,9 +51,9 @@ const Nav = ({ lang, setLang, isMenuOpen, setIsMenuOpen }: {
             <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
-        
+
         {/* Language Toggle (Desktop) */}
-        <span 
+        <span
           onClick={() => setLang(lang === 'EN' ? 'PT' : 'EN')}
           className="text-sm font-mono uppercase tracking-widest text-[#b0b0b0] hover:text-white cursor-pointer transition-colors relative group w-6 text-center pointer-events-auto"
         >
@@ -123,11 +123,11 @@ export default function App() {
 
   return (
     <div className="font-body selection:bg-accent selection:text-black">
-      <Nav 
-        lang={lang} 
-        setLang={setLang} 
-        isMenuOpen={isMenuOpen} 
-        setIsMenuOpen={setIsMenuOpen} 
+      <Nav
+        lang={lang}
+        setLang={setLang}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
       />
 
       {/* Mobile Menu Overlay */}
@@ -182,34 +182,34 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Hero Section */}
       <main className="relative pt-40 pb-40 px-4 md:px-8 overflow-hidden min-h-screen flex items-center">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-30">
-          <iframe 
-            src="https://player.mediadelivery.net/embed/625906/50875b16-1f76-461c-8c40-0cc509f88bce?autoplay=true&loop=true&muted=true&preload=true&responsive=true" 
-            loading="lazy" 
-            style={{ 
-              border: 0, 
-              width: '100vw', 
+          <iframe
+            src="https://player.mediadelivery.net/embed/625906/50875b16-1f76-461c-8c40-0cc509f88bce?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+            loading="lazy"
+            style={{
+              border: 0,
+              width: '100vw',
               height: '56.25vw',
-              minHeight: '100vh', 
+              minHeight: '100vh',
               minWidth: '177.77vh',
-              position: 'absolute', 
-              top: '50%', 
-              left: '50%', 
-              transform: 'translate(-50%, -50%)' 
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
             }}
-            allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+            allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
             allowFullScreen={true}
           ></iframe>
         </div>
         <div className="absolute inset-0 bg-black/50 pointer-events-none z-0"></div>
         <div className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full animate-pulse z-0"></div>
-        
+
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10 w-full">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="lg:w-1/2 text-left -rotate-2"
@@ -251,7 +251,7 @@ export default function App() {
 
           <div className="w-full lg:w-1/2 relative mt-8 lg:mt-0">
             <div className="relative w-full aspect-square max-w-xl mx-auto">
-              <motion.div 
+              <motion.div
                 initial={{ rotate: 5, scale: 0.9, opacity: 0 }}
                 whileInView={{ rotate: 3, scale: 1, opacity: 1 }}
                 className="absolute inset-0 border-8 border-white bg-black overflow-hidden y2k-shadow-cyan"
@@ -271,23 +271,23 @@ export default function App() {
       {/* Concept Section */}
       <section className="relative py-32 bg-primary transform -skew-y-3 z-20" id="concept">
         <div className="transform skew-y-3 max-w-5xl mx-auto px-8 flex flex-col gap-16 items-center text-center">
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02 }}
             className="w-full bg-black p-4 md:p-8 border-8 border-white y2k-shadow flex flex-col justify-center"
           >
             <div style={{ position: 'relative', paddingTop: '56.25%', width: '100%' }}>
-              <iframe 
-                src="https://player.mediadelivery.net/embed/625906/e50574bf-c360-4554-89d2-51e828913089?autoplay=true&loop=true&muted=true&preload=true&responsive=true" 
-                loading="lazy" 
-                style={{ border: 0, position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }} 
-                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+              <iframe
+                src="https://player.mediadelivery.net/embed/625906/e50574bf-c360-4554-89d2-51e828913089?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                loading="lazy"
+                style={{ border: 0, position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+                allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
                 allowFullScreen={true}
               ></iframe>
             </div>
           </motion.div>
-          
+
           <div className="text-black max-w-3xl">
-            <h2 className="text-5xl md:text-6xl font-headline mb-8 leading-none font-black uppercase italic">FUN & INTERACTIVE <br/><span className="text-white drop-shadow-[4px_4px_0px_#000]">MAGIC</span></h2>
+            <h2 className="text-5xl md:text-6xl font-headline mb-8 leading-none font-black uppercase italic">FUN & INTERACTIVE <br /><span className="text-white drop-shadow-[4px_4px_0px_#000]">MAGIC</span></h2>
             <p className="font-body text-xl md:text-2xl font-bold mb-8 leading-relaxed">
               An immersive experience combining creativity and technology. Sensors capture your movements and transform them into art instantly!
             </p>
@@ -317,7 +317,7 @@ export default function App() {
               { id: '02', title: 'PICK A THEME', desc: 'Choose your theme: Cute Cartoon Monsters, Rainbow Stars, or Abstract Landscapes.', icon: Gamepad2, color: 'secondary' },
               { id: '03', title: 'WATCH IT GLOW', desc: 'Watch projections display your results in real time! Share your magical art with everyone.', icon: Sparkles, color: 'accent' }
             ].map((step, i) => (
-              <motion.div 
+              <motion.div
                 key={step.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -339,7 +339,7 @@ export default function App() {
       {/* Features Bento */}
       <section className="py-32 px-4 max-w-7xl mx-auto" id="features">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div 
+          <motion.div
             whileHover={{ y: -10 }}
             className="md:col-span-2 bg-white text-black p-12 border-8 border-black y2k-shadow relative overflow-hidden"
           >
@@ -361,7 +361,7 @@ export default function App() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02 }}
             className="bg-secondary text-black p-10 border-8 border-black y2k-shadow flex flex-col justify-between hover:bg-white transition-colors group"
           >
@@ -378,7 +378,7 @@ export default function App() {
             { title: 'RAINBOW STARS', desc: "Fill the screen with magical, glowing rainbow stars and bright colors.", icon: Wand2, color: 'primary' },
             { title: 'DREAM LANDSCAPES', desc: "Build beautiful, abstract landscapes based on your pure imagination.", icon: Share2, color: 'black' }
           ].map((feat, i) => (
-            <motion.div 
+            <motion.div
               key={feat.title}
               whileHover={{ rotate: i % 2 === 0 ? 2 : -2 }}
               className={`bg-${feat.color} ${feat.color === 'black' ? 'text-secondary border-secondary' : 'text-black border-black'} p-10 border-8 y2k-shadow group`}
