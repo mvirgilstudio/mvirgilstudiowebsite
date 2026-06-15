@@ -450,31 +450,31 @@
 
     <!-- 3D Planetary Simulation: Floating Instrument Window -->
     <div id="planet-modal"
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[90%] h-[80vh] lg:w-[1000px] lg:h-[650px]">
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[94%] h-[85vh] md:w-[90%] md:h-[80vh] lg:w-[1000px] lg:h-[650px]">
         <!-- Glass Surface (Tonal shift vs border) -->
         <div class="relative w-full h-full glass rounded-none ambient-glow-gold flex flex-col overflow-hidden">
             <!-- Modal Header / Drag Handle (Asymmetric) -->
-            <div id="modal-header" class="p-8 flex justify-between items-start cursor-move bg-white/5">
+            <div id="modal-header" class="p-4 sm:p-6 md:p-8 flex justify-between items-center cursor-move bg-white/5">
                 <div>
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-2 h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
-                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="modal.status">INSTRUMENT 0-ORRERY
+                    <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
+                        <span class="telemetry text-nebula-cyan text-[8px] sm:text-[9px]" data-t="modal.status">INSTRUMENT 0-ORRERY
                             ACTIVE</span>
                     </div>
-                    <h2 class="font-michroma text-2xl tracking-wider uppercase" data-t="modal.h2">Planetary Viewport
+                    <h2 class="font-michroma text-sm sm:text-lg md:text-2xl tracking-wider uppercase" data-t="modal.h2">Planetary Viewport
                     </h2>
                 </div>
                 <button id="close-modal"
-                    class="group flex items-center gap-4 text-white/40 hover:text-nebula-cyan transition-colors">
-                    <span class="telemetry" data-t="modal.close">DISCONNECT</span>
-                    <span class="material-symbols-outlined text-3xl">close</span>
+                    class="group flex items-center gap-2 sm:gap-4 text-white/40 hover:text-nebula-cyan transition-colors">
+                    <span class="telemetry hidden sm:inline" data-t="modal.close">DISCONNECT</span>
+                    <span class="material-symbols-outlined text-2xl sm:text-3xl">close</span>
                 </button>
             </div>
 
             <!-- Three.js Canvas Container -->
             <div id="three-canvas-container" class="flex-1 relative overflow-hidden bg-transparent">
                 <!-- Navigation Instructions Indicator (Asymmetric Overlay) -->
-                <div class="absolute bottom-8 right-8 glass p-6 w-72 reveal-up z-10 ambient-glow border-none">
+                <div class="absolute bottom-4 right-4 md:bottom-8 md:right-8 glass p-4 md:p-6 w-auto max-w-[280px] md:w-72 reveal-up z-10 ambient-glow border-none hidden md:block">
                     <div class="flex flex-col gap-4">
                         <h4 class="font-michroma text-[10px] tracking-widest text-nebula-cyan" data-t="nav.matrix">
                             NAVIGATION MATRIX</h4>
@@ -509,29 +509,29 @@
 
     <!-- Demo Popup: Solar System Encyclopedia -->
     <div id="demo-modal"
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[92%] h-[88vh] lg:w-[1100px] lg:h-[750px]">
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[600] hidden opacity-0 transition-opacity duration-500 w-[96%] h-[90vh] lg:w-[1100px] lg:h-[750px]">
         <!-- Glass Surface -->
         <div class="relative w-full h-full glass rounded-none ambient-glow flex flex-col overflow-hidden"
             style="box-shadow: 0 40px 80px -20px rgba(0, 219, 231, 0.12), 0 0 120px -30px rgba(0, 242, 255, 0.06);">
             <!-- Modal Header / Drag Handle -->
             <div id="demo-modal-header"
-                class="p-6 flex justify-between items-center cursor-move bg-white/5 flex-shrink-0">
-                <div class="flex items-center gap-6">
+                class="p-4 sm:p-6 flex justify-between items-center cursor-move bg-white/5 flex-shrink-0">
+                <div class="flex items-center gap-4 sm:gap-6">
                     <div class="flex items-center gap-3">
-                        <div class="w-2 h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
-                        <span class="telemetry text-nebula-cyan text-[9px]" data-t="demo.status">DEMO STREAM
+                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-nebula-cyan animate-pulse shadow-[0_0_10px_#00F2FF]"></div>
+                        <span class="telemetry text-nebula-cyan text-[8px] sm:text-[9px] hidden sm:inline" data-t="demo.status">DEMO STREAM
                             ACTIVE</span>
                     </div>
-                    <div class="h-4 w-[0.5px] bg-white/10"></div>
-                    <h2 class="font-michroma text-sm tracking-wider uppercase text-white/80" data-t="demo.h2">Cosmos
+                    <div class="h-4 w-[0.5px] bg-white/10 hidden sm:block"></div>
+                    <h2 class="font-michroma text-[10px] sm:text-sm tracking-wider uppercase text-white/80" data-t="demo.h2">Cosmos
                         Explorer</h2>
                 </div>
                 <div class="flex items-center gap-6">
                     <span class="telemetry text-[8px] text-white/30 hidden md:inline" data-t="demo.preview">EMBEDDED
                         PREVIEW</span>
                     <button id="close-demo-modal"
-                        class="group flex items-center gap-3 text-white/40 hover:text-nebula-cyan transition-colors">
-                        <span class="telemetry text-[9px]" data-t="demo.close">CLOSE</span>
+                        class="group flex items-center gap-2 sm:gap-3 text-white/40 hover:text-nebula-cyan transition-colors">
+                        <span class="telemetry text-[9px] hidden sm:inline" data-t="demo.close">CLOSE</span>
                         <span class="material-symbols-outlined text-2xl">close</span>
                     </button>
                 </div>
@@ -555,13 +555,13 @@
             </div>
 
             <!-- Bottom Status Bar -->
-            <div class="p-4 flex justify-between items-center bg-white/[0.02] flex-shrink-0">
-                <div class="flex items-center gap-4">
+            <div class="p-3 sm:p-4 flex justify-between items-center bg-white/[0.02] flex-shrink-0">
+                <div class="flex items-center gap-2 sm:gap-4">
                     <span class="material-symbols-outlined text-nebula-cyan text-sm">public</span>
-                    <span class="telemetry text-[8px] text-white/40" data-t="demo.footer">COSMOS EXPLORER — 8 PLANETARY
+                    <span class="telemetry text-[7px] sm:text-[8px] text-white/40" data-t="demo.footer">COSMOS EXPLORER — 8 PLANETARY
                         BODIES</span>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 sm:gap-4 hidden sm:flex">
                     <span class="material-symbols-outlined text-nebula-cyan text-sm">verified</span>
                     <span class="telemetry text-[8px] text-white/40">NASA-JPL DATA VERIFIED</span>
                 </div>
