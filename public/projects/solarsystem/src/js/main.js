@@ -328,6 +328,8 @@ function resizeThree() {
 }
 
 function openModal() {
+    modal.style.left = '50%';
+    modal.style.top = '50%';
     modal.classList.remove('hidden');
     gsap.fromTo(modal,
         { opacity: 0, scale: 0.9, xPercent: -50, yPercent: -50, y: -50 },
