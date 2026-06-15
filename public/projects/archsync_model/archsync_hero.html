@@ -990,13 +990,13 @@
                 </div>
 
                 <aside
-                    class="glass-panel lg:absolute lg:right-6 lg:top-6 lg:bottom-6 lg:w-80 w-full rounded-b-xl lg:rounded-xl p-6 flex flex-col space-y-6 lg:space-y-8 text-sm relative z-20"
+                    class="glass-panel lg:absolute lg:right-6 lg:top-6 lg:bottom-6 lg:w-80 w-full rounded-b-xl lg:rounded-xl p-6 flex flex-col gap-6 lg:gap-8 text-sm relative z-20"
                     data-purpose="controls-panel">
-                    <div class="text-center">
+                    <div class="text-center order-1">
                         <h3 class="text-white/90 font-semibold text-base uppercase tracking-widest"
                             data-t-en="Sync Controls" data-t-pt="Controlos de Sincronização">Sync Controls</h3>
                     </div>
-                    <section>
+                    <section class="order-3 lg:order-2">
                         <label class="block text-softGrey mb-4 font-medium uppercase tracking-wider text-[10px]"
                             data-t-en="Building Floor Select" data-t-pt="Seleção de Piso">Building Floor Select</label>
                         <div class="grid grid-cols-3 gap-2">
@@ -1037,7 +1037,7 @@
                             </button>
                         </div>
                     </section>
-                    <section class="flex-grow flex flex-col min-h-0">
+                    <section class="flex-grow flex flex-col min-h-0 order-2 lg:order-3">
                         <label
                             class="block text-softGrey mb-2 font-medium text-[10px] uppercase tracking-widest flex-shrink-0"
                             data-t-en="3D Asset Sync" data-t-pt="Sincronização 3D">3D Asset Sync</label>
@@ -1868,8 +1868,9 @@
             // On mobile, only load iframes that are not hidden by CSS (display:none)
             const heroIframes = document.querySelectorAll('#hero iframe[data-src]');
             heroIframes.forEach(iframe => {
+                const blurredParent = iframe.closest('#hero-bg-blurred');
                 const isHidden = getComputedStyle(iframe).display === 'none' || 
-                                 iframe.closest('#hero-bg-blurred') !== null;
+                                 (blurredParent && getComputedStyle(blurredParent).display === 'none');
                 if (!isHidden) {
                     iframe.setAttribute('src', iframe.getAttribute('data-src'));
                 }

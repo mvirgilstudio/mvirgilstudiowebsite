@@ -575,16 +575,23 @@
         };
 
         let player = null;
+        window.isMuted = true;
 
         const initPlayer = () => {
             if (player) return;
             player = new playerjs.Player(showVideoIframe);
 
             player.on('ready', () => {
-                // Initial mute state check
-                player.getMuted((muted) => {
-                    updateSoundIcons(muted);
-                });
+                // Apply the current global muted state
+                if (window.isMuted) {
+                    player.mute();
+                } else {
+                    player.unmute();
+                    if (typeof player.setVolume === 'function') {
+                        player.setVolume(100);
+                    }
+                }
+                updateSoundIcons(window.isMuted);
 
                 player.on('timeupdate', (data) => {
                     const currentTime = data.seconds;
@@ -615,16 +622,19 @@
         };
 
         window.toggleSound = () => {
-            if (!player) return;
-            player.getMuted((muted) => {
-                if (muted) {
-                    player.unmute();
-                    updateSoundIcons(false);
-                } else {
+            window.isMuted = !window.isMuted;
+            updateSoundIcons(window.isMuted);
+
+            if (player) {
+                if (window.isMuted) {
                     player.mute();
-                    updateSoundIcons(true);
+                } else {
+                    player.unmute();
+                    if (typeof player.setVolume === 'function') {
+                        player.setVolume(100);
+                    }
                 }
-            });
+            }
         };
 
         muteToggle.addEventListener('click', window.toggleSound);
