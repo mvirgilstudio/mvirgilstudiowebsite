@@ -96,11 +96,19 @@
         ::-webkit-scrollbar-track { background: #0c0e12; }
         ::-webkit-scrollbar-thumb { background: #1c2025; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #8eabff; }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30">
-<header class="bg-[#0c0e12]/80 dark:bg-[#0c0e12]/80 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-center items-center px-8 py-4">
-<nav class="flex items-center gap-8">
+<header class="bg-[#0c0e12]/80 dark:bg-[#0c0e12]/80 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-center items-center px-4 sm:px-8 py-4">
+<nav class="flex items-center gap-6 md:gap-8 overflow-x-auto w-full md:w-auto justify-start md:justify-center whitespace-nowrap no-scrollbar py-1 px-4 md:px-0">
 <a class="text-blue-300 border-b-2 border-blue-400 pb-1 font-['Space_Grotesk'] tracking-tight transition-all" href="#Mercury" data-t="nav.mercury">Mercury</a>
 <a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Venus" data-t="nav.venus">Venus</a>
 <a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#Earth" data-t="nav.earth">Earth</a>
