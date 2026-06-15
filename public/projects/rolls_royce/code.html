@@ -586,7 +586,7 @@
                 </button>
 
                 <div id="card-stack"
-                    class="relative w-full max-w-3xl aspect-video mx-auto px-4 md:px-0 cursor-grab active:cursor-grabbing">
+                    class="relative w-full max-w-3xl aspect-video mx-auto px-4 md:px-0 cursor-grab active:cursor-grabbing touch-pan-y">
                     <!-- Cards will be injected here by JS -->
                 </div>
             </div>
@@ -1444,22 +1444,35 @@
             };
 
             // Swipe & Tap support for gallery cards
-            let swipeStartY = 0;
-            stackContainer.onmousedown = (e) => { swipeStartY = e.pageY; };
+            let swipeStartX = 0;
+            stackContainer.onmousedown = (e) => { swipeStartX = e.pageX; };
             stackContainer.onmouseup = (e) => {
-                const diffY = e.pageY - swipeStartY;
-                if (Math.abs(diffY) > 50) moveToEnd();
+                const diffX = e.pageX - swipeStartX;
+                if (diffX < -50) {
+                    moveToEnd();
+                } else if (diffX > 50) {
+                    moveToStart();
+                }
             };
 
+            let touchSwipeStartX = 0;
             let touchSwipeStartY = 0;
             stackContainer.addEventListener('touchstart', (e) => {
+                touchSwipeStartX = e.touches[0].pageX;
                 touchSwipeStartY = e.touches[0].pageY;
             }, { passive: true });
             stackContainer.addEventListener('touchend', (e) => {
+                const diffX = e.changedTouches[0].pageX - touchSwipeStartX;
                 const diffY = e.changedTouches[0].pageY - touchSwipeStartY;
-                if (Math.abs(diffY) > 50) {
-                    moveToEnd();
-                } else {
+                
+                // Only trigger if horizontal swipe is more pronounced than vertical swipe
+                if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX < 0) {
+                        moveToEnd();
+                    } else {
+                        moveToStart();
+                    }
+                } else if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
                     // Tap to zoom the top card
                     const topCard = stackCards[0];
                     if (topCard) {
