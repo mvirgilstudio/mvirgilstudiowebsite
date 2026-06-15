@@ -315,6 +315,18 @@ function animate() {
     renderer.render(scene, camera);
 }
 
+function resizeThree() {
+    if (isInitialized && renderer && camera && canvasContainer) {
+        const width = canvasContainer.clientWidth;
+        const height = canvasContainer.clientHeight;
+        if (width > 0 && height > 0) {
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+    }
+}
+
 function openModal() {
     modal.classList.remove('hidden');
     gsap.fromTo(modal,
@@ -343,6 +355,7 @@ function openModal() {
     isAnimatingLoop = true;
     initThree();
     if (isInitialized) {
+        resizeThree();
         animate();
     }
 }
@@ -486,9 +499,7 @@ if (closeDemoBtn) closeDemoBtn.addEventListener('click', closeDemoModal);
 if (demoBackdrop) demoBackdrop.addEventListener('click', closeDemoModal);
 
 window.addEventListener('resize', () => {
-    if (isInitialized) {
-        camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+    if (isInitialized && !modal.classList.contains('hidden')) {
+        resizeThree();
     }
 });
