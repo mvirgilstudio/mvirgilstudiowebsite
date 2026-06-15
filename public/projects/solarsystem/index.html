@@ -228,7 +228,7 @@
     <main>
 
         <!-- Hero Section: The Celestial Cartographer -->
-        <section class="h-screen relative flex items-center px-12 lg:px-24 overflow-hidden">
+        <section class="min-h-screen relative flex items-center py-20 px-6 sm:px-12 md:px-16 lg:px-24 lg:py-0 overflow-hidden">
             <!-- Orbital Lines Extending Past Boundaries -->
             <div class="orbital-line w-[200%] top-[40%] -left-[50%] rotate-[-15deg]"></div>
             <div class="orbital-line w-[200%] top-[70%] -left-[20%] rotate-[5deg]"></div>
@@ -253,12 +253,12 @@
                     class="absolute -top-32 -left-32 w-[150%] h-[150%] bg-nebula-cyan/5 rounded-full blur-[120px] pointer-events-none -z-10">
                 </div>
 
-                <div class="mb-8 flex items-center gap-6 reveal-up">
+                <div class="mb-6 md:mb-8 flex items-center gap-6 reveal-up">
                     <span class="font-michroma text-[10px] tracking-[0.5em] text-nebula-cyan">HUB SYSTEM 0-ORRERY</span>
                     <div class="h-[0.5px] w-24 bg-nebula-cyan/40"></div>
                 </div>
 
-                <h1 class="font-michroma text-6xl lg:text-8xl leading-[1.1] tracking-tight mb-8 reveal-up"
+                <h1 class="font-michroma text-3xl sm:text-5xl md:text-6xl lg:text-8xl leading-[1.2] lg:leading-[1.1] tracking-tight mb-6 md:mb-8 reveal-up"
                     data-t="hero.h1">
                     The Galaxy,<br />
                     <span
@@ -266,19 +266,19 @@
                         Reach.</span>
                 </h1>
 
-                <p class="text-xl lg:text-2xl text-white/60 font-light max-w-2xl mb-12 leading-relaxed reveal-up"
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/60 font-light max-w-2xl mb-6 sm:mb-8 md:mb-12 leading-relaxed reveal-up"
                     data-t="hero.p">
                     Experience Orbitarium - gesture-controlled 3D solar system. Touch the stars without a screen.
                 </p>
 
-                <div class="flex items-center gap-8 reveal-up">
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-8 reveal-up">
                     <button id="launch-btn"
-                        class="btn-primary font-michroma text-[11px] uppercase tracking-widest px-12 py-5 rounded-none"
+                        class="btn-primary font-michroma text-[10px] sm:text-[11px] uppercase tracking-widest px-6 py-4 sm:px-12 sm:py-5 rounded-none w-full sm:w-auto text-center"
                         data-t="hero.launch">
                         Launch Simulation
                     </button>
                     <button id="watch-demo-btn"
-                        class="btn-secondary font-michroma text-[11px] uppercase tracking-widest px-12 py-5 rounded-none flex items-center gap-3">
+                        class="btn-secondary font-michroma text-[10px] sm:text-[11px] uppercase tracking-widest px-6 py-4 sm:px-12 sm:py-5 rounded-none flex items-center justify-center gap-3 w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[18px]">play_arrow</span>
                         <span data-t="hero.explorer">Cosmos Explorer</span>
                     </button>
@@ -295,7 +295,7 @@
         </section>
 
         <!-- Bento Grid: The Scanning Field (Strictly No Dividers rule) -->
-        <section class="py-32 px-12 lg:px-24 bg-surface-recess">
+        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-surface-recess">
             <div class="max-w-7xl mx-auto">
                 <div class="mb-20 reveal-up">
                     <span class="telemetry text-nebula-cyan" data-t="core.badge">CORE SYSTEMS</span>
@@ -353,7 +353,7 @@
         </section>
 
         <!-- Video Archive: Event Horizon Section (Strictly No Dividers rule) -->
-        <section class="py-32 px-12 lg:px-24 bg-deep-space relative overflow-hidden">
+        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-deep-space relative overflow-hidden">
             <!-- Background Image -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/planetary/space_bck.jpg" alt="Space Background" class="w-full h-full object-cover">
