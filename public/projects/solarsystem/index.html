@@ -225,10 +225,10 @@
             </div>
         </div>
     </div>
-    <main>
+    <main class="flex flex-col">
 
         <!-- Hero Section: The Celestial Cartographer -->
-        <section class="min-h-screen relative flex items-center py-20 px-6 sm:px-12 md:px-16 lg:px-24 lg:py-0 overflow-hidden">
+        <section class="min-h-screen relative flex items-center py-20 px-6 sm:px-12 md:px-16 lg:px-24 lg:py-0 overflow-hidden order-1">
             <!-- Orbital Lines Extending Past Boundaries -->
             <div class="orbital-line w-[200%] top-[40%] -left-[50%] rotate-[-15deg]"></div>
             <div class="orbital-line w-[200%] top-[70%] -left-[20%] rotate-[5deg]"></div>
@@ -295,7 +295,7 @@
         </section>
 
         <!-- Bento Grid: The Scanning Field (Strictly No Dividers rule) -->
-        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-surface-recess">
+        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-surface-recess order-3 lg:order-2">
             <div class="max-w-7xl mx-auto">
                 <div class="mb-20 reveal-up">
                     <span class="telemetry text-nebula-cyan" data-t="core.badge">CORE SYSTEMS</span>
@@ -353,7 +353,7 @@
         </section>
 
         <!-- Video Archive: Event Horizon Section (Strictly No Dividers rule) -->
-        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-deep-space relative overflow-hidden">
+        <section class="py-20 sm:py-32 px-6 sm:px-12 md:px-16 lg:px-24 bg-deep-space relative overflow-hidden order-2 lg:order-3">
             <!-- Background Image -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/planetary/space_bck.jpg" alt="Space Background" class="w-full h-full object-cover">
@@ -400,7 +400,7 @@
 
         <!-- Main Portfolio Integration Footer -->
         <footer
-            class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            class="w-full py-16 md:py-24 px-6 md:px-0 bg-black border-t border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden order-4">
             <div class="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
 
             <!-- Social Media Links -->
