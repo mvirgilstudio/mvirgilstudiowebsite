@@ -393,6 +393,10 @@
                     data-t="realtime_span">Real-Time Engine</span>
                 <h2 class="font-headline text-3xl md:text-5xl text-white mb-8 tracking-tighter" data-t="realtime_h2">
                     Unprecedented fidelity at your fingertips.</h2>
+                
+                <!-- Mobile Video Placeholder -->
+                <div id="mobile-video-placeholder" class="w-full my-6 block lg:hidden animate-slide-down"></div>
+
                 <p class="text-white/60 font-body text-lg leading-relaxed mb-10" data-t="realtime_p">
                     Our proprietary rendering engine allows for instantaneous material swaps and lighting adjustments
                     without the need for lengthy export times.
@@ -412,13 +416,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Right Visual (Mock Interactive Player) -->
-            <div class="w-full lg:w-2/3 relative aspect-video lg:h-auto overflow-hidden reveal-slide-right delay-200">
-                <iframe
-                    data-src="https://player.mediadelivery.net/embed/625906/9d366200-056b-4240-ae8a-c7f449382cbb?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-                    style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
-                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
-                    allowfullscreen="true"></iframe>
+            <!-- Right Visual (Mock Interactive Player / Desktop Video Placeholder) -->
+            <div id="desktop-video-placeholder" class="w-full lg:w-2/3 relative aspect-video lg:h-auto overflow-hidden reveal-slide-right delay-200 hidden lg:block">
+                <div id="video-container" class="w-full h-full relative aspect-video overflow-hidden">
+                    <iframe
+                        data-src="https://player.mediadelivery.net/embed/625906/9d366200-056b-4240-ae8a-c7f449382cbb?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+                        style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;"
+                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                        allowfullscreen="true"></iframe>
+                </div>
             </div>
         </section>        <!-- Architectural Image Gallery (Modern Carousel Slider) -->
         <!-- Architectural Image Gallery Section -->
@@ -905,6 +911,26 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
+
+            // Handle Fidelity Video layout shift for mobile
+            const moveFidelityVideo = () => {
+                const video = document.getElementById('video-container');
+                const mobilePlaceholder = document.getElementById('mobile-video-placeholder');
+                const desktopPlaceholder = document.getElementById('desktop-video-placeholder');
+                if (!video || !mobilePlaceholder || !desktopPlaceholder) return;
+
+                if (window.innerWidth < 1024) {
+                    if (mobilePlaceholder.children.length === 0) {
+                        mobilePlaceholder.appendChild(video);
+                    }
+                } else {
+                    if (desktopPlaceholder.children.length === 0) {
+                        desktopPlaceholder.appendChild(video);
+                    }
+                }
+            };
+            moveFidelityVideo();
+            window.addEventListener('resize', moveFidelityVideo);
 
             // Lazy load below-fold iframe
             const lazyIframe = document.querySelector('iframe[data-src]');
