@@ -216,7 +216,7 @@
 
     <!-- Fixed Lottie Container -->
     <div id="fixed-lottie-container"
-        class="fixed inset-0 z-[15] pointer-events-none flex items-center justify-center overflow-hidden">
+        class="fixed inset-0 z-[15] pointer-events-none hidden lg:flex items-center justify-center overflow-hidden">
         <div id="lottie-scroll-container" class="h-[85vh] aspect-square"></div>
     </div>
 
@@ -358,16 +358,15 @@
                         Scroll to Initiate</div>
                     <div class="w-[1px] h-24 bg-gradient-to-b from-primary/50 to-transparent"></div>
                 </div>
-            </div>
         </section>
 
         <!-- Lottie Section -->
-        <section id="lottie-section" class="relative min-h-[100vh] overflow-hidden">
+        <section id="lottie-section" class="relative min-h-[100vh] lg:overflow-hidden">
             <!-- Section Background -->
             <div class="absolute inset-0 z-0 bg-surface"></div>
 
-            <div class="sticky top-0 h-screen flex flex-col items-center justify-center px-10 relative">
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
+            <div class="relative lg:sticky lg:top-0 min-h-screen lg:h-screen flex flex-col items-center justify-center py-12 lg:py-0 px-6 sm:px-10 relative">
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02] overflow-hidden">
                     <h2 class="text-[25vw] font-serif font-black uppercase italic whitespace-nowrap -rotate-6"
                         data-t="lottie.bg_text">Synthesis
                     </h2>
@@ -411,7 +410,7 @@
                             <div>
                                 <div class="font-mono text-[8px] text-neutral-500 uppercase mb-2 tracking-widest"
                                     data-t="lottie.nodes_label">Nodes
-                                </div>
+                                    </div>
                                 <div class="text-xl font-serif">1.284.901</div>
                             </div>
                         </div>
@@ -419,7 +418,7 @@
 
                     <!-- Video Showcase Column -->
                     <div
-                        class="w-full max-w-[420px] lg:max-w-[460px] mx-auto lg:mr-0 glass overflow-hidden shadow-2xl rounded-2xl relative z-10">
+                        class="w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] lg:max-w-[460px] mx-auto lg:mr-0 glass overflow-hidden shadow-2xl rounded-2xl relative z-10">
                         <div style="position:relative;padding-top:177.78%;">
                             <iframe
                                 src="https://player.mediadelivery.net/embed/625906/68c561ae-ad75-407c-9106-1944ac15799b?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
@@ -527,16 +526,12 @@
                                     </div>
                                     <div class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                                        <span data-t="tech.zoom">Scroll — Zoom</span>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                                         <span data-t="tech.pan">Right Click — Pan</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             <div class="p-6 glass border border-white/5 space-y-4">
                                 <h4 class="font-serif italic text-primary" data-t="tech.layer_title">Layer Precision
                                 </h4>
@@ -557,7 +552,7 @@
                                     Recycled high-impact filament.</p>
                             </div>
                             <div
-                                class="p-6 glass border border-white/5 space-y-4 flex items-center justify-center group transition-all cursor-pointer">
+                                class="p-6 glass border border-white/5 space-y-4 hidden lg:flex items-center justify-center group transition-all cursor-pointer">
                                 <div id="lottie-loop-container"></div>
                             </div>
                         </div>
@@ -754,87 +749,90 @@
                 scale: 1.1
             });
 
-            // Lottie Scroll
-            const lottieScroll = lottie.loadAnimation({
-                container: document.getElementById('lottie-scroll-container'),
-                renderer: 'svg',
-                loop: false,
-                autoplay: false,
-                path: 'assets/vase_anim/vase_anim.json'
-            });
-
-            lottieScroll.addEventListener('DOMLoaded', () => {
-                // Pin/Visibility Logic
-                ScrollTrigger.create({
-                    trigger: "body",
-                    start: "top top",
-                    end: "bottom bottom",
-                    onUpdate: (self) => {
-                        gsap.to("#fixed-lottie-container", {
-                            opacity: 1,
-                            duration: 0.5,
-                            overwrite: "auto"
-                        });
-                    }
+            // Lottie Animations (Desktop only)
+            if (window.innerWidth >= 1024) {
+                // Lottie Scroll
+                const lottieScroll = lottie.loadAnimation({
+                    container: document.getElementById('lottie-scroll-container'),
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: false,
+                    path: 'assets/vase_anim/vase_anim.json'
                 });
 
-                // Initialize Position
-                gsap.set("#lottie-scroll-container", { x: 0 });
-
-                // Unified Position Transition Logic
-                const lottiePosTl = gsap.timeline({
-                    scrollTrigger: {
+                lottieScroll.addEventListener('DOMLoaded', () => {
+                    // Pin/Visibility Logic
+                    ScrollTrigger.create({
                         trigger: "body",
                         start: "top top",
                         end: "bottom bottom",
-                        scrub: 1
-                    }
+                        onUpdate: (self) => {
+                            gsap.to("#fixed-lottie-container", {
+                                opacity: 1,
+                                duration: 0.5,
+                                overwrite: "auto"
+                            });
+                        }
+                    });
+
+                    // Initialize Position
+                    gsap.set("#lottie-scroll-container", { x: 0 });
+
+                    // Unified Position Transition Logic
+                    const lottiePosTl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "body",
+                            start: "top top",
+                            end: "bottom bottom",
+                            scrub: 1
+                        }
+                    });
+
+                    // Ensure it moves based on section transitions: Center -> Right -> Stay Right -> Left
+                    lottiePosTl
+                        .to("#lottie-scroll-container", { x: 0, duration: 0.1 }) // Hero (Center)
+                        .to("#lottie-scroll-container", {
+                            x: "25vw",
+                            duration: 0.3,
+                            ease: "power2.inOut"
+                        }) // Move to Right for Dynamics
+                        .to("#lottie-scroll-container", {
+                            x: "25vw",
+                            duration: 0.3,
+                            ease: "power2.inOut"
+                        }) // Move to Right for Technical (middle-right anchor)
+                        .to("#lottie-scroll-container", {
+                            x: "-25vw",
+                            duration: 0.3,
+                            ease: "none"
+                        }); // Stay on Left for Command Succession (Final section)
+
+                    // Frame Sequence Logic with Lag Effect
+                    const playhead = { frame: 0 };
+                    gsap.to(playhead, {
+                        frame: lottieScroll.totalFrames - 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: "body",
+                            start: "top top",
+                            end: "bottom bottom",
+                            scrub: 1.5
+                        },
+                        onUpdate: () => {
+                            lottieScroll.goToAndStop(playhead.frame, true);
+                        }
+                    });
                 });
 
-                // Ensure it moves based on section transitions: Center -> Right -> Stay Right -> Left
-                lottiePosTl
-                    .to("#lottie-scroll-container", { x: 0, duration: 0.1 }) // Hero (Center)
-                    .to("#lottie-scroll-container", {
-                        x: "25vw",
-                        duration: 0.3,
-                        ease: "power2.inOut"
-                    }) // Move to Right for Dynamics
-                    .to("#lottie-scroll-container", {
-                        x: "25vw",
-                        duration: 0.3,
-                        ease: "power2.inOut"
-                    }) // Move to Right for Technical (middle-right anchor)
-                    .to("#lottie-scroll-container", {
-                        x: "-25vw",
-                        duration: 0.3,
-                        ease: "none"
-                    }); // Stay on Left for Command Succession (Final section)
-
-                // Frame Sequence Logic with Lag Effect
-                const playhead = { frame: 0 };
-                gsap.to(playhead, {
-                    frame: lottieScroll.totalFrames - 1,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: "body",
-                        start: "top top",
-                        end: "bottom bottom",
-                        scrub: 1.5
-                    },
-                    onUpdate: () => {
-                        lottieScroll.goToAndStop(playhead.frame, true);
-                    }
+                // Lottie Loop
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-loop-container'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'assets/vase_rot/vase_rot.json'
                 });
-            });
-
-            // Lottie Loop
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-loop-container'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'assets/vase_rot/vase_rot.json'
-            });
+            }
 
             // Three.js Abstract Background
             setupAbstractBG();
@@ -1007,7 +1005,7 @@
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
-            controls.enableZoom = true;
+            controls.enableZoom = false;
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
 
@@ -1209,7 +1207,6 @@
                 "lottie.nodes_label": "Nós",
                 "tech.preview": "Pré-visualização Técnica",
                 "tech.rotate": "Clique Esquerdo — Rodar",
-                "tech.zoom": "Roda — Zoom",
                 "tech.pan": "Clique Direito — Panorâmica",
                 "tech.layer_title": "Precisão de Camada",
                 "tech.layer_desc": "Resolução de altura adaptativa de 0.2mm.",
@@ -1247,7 +1244,6 @@
                 "lottie.nodes_label": "Nodes",
                 "tech.preview": "Technical Preview",
                 "tech.rotate": "Left Click — Rotate",
-                "tech.zoom": "Scroll — Zoom",
                 "tech.pan": "Right Click — Pan",
                 "tech.layer_title": "Layer Precision",
                 "tech.layer_desc": "0.2mm adaptive height resolution.",
