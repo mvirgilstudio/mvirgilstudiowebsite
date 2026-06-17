@@ -77,6 +77,146 @@
                 display: none !important;
             }
         }
+
+        /* CSS Image Fade Transitions for Showcase 1.1 */
+        @keyframes imageFade {
+            0% { opacity: 0; }
+            4.17% { opacity: 1; }
+            12.5% { opacity: 1; }
+            16.67% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .fade-gallery {
+            position: relative;
+            width: 100%;
+            max-width: 536px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .fade-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            max-width: 536px;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+        }
+
+        .fade-gallery img.img1 {
+            position: relative;
+            opacity: 1;
+            height: 150px;
+            max-height: 150px;
+        }
+
+        .fade-img {
+            animation-name: imageFade;
+            animation-duration: 24s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        .img1 { animation-delay: 0s; }
+        .img2 { animation-delay: -21s; }
+        .img3 { animation-delay: -18s; }
+        .img4 { animation-delay: -15s; }
+        .img5 { animation-delay: -12s; }
+        .img6 { animation-delay: -9s; }
+        .img7 { animation-delay: -6s; }
+        .img8 { animation-delay: -3s; }
+
+        /* CSS Video Fade Transitions for Showcase 1.2 */
+        @keyframes videoFade {
+            0% { opacity: 0; pointer-events: none; }
+            5.56% { opacity: 1; pointer-events: auto; }
+            27.78% { opacity: 1; pointer-events: auto; }
+            33.33% { opacity: 0; pointer-events: none; }
+            100% { opacity: 0; pointer-events: none; }
+        }
+
+        .video-gallery {
+            position: relative;
+            width: 100%;
+            max-width: 536px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .video-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .video-wrap.vid1 {
+            position: relative;
+            opacity: 1;
+        }
+
+        .fade-video {
+            animation-name: videoFade;
+            animation-duration: 9s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        .vid1 { animation-delay: 0s; z-index: 2; }
+        .vid2 { animation-delay: -6s; z-index: 2; }
+        .vid3 { animation-delay: -3s; z-index: 2; }
+
+        /* CSS Video Fade Transitions for Showcase 1.3 */
+        @keyframes walkthroughFade {
+            0% { opacity: 0; pointer-events: none; }
+            8.33% { opacity: 1; pointer-events: auto; }
+            41.67% { opacity: 1; pointer-events: auto; }
+            50% { opacity: 0; pointer-events: none; }
+            100% { opacity: 0; pointer-events: none; }
+        }
+
+        .walkthrough-gallery {
+            position: relative;
+            width: 100%;
+            max-width: 536px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .walkthrough-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .walkthrough-wrap.walk1 {
+            position: relative;
+            opacity: 1;
+        }
+
+        .fade-walkthrough {
+            animation-name: walkthroughFade;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        .walk1 { animation-delay: 0s; z-index: 2; }
+        .walk2 { animation-delay: -3s; z-index: 2; }
     </style>
 </head>
 
@@ -205,11 +345,15 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
-                                        <div
-                                            style="position: relative; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/renders_thumbnail.png"
-                                                width="536" class="fluid-img" alt="Image Renders Gallery"
-                                                style="display: block; width: 100%; max-width: 536px; height: 150px; max-height: 150px; object-fit: cover;" />
+                                        <div class="fade-gallery">
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/01_house_front.jpg" class="fluid-img fade-img img1" alt="Image Renders Gallery" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/04_livingroom.jpg" class="fade-img img2" alt="Living Room" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/10.jpg" class="fade-img img3" alt="10" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/bung_02.jpg" class="fade-img img4" alt="Bungalow 2" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/bung_03.jpg" class="fade-img img5" alt="Bungalow 3" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/casa_07.jpg" class="fade-img img6" alt="Casa 7" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/casa_15.jpg" class="fade-img img7" alt="Casa 15" />
+                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/hero_images_anim/int_02.jpg" class="fade-img img8" alt="Interior 2" />
                                             <!-- Stats strip overlay -->
                                             <div
                                                 style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
@@ -241,13 +385,20 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
-                                        <div
-                                            style="position: relative; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/animations_thumbnail.png"
-                                                width="536" class="fluid-img" alt="Cinematic Animations Preview"
-                                                style="display: block; width: 100%; max-width: 536px; height: 150px; max-height: 150px; object-fit: cover;" />
-                                            <div
-                                                style="background-color: #1a1a1a; padding: 10px 14px; text-align: left;">
+                                        <div class="video-gallery">
+                                            <!-- Wrapper 1 is relative and defines the aspect ratio -->
+                                            <div class="video-wrap fade-video vid1" style="position: relative; padding-top: 56.25%;">
+                                                <iframe src="https://player.mediadelivery.net/embed/625906/79267664-ba4c-4f85-bfec-34b0fa4c7d2a?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                                            </div>
+                                            <!-- Wrapper 2 and 3 are absolute-positioned, filling the space -->
+                                            <div class="video-wrap fade-video vid2">
+                                                <iframe src="https://player.mediadelivery.net/embed/625906/112bd2e0-2748-4237-bb13-06e6e2fab590?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                                            </div>
+                                            <div class="video-wrap fade-video vid3">
+                                                <iframe src="https://player.mediadelivery.net/embed/625906/bce7817f-5825-4384-9ef8-c84b09c33e3a?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                                            </div>
+                                            <!-- Stats strip overlay -->
+                                            <div style="background-color: #1a1a1a; padding: 10px 14px; text-align: left; position: relative; z-index: 10;">
                                                 <span
                                                     style="font-size: 10px; font-family: monospace; color: #ffffff; letter-spacing: 0.1em; text-transform: uppercase;">&nbsp;</span>
                                             </div>
@@ -276,13 +427,18 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
-                                        <div
-                                            style="position: relative; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                            <img src="https://mvirgilstudio.com/archviz_email2/assets/walkthrough_thumbnail.png"
-                                                width="536" class="fluid-img" alt="Walkthrough Gallery Preview"
-                                                style="display: block; width: 100%; max-width: 536px; height: 150px; max-height: 150px; object-fit: cover;" />
+                                        <div class="walkthrough-gallery">
+                                            <!-- Wrapper 1 is relative and defines the aspect ratio -->
+                                            <div class="walkthrough-wrap fade-walkthrough walk1" style="position: relative; padding-top: 56.25%;">
+                                                <iframe src="https://player.mediadelivery.net/embed/625906/cb3b40f5-31cb-48ef-8734-6b096cf39f53?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                                            </div>
+                                            <!-- Wrapper 2 is absolute-positioned, filling the space -->
+                                            <div class="walkthrough-wrap fade-walkthrough walk2">
+                                                <iframe src="https://player.mediadelivery.net/embed/625906/10b021e4-dbc0-4e46-996e-2d626ee0cead?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+                                            </div>
+                                            <!-- Description strip overlay -->
                                             <div
-                                                style="background-color: #1a1a1a; padding: 12px 16px; text-align: left;">
+                                                style="background-color: #1a1a1a; padding: 12px 16px; text-align: left; position: relative; z-index: 10;">
                                                 <span
                                                     style="font-size: 12px; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1.5; display: block;">Misturando fidelidade visual intransigente com exploração espacial fluida. Entre na nossa visão através de simulações em tempo real de alta qualidade, capturando transições de luz natural, interações biofílicas e detalhes de materiais brutos em fluxo cinemático.</span>
                                             </div>
