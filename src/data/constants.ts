@@ -29,7 +29,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A playful project that turns real apples into piano keys. Touching the apples plays musical notes, while a projected 3D apple on screen mimics your hand movements. It\'s a fun blend of nature and technology that shows how everyday objects can come to life.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/9d2922a9-4e5a-4525-8d05-0e3125be754a?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/appleharmonics/index.html'
+    externalLink: '/appleharmonics/index.html'
   },
   {
     id: 'w2',
@@ -37,7 +37,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'An interactive poster that you can play like a real guitar. Touch the illustrated guitar strings to hear chords, or tap the speakers to play songs from featured rock bands. It combines graphic design and touch technology into a musical experience.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/cf77af7f-ca47-4a8b-b944-45c6fe3c8eb3?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/rocktouch/code.html'
+    externalLink: '/rocktouch/code.html'
   },
   {
     id: 'w3',
@@ -45,7 +45,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A physical catalog of stone samples connected to a screen. Touching any real stone immediately displays its detailed 3D version on the screen, letting you explore different design materials in a hands-on way.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/d7781688-242b-40ba-9d7a-ef77c558a697?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/touchstone/index.html'
+    externalLink: '/touchstone/index.html'
   },
   {
     id: 'w4',
@@ -53,7 +53,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A physical, 3D-printed building miniature synced with a screen. Turning the physical model rotates the virtual building on the screen in real time, and lifting off floors shows the room layouts instantly.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/cadd146c-d63e-473d-a1e2-9e8ba0a0d4e6?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/archsync_model/archsync_hero.html'
+    externalLink: '/archsync_model/archsync_hero.html'
   },
   {
     id: 'w5',
@@ -61,7 +61,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'An interactive virtual home tour. You can walk through the house, customize the furniture and colors in real time, and see how the sunlight changes at different times of day.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/7ce0e237-7f69-403e-990d-8e5ed7005a45?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/livespace/code.html'
+    externalLink: '/livespace/code.html'
   },
   {
     id: 'w6',
@@ -69,7 +69,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A beautiful 3D walkthrough of a forest cabin. Change furniture layouts, wall colors, and lighting to see updates instantly against a realistic woodland backdrop.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/4f613faf-a1f8-4505-892e-2a92a6288309?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/greenhaven/code.html'
+    externalLink: '/greenhaven/code.html'
   },
   {
     id: 'w7',
@@ -77,7 +77,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A 3D solar system controlled with your hands. Fly between planets using simple hand gestures in the air, and watch educational videos about space.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/67ba8e61-32a5-44bf-a110-a635ec840c06?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/solarsystem/index.html'
+    externalLink: '/solarsystem/index.html'
   },
   {
     id: 'w8',
@@ -85,7 +85,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A drawing app for kids that uses AI to bring sketches to life. Waves of your hands in front of sensors turn simple outlines into cute cartoon monsters or colorful stars instantly.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/6c067489-8672-4e37-a042-6c1a52474c78?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/sketchmagic/index.html'
+    externalLink: '/sketchmagic/index.html'
   },
   {
     id: 'w10',
@@ -93,7 +93,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'An interactive 3D showroom for the Rolls-Royce Ghost. Customize paint colors, explore the luxury interior, and view the car in different settings like studio lights or city streets.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/3fc8c5e8-84a2-466a-b9e6-0d022d51005e?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/rolls_royce/code.html'
+    externalLink: '/rolls_royce/code.html'
   },
   {
     id: 'w12',
@@ -101,7 +101,7 @@ export const WORKS_INDEX: WorkItem[] = [
     description: 'A custom 3D-printed vase presented through video animations. The animation highlights its curves and texture, showing how physical crafting and digital art work together.',
     mediaUrl: 'https://player.mediadelivery.net/embed/625906/42b64c18-0390-4920-9964-d2c9384a981c?autoplay=true&loop=true&muted=true&preload=true&responsive=true',
     mediaType: 'iframe',
-    externalLink: '/projects/vasemotion/index.html'
+    externalLink: '/vasemotion/index.html'
   },
 ];
 

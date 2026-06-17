@@ -257,8 +257,8 @@ export default function App() {
                 className="absolute inset-0 border-8 border-white bg-black overflow-hidden y2k-shadow-cyan"
               >
                 <ImageComparisonSlider
-                  topImage="/projects/sketchmagic/comp_scketch.png"
-                  bottomImage="/projects/sketchmagic/comp_monster.png"
+                  topImage="/sketchmagic/comp_scketch.png"
+                  bottomImage="/sketchmagic/comp_monster.png"
                   className="w-full h-full"
                 />
                 <div className="absolute top-4 left-4 font-pixel bg-primary px-2 text-white text-lg z-50">RE_MIXING...</div>

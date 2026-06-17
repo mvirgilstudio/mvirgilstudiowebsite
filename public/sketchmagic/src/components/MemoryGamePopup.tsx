@@ -8,7 +8,7 @@ interface Card {
 }
 
 const TOTAL_PAIRS = 12;
-const CARD_IMAGES = Array.from({ length: TOTAL_PAIRS }, (_, i) => `/projects/sketchmagic/memory_cards/card_${String(i + 1).padStart(2, '0')}.png`);
+const CARD_IMAGES = Array.from({ length: TOTAL_PAIRS }, (_, i) => `/sketchmagic/memory_cards/card_${String(i + 1).padStart(2, '0')}.png`);
 
 interface MemoryGamePopupProps {
   isOpen: boolean;

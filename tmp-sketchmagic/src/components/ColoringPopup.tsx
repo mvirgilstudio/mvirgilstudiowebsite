@@ -41,7 +41,7 @@ export function ColoringPopup({ isOpen, onClose }: ColoringPopupProps) {
   // Store color layers per image index
   const colorLayersData = useRef<Map<number, ImageData>>(new Map());
 
-  const currentImageSrc = `/projects/sketchmagic/lineart/lineart-${padIndex(currentIndex)}.png`;
+  const currentImageSrc = `/sketchmagic/lineart/lineart-${padIndex(currentIndex)}.png`;
 
   // Save current color layer data before switching
   const saveCurrentLayer = useCallback(() => {

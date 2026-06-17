@@ -4,13 +4,13 @@
     "framework": "vite",
     "rewrites": [
         {
-            "source": "/((?!projects|assets|public).*)",
+            "source": "/((?!appleharmonics|appleharmonics_email|archsync_model|archviz|archviz_email|archviz_email2|greenhaven|livespace|rocktouch|rolls_royce|sketchmagic|solarsystem|touchstone|vasemotion|assets|public).*)",
             "destination": "/index.html"
         }
     ],
     "headers": [
         {
-            "source": "/projects/rolls_royce/sequences/(.*)",
+            "source": "/rolls_royce/sequences/(.*)",
             "headers": [
                 {
                     "key": "Cache-Control",
