@@ -1256,7 +1256,7 @@
                             <span data-t="contact_badge_email"
                                 class="text-[9px] text-secondary/60 transition-colors font-sans tracking-widest uppercase">EMAIL</span>
                             <span
-                                class="text-xs md:text-sm font-medium text-[#1a1a1a] tracking-wide normal-case font-sans">contact@mvirgilstudio.com</span>
+                                class="text-xs md:text-sm font-medium text-[#1a1a1a] tracking-wide normal-case font-sans">hello@mvirgilstudio.com</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span id="copied-toast" data-t="contact_copied"
@@ -2394,7 +2394,7 @@
 
             if (emailBadge && copiedToast && copyIconContainer) {
                 emailBadge.addEventListener('click', () => {
-                    navigator.clipboard.writeText('contact@mvirgilstudio.com').then(() => {
+                    navigator.clipboard.writeText('hello@mvirgilstudio.com').then(() => {
                         copiedToast.classList.remove('hidden');
                         copyIconContainer.classList.add('hidden');
                         setTimeout(() => {
@@ -2428,7 +2428,7 @@
                     `;
 
                     try {
-                        const response = await fetch("https://formsubmit.co/ajax/contact@mvirgilstudio.com", {
+                        const response = await fetch("https://formsubmit.co/ajax/hello@mvirgilstudio.com", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
