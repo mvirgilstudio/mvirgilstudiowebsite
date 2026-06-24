@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from './components/Hero';
@@ -22,6 +22,50 @@ const App: React.FC = () => {
   const isEmbeddedExperience = new URLSearchParams(window.location.search).has('experience');
 
   const t = TRANSLATIONS[lang];
+
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Synchronize audio element play/pause state
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.4; // Set background audio volume to a comfortable level (40%)
+    if (isPlaying) {
+      audio.play().catch((err) => {
+        console.log("Audio autoplay prevented. Waiting for user interaction.", err);
+      });
+    } else {
+      audio.pause();
+    }
+  }, [isPlaying]);
+
+  // Handle browser autoplay policy by starting audio on first interaction
+  useEffect(() => {
+    const startPlay = () => {
+      const audio = audioRef.current;
+      if (audio && isPlaying && audio.paused) {
+        audio.play().catch((err) => {
+          console.log("Audio play on user interaction failed:", err);
+        });
+      }
+      cleanupListeners();
+    };
+
+    const cleanupListeners = () => {
+      window.removeEventListener('click', startPlay);
+      window.removeEventListener('keydown', startPlay);
+      window.removeEventListener('touchstart', startPlay);
+    };
+
+    window.addEventListener('click', startPlay);
+    window.addEventListener('keydown', startPlay);
+    window.addEventListener('touchstart', startPlay);
+
+    return () => {
+      cleanupListeners();
+    };
+  }, [isPlaying]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -97,6 +141,51 @@ const App: React.FC = () => {
       <SvgFilters />
       <CustomCursor />
       <ExpertiseModal isOpen={isExpertiseOpen} onClose={() => setIsExpertiseOpen(false)} lang={lang} />
+
+      <audio
+        ref={audioRef}
+        src="/assets/audio/mv_portfolio_final_audio.mp3"
+        loop
+        preload="auto"
+      />
+
+      {/* Floating Audio Toggle Button */}
+      {!isEmbeddedExperience && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
+          onClick={() => setIsPlaying(prev => !prev)}
+          className="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-[60] flex items-center gap-3 px-4 py-2.5 rounded-full bg-white hover:bg-white/90 border border-white/20 transition-all pointer-events-auto group shadow-lg shadow-black/50 md:cursor-none"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label={isPlaying ? "Mute Background Music" : "Unmute Background Music"}
+        >
+          {/* Animated Waveform */}
+          <div className="flex items-end gap-[3px] h-3 w-3.5 justify-center overflow-hidden">
+            <motion.span
+              animate={isPlaying ? { height: ["30%", "100%", "30%"] } : { height: "30%" }}
+              transition={isPlaying ? { duration: 0.8, repeat: Infinity, ease: "easeInOut" } : {}}
+              className="w-[2px] bg-charcoal group-hover:bg-black rounded-full transition-colors"
+            />
+            <motion.span
+              animate={isPlaying ? { height: ["50%", "100%", "50%"] } : { height: "50%" }}
+              transition={isPlaying ? { duration: 0.5, repeat: Infinity, ease: "easeInOut", delay: 0.15 } : {}}
+              className="w-[2px] bg-charcoal group-hover:bg-black rounded-full transition-colors"
+            />
+            <motion.span
+              animate={isPlaying ? { height: ["20%", "100%", "20%"] } : { height: "20%" }}
+              transition={isPlaying ? { duration: 0.7, repeat: Infinity, ease: "easeInOut", delay: 0.3 } : {}}
+              className="w-[2px] bg-charcoal group-hover:bg-black rounded-full transition-colors"
+            />
+          </div>
+
+          {/* Text indicator */}
+          <span className="text-[10px] font-mono tracking-widest text-charcoal group-hover:text-black uppercase transition-colors select-none">
+            {isPlaying ? t.audio.on : t.audio.off}
+          </span>
+        </motion.button>
+      )}
 
       {/* Fixed UI - Hidden on Hero or when a section is expanded */}
 

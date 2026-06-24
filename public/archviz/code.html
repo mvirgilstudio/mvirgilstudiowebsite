@@ -573,6 +573,54 @@
         .video-container:-webkit-full-screen .exit-fullscreen-btn {
             display: flex !important;
         }
+
+        /* ===== INTERACTIVE VIEWER (archsync-style) ===== */
+        .viewer-glass-panel {
+            background: rgba(20, 20, 20, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .viewer-grid-overlay {
+            background-image:
+                linear-gradient(to right, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .viewer-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00E5FF;
+            border-radius: 50%;
+            animation: viewerParticleDrift linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes viewerParticleDrift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        .viewer-section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .viewer-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00E5FF, transparent);
+        }
     </style>
 </head>
 
@@ -657,6 +705,116 @@
             </a>
         </div>
     </div>
+
+    <!-- Audio Element & Control Button -->
+    <audio id="bg-audio" src="/assets/audio/archviz_audio.mp3" loop preload="auto"></audio>
+
+    <button id="audio-toggle-btn"
+        class="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-[60] flex items-center gap-3 px-4 py-2.5 rounded-full bg-white hover:bg-white/90 border border-white/20 transition-all pointer-events-auto group shadow-lg shadow-black/50 cursor-pointer focus:outline-none"
+        aria-label="Toggle Background Music">
+        <!-- Animated Waveform -->
+        <div class="flex items-end gap-[3px] h-3 w-3.5 justify-center overflow-hidden">
+            <span class="w-[2px] h-[30%] bg-[#050505] group-hover:bg-black rounded-full transition-all sound-bar bar-1"></span>
+            <span class="w-[2px] h-[50%] bg-[#050505] group-hover:bg-black rounded-full transition-all sound-bar bar-2"></span>
+            <span class="w-[2px] h-[20%] bg-[#050505] group-hover:bg-black rounded-full transition-all sound-bar bar-3"></span>
+        </div>
+        <!-- Text indicator -->
+        <span id="audio-status-text" data-t="audio_on"
+            class="text-[10px] font-mono tracking-widest text-[#050505] group-hover:text-black uppercase transition-colors select-none">SOM LIGADO</span>
+    </button>
+
+    <style>
+        @keyframes soundwave {
+            0%, 100% { height: 30%; }
+            50% { height: 100%; }
+        }
+        @keyframes soundwave-mid {
+            0%, 100% { height: 50%; }
+            50% { height: 100%; }
+        }
+        @keyframes soundwave-short {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+        .sound-bar.animating.bar-1 {
+            animation: soundwave 0.8s ease-in-out infinite;
+        }
+        .sound-bar.animating.bar-2 {
+            animation: soundwave-mid 0.5s ease-in-out infinite;
+        }
+        .sound-bar.animating.bar-3 {
+            animation: soundwave-short 0.7s ease-in-out infinite;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById('bg-audio');
+            const toggleBtn = document.getElementById('audio-toggle-btn');
+            const statusText = document.getElementById('audio-status-text');
+            const bars = document.querySelectorAll('.sound-bar');
+            
+            let isPlaying = true;
+            
+            if (audio) {
+                audio.volume = 0.4;
+            }
+
+            function updateUI() {
+                if (isPlaying) {
+                    statusText.setAttribute('data-t', 'audio_on');
+                    if (typeof dictionary !== 'undefined' && dictionary[currentLang] && dictionary[currentLang]['audio_on']) {
+                        statusText.innerHTML = dictionary[currentLang]['audio_on'];
+                    } else {
+                        statusText.innerHTML = 'SOUND ON';
+                    }
+                    bars.forEach(bar => bar.classList.add('animating'));
+                } else {
+                    statusText.setAttribute('data-t', 'audio_off');
+                    if (typeof dictionary !== 'undefined' && dictionary[currentLang] && dictionary[currentLang]['audio_off']) {
+                        statusText.innerHTML = dictionary[currentLang]['audio_off'];
+                    } else {
+                        statusText.innerHTML = 'SOUND OFF';
+                    }
+                    bars.forEach(bar => bar.classList.remove('animating'));
+                }
+            }
+
+            function toggleAudio() {
+                isPlaying = !isPlaying;
+                if (isPlaying) {
+                    audio.play().catch(err => {
+                        console.log("Audio play failed:", err);
+                    });
+                } else {
+                    audio.pause();
+                }
+                updateUI();
+            }
+
+            if (toggleBtn && audio) {
+                toggleBtn.addEventListener('click', toggleAudio);
+
+                const playOnInteraction = () => {
+                    if (isPlaying && audio.paused) {
+                        audio.play().catch(err => {
+                            console.log("Interaction autoplay blocked:", err);
+                        });
+                        bars.forEach(bar => bar.classList.add('animating'));
+                    }
+                    window.removeEventListener('click', playOnInteraction);
+                    window.removeEventListener('keydown', playOnInteraction);
+                    window.removeEventListener('touchstart', playOnInteraction);
+                };
+
+                window.addEventListener('click', playOnInteraction);
+                window.addEventListener('keydown', playOnInteraction);
+                window.addEventListener('touchstart', playOnInteraction);
+                
+                updateUI();
+            }
+        });
+    </script>
     <!-- Section 1: Hero & Overlapping Content -->
     <section class="relative w-full flex flex-col md:block">
         <!-- Hero Background Canvas with Masking -->
@@ -894,134 +1052,131 @@
 
     <!-- Section 4B: Digital Twin Interactive Viewer -->
     <section id="digital-twin-viewer-sec"
-        class="w-full relative bg-white py-24 md:py-32 overflow-hidden border-t border-outline-variant/10">
-
-        <div class="max-w-[1920px] mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
-            <!-- Header Info -->
-            <div class="flex flex-col mb-12 reveal-up">
-                <h4 data-t="viewer_tag"
-                    class="font-body-md text-label-md uppercase tracking-widest text-secondary mb-2">
-                    03 /
-                </h4>
-                <h3 data-t="viewer_title"
-                    class="font-headline-lg text-3xl md:text-5xl uppercase text-[#1a1a1a] mb-4 leading-tight">
-                    Interactive Viewer
-                </h3>
-                <p data-t="viewer_desc" class="font-body-md text-body-md text-secondary max-w-3xl">
+        class="w-full relative bg-[#0c0c0c] text-white py-20 px-8 overflow-hidden">
+        <div class="fixed inset-0 viewer-grid-overlay pointer-events-none z-0"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-[1]" id="viewer-particles"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <header class="mb-12 reveal-up">
+                <h2 class="text-4xl font-bold tracking-tight mb-2 viewer-section-title"
+                    data-t="viewer_title">
+                    <span class="text-[#00E5FF]">Interactive</span> Viewer
+                </h2>
+                <p class="text-[#F5F5F7]/60 text-lg tracking-wide" data-t="viewer_desc">
                     Experience dynamic 3D model synchronization in real-time. Use the controls to select individual
                     building floors, and rotate or zoom the 3D model to synchronize the architectural rendering
                     sequence.
                 </p>
-            </div>
+            </header>
+            <div class="relative rounded-2xl border-4 border-[#00E5FF]/20 flex flex-col lg:block h-auto lg:h-[700px] group shadow-2xl reveal-up"
+                id="interactive-viewer-container">
+                <!-- Canvas Wrapper -->
+                <div
+                    class="relative w-full h-[300px] sm:h-[450px] lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
+                    <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
+                        id="sequence-canvas"></canvas>
+                </div>
 
-            <!-- Sync Floor Controls Bar (Horizontal Row) -->
-            <div class="flex flex-wrap gap-4 mb-8 justify-start reveal-up">
-                <button
-                    class="floor-btn active flex items-center gap-2 px-6 py-3.5 border border-primary bg-primary text-white font-body-md text-xs uppercase tracking-wider cursor-pointer rounded-none"
-                    data-floor="all">
-                    <span class="material-symbols-outlined text-sm">grid_view</span>
-                    <span data-t="viewer_btn_all">Full Building</span>
-                </button>
-                <button
-                    class="floor-btn flex items-center gap-2 px-6 py-3.5 border border-black/10 bg-white text-secondary hover:text-primary hover:border-primary transition-all duration-300 font-body-md text-xs uppercase tracking-wider cursor-pointer rounded-none"
-                    data-floor="1">
-                    <span class="material-symbols-outlined text-sm">layers</span>
-                    <span data-t="viewer_btn_f1">Floor 01</span>
-                </button>
-                <button
-                    class="floor-btn flex items-center gap-2 px-6 py-3.5 border border-black/10 bg-white text-secondary hover:text-primary hover:border-primary transition-all duration-300 font-body-md text-xs uppercase tracking-wider cursor-pointer rounded-none"
-                    data-floor="2">
-                    <span class="material-symbols-outlined text-sm">layers</span>
-                    <span data-t="viewer_btn_f2">Floor 02</span>
-                </button>
-                <button
-                    class="floor-btn flex items-center gap-2 px-6 py-3.5 border border-black/10 bg-white text-secondary hover:text-primary hover:border-primary transition-all duration-300 font-body-md text-xs uppercase tracking-wider cursor-pointer rounded-none"
-                    data-floor="3">
-                    <span class="material-symbols-outlined text-sm">layers</span>
-                    <span data-t="viewer_btn_f3">Floor 03</span>
-                </button>
-                <button
-                    class="floor-btn flex items-center gap-2 px-6 py-3.5 border border-black/10 bg-white text-secondary hover:text-primary hover:border-primary transition-all duration-300 font-body-md text-xs uppercase tracking-wider cursor-pointer rounded-none"
-                    data-floor="4">
-                    <span class="material-symbols-outlined text-sm">layers</span>
-                    <span data-t="viewer_btn_f4">Floor 04</span>
-                </button>
-            </div>
-
-            <!-- Main Grid: Image Sequence Canvas & 3D Sync Model Viewer -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
-                <!-- Left Panel: Interactive Image Sequence Canvas -->
-                <div class="flex flex-col gap-3 lg:col-span-8 reveal-left">
-                    <span data-t="viewer_title_render"
-                        class="font-body-md text-xs uppercase tracking-wider text-secondary">Dynamic Image Sequence
-                        (Rendering)</span>
-                    <div class="w-full h-[300px] md:h-[450px] relative overflow-hidden bg-neutral-900 shadow-architectural border border-black/5"
-                        id="interactive-viewer-container">
-                        <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
-                            id="sequence-canvas"></canvas>
-
-                        <!-- Dynamic Overlay for Cinematic Feel -->
-                        <div class="absolute bottom-4 left-4 flex gap-2 z-20">
-                            <div
-                                class="px-2 py-1 bg-black/60 backdrop-blur-md rounded-none text-[10px] border border-white/10 text-[#00E5FF] font-mono tracking-widest uppercase flex items-center gap-1.5">
-                                <span class="relative flex h-1.5 w-1.5">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#00E5FF]"></span>
-                                </span>
-                                <span data-t="viewer_live_stream">LIVE STREAM</span>
+                <aside
+                    class="viewer-glass-panel lg:absolute lg:right-6 lg:top-6 lg:bottom-6 lg:w-80 w-full rounded-b-xl lg:rounded-xl p-6 flex flex-col gap-6 lg:gap-8 text-sm relative z-20"
+                    data-purpose="controls-panel">
+                    <div class="text-center order-1">
+                        <h3 class="text-white/90 font-semibold text-base uppercase tracking-widest"
+                            data-t="viewer_sync_controls">Sync Controls</h3>
+                    </div>
+                    <section class="order-3 lg:order-2">
+                        <label class="block text-[#F5F5F7] mb-4 font-medium uppercase tracking-wider text-[10px]"
+                            data-t="viewer_floor_select">Building Floor Select</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button
+                                class="floor-btn active flex flex-col items-center justify-center p-2 bg-black/40 border border-[#00E5FF]/50 rounded-lg text-white transition-all duration-300 group"
+                                data-floor="all">
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t="viewer_btn_all">Full</span>
+                                <div class="w-1 h-1 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]"></div>
+                            </button>
+                            <button
+                                class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-[#00E5FF]/30 transition-all duration-300 group"
+                                data-floor="1">
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t="viewer_btn_f1">Floor 1</span>
+                                <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
+                            </button>
+                            <button
+                                class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-[#00E5FF]/30 transition-all duration-300 group"
+                                data-floor="2">
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t="viewer_btn_f2">Floor 2</span>
+                                <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
+                            </button>
+                            <button
+                                class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-[#00E5FF]/30 transition-all duration-300 group"
+                                data-floor="3">
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t="viewer_btn_f3">Floor 3</span>
+                                <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
+                            </button>
+                            <button
+                                class="floor-btn flex flex-col items-center justify-center p-2 bg-black/20 border border-white/5 rounded-lg text-white/60 hover:bg-black/40 hover:border-[#00E5FF]/30 transition-all duration-300 group"
+                                data-floor="4">
+                                <span class="font-bold tracking-widest text-[8px] uppercase mb-1" data-t="viewer_btn_f4">Floor 4</span>
+                                <div class="w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20"></div>
+                            </button>
+                        </div>
+                    </section>
+                    <section class="flex-grow flex flex-col min-h-0 order-2 lg:order-3">
+                        <label
+                            class="block text-[#F5F5F7] mb-2 font-medium text-[10px] uppercase tracking-widest flex-shrink-0"
+                            data-t="viewer_title_model">3D Asset Sync</label>
+                        <div
+                            class="relative rounded-lg overflow-hidden h-[250px] lg:h-auto lg:flex-grow lg:min-h-[150px] border border-white/10 bg-black/60 shadow-inner group/viewer">
+                            <!-- Loading Overlay -->
+                            <div id="model-viewer-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-black/85 z-30 transition-opacity duration-500 pointer-events-none">
+                                <div class="flex items-center gap-3">
+                                    <svg class="animate-spin h-5 w-5 text-[#00E5FF]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    <span class="text-xs uppercase font-mono tracking-widest text-white" data-t="loading_3d_model">Loading 3D Model...</span>
+                                </div>
+                                <div class="w-32 h-1 bg-white/10 rounded-full mt-3 overflow-hidden">
+                                    <div id="viewer-progress-bar" class="h-full bg-[#00E5FF] w-0 transition-all duration-300"></div>
+                                </div>
                             </div>
+                            <model-viewer id="building-viewer" src="../archsync_model/3d_assets/3d_building.gltf"
+                                alt="3D Building Model" camera-controls
+                                environment-image="../archsync_model/images/urban_courtyard_02_1k.hdr" exposure="1.2"
+                                shadow-intensity="1" shadow-softness="1"
+                                style="width: 100%; height: 100%; background-color: transparent;"
+                                interaction-prompt="none" camera-orbit="-100deg 85deg auto"
+                                min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto" loading="lazy">
+                            </model-viewer>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Right Panel: 3D Model Sync Viewer -->
-                <div class="flex flex-col gap-3 lg:col-span-4 reveal-right">
-                    <span data-t="viewer_title_model"
-                        class="font-body-md text-xs uppercase tracking-wider text-secondary">3D Real-time Synced
-                        Model</span>
-                    <div
-                        class="relative w-full h-[300px] md:h-[450px] border border-white/5 bg-neutral-900 shadow-architectural overflow-hidden">
-                        <!-- Loading Overlay -->
-                        <div id="model-viewer-loading" class="loading-overlay-3d">
-                            <div class="loading-spinner-3d"></div>
-                            <span class="loading-text-3d" data-t="loading_3d_model">Loading 3D Model</span>
+                        <!-- Interaction Legend (Below 3D Viewer) -->
+                        <div
+                            class="mt-3 px-3 py-2 bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 flex flex-wrap justify-center gap-x-4 gap-y-1 flex-shrink-0">
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse"
+                                    style="animation-duration: 2s;"></span>
+                                <span data-t="viewer_footer_info">Left Click + Drag: <span class="text-[#00E5FF] font-normal">Rotate</span></span>
+                            </span>
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse"
+                                    style="animation-duration: 2s; animation-delay: 0.5s;"></span>
+                                <span data-t="viewer_footer_zoom">Scroll Wheel: <span class="text-[#00E5FF] font-normal">Zoom</span></span>
+                            </span>
+                            <span
+                                class="text-[9px] text-white font-bold uppercase tracking-[0.1em] flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse"
+                                    style="animation-duration: 2s; animation-delay: 1s;"></span>
+                                <span data-t="viewer_footer_pan">Right Click + Drag: <span class="text-[#00E5FF] font-normal">Pan</span></span>
+                            </span>
                         </div>
-                        <model-viewer id="building-viewer" src="../archsync_model/3d_assets/3d_building.gltf"
-                            alt="3D Building Model" camera-controls
-                            environment-image="../archsync_model/images/urban_courtyard_02_1k.hdr" exposure="1.2"
-                            shadow-intensity="1" shadow-softness="1"
-                            style="width: 100%; height: 100%; background-color: transparent;" interaction-prompt="none"
-                            camera-orbit="-100deg 85deg auto" min-camera-orbit="auto 0deg auto"
-                            max-camera-orbit="auto 90deg auto">
-                        </model-viewer>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </aside>
 
-            <!-- Interaction Legend Footer (Row) -->
-            <div
-                class="mt-8 p-4 bg-neutral-100 rounded-none border border-black/5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[10px] md:text-xs text-secondary font-body-md uppercase tracking-wider reveal-up">
-                <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-base">info</span>
-                    <span data-t="viewer_footer_info">Hold and drag the 3D model to rotate both perspectives in
-                        real-time</span>
-                </div>
-                <div class="flex flex-wrap gap-x-6 gap-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">drag_pan</span>
-                        <span>Left Click + Drag: <strong data-t="viewer_footer_rotate"
-                                class="text-primary font-medium">Rotate</strong></span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">zoom_in</span>
-                        <span>Scroll Wheel: <strong data-t="viewer_footer_zoom" class="text-primary font-medium">Rotate
-                                / Zoom</strong></span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+
 
     <!-- Section 04C: Gaussian Splatting Viewer -->
     <section id="gaussian-splatting-sec"
@@ -1099,7 +1254,7 @@
                             </div>
                         </div>
                         <!-- Loading Overlay -->
-                        <div id="splat-loading" class="loading-overlay-3d" style="background: #1a1a1a;">
+                        <div id="splat-loading" class="loading-overlay-3d hidden" style="background: #1a1a1a;">
                             <div class="loading-spinner-3d"></div>
                             <span class="loading-text-3d" data-t="loading_3d_scan">Loading 3D Scan</span>
                         </div>
@@ -2321,7 +2476,9 @@
                 "contact_telemetry_error": "TRANSMISSION FAILED. PLEASE TRY AGAIN.",
                 "interactive_webcam_exit": "Exit Experience",
                 "splat_mobile_load_title": "Interactive 3D Scan",
-                "splat_mobile_load_desc": "Tap to load interactive 3D Gaussian Splatting. Loads approx. 30MB of 3D data."
+                "splat_mobile_load_desc": "Tap to load interactive 3D Gaussian Splatting. Loads approx. 30MB of 3D data.",
+                "audio_on": "SOUND ON",
+                "audio_off": "SOUND OFF"
             },
             'PT': {
                 "contact_badge_email": "EMAIL",
@@ -2454,7 +2611,9 @@
                 "contact_telemetry_error": "FALHA NA TRANSMISSÃO. POR FAVOR, TENTE NOVAMENTE.",
                 "interactive_webcam_exit": "Sair da Experiência",
                 "splat_mobile_load_title": "Scan 3D Interativo",
-                "splat_mobile_load_desc": "Toque para carregar Gaussian Splatting 3D interativo. Carrega cerca de 30MB de dados 3D."
+                "splat_mobile_load_desc": "Toque para carregar Gaussian Splatting 3D interativo. Carrega cerca de 30MB de dados 3D.",
+                "audio_on": "SOM LIGADO",
+                "audio_off": "SOM DESLIGADO"
             }
         };
 
@@ -3369,14 +3528,22 @@
                         btn.addEventListener('click', () => {
                             const floor = btn.getAttribute('data-floor');
 
-                            // Update active button classes in a brutalist way
+                            // Update button UI
                             floorBtns.forEach(b => {
-                                b.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
-                                b.classList.add('bg-white', 'text-secondary', 'border-black/10');
+                                b.classList.remove('active', 'border-[#00E5FF]/50', 'bg-black/40', 'text-white');
+                                b.classList.add('border-white/5', 'bg-black/20', 'text-white/60');
+                                const led = b.querySelector('div');
+                                if (led) {
+                                    led.className = 'w-1 h-1 rounded-full bg-white/10 group-hover:bg-white/20';
+                                }
                             });
 
-                            btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
-                            btn.classList.remove('bg-white', 'text-secondary', 'border-black/10');
+                            btn.classList.add('active', 'border-[#00E5FF]/50', 'bg-black/40', 'text-white');
+                            btn.classList.remove('border-white/5', 'bg-black/20', 'text-white/60');
+                            const led = btn.querySelector('div');
+                            if (led) {
+                                led.className = 'w-1 h-1 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]';
+                            }
 
                             // Swap model source
                             const newSrc = floorModels[floor];
@@ -3973,16 +4140,33 @@
                 // Model-Viewer loading overlay
                 const modelViewer = document.getElementById('building-viewer');
                 const modelOverlay = document.getElementById('model-viewer-loading');
+                const progressBar = document.getElementById('viewer-progress-bar');
                 if (modelViewer && modelOverlay) {
-                    const hideModelOverlay = () => modelOverlay.classList.add('hidden');
-                    const showModelOverlay = () => modelOverlay.classList.remove('hidden');
+                    const hideModelOverlay = () => {
+                        setTimeout(() => {
+                            modelOverlay.classList.add('opacity-0');
+                        }, 500);
+                    };
+                    const showModelOverlay = () => {
+                        modelOverlay.classList.remove('opacity-0');
+                        if (progressBar) progressBar.style.width = '0%';
+                    };
 
-                    modelViewer.addEventListener('load', hideModelOverlay);
+                    modelViewer.addEventListener('load', () => {
+                        if (progressBar) progressBar.style.width = '100%';
+                        hideModelOverlay();
+                    });
 
                     // Show loading overlay when a new model starts downloading
                     modelViewer.addEventListener('progress', (e) => {
-                        if (e.detail.totalProgress < 1) {
-                            showModelOverlay();
+                        const progress = e.detail.totalProgress;
+                        if (progressBar) {
+                            progressBar.style.width = `${progress * 100}%`;
+                        }
+                        if (progress === 1) {
+                            hideModelOverlay();
+                        } else if (progress < 1) {
+                            modelOverlay.classList.remove('opacity-0');
                         }
                     });
 
@@ -4004,8 +4188,26 @@
                 const splatIframe = document.getElementById('splat-iframe');
                 const splatOverlay = document.getElementById('splat-loading');
                 if (splatIframe && splatOverlay) {
-                    const hideSplatOverlay = () => splatOverlay.classList.add('hidden');
+                    const hideSplatOverlay = () => {
+                        const currentSrc = splatIframe.getAttribute('src');
+                        if (currentSrc === 'about:blank' || !currentSrc) return;
+                        splatOverlay.classList.add('hidden');
+                    };
                     splatIframe.addEventListener('load', hideSplatOverlay);
+
+                    // Show loading overlay immediately when the src changes (e.g. initial lazy load or reload)
+                    const splatObserver = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                                const newSrc = splatIframe.getAttribute('src');
+                                if (newSrc && newSrc !== 'about:blank') {
+                                    splatOverlay.classList.remove('hidden');
+                                }
+                            }
+                        });
+                    });
+                    splatObserver.observe(splatIframe, { attributes: true });
+
                     // Fallback: hide after 15s
                     setTimeout(hideSplatOverlay, 15000);
 

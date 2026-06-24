@@ -29,3 +29,8 @@ dist-ssr
 .vercel
 
 .env
+
+# Large archives and video animations
+*.zip
+public/archviz_email2/assets/hero_video_anim/
+

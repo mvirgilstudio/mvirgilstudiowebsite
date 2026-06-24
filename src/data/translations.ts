@@ -21,6 +21,10 @@ export const TRANSLATIONS = {
             copyright: 'MV Interactive Systems',
             tagline: 'Designed for Performance & Precision',
         },
+        audio: {
+            on: 'SOUND ON',
+            off: 'SOUND OFF',
+        },
         sections: {
             section_01: {
                 title: 'INTERACTIVE SURFACES & MOTION CONTROLS',
@@ -300,6 +304,10 @@ export const TRANSLATIONS = {
         footer: {
             copyright: 'MV Sistemas Interativos',
             tagline: 'Desenhado para Performance e Precisão',
+        },
+        audio: {
+            on: 'SOM LIGADO',
+            off: 'SOM DESLIGADO',
         },
         sections: {
             section_01: {
