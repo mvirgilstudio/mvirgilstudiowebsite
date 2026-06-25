@@ -1071,7 +1071,7 @@
                 id="interactive-viewer-container">
                 <!-- Canvas Wrapper -->
                 <div
-                    class="relative w-full h-[300px] sm:h-[450px] lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
+                    class="relative w-full aspect-video lg:aspect-auto lg:h-full lg:absolute lg:inset-0 overflow-hidden rounded-t-xl lg:rounded-2xl z-10">
                     <canvas alt="Architectural Digital Twin" class="w-full h-full object-cover"
                         id="sequence-canvas"></canvas>
                 </div>
@@ -3491,8 +3491,8 @@
                     };
 
                     const resizeCanvas = () => {
-                        canvas.width = container.offsetWidth;
-                        canvas.height = container.offsetHeight;
+                        canvas.width = canvas.parentElement.offsetWidth;
+                        canvas.height = canvas.parentElement.offsetHeight;
                         render();
                     };
 
