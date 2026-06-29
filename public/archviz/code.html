@@ -2343,7 +2343,11 @@
         }
 
         // Language switcher variables and functions
-        let currentLang = 'PT';
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang') || (window.location.hash === '#en' ? 'en' : window.location.hash === '#pt' ? 'pt' : null);
+        let currentLang = (urlLang && ['PT', 'EN'].includes(urlLang.toUpperCase())) 
+            ? urlLang.toUpperCase() 
+            : 'PT';
         const dictionary = {
             'EN': {
                 "contact_badge_email": "EMAIL",
