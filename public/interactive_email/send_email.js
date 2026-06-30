@@ -1,13 +1,12 @@
 /**
- * MVs Archviz — Email Sender via Resend
+ * MVs Interactive — Email Sender via Resend
  * 
  * Sends full HTML emails from hello@mvirgilstudio.com
  * with images, links, and all styling intact.
  * 
  * Setup:
  *   1. npm install resend
- *   2. Replace YOUR_API_KEY below with your Resend API key
- *   3. Run: node send_email.js
+ *   2. Run: node send_email.js
  */
 
 import { Resend } from 'resend';
@@ -25,7 +24,7 @@ const __dirname = path.dirname(__filename);
 
 const API_KEY = 're_gZJjsYD4_HNxtWSpStRadBTc445qbu6G4';  // Get from https://resend.com/api-keys
 
-const FROM_NAME = 'MVs Archviz';
+const FROM_NAME = 'MVs Interactive';
 const FROM_EMAIL = 'hello@mvirgilstudio.com';  // Your verified domain email
 
 // Where replies go (your personal Gmail)
@@ -39,8 +38,10 @@ const RECIPIENTS = [
 // Which template to send: 'en' for English, 'pt' for Portuguese
 const LANGUAGE = 'pt';
 
-// Email subject (lowercase recommended for deliverability, automatically chooses based on language)
-const SUBJECT = LANGUAGE === 'pt' ? 'Parceria Técnica: Maquetes Interativas para Apresentações de Arquitetónicas' : 'architectural visualization services';
+// Email subject chooses based on language
+const SUBJECT = LANGUAGE === 'pt' 
+  ? 'Design Interativo: Sistemas 3D & Experiências de IA' 
+  : 'Interactive Design: 3D Systems & AI Experiences';
 
 // ═══════════════════════════════════════════
 //  SEND LOGIC — No need to edit below
@@ -70,7 +71,7 @@ async function sendEmail() {
                     <tr>
                         <td class="mobile-padding" style="padding: 32px 32px; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1a1a1a;">
                             Olá! Sou Miguel Virgílio.<br>
-                            Nós desenvolvemos uma solução de Maquetes Físico-Digitais para apresentações de alto impacto. Deixo um breve resumo visual abaixo.<br>
+                            Desenvolvo sistemas 3D interativos, experiências de inteligência artificial e soluções que integram o físico com o digital (Creative Coding). Deixo abaixo alguns dos meus principais projetos.<br>
                             Com os melhores cumprimentos.
                         </td>
                     </tr>
@@ -81,13 +82,16 @@ async function sendEmail() {
                     <tr>
                         <td class="mobile-padding" style="padding: 32px 32px; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1a1a1a;">
                             Hello! I am Miguel Virgílio.<br>
-                            We have developed a Physical-Digital Model solution for high-impact presentations. I leave a brief visual summary below.<br>
+                            I develop interactive 3D systems, artificial intelligence experiences, and solutions that blend physical elements with the digital world (Creative Coding). Below are some of my main projects.<br>
                             Best regards.
                         </td>
                     </tr>
                 </table>`;
 
   html = html.replace('<!-- Main Container -->', `${introText}\n                <!-- Main Container -->`);
+
+  // Convert relative asset paths to absolute URLs using the live website domain
+  html = html.replace(/src="\/interactive_email\//g, 'src="https://mvirgilstudio.com/interactive_email/');
 
   // 1. Strip any <script> tags for deliverability (spam filters block emails with scripts)
   html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
