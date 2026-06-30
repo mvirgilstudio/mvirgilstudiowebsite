@@ -15,7 +15,16 @@ import ContactSection from './components/ContactSection';
 const App: React.FC = () => {
   const [isIndexVisible, setIsIndexVisible] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
-  const [lang, setLang] = useState<'EN' | 'PT'>('PT');
+  const [lang, setLang] = useState<'EN' | 'PT'>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get('lang');
+      if (urlLang && ['EN', 'PT'].includes(urlLang.toUpperCase())) {
+        return urlLang.toUpperCase() as 'EN' | 'PT';
+      }
+    }
+    return 'PT';
+  });
   const [isAnySectionExpanded, setIsAnySectionExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isExpertiseOpen, setIsExpertiseOpen] = useState(false);
