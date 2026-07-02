@@ -37,3 +37,9 @@ public/archviz_email2/assets/hero_video_anim/
 .stitch-mcp/
 
 
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
