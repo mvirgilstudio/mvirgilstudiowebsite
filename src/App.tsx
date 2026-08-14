@@ -225,8 +225,7 @@ const App: React.FC = () => {
                 </g>
               </motion.svg>
               <span className="text-[9px] min-[380px]:text-[10px] sm:text-sm md:text-base xl:text-lg font-medium font-orbitron tracking-[0.1em] md:tracking-[0.2em] xl:tracking-[0.3em] text-white/90 group-hover:text-white transition-all flex items-baseline gap-1 whitespace-nowrap flex-shrink-0">
-                MIGUEL VIRGÍLIO 
-                <span className="opacity-40 font-light text-[0.8em] hidden min-[320px]:inline">STUDIO</span>
+                MIGUEL VIRGÍLIO
               </span>
             </div>
           </div>
