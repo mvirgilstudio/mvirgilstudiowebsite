@@ -49,7 +49,7 @@ node send_to.js client@example.com en "resend 2"
 
 ## Resend API Options
 
-- **resend 1**: `re_gZJjsYD4...` (Current / Default API key)
+- **resend 1**: `re_RX9uXiXK...` (Current / Default API key)
 - **resend 2**: `re_MxHZ1ptm...` (Secondary API key)
 
 If the user mentions "resend 1" or "resend 2" in their request, pass `"resend 1"` or `"resend 2"` as an argument to `send_to.js`.
@@ -58,7 +58,7 @@ If the user mentions "resend 1" or "resend 2" in their request, pass `"resend 1"
 
 - The script loads `email_pt.html` (or `email_en.html`) from the same directory
 - Applies deliverability optimizations (strips scripts, IDs, boosts small fonts)
-- Sends via Resend API from `Miguel Virgílio Formador <vfxmiguel@gmail.com>` using the selected API key
+- Sends via Resend API from `Miguel Virgílio <hello@mvirgilstudio.com>` using the selected API key
 - Replies go to `mvirgilstudio@gmail.com`
 - Logs email details to `sent_cursos_emails.xlsx`
 
@@ -66,11 +66,11 @@ If the user mentions "resend 1" or "resend 2" in their request, pass `"resend 1"
 
 | Setting    | Value                                                                              |
 |------------|------------------------------------------------------------------------------------|
-| From       | Miguel Virgílio Formador \<vfxmiguel@gmail.com\>                               |
+| From       | Miguel Virgílio \<hello@mvirgilstudio.com\>                                        |
 | Reply-To   | mvirgilstudio@gmail.com                                                            |
 | Subject PT | Formador profissional em IA, 3D e produção digital                                 |
 | Subject EN | Professional training in AI, 3D and digital production                             |
-| Resend 1   | re_gZJjsYD4... (Default)                                                           |
+| Resend 1   | re_RX9uXiXK... (Default)                                                           |
 | Resend 2   | re_MxHZ1ptm...                                                                     |
 
 ## Files Reference

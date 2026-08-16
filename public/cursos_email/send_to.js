@@ -22,13 +22,27 @@ const __dirname = path.dirname(__filename);
 //  CONFIGURATION
 // ═══════════════════════════════════════════
 
+// Load environment variables from root .env if present
+const envPath = path.resolve(__dirname, '../../.env');
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  for (const line of envContent.split('\n')) {
+    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match) {
+      const key = match[1];
+      let value = (match[2] || '').trim().replace(/^['"]|['"]$/g, '');
+      if (!process.env[key]) process.env[key] = value;
+    }
+  }
+}
+
 const RESEND_KEYS = {
   '1': process.env.RESEND_API_KEY_1 || process.env.RESEND_API_KEY || '',
   '2': process.env.RESEND_API_KEY_2 || ''
 };
 
-const FROM_NAME = 'Miguel Virgílio Formador';
-const FROM_EMAIL = 'vfxmiguel@gmail.com';
+const FROM_NAME = 'Miguel Virgílio';
+const FROM_EMAIL = 'hello@mvirgilstudio.com';
 const REPLY_TO = 'mvirgilstudio@gmail.com';
 
 // ═══════════════════════════════════════════
@@ -170,14 +184,29 @@ async function sendEmail() {
   for (let i = 0; i < recipients.length; i++) {
     const recipient = recipients[i];
     console.log(`📨 Sending email ${i + 1}/${recipients.length} to: ${recipient}...`);
+    let fromAddress = `${FROM_NAME} <${FROM_EMAIL}>`;
     try {
-      const { data, error } = await resend.emails.send({
-        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+      let res = await resend.emails.send({
+        from: fromAddress,
         to: [recipient],
         reply_to: REPLY_TO,
         subject: SUBJECT,
         html: html,
       });
+
+      if (res.error && (res.error.statusCode === 403 || res.error.message?.includes('domain is not verified') || res.error.message?.includes('from address'))) {
+        console.warn(`⚠️ Custom domain unverified, retrying with onboarding@resend.dev...`);
+        fromAddress = `${FROM_NAME} <onboarding@resend.dev>`;
+        res = await resend.emails.send({
+          from: fromAddress,
+          to: [recipient],
+          reply_to: REPLY_TO,
+          subject: SUBJECT,
+          html: html,
+        });
+      }
+
+      const { data, error } = res;
 
       if (error) {
         console.error(`❌ Failed to send to ${recipient}:`, error);
