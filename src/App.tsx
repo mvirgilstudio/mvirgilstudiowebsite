@@ -9,6 +9,7 @@ import SvgFilters from './components/SvgFilters';
 import { SECTIONS } from './data/constants';
 import { TRANSLATIONS } from './data/translations';
 import ExpertiseModal from './components/ExpertiseModal';
+import SoonModal from './components/SoonModal';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 
@@ -28,6 +29,8 @@ const App: React.FC = () => {
   const [isAnySectionExpanded, setIsAnySectionExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isExpertiseOpen, setIsExpertiseOpen] = useState(false);
+  const [isVfxModalOpen, setIsVfxModalOpen] = useState(false);
+  const [isAppsModalOpen, setIsAppsModalOpen] = useState(false);
   const isEmbeddedExperience = new URLSearchParams(window.location.search).has('experience');
 
   const t = TRANSLATIONS[lang];
@@ -232,6 +235,30 @@ const App: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav aria-label="Main navigation" className="hidden lg:flex gap-6 xl:gap-8 pointer-events-auto items-center">
+            {/* 3D / VFX Button */}
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              onClick={() => setIsVfxModalOpen(true)}
+              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group"
+            >
+              3D / VFX
+              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+            </motion.span>
+
+            {/* Apps / AI Button */}
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              onClick={() => setIsAppsModalOpen(true)}
+              className="text-sm font-mono uppercase tracking-widest text-concrete hover:text-white cursor-pointer transition-colors relative group"
+            >
+              APPS / AI
+              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+            </motion.span>
+
             {/* Archviz Button */}
             <motion.span
               initial={{ opacity: 0, y: -20 }}
@@ -336,6 +363,36 @@ const App: React.FC = () => {
             className="fixed inset-0 min-h-screen bg-black z-[45] flex flex-col justify-center p-8 lg:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col gap-6 sm:gap-8 min-[400px]:gap-12 max-w-sm mx-auto w-full">
+              {/* 3D / VFX Mobile Button */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.02, ease: "easeOut" }}
+                className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setIsVfxModalOpen(true);
+                }}
+              >
+                <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">00</span>
+                3D / VFX
+              </motion.div>
+
+              {/* Apps / AI Mobile Button */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05, ease: "easeOut" }}
+                className="text-lg min-[400px]:text-xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-3 sm:gap-6 group"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setIsAppsModalOpen(true);
+                }}
+              >
+                <span className="text-xs font-mono text-concrete group-hover:text-white transition-colors">01</span>
+                APPS / AI
+              </motion.div>
+
               {/* Archviz Mobile Button */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -459,6 +516,35 @@ const App: React.FC = () => {
             </motion.p>
           </footer>
         )}
+
+        {/* Modals */}
+        <SoonModal
+          isOpen={isVfxModalOpen}
+          onClose={() => setIsVfxModalOpen(false)}
+          lang={lang}
+          badge="3D & VFX"
+          description={
+            lang === 'PT'
+              ? 'Novos projetos de modelação 3D, animação, tracking e VFX estão a ser preparados.'
+              : 'New 3D modeling, animation, camera tracking, and VFX showcases are currently in preparation.'
+          }
+        />
+        <SoonModal
+          isOpen={isAppsModalOpen}
+          onClose={() => setIsAppsModalOpen(false)}
+          lang={lang}
+          badge="APPS & AI EXPERIENCES"
+          description={
+            lang === 'PT'
+              ? 'Novas aplicações interativas, ferramentas criativas e experiências generativas de IA estão em desenvolvimento.'
+              : 'Exciting new interactive web apps, generative AI tools, and creative experiences are currently in development.'
+          }
+        />
+        <ExpertiseModal
+          isOpen={isExpertiseOpen}
+          onClose={() => setIsExpertiseOpen(false)}
+          lang={lang}
+        />
       </main>
     </div>
   );

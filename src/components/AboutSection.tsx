@@ -47,7 +47,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
       {/* Grid Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        {/* Left Column: Heading and expressiveness */}
+        {/* Left Column: Heading, Image and expressiveness */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,6 +55,17 @@ const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:col-span-5 flex flex-col gap-6"
         >
+          {/* Profile Image */}
+          <div className="relative group w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border border-white/15 shadow-[0_0_30px_rgba(255,255,255,0.08)] bg-white/5 backdrop-blur-sm">
+            <img
+              src="/assets/images/mvs_profile.jpg"
+              alt="Miguel Virgílio - mvirgilstudio"
+              className="w-full h-full object-cover object-center grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+          </div>
+
           <div className="flex flex-col">
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tight text-white leading-[1.05]">
               {t.title}

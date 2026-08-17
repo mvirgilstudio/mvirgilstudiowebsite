@@ -525,7 +525,7 @@ const Section03Experience: React.FC<{ lang?: 'EN' | 'PT' }> = ({ lang = 'EN' }) 
                             />
                         )}
 
-                        <Environment preset="city" />
+                        <Environment files="/assets/images/monochrome_studio_04_1k.hdr" />
 
                         <BackgroundPlanes />
 

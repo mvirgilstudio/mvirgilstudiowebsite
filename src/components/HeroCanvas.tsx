@@ -368,7 +368,7 @@ const Scene = ({ scrollY, isActive = true }: { scrollY?: MotionValue<number>; is
             <Model isActive={isActive} />
             <OrbitingParticles count={60} isActive={isActive} />
 
-            <Environment preset="city" environmentIntensity={0.4} />
+            <Environment files="/assets/images/monochrome_studio_04_1k.hdr" environmentIntensity={0.4} />
             <fog attach="fog" args={['#000000', 5, 35]} />
 
             {!isMobile && (
