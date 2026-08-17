@@ -57,6 +57,7 @@ If the user mentions "resend 1" or "resend 2" in their request, pass `"resend 1"
 ## What Happens
 
 - The script loads `email_pt.html` (or `email_en.html`) from the same directory
+- Automatically attaches `Miguel_Virgilio_Curriculum_Formador_2026.pdf` from `public/cursos_currriculum/`
 - Applies deliverability optimizations (strips scripts, IDs, boosts small fonts)
 - Sends via Resend API from `Miguel Virgílio <hello@mvirgilstudio.com>` using the selected API key
 - Replies go to `mvirgilstudio@gmail.com`

@@ -140,30 +140,28 @@ async function sendEmail() {
     const introText = LANGUAGE === 'pt'
       ? `<!-- Personal Message -->
                 <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container"
-                    style="background-color: #131313; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid #222222; margin-bottom: 20px;">
+                    style="background-color: #1a1c1c; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 1px solid #333333; margin-bottom: 20px;">
                     <tr>
-                        <td class="mobile-padding" style="padding: 28px 32px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; color: #e5e2e1;">
-                            Olá,<br><br>
-                            O meu nome é Miguel Virgílio. Sou formador e especialista no desenvolvimento de soluções digitais em IA, 3D e VFX.<br><br>
-                            Apresento a minha proposta de cursos e workshops concebidos para equipar alunos e profissionais com as ferramentas digitais mais procuradas pelo mercado.<br><br>
-                            Gostaria de partilhar a oferta formativa disponível para reforçar os programas da vossa instituição.
+                        <td class="mobile-padding" style="padding: 26px 30px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.6; color: #dedede;">
+                            Olá! O meu nome é Miguel Virgílio. Sou especialista em tecnologias digitais avançadas com mais de 25 anos de experiência técnica em artes gráficas, pós-produção audiovisual (VFX), computação gráfica 3D e soluções com Inteligência Artificial. Capacito formandos através de metodologias ativas e orientadas a projetos reais, dotando a sua instituição de cursos práticos, modulares e diretamente alinhados com as exigências do mercado.
                         </td>
                     </tr>
                 </table>`
       : `<!-- Personal Message -->
                 <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container"
-                    style="background-color: #131313; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid #222222; margin-bottom: 20px;">
+                    style="background-color: #1a1c1c; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 1px solid #333333; margin-bottom: 20px;">
                     <tr>
-                        <td class="mobile-padding" style="padding: 28px 32px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; color: #e5e2e1;">
-                            Hello,<br><br>
-                            My name is Miguel Virgílio. I am a trainer and digital solutions specialist working across AI, 3D, and VFX.<br><br>
-                            I present my catalog of courses and workshops designed to equip students and professionals with highly requested digital tools.<br><br>
-                            I would like to share my training offer to enhance your institution's programs.
+                        <td class="mobile-padding" style="padding: 26px 30px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.6; color: #dedede;">
+                            Hello! My name is Miguel Virgílio. I am a specialist in advanced digital technologies with over 25 years of technical expertise across graphic arts, VFX post-production, 3D computer graphics, and Artificial Intelligence solutions. I empower students through project-based learning and hands-on methodologies, strengthening your institution's portfolio with practical, modular courses tailored to current industry demands.
                         </td>
                     </tr>
                 </table>`;
 
-    html = html.replace('<!-- Main Container -->', `${introText}\n                <!-- Main Container -->`);
+    if (html.includes('<!-- Main Container -->')) {
+      html = html.replace('<!-- Main Container -->', `${introText}\n  <!-- Main Container -->`);
+    } else {
+      html = html.replace('<table class="wrap"', `${introText}\n<table class="wrap"`);
+    }
   }
 
   // Convert relative paths to live domain
@@ -175,10 +173,23 @@ async function sendEmail() {
   html = html.replace(/\s+id="[^"]*"/gi, '');
   html = html.replace(/font-size:\s*(9|10|11)px/gi, 'font-size: 12px');
 
+  // Load PDF Attachment
+  const attachmentPath = path.resolve(__dirname, '../cursos_currriculum/Miguel_Virgilio_Curriculum_Formador_2026.pdf');
+  const attachments = [];
+  if (fs.existsSync(attachmentPath)) {
+    attachments.push({
+      filename: 'Miguel_Virgilio_Curriculum_Formador_2026.pdf',
+      content: fs.readFileSync(attachmentPath),
+    });
+  }
+
   console.log(`🔑 Resend API Key: ${KEY_LABEL}`);
   console.log(`📧 Sending ${LANGUAGE.toUpperCase()} email from ${FROM_NAME} <${FROM_EMAIL}>`);
   console.log(`📝 Subject: ${SUBJECT}`);
   console.log(`📎 Template: ${templateFile}`);
+  if (attachments.length > 0) {
+    console.log(`📎 Attachment: ${attachments[0].filename} (${(fs.statSync(attachmentPath).size / 1024).toFixed(1)} KB)`);
+  }
   console.log('');
 
   for (let i = 0; i < recipients.length; i++) {
@@ -186,24 +197,21 @@ async function sendEmail() {
     console.log(`📨 Sending email ${i + 1}/${recipients.length} to: ${recipient}...`);
     let fromAddress = `${FROM_NAME} <${FROM_EMAIL}>`;
     try {
-      let res = await resend.emails.send({
+      const emailPayload = {
         from: fromAddress,
         to: [recipient],
         reply_to: REPLY_TO,
         subject: SUBJECT,
         html: html,
-      });
+        attachments: attachments.length > 0 ? attachments : undefined,
+      };
+      let res = await resend.emails.send(emailPayload);
 
       if (res.error && (res.error.statusCode === 403 || res.error.message?.includes('domain is not verified') || res.error.message?.includes('from address'))) {
         console.warn(`⚠️ Custom domain unverified, retrying with onboarding@resend.dev...`);
         fromAddress = `${FROM_NAME} <onboarding@resend.dev>`;
-        res = await resend.emails.send({
-          from: fromAddress,
-          to: [recipient],
-          reply_to: REPLY_TO,
-          subject: SUBJECT,
-          html: html,
-        });
+        emailPayload.from = fromAddress;
+        res = await resend.emails.send(emailPayload);
       }
 
       const { data, error } = res;
